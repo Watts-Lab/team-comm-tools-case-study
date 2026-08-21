@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Embedding cache produced by team_comm_tools (large, fully regenerable)
+outputs/vector_cache/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# FeatureBuilder writes its own log tree into the working directory.
+# Anchored to the repo root so it does not swallow outputs/features/output/.
+/output/

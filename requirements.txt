@@ -1,0 +1,9 @@
+# The toolkit under study. Pinned to the version this case study was built and
+# run against; earlier versions differ in both column names and defaults.
+team_comm_tools>=0.1.8
+
+pandas>=2.0
+numpy>=1.24,<2
+scikit-learn>=1.3
+statsmodels>=0.14
+matplotlib>=3.7
