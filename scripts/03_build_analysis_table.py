@@ -9,10 +9,23 @@ deliberation about this round's decision, and reaction to the previous round's
 result. Keeping them separate is the point of the exercise - they can be entered
 into a model independently, so the analysis can say which kind of talk predicts.
 
-The awkward part is that game-rounds with no chat channel have no conversation to
-describe. They are not dropped - they are the counterfactual the whole question
-rests on - so their conversation features are set to a **neutral value**: the mean
-of the feature among rounds that did have a conversation.
+The awkward part is silence, and there are two kinds of it. A round with **no
+channel** could not have a conversation; a round with a channel where **nobody
+spoke** chose not to have one. The second is a behaviour, not a missing value, and
+it is the largest group of the three - so the two are encoded differently:
+
+    no channel        neutral fill everywhere; the counterfactual, flagged by
+                      has_chat_channel = 0
+    channel, silent   0 on the handful of features that are genuinely counts
+                      (a group that said nothing said zero words), neutral fill on
+                      the rest, flagged by chose_silence_{block} = 1
+    talked            the toolkit's actual values
+
+Filling everything with zero would be wrong for 138 of the 140 features. Nearly all
+of them are per-message means or conversation-level ratios, which are *undefined*
+without a conversation rather than zero: a raw 0 on ``mean_positive_bert`` asserts
+maximally non-positive content, which is a claim about speech that never happened.
+Only true totals - ``sum_num_words`` and ``sum_num_messages`` - have a truthful zero.
 
 Neutral-filling rather than zero-filling matters for two different reasons:
 
@@ -51,12 +64,14 @@ import pandas as pd
 from config import (CONV_FEATURES, DATA_PROCESSED, FEATURE_FAMILIES, SPLITS,
                     TABLES, TCT_ID_COLS)
 
-# Screening thresholds for candidate conversation features. These guard against
-# columns that cannot support a regression rather than against uninteresting
-# ones; substantive selection is left to the models in step 4.
-MAX_MISSING = 0.30      # drop features missing in >30% of conversations
+# Redundancy is now handled by the toolkit itself (see step 2): the learning
+# split is written with `drop_redundant_columns=True`, which groups features
+# correlated above 0.9 and keeps one representative per group, and also drops
+# columns that are mostly missing or mostly zero. What remains here is a thin
+# safety net for columns that survived reduction but still cannot support a
+# regression - the toolkit reduces on its own output, not on the joined analysis
+# table, so a feature can be fine there and near-constant once merged.
 MIN_UNIQUE = 5          # drop near-constant features
-MAX_ABS_CORR = 0.95     # drop one of any near-duplicate pair
 
 
 def family_of(feature):
@@ -69,7 +84,7 @@ def family_of(feature):
 
 def load_conv_features(split):
     """Load the conversation-level toolkit output, keyed by game-round."""
-    conv = pd.read_csv(CONV_FEATURES / f"{split}_conv_level.csv")
+    conv = pd.read_csv(CONV_FEATURES / f"{split}_conv_level.csv", low_memory=False)
     if "conv_id" not in conv.columns and "conversation_num" in conv.columns:
         conv = conv.rename(columns={"conversation_num": "conv_id"})
     conv = conv.loc[:, ~conv.columns.str.startswith("Unnamed")]
@@ -78,56 +93,35 @@ def load_conv_features(split):
 
 
 def candidate_feature_columns(conv):
-    """Numeric conversation features, restricted to one aggregation per construct.
+    """Every numeric feature the toolkit kept, minus identifiers.
 
-    The toolkit reports every chat-level feature four ways at the conversation level
-    (mean / min / max / stdev), and again after first aggregating within speaker
-    (``mean_user_*``). This keeps:
+    This used to impose its own rule - keep the conversation ``mean_*`` of each
+    chat-level feature and the toolkit's native conversation-level columns, drop
+    the min/max/stdev and per-speaker variants - because the raw output repeated
+    every construct four or five ways.
 
-      * the toolkit's native conversation-level features (turn-taking, burstiness,
-        discursive diversity, Gini coefficients of participation, and so on), which
-        have no aggregation prefix because they are already properties of the group;
-      * the conversation ``mean_*`` of each chat-level feature - the most
-        interpretable summary of "how much of this was in the conversation".
-
-    Dropping the min/max/stdev and per-speaker variants is a deliberate simplification,
-    not a claim that they carry no signal.
+    That rule is now not just redundant but harmful. The toolkit's reduction
+    deduplicates *across* aggregations: a group typically contains the mean, min,
+    max, stdev and per-speaker forms of one construct, and the representative it
+    keeps is whichever has the most valid data and the highest variance. That is
+    usually a ``max_*`` or per-speaker column, not the mean. Filtering to means
+    afterwards discarded 235 of the 238 surviving features and left 13, chosen by
+    the accident of which variant happened to represent its group.
     """
     numeric = set(conv.select_dtypes(include=[np.number]).columns) - TCT_ID_COLS
-    agg_prefix = re.compile(r"^(mean|min|max|stdev)_")
-    return [c for c in conv.columns
-            if c in numeric
-            and (not agg_prefix.match(c)
-                 or (c.startswith("mean_") and not c.startswith("mean_user_")))]
+    return [c for c in conv.columns if c in numeric]
 
 
 def screen_features(conv, candidates):
-    """Drop features that cannot support a regression; record why for each drop."""
-    reasons = {}
-    kept = []
-
+    """Drop the few survivors that still cannot support a regression."""
+    reasons, kept = {}, []
     for col in candidates:
-        s = conv[col]
-        if s.isna().mean() > MAX_MISSING:
-            reasons[col] = f"missing in {s.isna().mean():.0%} of conversations"
-        elif s.nunique(dropna=True) < MIN_UNIQUE:
-            reasons[col] = f"near-constant ({s.nunique(dropna=True)} unique values)"
+        values = conv[col]
+        if values.nunique(dropna=True) < MIN_UNIQUE:
+            reasons[col] = f"near-constant ({values.nunique(dropna=True)} unique values)"
         else:
             kept.append(col)
-
-    # Remove near-duplicate columns, keeping whichever appears first so the
-    # decision is deterministic and reproducible from the learn split alone.
-    corr = conv[kept].corr().abs()
-    dropped = set()
-    for i, col in enumerate(kept):
-        if col in dropped:
-            continue
-        for other in kept[i + 1:]:
-            if other not in dropped and corr.loc[col, other] > MAX_ABS_CORR:
-                dropped.add(other)
-                reasons[other] = f"|r| > {MAX_ABS_CORR} with {col}"
-
-    return [c for c in kept if c not in dropped], reasons
+    return kept, reasons
 
 
 def write_manifest(candidates, kept, reasons):
@@ -159,8 +153,12 @@ def scaling_moments(conv, feature_cols):
     return stats
 
 
+# Features whose truthful value is zero when nobody spoke, as opposed to undefined.
+TRUE_TOTALS = ["sum_num_words", "sum_num_chars", "sum_num_messages"]
+
+
 def block_frame(rounds, conv, feature_cols, moments, block):
-    """One block's features, z-scored and neutral-filled, suffixed by block."""
+    """One block's features, z-scored and filled by kind of silence, suffixed by block."""
     key = f"conv_id_{block}"
     present = [c for c in feature_cols if c in conv.columns]
 
@@ -181,11 +179,22 @@ def block_frame(rounds, conv, feature_cols, moments, block):
         if col not in scaled.columns:
             scaled[col] = np.nan
 
-    described = scaled.notna().any(axis=1)
-    scaled = scaled[feature_cols].fillna(0.0)
-    scaled.columns = [f"{c}__{block}" for c in feature_cols]
+    described = scaled.notna().any(axis=1).to_numpy()
+    scaled = scaled[feature_cols]
     scaled.index = rounds.index
-    scaled[f"has_features_{block}"] = described.to_numpy()
+
+    # Groups with a channel that said nothing: zero on the true totals, on the raw
+    # scale, so they land below every real conversation rather than at its average.
+    has_channel = rounds["has_chat_channel"].astype(bool).to_numpy()
+    chose_silence = has_channel & ~described
+    for col in (c for c in TRUE_TOTALS if c in scaled.columns):
+        zero_in_z = (0.0 - moments.loc["mean", col]) / moments.loc["std", col]
+        scaled.loc[chose_silence, col] = zero_in_z
+
+    scaled = scaled.fillna(0.0)          # everything else: neutral, i.e. undefined
+    scaled.columns = [f"{c}__{block}" for c in feature_cols]
+    scaled[f"has_features_{block}"] = described
+    scaled[f"chose_silence_{block}"] = chose_silence
     return scaled
 
 
@@ -209,9 +218,10 @@ def build(split, feature_cols, moments):
     analysis.to_csv(out, index=False)
     print(f"[{split}] {len(analysis)} game-rounds x {analysis.shape[1]} columns "
           f"-> {out.name}")
-    print(f"         described by the toolkit: "
-          f"{int(analysis.has_features_pre.sum())} PRE, "
-          f"{int(analysis.has_features_post.sum())} POST")
+    for block in ("pre", "post"):
+        print(f"         {block.upper():<4} talked {int(analysis[f'has_features_{block}'].sum()):5d}"
+              f"   chose silence {int(analysis[f'chose_silence_{block}'].sum()):5d}"
+              f"   no channel {int((~analysis.has_chat_channel.astype(bool)).sum()):5d}")
     return analysis
 
 
@@ -220,8 +230,18 @@ if __name__ == "__main__":
     learn_conv = load_conv_features("learn")
     candidates = candidate_feature_columns(learn_conv)
     feature_cols, reasons = screen_features(learn_conv, candidates)
-    print(f"screened {len(candidates)} candidate features -> {len(feature_cols)} kept")
+    print(f"toolkit reduction left {len(candidates)} candidate features; "
+          f"{len(feature_cols)} survive the near-constant check")
     write_manifest(candidates, feature_cols, reasons)
+
+    # The held-out split keeps every column, so the learning split's surviving
+    # features must all be present in it. Anything absent is a real mismatch
+    # rather than something to paper over with a neutral fill.
+    val_cols = set(load_conv_features("val").columns)
+    missing = [c for c in feature_cols if c not in val_cols]
+    if missing:
+        raise SystemExit(f"{len(missing)} learn features absent from the held-out "
+                         f"split, e.g. {missing[:5]} - re-run 02 for both splits.")
 
     moments = scaling_moments(learn_conv, feature_cols)
     for split in SPLITS:

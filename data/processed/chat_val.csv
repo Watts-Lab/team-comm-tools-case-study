@@ -191,6 +191,7 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 43EgdreyndHorgfGv,aoZJWx6AhwLTcZxi6,duck,are you pressing I'm done after?,2024-07-12 14:15:03.185000+00:00,7,contribution,pre,43EgdreyndHorgfGv_r7_pre,7
 43EgdreyndHorgfGv,aoZJWx6AhwLTcZxi6,duck,yes you are,2024-07-12 14:16:14.672000+00:00,9,outcome,post,43EgdreyndHorgfGv_r9_post,10
 43EgdreyndHorgfGv,eGHTtg5wzYcfNh8QL,chicken,i should be contributing now,2024-07-12 14:16:03.626000+00:00,9,contribution,pre,43EgdreyndHorgfGv_r9_pre,9
+4HwmGmWXPq5jBJust,zXxt9tNsDKoq9CSYR,chick,hello x,2024-07-09 16:19:20.357000+00:00,0,contribution,pre,4HwmGmWXPq5jBJust_r0_pre,0
 4HwmGmWXPq5jBJust,eanaR9rJpG7rDvW55,rabbit,Hi,2024-07-09 16:21:28.499000+00:00,1,summary,post,4HwmGmWXPq5jBJust_r1_post,2
 4HwmGmWXPq5jBJust,JLnn422YuJYk597jB,dog,hello,2024-07-09 16:20:34.786000+00:00,1,contribution,pre,4HwmGmWXPq5jBJust_r1_pre,1
 4hDDkjrDWqkXQRsrK,XunpyCqThWgLL9gA6,chicken,hi there  :),2024-07-09 17:15:44.963000+00:00,0,summary,post,4hDDkjrDWqkXQRsrK_r0_post,1
@@ -248,9 +249,15 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 4hDDkjrDWqkXQRsrK,rMYuhEX4rFdfrQK79,parrot,exactly,2024-07-09 17:27:16.404000+00:00,9,summary,post,4hDDkjrDWqkXQRsrK_r9_post,10
 4hDDkjrDWqkXQRsrK,RwY4bt2Rat6gaZ8B6,gorilla,"bigger pool, bigger payout for all of us.",2024-07-09 17:26:42.976000+00:00,9,contribution,pre,4hDDkjrDWqkXQRsrK_r9_pre,9
 52QdMhd96PFYubPFc,wNxzTBePqR72KjkAP,duck,hmmm,2024-07-08 18:31:37.733000+00:00,0,outcome,post,52QdMhd96PFYubPFc_r0_post,1
+52QdMhd96PFYubPFc,wNxzTBePqR72KjkAP,duck,donate the lot,2024-07-08 18:30:38.562000+00:00,0,contribution,pre,52QdMhd96PFYubPFc_r0_pre,0
 52QdMhd96PFYubPFc,wNxzTBePqR72KjkAP,duck,all or nothing !!,2024-07-08 18:33:29.965000+00:00,1,summary,post,52QdMhd96PFYubPFc_r1_post,2
 52QdMhd96PFYubPFc,wNxzTBePqR72KjkAP,duck,all or i will punish,2024-07-08 18:35:35.781000+00:00,4,contribution,pre,52QdMhd96PFYubPFc_r4_pre,4
 53ApueW6mJbX6RZgo,iprQWYQAhEk7aYHkQ,moose,everyone donate to pot,2024-07-17 17:21:00.015000+00:00,0,summary,post,53ApueW6mJbX6RZgo_r0_post,1
+53ApueW6mJbX6RZgo,FdXW5cubcsFaY3JGh,duck,Hello! I think we can maximize our payouts if we give everything to the pot. what do you think?,2024-07-17 17:19:34.663000+00:00,0,contribution,pre,53ApueW6mJbX6RZgo_r0_pre,0
+53ApueW6mJbX6RZgo,MpL9jPfb97z59c7kD,dog,I agree,2024-07-17 17:19:41.410000+00:00,0,contribution,pre,53ApueW6mJbX6RZgo_r0_pre,0
+53ApueW6mJbX6RZgo,ZCwQzDPt94JYtk3Gh,parrot,Yes,2024-07-17 17:19:45.580000+00:00,0,contribution,pre,53ApueW6mJbX6RZgo_r0_pre,0
+53ApueW6mJbX6RZgo,oM2TubuNLzqjwRFsa,rabbit,Yes!,2024-07-17 17:19:54.707000+00:00,0,contribution,pre,53ApueW6mJbX6RZgo_r0_pre,0
+53ApueW6mJbX6RZgo,iprQWYQAhEk7aYHkQ,moose,yes,2024-07-17 17:19:55.584000+00:00,0,contribution,pre,53ApueW6mJbX6RZgo_r0_pre,0
 53ApueW6mJbX6RZgo,FdXW5cubcsFaY3JGh,duck,"Yikes--there was an error on my end, I meant to contribute 20!!",2024-07-17 17:39:19.732000+00:00,12,outcome,post,53ApueW6mJbX6RZgo_r12_post,13
 53ApueW6mJbX6RZgo,GRyxW3NsDGWjixQuT,chicken,I wonder if this is part of the experiment ;),2024-07-17 17:40:04.047000+00:00,13,outcome,post,53ApueW6mJbX6RZgo_r13_post,14
 53ApueW6mJbX6RZgo,FdXW5cubcsFaY3JGh,duck,"Yes, I for sure put in 20 into the pot!",2024-07-17 17:40:27.934000+00:00,13,summary,post,53ApueW6mJbX6RZgo_r13_post,14
@@ -275,6 +282,11 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 53ApueW6mJbX6RZgo,FdXW5cubcsFaY3JGh,duck,Alright! We'll all get the bonus! :),2024-07-17 17:33:19.887000+00:00,7,outcome,post,53ApueW6mJbX6RZgo_r7_post,8
 53ApueW6mJbX6RZgo,FdXW5cubcsFaY3JGh,duck,"Yay, Team! :)",2024-07-17 17:34:40.566000+00:00,7,summary,post,53ApueW6mJbX6RZgo_r7_post,8
 5CF98timgPxWv28MK,MKcfuX9cgiXXh2hSL,gorilla,I think we should all donate all,2024-07-08 18:35:23.468000+00:00,8,summary,post,5CF98timgPxWv28MK_r8_post,9
+5R7YRmti4R5GiJKpi,4HjuciqunRG9mGsX4,sloth,Will we have a common strategy,2024-07-10 15:28:46.332000+00:00,0,contribution,pre,5R7YRmti4R5GiJKpi_r0_pre,0
+5R7YRmti4R5GiJKpi,77ruR2sTKH7w39nDB,gorilla,I hope so,2024-07-10 15:28:56.353000+00:00,0,contribution,pre,5R7YRmti4R5GiJKpi_r0_pre,0
+5R7YRmti4R5GiJKpi,Xqj6gvcXXfTxk6KBA,parrot,That's a good idea!,2024-07-10 15:29:00.797000+00:00,0,contribution,pre,5R7YRmti4R5GiJKpi_r0_pre,0
+5R7YRmti4R5GiJKpi,o4ojgAMzkrvDJbwmE,owl,What do you suggest.,2024-07-10 15:29:04.695000+00:00,0,contribution,pre,5R7YRmti4R5GiJKpi_r0_pre,0
+5R7YRmti4R5GiJKpi,o4ojgAMzkrvDJbwmE,owl,?,2024-07-10 15:29:06.431000+00:00,0,contribution,pre,5R7YRmti4R5GiJKpi_r0_pre,0
 5R7YRmti4R5GiJKpi,4HjuciqunRG9mGsX4,sloth,Rabbit...,2024-07-10 15:39:41.101000+00:00,11,summary,post,5R7YRmti4R5GiJKpi_r11_post,12
 5R7YRmti4R5GiJKpi,Xqj6gvcXXfTxk6KBA,parrot,Wait!!!!,2024-07-10 15:39:46.274000+00:00,11,summary,post,5R7YRmti4R5GiJKpi_r11_post,12
 5R7YRmti4R5GiJKpi,o4ojgAMzkrvDJbwmE,owl,k,2024-07-10 15:40:28.790000+00:00,12,outcome,post,5R7YRmti4R5GiJKpi_r12_post,13
@@ -411,6 +423,7 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 5jDHNDoA3Zrd9ZWyP,cPL2v74h67jmywZdN,chicken,yes,2024-07-12 15:34:24.150000+00:00,9,summary,post,5jDHNDoA3Zrd9ZWyP_r9_post,10
 5jDHNDoA3Zrd9ZWyP,QgLJv2JWTZgtuhjhR,duck,yeah this is great,2024-07-12 15:33:56.832000+00:00,9,contribution,pre,5jDHNDoA3Zrd9ZWyP_r9_pre,9
 5mhtM66ewYHNxSp4q,S48gTjabL2BSJCSbr,parrot,All in,2024-07-09 15:38:41.119000+00:00,1,contribution,pre,5mhtM66ewYHNxSp4q_r1_pre,1
+5zZoNBh7D35XSCvQk,zCuWb6xofrxNStvsw,moose,stick em all in!,2024-07-09 17:14:02.367000+00:00,0,contribution,pre,5zZoNBh7D35XSCvQk_r0_pre,0
 5zZoNBh7D35XSCvQk,hYPvwzjPeQxeMKCj7,dog,keep it up,2024-07-09 17:24:14.696000+00:00,7,contribution,pre,5zZoNBh7D35XSCvQk_r7_pre,7
 6Mw9RRwcGQrJbouQh,vgc9qJrJr8E4wYPvW,crocodile,AYO,2024-07-18 17:53:09.456000+00:00,0,outcome,post,6Mw9RRwcGQrJbouQh_r0_post,1
 6Mw9RRwcGQrJbouQh,Dc7cxEsfAGrd6GFdR,duck,i deducted the sloth,2024-07-18 17:53:23.904000+00:00,0,outcome,post,6Mw9RRwcGQrJbouQh_r0_post,1
@@ -422,6 +435,15 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 6Mw9RRwcGQrJbouQh,vgc9qJrJr8E4wYPvW,crocodile,chill out brudda,2024-07-18 17:54:20.426000+00:00,0,summary,post,6Mw9RRwcGQrJbouQh_r0_post,1
 6Mw9RRwcGQrJbouQh,emzZcDCM65EjaSpNZ,parrot,i didnt deduct anyone but ima get the non contributors next time,2024-07-18 17:54:31.897000+00:00,0,summary,post,6Mw9RRwcGQrJbouQh_r0_post,1
 6Mw9RRwcGQrJbouQh,7aew5DrSY4nBCDaPn,sloth,OI DUCK,2024-07-18 17:54:43.334000+00:00,0,summary,post,6Mw9RRwcGQrJbouQh_r0_post,1
+6Mw9RRwcGQrJbouQh,vgc9qJrJr8E4wYPvW,crocodile,pls everyone donate to the pot i need dat bonus money,2024-07-18 17:52:26.987000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,h9gFW5qrsvcqGcQWX,owl,lfg,2024-07-18 17:52:34.922000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,emzZcDCM65EjaSpNZ,parrot,im all in,2024-07-18 17:52:37.391000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,Dc7cxEsfAGrd6GFdR,duck,i donated,2024-07-18 17:52:41.614000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,Dc7cxEsfAGrd6GFdR,duck,quack,2024-07-18 17:52:47.317000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,BJLSFyR67nAqwDdWS,gorilla,Hi,2024-07-18 17:52:47.640000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,vgc9qJrJr8E4wYPvW,crocodile,if anyone gets greedy we jumping u,2024-07-18 17:52:49.330000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,Dc7cxEsfAGrd6GFdR,duck,LOL,2024-07-18 17:52:56.183000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
+6Mw9RRwcGQrJbouQh,BJLSFyR67nAqwDdWS,gorilla,oh,2024-07-18 17:52:56.974000+00:00,0,contribution,pre,6Mw9RRwcGQrJbouQh_r0_pre,0
 6Mw9RRwcGQrJbouQh,emzZcDCM65EjaSpNZ,parrot,thats true everyone is being good,2024-07-18 18:12:13.562000+00:00,10,outcome,post,6Mw9RRwcGQrJbouQh_r10_post,11
 6Mw9RRwcGQrJbouQh,vgc9qJrJr8E4wYPvW,crocodile,hoo wee that cash is rolling in,2024-07-18 18:12:16.099000+00:00,10,outcome,post,6Mw9RRwcGQrJbouQh_r10_post,11
 6Mw9RRwcGQrJbouQh,rGzHmnTycpc2dQcai,snake,let's just agree to stick together on the last round now,2024-07-18 18:12:43.005000+00:00,10,summary,post,6Mw9RRwcGQrJbouQh_r10_post,11
@@ -598,9 +620,12 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 75Lp6nDFLGvmzj2Bm,zx2mkw5TKB3mPQ2on,chicken,HI,2024-07-08 18:30:59.913000+00:00,2,outcome,post,75Lp6nDFLGvmzj2Bm_r2_post,3
 75Lp6nDFLGvmzj2Bm,LTcpSqvn2TCESPiEC,gorilla,Hi,2024-07-08 18:31:10.227000+00:00,2,outcome,post,75Lp6nDFLGvmzj2Bm_r2_post,3
 79kveGWTa4seiDX6H,pFSjLhLWh3SzaSREy,duck,Hi!,2024-07-08 20:11:20.642000+00:00,0,summary,post,79kveGWTa4seiDX6H_r0_post,1
+79kveGWTa4seiDX6H,kL9XKh8rC4QCCYEA4,gorilla,Hello!,2024-07-08 20:10:20.571000+00:00,0,contribution,pre,79kveGWTa4seiDX6H_r0_pre,0
 7tfDsTHHnxsgrhE3d,YjqwBn9NTc4a3HQgW,moose,no 20s only,2024-07-17 14:49:56.933000+00:00,0,outcome,post,7tfDsTHHnxsgrhE3d_r0_post,1
 7tfDsTHHnxsgrhE3d,QEFz2F26jcLgP8325,dog,I'm lost on this game!,2024-07-17 14:50:42.624000+00:00,0,summary,post,7tfDsTHHnxsgrhE3d_r0_post,1
 7tfDsTHHnxsgrhE3d,HpQyxGY4WDRgs4Rzj,chicken,how did some get 42,2024-07-17 14:50:54.157000+00:00,0,summary,post,7tfDsTHHnxsgrhE3d_r0_post,1
+7tfDsTHHnxsgrhE3d,YjqwBn9NTc4a3HQgW,moose,theyre kind of swindling us by making us submit to prolific first,2024-07-17 14:49:28.090000+00:00,0,contribution,pre,7tfDsTHHnxsgrhE3d_r0_pre,0
+7tfDsTHHnxsgrhE3d,HpQyxGY4WDRgs4Rzj,chicken,can you contribute 10 instead of 20,2024-07-17 14:49:48.971000+00:00,0,contribution,pre,7tfDsTHHnxsgrhE3d_r0_pre,0
 7tfDsTHHnxsgrhE3d,YjqwBn9NTc4a3HQgW,moose,we will all have to say goodbye soon,2024-07-17 15:04:10.684000+00:00,10,outcome,post,7tfDsTHHnxsgrhE3d_r10_post,11
 7tfDsTHHnxsgrhE3d,YjqwBn9NTc4a3HQgW,moose,and go on with our lives,2024-07-17 15:04:13.468000+00:00,10,outcome,post,7tfDsTHHnxsgrhE3d_r10_post,11
 7tfDsTHHnxsgrhE3d,vcfvunxvB9gdxsYZ2,chick,if he is AI he knows the answer lol,2024-07-17 15:04:15.302000+00:00,10,outcome,post,7tfDsTHHnxsgrhE3d_r10_post,11
@@ -854,6 +879,13 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 925LF9k9CXpz8KjQm,AM33BkxJGJfWa3pBD,gorilla,you should set an example,2024-07-15 17:00:14.254000+00:00,9,contribution,pre,925LF9k9CXpz8KjQm_r9_pre,9
 925LF9k9CXpz8KjQm,YEKXLa5DPRzuZHPJi,owl,Just keep clicking I'm done; that's literally it,2024-07-15 17:00:26.095000+00:00,9,contribution,pre,925LF9k9CXpz8KjQm_r9_pre,9
 925LF9k9CXpz8KjQm,m7Gmn7T7twNxZ245c,snake,ive done twenty each time,2024-07-15 17:00:29.322000+00:00,9,contribution,pre,925LF9k9CXpz8KjQm_r9_pre,9
+9aygFvfvCRquDLWYn,Tv3nod3Bk6KmoSXpn,dog,Hello! Let's all put coins into pot to gain benefit of multiplier!,2024-07-09 16:13:20.578000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
+9aygFvfvCRquDLWYn,JXjHYoPT8LYGgSthQ,chicken,Definitely,2024-07-09 16:13:30.675000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
+9aygFvfvCRquDLWYn,C2kxcyTr8uJWxuexe,duck,Yes please! $$,2024-07-09 16:13:32.507000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
+9aygFvfvCRquDLWYn,a4zhTfHv6daWBF7S5,parrot,yeah,2024-07-09 16:13:33.462000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
+9aygFvfvCRquDLWYn,jvBTL2hhfWW5xpKcp,owl,ok,2024-07-09 16:13:34.624000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
+9aygFvfvCRquDLWYn,6LWpy4tWrEFLJExZ8,sloth,Yep putting it all in,2024-07-09 16:13:36.181000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
+9aygFvfvCRquDLWYn,yaB32vnAN7jnHRuRQ,chick,ok,2024-07-09 16:13:41.355000+00:00,0,contribution,pre,9aygFvfvCRquDLWYn_r0_pre,0
 9aygFvfvCRquDLWYn,C2kxcyTr8uJWxuexe,duck,Parrot may be a control.,2024-07-09 16:15:04.853000+00:00,1,outcome,post,9aygFvfvCRquDLWYn_r1_post,2
 9aygFvfvCRquDLWYn,Tv3nod3Bk6KmoSXpn,dog,Maybe parrot is a bot yeah,2024-07-09 16:15:07.520000+00:00,1,outcome,post,9aygFvfvCRquDLWYn_r1_post,2
 9aygFvfvCRquDLWYn,C2kxcyTr8uJWxuexe,duck,Not real.,2024-07-09 16:15:08.650000+00:00,1,outcome,post,9aygFvfvCRquDLWYn_r1_post,2
@@ -896,6 +928,9 @@ gameId,playerId,avatar,text,timestamp,round_index,phase,block,conv_id,target_rou
 9aygFvfvCRquDLWYn,Tv3nod3Bk6KmoSXpn,dog,My chatbot in christ,2024-07-09 16:18:49.973000+00:00,4,contribution,pre,9aygFvfvCRquDLWYn_r4_pre,4
 9aygFvfvCRquDLWYn,a4zhTfHv6daWBF7S5,parrot,i put 20 in,2024-07-09 16:18:53.808000+00:00,4,contribution,pre,9aygFvfvCRquDLWYn_r4_pre,4
 9aygFvfvCRquDLWYn,6LWpy4tWrEFLJExZ8,sloth,tbf parrot could be the poor researcher who has to pretend to be one of us,2024-07-09 16:18:58.917000+00:00,4,contribution,pre,9aygFvfvCRquDLWYn_r4_pre,4
+AJ4ikZuWJeJcEXhgZ,o2bvxZWS9gn2XpYoD,dog,All contribute 20 and we get the biggest payout,2024-07-09 15:36:56.022000+00:00,0,contribution,pre,AJ4ikZuWJeJcEXhgZ_r0_pre,0
+AJ4ikZuWJeJcEXhgZ,hL9SN7BENecpviKyC,gorilla,Bingo!  Let's all do 20.,2024-07-09 15:37:12.466000+00:00,0,contribution,pre,AJ4ikZuWJeJcEXhgZ_r0_pre,0
+AJ4ikZuWJeJcEXhgZ,m7T9G8b5CTEoiEjyr,chicken,agree,2024-07-09 15:37:13.110000+00:00,0,contribution,pre,AJ4ikZuWJeJcEXhgZ_r0_pre,0
 AJ4ikZuWJeJcEXhgZ,o2bvxZWS9gn2XpYoD,dog,Good group heh,2024-07-09 15:39:33.456000+00:00,3,contribution,pre,AJ4ikZuWJeJcEXhgZ_r3_pre,3
 AJ4ikZuWJeJcEXhgZ,o2bvxZWS9gn2XpYoD,dog,oh my god im sorry i misclicked,2024-07-09 15:41:43.761000+00:00,5,summary,post,AJ4ikZuWJeJcEXhgZ_r5_post,6
 AJ4ikZuWJeJcEXhgZ,o2bvxZWS9gn2XpYoD,dog,wont happen again,2024-07-09 15:41:54.440000+00:00,5,summary,post,AJ4ikZuWJeJcEXhgZ_r5_post,6
@@ -909,6 +944,8 @@ ALoMZFmwG8Nkjgy8f,k5hr4kJj5prRdJeH6,crocodile,"I clicked wrong, but will go all 
 ALoMZFmwG8Nkjgy8f,AeN2mtwqLPePajiEg,duck,ok,2024-07-18 15:36:45.702000+00:00,0,outcome,post,ALoMZFmwG8Nkjgy8f_r0_post,1
 ALoMZFmwG8Nkjgy8f,o47HPg52G5i5PDtWS,cow,ok,2024-07-18 15:36:58.452000+00:00,0,outcome,post,ALoMZFmwG8Nkjgy8f_r0_post,1
 ALoMZFmwG8Nkjgy8f,q36YZ4LJtzGawekbW,pinguin,yup we all win why wouldnt we use multipliers,2024-07-18 15:37:27.335000+00:00,0,summary,post,ALoMZFmwG8Nkjgy8f_r0_post,1
+ALoMZFmwG8Nkjgy8f,q36YZ4LJtzGawekbW,pinguin,lets go all in first round,2024-07-18 15:35:52.258000+00:00,0,contribution,pre,ALoMZFmwG8Nkjgy8f_r0_pre,0
+ALoMZFmwG8Nkjgy8f,o47HPg52G5i5PDtWS,cow,I did,2024-07-18 15:36:07.995000+00:00,0,contribution,pre,ALoMZFmwG8Nkjgy8f_r0_pre,0
 ALoMZFmwG8Nkjgy8f,KFPbPjbWd5vtp4P8v,rabbit,"Nah, too expensive",2024-07-18 15:50:40.396000+00:00,10,outcome,post,ALoMZFmwG8Nkjgy8f_r10_post,11
 ALoMZFmwG8Nkjgy8f,o47HPg52G5i5PDtWS,cow,only 6 more to go,2024-07-18 15:50:44.372000+00:00,10,outcome,post,ALoMZFmwG8Nkjgy8f_r10_post,11
 ALoMZFmwG8Nkjgy8f,HRAJSqFsDqXx23iKq,moose,you cant deduct me fool,2024-07-18 15:50:46.467000+00:00,10,outcome,post,ALoMZFmwG8Nkjgy8f_r10_post,11
@@ -1083,6 +1120,10 @@ ALoMZFmwG8Nkjgy8f,HRAJSqFsDqXx23iKq,moose,he had enough of you guys talking arse
 ALoMZFmwG8Nkjgy8f,uFasNMBideGH4m56s,frog,deduct moose,2024-07-18 15:50:19.725000+00:00,9,summary,post,ALoMZFmwG8Nkjgy8f_r9_post,10
 ALoMZFmwG8Nkjgy8f,uFasNMBideGH4m56s,frog,like probably not lol,2024-07-18 15:49:24.572000+00:00,9,contribution,pre,ALoMZFmwG8Nkjgy8f_r9_pre,9
 ANZmRctEmzi3aXhxq,vvDhFYbL8NR9rKFMq,chick,Thanks guys! I am glad we are all on the same page lol,2024-07-17 14:50:29.221000+00:00,0,outcome,post,ANZmRctEmzi3aXhxq_r0_post,1
+ANZmRctEmzi3aXhxq,vvDhFYbL8NR9rKFMq,chick,I am giving all I got! We can all make money this way!,2024-07-17 14:49:42.483000+00:00,0,contribution,pre,ANZmRctEmzi3aXhxq_r0_pre,0
+ANZmRctEmzi3aXhxq,Xsw9Wq5si8kChz2vo,dog,Same!,2024-07-17 14:49:47.130000+00:00,0,contribution,pre,ANZmRctEmzi3aXhxq_r0_pre,0
+ANZmRctEmzi3aXhxq,PHwMav9rDyJegwAXN,chicken,same!!,2024-07-17 14:49:50.460000+00:00,0,contribution,pre,ANZmRctEmzi3aXhxq_r0_pre,0
+ANZmRctEmzi3aXhxq,spen4phiGNquKrZfy,owl,same,2024-07-17 14:49:51.230000+00:00,0,contribution,pre,ANZmRctEmzi3aXhxq_r0_pre,0
 ANZmRctEmzi3aXhxq,vvDhFYbL8NR9rKFMq,chick,Owl.. I am disappointed!,2024-07-17 14:59:59.439000+00:00,10,outcome,post,ANZmRctEmzi3aXhxq_r10_post,11
 ANZmRctEmzi3aXhxq,vvDhFYbL8NR9rKFMq,chick,BUNNY! Again?!,2024-07-17 15:00:54.182000+00:00,11,outcome,post,ANZmRctEmzi3aXhxq_r11_post,12
 ANZmRctEmzi3aXhxq,aLRKYYEuPkX7fXKwx,parrot,We can all deduct from bunny together,2024-07-17 15:01:04.134000+00:00,11,outcome,post,ANZmRctEmzi3aXhxq_r11_post,12
@@ -1116,6 +1157,7 @@ ANZmRctEmzi3aXhxq,vvDhFYbL8NR9rKFMq,chick,We all make more by putting money in!,
 ANZmRctEmzi3aXhxq,vvDhFYbL8NR9rKFMq,chick,"God job, everyone!",2024-07-17 14:59:12.774000+00:00,9,outcome,post,ANZmRctEmzi3aXhxq_r9_post,10
 ANZmRctEmzi3aXhxq,EFERhAAYmmbqZzduo,duck,Exactly,2024-07-17 14:59:14.589000+00:00,9,outcome,post,ANZmRctEmzi3aXhxq_r9_post,10
 ASQtYBWx6cGN27KxL,nANvgSzk8ZjbnEadp,parrot,WOGWAN,2024-07-12 14:40:45.868000+00:00,0,outcome,post,ASQtYBWx6cGN27KxL_r0_post,1
+ASQtYBWx6cGN27KxL,44BQoCwuEhjvEbZ9C,sloth,wogwan,2024-07-12 14:40:30.889000+00:00,0,contribution,pre,ASQtYBWx6cGN27KxL_r0_pre,0
 ASQtYBWx6cGN27KxL,Hcg6xsKWQrPmSH8mq,duck,chicken wake up,2024-07-12 14:50:13.638000+00:00,11,contribution,pre,ASQtYBWx6cGN27KxL_r11_pre,11
 ASQtYBWx6cGN27KxL,Hcg6xsKWQrPmSH8mq,duck,chicken,2024-07-12 14:50:18.188000+00:00,11,contribution,pre,ASQtYBWx6cGN27KxL_r11_pre,11
 ASQtYBWx6cGN27KxL,44BQoCwuEhjvEbZ9C,sloth,how many rounds,2024-07-12 14:50:18.905000+00:00,11,contribution,pre,ASQtYBWx6cGN27KxL_r11_pre,11
@@ -1175,6 +1217,17 @@ Acx4Q495QGk2h3E6Y,2qyfkh5qBzQDmPH8P,gorilla,"maybe instead of a certain number, 
 Acx4Q495QGk2h3E6Y,2qyfkh5qBzQDmPH8P,gorilla,depending on the multiplier,2024-07-18 14:32:29.833000+00:00,0,summary,post,Acx4Q495QGk2h3E6Y_r0_post,1
 Acx4Q495QGk2h3E6Y,F5qiZbKeP5d2Kthbg,owl,"I agree, give all each time",2024-07-18 14:32:39.796000+00:00,0,summary,post,Acx4Q495QGk2h3E6Y_r0_post,1
 Acx4Q495QGk2h3E6Y,ALPHW6o5jhd3xJFFC,chicken,"Assuming theres always oneblack sheep, we could cut our losses by doing 5 or 10",2024-07-18 14:32:50.404000+00:00,0,summary,post,Acx4Q495QGk2h3E6Y_r0_post,1
+Acx4Q495QGk2h3E6Y,ALPHW6o5jhd3xJFFC,chicken,10 each?,2024-07-18 14:30:35.811000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,2iTm7vdJqSESHce5q,sloth,Hello all,2024-07-18 14:30:38.105000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,ZNfX3gCBHTu65zQKG,cow,hello!!,2024-07-18 14:30:46.569000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,3hs8xREWC3Efbc4nJ,duck,Hi everyone!,2024-07-18 14:30:48.971000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,2qyfkh5qBzQDmPH8P,gorilla,hey y'all,2024-07-18 14:30:50.352000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,ZNfX3gCBHTu65zQKG,cow,i did 20,2024-07-18 14:30:50.914000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,DSYuXbXxh43ieQ2hs,rabbit,i forgot the chat. I've gone rogue at 2,2024-07-18 14:30:52.169000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,CjB3uMWv2Dj5X6BTz,parrot,Hello!,2024-07-18 14:30:55.228000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,ASEFxe3erSr6Hpn4n,dog,I gave 20 oops,2024-07-18 14:30:58.500000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,2qyfkh5qBzQDmPH8P,gorilla,I'm giving 16,2024-07-18 14:31:05.369000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
+Acx4Q495QGk2h3E6Y,ZC5bRutXCutWPeZsN,crocodile,I gave 5,2024-07-18 14:31:07.297000+00:00,0,contribution,pre,Acx4Q495QGk2h3E6Y_r0_pre,0
 Acx4Q495QGk2h3E6Y,3hs8xREWC3Efbc4nJ,duck,"oh eyah, someone did drop out",2024-07-18 14:51:55.455000+00:00,10,outcome,post,Acx4Q495QGk2h3E6Y_r10_post,11
 Acx4Q495QGk2h3E6Y,DSYuXbXxh43ieQ2hs,rabbit,somone said they needed to work?,2024-07-18 14:51:59.210000+00:00,10,outcome,post,Acx4Q495QGk2h3E6Y_r10_post,11
 Acx4Q495QGk2h3E6Y,2qyfkh5qBzQDmPH8P,gorilla,no they're still here,2024-07-18 14:52:07.934000+00:00,10,outcome,post,Acx4Q495QGk2h3E6Y_r10_post,11
@@ -1514,6 +1567,8 @@ Acx4Q495QGk2h3E6Y,CjB3uMWv2Dj5X6BTz,parrot,i did 20,2024-07-18 14:49:33.108000+0
 Acx4Q495QGk2h3E6Y,3hs8xREWC3Efbc4nJ,duck,20,2024-07-18 14:49:35.419000+00:00,9,contribution,pre,Acx4Q495QGk2h3E6Y_r9_pre,9
 AfraiKcnCmXFPxP6A,5ASGHhGnQG5SSzwym,gorilla,Are you guys real?,2024-07-17 17:28:31.791000+00:00,0,summary,post,AfraiKcnCmXFPxP6A_r0_post,1
 AfraiKcnCmXFPxP6A,bnNiiaZ7qis9dvAps,rabbit,Yh,2024-07-17 17:28:36.876000+00:00,0,summary,post,AfraiKcnCmXFPxP6A_r0_post,1
+AfraiKcnCmXFPxP6A,XyTvN2fkSYhM5kfsg,moose,Hi... :),2024-07-17 17:27:25.380000+00:00,0,contribution,pre,AfraiKcnCmXFPxP6A_r0_pre,0
+AfraiKcnCmXFPxP6A,2D7dwmc9iJqYtTru5,sloth,hi all,2024-07-17 17:27:26.555000+00:00,0,contribution,pre,AfraiKcnCmXFPxP6A_r0_pre,0
 AfraiKcnCmXFPxP6A,bnNiiaZ7qis9dvAps,rabbit,Lol we've all turned on eachother because of owl,2024-07-17 17:40:39.977000+00:00,13,outcome,post,AfraiKcnCmXFPxP6A_r13_post,14
 AfraiKcnCmXFPxP6A,5ASGHhGnQG5SSzwym,gorilla,Yeah lol,2024-07-17 17:40:49.752000+00:00,13,summary,post,AfraiKcnCmXFPxP6A_r13_post,14
 AfraiKcnCmXFPxP6A,XyTvN2fkSYhM5kfsg,moose,lol- last round!,2024-07-17 17:41:09.301000+00:00,14,contribution,pre,AfraiKcnCmXFPxP6A_r14_pre,14
@@ -1567,6 +1622,8 @@ BJWpJtN2jP8jHntmQ,NsjwWmeaLsvPm928r,chicken,Im not going to keep contributing if
 BJWpJtN2jP8jHntmQ,DYQmLfemkM2MdFQTX,gorilla,"there is no individual winner her guys, its a group win",2024-07-09 16:19:03.900000+00:00,4,summary,post,BJWpJtN2jP8jHntmQ_r4_post,5
 C2QpMte8Yi4kP9AFa,NKrPthW332RA6kPwW,duck,lets go all in for all rounds i guess,2024-07-08 17:48:20.943000+00:00,0,outcome,post,C2QpMte8Yi4kP9AFa_r0_post,1
 C2QpMte8Yi4kP9AFa,DqKie2DmFhhCHoQSu,gorilla,Heckin,2024-07-08 17:48:33.217000+00:00,0,summary,post,C2QpMte8Yi4kP9AFa_r0_post,1
+C2QpMte8Yi4kP9AFa,DqKie2DmFhhCHoQSu,gorilla,Shall we just all in for 6 rounds?,2024-07-08 17:47:49.672000+00:00,0,contribution,pre,C2QpMte8Yi4kP9AFa_r0_pre,0
+C2QpMte8Yi4kP9AFa,NKrPthW332RA6kPwW,duck,yeah,2024-07-08 17:48:04.904000+00:00,0,contribution,pre,C2QpMte8Yi4kP9AFa_r0_pre,0
 C2QpMte8Yi4kP9AFa,NKrPthW332RA6kPwW,duck,they knew we would do that,2024-07-08 17:50:39.687000+00:00,2,summary,post,C2QpMte8Yi4kP9AFa_r2_post,3
 C2QpMte8Yi4kP9AFa,NKrPthW332RA6kPwW,duck,thats it,2024-07-08 17:49:42.756000+00:00,2,contribution,pre,C2QpMte8Yi4kP9AFa_r2_pre,2
 C2QpMte8Yi4kP9AFa,NKrPthW332RA6kPwW,duck,all in baby.,2024-07-08 17:49:48.999000+00:00,2,contribution,pre,C2QpMte8Yi4kP9AFa_r2_pre,2
@@ -1582,6 +1639,7 @@ C5Cd8Yq5dDbdycXKB,S76stnxDqF2pCA6cu,sloth,sure,2024-07-12 14:52:36.718000+00:00,
 C5Cd8Yq5dDbdycXKB,hZDKR9w6gYHjH8bY8,gorilla,yep,2024-07-12 14:52:37.554000+00:00,12,contribution,pre,C5Cd8Yq5dDbdycXKB_r12_pre,12
 C5Cd8Yq5dDbdycXKB,tF3CJPFtsFNHo2xmL,chicken,good job everyone,2024-07-12 14:55:40.125000+00:00,17,outcome,post,C5Cd8Yq5dDbdycXKB_r17_post,18
 C5Cd8Yq5dDbdycXKB,xCdSGZuuBdog62krg,parrot,yes,2024-07-12 14:55:59.768000+00:00,18,contribution,pre,C5Cd8Yq5dDbdycXKB_r18_pre,18
+C6saDK7dbQmkvtG5X,QxxrPYg8oKxy3CSrH,sloth,Hi,2024-07-08 19:22:19.895000+00:00,0,contribution,pre,C6saDK7dbQmkvtG5X_r0_pre,0
 C6saDK7dbQmkvtG5X,QxxrPYg8oKxy3CSrH,sloth,can we agree to all contribute the full 20 each time,2024-07-08 19:24:51.883000+00:00,1,summary,post,C6saDK7dbQmkvtG5X_r1_post,2
 C6saDK7dbQmkvtG5X,pxobCZDLZGNzb4Rxm,duck,"Gorilla, why are you being a jerk?",2024-07-08 19:23:40.342000+00:00,1,contribution,pre,C6saDK7dbQmkvtG5X_r1_pre,1
 C6saDK7dbQmkvtG5X,pxobCZDLZGNzb4Rxm,duck,Gorilla is penalizing all of us.  Stop contributing to their cause.,2024-07-08 19:27:31.703000+00:00,3,outcome,post,C6saDK7dbQmkvtG5X_r3_post,4
@@ -1592,6 +1650,10 @@ CERwfEBrZtGF9Y7LH,sZDKgo3JtzaDPiJLA,duck,hello,2024-07-08 20:06:51.460000+00:00,
 CapNW6NsJ4cku7sjt,FwdKTc74Wp3hXq66b,duck,will do!!,2024-07-17 14:08:33.037000+00:00,0,outcome,post,CapNW6NsJ4cku7sjt_r0_post,1
 CapNW6NsJ4cku7sjt,juQaxaqW9xhvQSnCY,owl,likewise everybody eats if we all put in the most every time,2024-07-17 14:08:37.636000+00:00,0,outcome,post,CapNW6NsJ4cku7sjt_r0_post,1
 CapNW6NsJ4cku7sjt,TkHc7Qc4nbMX3WN88,chicken,"I'm all for that, everytime max amount",2024-07-17 14:09:11.848000+00:00,0,summary,post,CapNW6NsJ4cku7sjt_r0_post,1
+CapNW6NsJ4cku7sjt,bwhXNzFrm6hXbzwDf,parrot,"If we all put in, we all double our money :)",2024-07-17 14:07:48.736000+00:00,0,contribution,pre,CapNW6NsJ4cku7sjt_r0_pre,0
+CapNW6NsJ4cku7sjt,Fqhuf6KtzKKD32N3v,gorilla,agreed!,2024-07-17 14:07:55.546000+00:00,0,contribution,pre,CapNW6NsJ4cku7sjt_r0_pre,0
+CapNW6NsJ4cku7sjt,iPZ8qXqSbTEZ9KJAT,rabbit,True :D,2024-07-17 14:07:56.956000+00:00,0,contribution,pre,CapNW6NsJ4cku7sjt_r0_pre,0
+CapNW6NsJ4cku7sjt,YdGdTcGkGhspRCp34,dog,All of mine in every time.,2024-07-17 14:08:08.538000+00:00,0,contribution,pre,CapNW6NsJ4cku7sjt_r0_pre,0
 CapNW6NsJ4cku7sjt,FwdKTc74Wp3hXq66b,duck,greedy people here,2024-07-17 14:25:12.791000+00:00,11,outcome,post,CapNW6NsJ4cku7sjt_r11_post,12
 CapNW6NsJ4cku7sjt,FwdKTc74Wp3hXq66b,duck,some,2024-07-17 14:25:28.604000+00:00,11,summary,post,CapNW6NsJ4cku7sjt_r11_post,12
 CapNW6NsJ4cku7sjt,bwhXNzFrm6hXbzwDf,parrot,i dont know whether duck is telling the truth or gaslighting me lol,2024-07-17 14:25:37.689000+00:00,11,summary,post,CapNW6NsJ4cku7sjt_r11_post,12
@@ -1722,6 +1784,10 @@ CbDvrXGkphmfGtH3G,SHSrQhTGRsmD7mfkD,parrot,In,2024-07-18 14:25:55.548000+00:00,0
 CbDvrXGkphmfGtH3G,fiJD3zp8sW3S9yFYu,owl,same,2024-07-18 14:26:07.739000+00:00,0,outcome,post,CbDvrXGkphmfGtH3G_r0_post,1
 CbDvrXGkphmfGtH3G,SHSrQhTGRsmD7mfkD,parrot,Bonuses left blank?,2024-07-18 14:26:40.459000+00:00,0,summary,post,CbDvrXGkphmfGtH3G_r0_post,1
 CbDvrXGkphmfGtH3G,yDM6CZEvDkPeYw38t,pinguin,"Yeah if we max every round, no need for bonuses?",2024-07-18 14:27:02.842000+00:00,0,summary,post,CbDvrXGkphmfGtH3G_r0_post,1
+CbDvrXGkphmfGtH3G,qsYx6vcNEwo7k5qbs,crocodile,we maxing out every round or what fam,2024-07-18 14:24:54.896000+00:00,0,contribution,pre,CbDvrXGkphmfGtH3G_r0_pre,0
+CbDvrXGkphmfGtH3G,N225onacZE5qPektQ,chicken,MAXING!,2024-07-18 14:25:03.764000+00:00,0,contribution,pre,CbDvrXGkphmfGtH3G_r0_pre,0
+CbDvrXGkphmfGtH3G,qsYx6vcNEwo7k5qbs,crocodile,lfg,2024-07-18 14:25:07.707000+00:00,0,contribution,pre,CbDvrXGkphmfGtH3G_r0_pre,0
+CbDvrXGkphmfGtH3G,yDM6CZEvDkPeYw38t,pinguin,Didn't max this time but will from now on!,2024-07-18 14:25:17.607000+00:00,0,contribution,pre,CbDvrXGkphmfGtH3G_r0_pre,0
 CbDvrXGkphmfGtH3G,qsYx6vcNEwo7k5qbs,crocodile,so is the amount of pigs at the top our points?,2024-07-18 14:37:59.067000+00:00,10,outcome,post,CbDvrXGkphmfGtH3G_r10_post,11
 CbDvrXGkphmfGtH3G,PQsBL4inNdYBECXDC,dog,[] X,2024-07-18 14:38:02.050000+00:00,10,outcome,post,CbDvrXGkphmfGtH3G_r10_post,11
 CbDvrXGkphmfGtH3G,SHSrQhTGRsmD7mfkD,parrot,So surly the research here is the chat?,2024-07-18 14:38:14.061000+00:00,10,summary,post,CbDvrXGkphmfGtH3G_r10_post,11
@@ -1840,6 +1906,8 @@ CbDvrXGkphmfGtH3G,urzaLgCyAFRZSsxzp,cow,7 more rounds..,2024-07-18 14:36:57.3830
 CbDvrXGkphmfGtH3G,urzaLgCyAFRZSsxzp,cow,[X],2024-07-18 14:37:11.289000+00:00,9,summary,post,CbDvrXGkphmfGtH3G_r9_post,10
 CbDvrXGkphmfGtH3G,ajmNp5yqMsAmKs4vs,rabbit,check ;),2024-07-18 14:37:25.956000+00:00,9,summary,post,CbDvrXGkphmfGtH3G_r9_post,10
 CbDvrXGkphmfGtH3G,urzaLgCyAFRZSsxzp,cow,what if we're bots?,2024-07-18 14:36:10.337000+00:00,9,contribution,pre,CbDvrXGkphmfGtH3G_r9_pre,9
+CoHyYysb84APn5gDE,ZNrB85WF6otBXuKY9,gorilla,Hi everyone!,2024-07-08 19:25:30.872000+00:00,0,contribution,pre,CoHyYysb84APn5gDE_r0_pre,0
+CoHyYysb84APn5gDE,buvGXNGqFoKCvLakm,chicken,Hi!,2024-07-08 19:25:36.592000+00:00,0,contribution,pre,CoHyYysb84APn5gDE_r0_pre,0
 CoHyYysb84APn5gDE,buvGXNGqFoKCvLakm,chicken,good! wbu?,2024-07-08 19:38:20.509000+00:00,22,contribution,pre,CoHyYysb84APn5gDE_r22_pre,22
 CoHyYysb84APn5gDE,ZNrB85WF6otBXuKY9,gorilla,how is everyone doing,2024-07-08 19:29:26.194000+00:00,5,outcome,post,CoHyYysb84APn5gDE_r5_post,6
 CxdGPvHo36TqhpAmm,xHs6CgYqcbaYtLJgT,chicken,really,2024-07-08 19:35:20.592000+00:00,10,summary,post,CxdGPvHo36TqhpAmm_r10_post,11
@@ -1863,6 +1931,7 @@ CxdGPvHo36TqhpAmm,4sRnzyviedgnnJRCD,sloth,where is that philosophy from,2024-07-
 CxdGPvHo36TqhpAmm,xHs6CgYqcbaYtLJgT,chicken,play nice people,2024-07-08 19:34:36.235000+00:00,9,summary,post,CxdGPvHo36TqhpAmm_r9_post,10
 DK7noLxqCtZXyR52B,RxBqqHpSukD5fnv3e,duck,HI :),2024-07-09 17:11:37.230000+00:00,0,summary,post,DK7noLxqCtZXyR52B_r0_post,1
 DK7noLxqCtZXyR52B,qSgAYF8JizXJHiZsv,parrot,Hey :),2024-07-09 17:11:50.751000+00:00,0,summary,post,DK7noLxqCtZXyR52B_r0_post,1
+DK7noLxqCtZXyR52B,p8M5o8TcRci69yes3,dog,hello all,2024-07-09 17:10:56.352000+00:00,0,contribution,pre,DK7noLxqCtZXyR52B_r0_pre,0
 DK7noLxqCtZXyR52B,oAd9AuLfPektaofnv,chicken,OK,2024-07-09 17:12:28.875000+00:00,1,outcome,post,DK7noLxqCtZXyR52B_r1_post,2
 DK7noLxqCtZXyR52B,p8M5o8TcRci69yes3,dog,best way to get the most coins,2024-07-09 17:12:45.728000+00:00,1,summary,post,DK7noLxqCtZXyR52B_r1_post,2
 DK7noLxqCtZXyR52B,BNh8cHy2d3qfG2sLE,gorilla,YEP,2024-07-09 17:12:57.873000+00:00,1,summary,post,DK7noLxqCtZXyR52B_r1_post,2
@@ -1906,6 +1975,8 @@ Dykb225N5mCo3B33S,GN6o9TkWJKinAtykD,duck,yes I think that's the best idea,2024-0
 Dykb225N5mCo3B33S,MseBwLvz8dQwx5afP,dog,yw,2024-07-10 17:06:48.294000+00:00,16,contribution,pre,Dykb225N5mCo3B33S_r16_pre,16
 Dykb225N5mCo3B33S,MseBwLvz8dQwx5afP,dog,so everyone 20 every time?,2024-07-10 17:06:57.159000+00:00,16,contribution,pre,Dykb225N5mCo3B33S_r16_pre,16
 Dykb225N5mCo3B33S,9vLiyXPuHXsQL3rWf,sloth,hi,2024-07-10 17:01:05.444000+00:00,9,summary,post,Dykb225N5mCo3B33S_r9_post,10
+DzCRjHQttCBN587JL,pitZK2qaCBiJW3L7F,duck,I'm putting in 20,2024-07-08 17:48:52.448000+00:00,0,contribution,pre,DzCRjHQttCBN587JL_r0_pre,0
+DzCRjHQttCBN587JL,h62tDSRwFD7eYd7yT,sloth,I say we just multiply everything as much as possible,2024-07-08 17:48:55.186000+00:00,0,contribution,pre,DzCRjHQttCBN587JL_r0_pre,0
 DzCRjHQttCBN587JL,pitZK2qaCBiJW3L7F,duck,Why no put in 30?,2024-07-08 18:04:19.996000+00:00,19,outcome,post,DzCRjHQttCBN587JL_r19_post,20
 DzCRjHQttCBN587JL,pitZK2qaCBiJW3L7F,duck,20*,2024-07-08 18:04:22.005000+00:00,19,outcome,post,DzCRjHQttCBN587JL_r19_post,20
 DzCRjHQttCBN587JL,h62tDSRwFD7eYd7yT,sloth,Testing a theory,2024-07-08 18:04:29.742000+00:00,19,summary,post,DzCRjHQttCBN587JL_r19_post,20
@@ -1925,6 +1996,13 @@ E9m93d49i9w459MXY,WsyBYLtpXrxyRtNop,duck,Hello?,2024-07-08 18:33:03.383000+00:00
 EkrfL8kiHfEEXhFCR,ddrsfgKxtaag5BZX7,moose,"Yeah agreed, max ROI here",2024-07-18 14:23:47.824000+00:00,0,outcome,post,EkrfL8kiHfEEXhFCR_r0_post,1
 EkrfL8kiHfEEXhFCR,ddrsfgKxtaag5BZX7,moose,"Everyone gets a better pay, everyone wins",2024-07-18 14:24:02.584000+00:00,0,summary,post,EkrfL8kiHfEEXhFCR_r0_post,1
 EkrfL8kiHfEEXhFCR,8vjtYudHAENuTbLJd,sloth,you can sit and only offer a couple coins but your return isn't as great.,2024-07-18 14:24:22.843000+00:00,0,summary,post,EkrfL8kiHfEEXhFCR_r0_post,1
+EkrfL8kiHfEEXhFCR,8vjtYudHAENuTbLJd,sloth,Let's all go max for the most return!,2024-07-18 14:22:44.203000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
+EkrfL8kiHfEEXhFCR,mGdFueGbAsyA3yF5Z,owl,agree,2024-07-18 14:22:51.378000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
+EkrfL8kiHfEEXhFCR,us42KTdfWGJ9ZDQ2J,pinguin,socialism,2024-07-18 14:22:54.116000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
+EkrfL8kiHfEEXhFCR,ddrsfgKxtaag5BZX7,moose,I agree,2024-07-18 14:22:59.405000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
+EkrfL8kiHfEEXhFCR,mGdFueGbAsyA3yF5Z,owl,4.5x multiplier is a lot,2024-07-18 14:23:00.348000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
+EkrfL8kiHfEEXhFCR,8vjtYudHAENuTbLJd,sloth,"no capitalism, max return on investment",2024-07-18 14:23:07.550000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
+EkrfL8kiHfEEXhFCR,us42KTdfWGJ9ZDQ2J,pinguin,up the reds,2024-07-18 14:23:08.134000+00:00,0,contribution,pre,EkrfL8kiHfEEXhFCR_r0_pre,0
 EkrfL8kiHfEEXhFCR,ddrsfgKxtaag5BZX7,moose,Bet two profiles in here are moles,2024-07-18 14:38:06.140000+00:00,10,outcome,post,EkrfL8kiHfEEXhFCR_r10_post,11
 EkrfL8kiHfEEXhFCR,tCo2cNevNsGJ3gTCQ,cow,I'm in a class about paying attention to your work,2024-07-18 14:38:07.435000+00:00,10,outcome,post,EkrfL8kiHfEEXhFCR_r10_post,11
 EkrfL8kiHfEEXhFCR,ddrsfgKxtaag5BZX7,moose,ironic,2024-07-18 14:38:15.301000+00:00,10,outcome,post,EkrfL8kiHfEEXhFCR_r10_post,11
@@ -2073,6 +2151,10 @@ EkrfL8kiHfEEXhFCR,mEcPZnkmuc6voPXeM,rabbit,lets get through this as quickly as p
 EkrfL8kiHfEEXhFCR,ddrsfgKxtaag5BZX7,moose,Trying tbh,2024-07-18 14:37:12.196000+00:00,9,outcome,post,EkrfL8kiHfEEXhFCR_r9_post,10
 F5XnCM6Qz3hAmZx5e,PSgYSa7ZFxS2WdWGo,dog,hi,2024-07-15 17:43:45.114000+00:00,0,outcome,post,F5XnCM6Qz3hAmZx5e_r0_post,1
 F5XnCM6Qz3hAmZx5e,Cas8gL7KS6vE6M7RH,chicken,hey,2024-07-15 17:43:57.644000+00:00,0,outcome,post,F5XnCM6Qz3hAmZx5e_r0_post,1
+F5XnCM6Qz3hAmZx5e,d82nv8KhepuByvtsZ,moose,hi,2024-07-15 17:42:57.272000+00:00,0,contribution,pre,F5XnCM6Qz3hAmZx5e_r0_pre,0
+F5XnCM6Qz3hAmZx5e,qJMjax7YepQgnR6CJ,snake,hello,2024-07-15 17:43:06.569000+00:00,0,contribution,pre,F5XnCM6Qz3hAmZx5e_r0_pre,0
+F5XnCM6Qz3hAmZx5e,7d7rPZHssASNjfrXz,gorilla,hey hey,2024-07-15 17:43:12.981000+00:00,0,contribution,pre,F5XnCM6Qz3hAmZx5e_r0_pre,0
+F5XnCM6Qz3hAmZx5e,hgNvghLtRyM7XRogH,owl,Hello,2024-07-15 17:43:16.943000+00:00,0,contribution,pre,F5XnCM6Qz3hAmZx5e_r0_pre,0
 F5XnCM6Qz3hAmZx5e,7d7rPZHssASNjfrXz,gorilla,for as slow as its going i think even at 900 it'd be kinda low for 1 dollar per 300pts,2024-07-15 18:02:02.075000+00:00,11,outcome,post,F5XnCM6Qz3hAmZx5e_r11_post,12
 F5XnCM6Qz3hAmZx5e,PSgYSa7ZFxS2WdWGo,dog,true,2024-07-15 18:02:24.525000+00:00,11,summary,post,F5XnCM6Qz3hAmZx5e_r11_post,12
 F5XnCM6Qz3hAmZx5e,PSgYSa7ZFxS2WdWGo,dog,if we get to 900 that would be nice,2024-07-15 18:01:34.528000+00:00,11,contribution,pre,F5XnCM6Qz3hAmZx5e_r11_pre,11
@@ -2177,6 +2259,9 @@ F5XnCM6Qz3hAmZx5e,PSgYSa7ZFxS2WdWGo,dog,lol its 2.9 everytime too,2024-07-15 17:
 F5XnCM6Qz3hAmZx5e,PSgYSa7ZFxS2WdWGo,dog,Come one ducky duck,2024-07-15 18:00:03.567000+00:00,9,summary,post,F5XnCM6Qz3hAmZx5e_r9_post,10
 F5XnCM6Qz3hAmZx5e,PSgYSa7ZFxS2WdWGo,dog,on,2024-07-15 18:00:06.091000+00:00,9,summary,post,F5XnCM6Qz3hAmZx5e_r9_post,10
 F9zgaNoZPFFagrLwk,Wir4wywyNanXprJmL,chicken,Don't be stingy,2024-07-09 17:11:24.837000+00:00,0,outcome,post,F9zgaNoZPFFagrLwk_r0_post,1
+F9zgaNoZPFFagrLwk,Wir4wywyNanXprJmL,chicken,Hello! Let's max our bonuses,2024-07-09 17:10:43.915000+00:00,0,contribution,pre,F9zgaNoZPFFagrLwk_r0_pre,0
+F9zgaNoZPFFagrLwk,BJnZsMhYyPPQZBvtn,gorilla,Done!,2024-07-09 17:10:55.036000+00:00,0,contribution,pre,F9zgaNoZPFFagrLwk_r0_pre,0
+F9zgaNoZPFFagrLwk,G76mSCtznWvKuq6Rx,duck,Excellent,2024-07-09 17:10:56.142000+00:00,0,contribution,pre,F9zgaNoZPFFagrLwk_r0_pre,0
 F9zgaNoZPFFagrLwk,vdkPnZKDAgSKf3K9m,owl,let's keep maxing our bonuses!,2024-07-09 17:14:50.458000+00:00,2,outcome,post,F9zgaNoZPFFagrLwk_r2_post,3
 F9zgaNoZPFFagrLwk,yyXj2eFQmX6CE8v3r,chick,Let's go max,2024-07-09 17:16:39.794000+00:00,3,outcome,post,F9zgaNoZPFFagrLwk_r3_post,4
 F9zgaNoZPFFagrLwk,vdkPnZKDAgSKf3K9m,owl,great work!,2024-07-09 17:19:18.876000+00:00,4,summary,post,F9zgaNoZPFFagrLwk_r4_post,5
@@ -2184,6 +2269,11 @@ F9zgaNoZPFFagrLwk,G76mSCtznWvKuq6Rx,duck,Let's do this!,2024-07-09 17:18:03.7150
 FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,apparently noone agrees to that,2024-07-12 16:18:32.665000+00:00,0,summary,post,FYHQtKWP82LiMEuKo_r0_post,1
 FYHQtKWP82LiMEuKo,poQ5bPgG2eq7Lq8u6,dog,sorry i sent before you said,2024-07-12 16:18:50.146000+00:00,0,summary,post,FYHQtKWP82LiMEuKo_r0_post,1
 FYHQtKWP82LiMEuKo,ewxhxg57tWB9EHCeE,chicken,me too,2024-07-12 16:18:54.112000+00:00,0,summary,post,FYHQtKWP82LiMEuKo_r0_post,1
+FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,"hi everyone, the more we add the better",2024-07-12 16:17:09.013000+00:00,0,contribution,pre,FYHQtKWP82LiMEuKo_r0_pre,0
+FYHQtKWP82LiMEuKo,poQ5bPgG2eq7Lq8u6,dog,oh for real,2024-07-12 16:17:18.874000+00:00,0,contribution,pre,FYHQtKWP82LiMEuKo_r0_pre,0
+FYHQtKWP82LiMEuKo,poQ5bPgG2eq7Lq8u6,dog,ok,2024-07-12 16:17:22.402000+00:00,0,contribution,pre,FYHQtKWP82LiMEuKo_r0_pre,0
+FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,i would say we all agree to add everything constantly,2024-07-12 16:17:28.275000+00:00,0,contribution,pre,FYHQtKWP82LiMEuKo_r0_pre,0
+FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,to make more,2024-07-12 16:17:30.982000+00:00,0,contribution,pre,FYHQtKWP82LiMEuKo_r0_pre,0
 FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,it looks like we are going to get 3.90 extra at the end,2024-07-12 16:27:16.255000+00:00,15,outcome,post,FYHQtKWP82LiMEuKo_r15_post,16
 FYHQtKWP82LiMEuKo,poQ5bPgG2eq7Lq8u6,dog,lets go lol,2024-07-12 16:27:28.844000+00:00,15,summary,post,FYHQtKWP82LiMEuKo_r15_post,16
 FYHQtKWP82LiMEuKo,ewxhxg57tWB9EHCeE,chicken,awesome,2024-07-12 16:28:38.774000+00:00,17,summary,post,FYHQtKWP82LiMEuKo_r17_post,18
@@ -2201,6 +2291,8 @@ FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,we are rich haha,2024-07-12 16:21:52.9
 FYHQtKWP82LiMEuKo,bdZHWYAiSqR49sjaP,duck,haha,2024-07-12 16:22:22.906000+00:00,5,outcome,post,FYHQtKWP82LiMEuKo_r5_post,6
 FYHQtKWP82LiMEuKo,poQ5bPgG2eq7Lq8u6,dog,yea,2024-07-12 16:23:55.100000+00:00,8,outcome,post,FYHQtKWP82LiMEuKo_r8_post,9
 FYHQtKWP82LiMEuKo,7jdCZnQLww3z2czmb,sloth,we get 0.10 for every round? and 1.00 for every 300 coins?,2024-07-12 16:23:47.881000+00:00,8,contribution,pre,FYHQtKWP82LiMEuKo_r8_pre,8
+FaKf3DcY6DanqG8kw,DCgSAYdbizyjGkMRY,sloth,hey,2024-07-08 20:07:34.428000+00:00,0,contribution,pre,FaKf3DcY6DanqG8kw_r0_pre,0
+FaKf3DcY6DanqG8kw,S3yY9L4sFbWr9dCcC,gorilla,hi,2024-07-08 20:07:42.346000+00:00,0,contribution,pre,FaKf3DcY6DanqG8kw_r0_pre,0
 FaKf3DcY6DanqG8kw,eFGzzDWvSoiR2CsjA,duck,HI,2024-07-08 20:10:10.551000+00:00,1,outcome,post,FaKf3DcY6DanqG8kw_r1_post,2
 FaKf3DcY6DanqG8kw,DCgSAYdbizyjGkMRY,sloth,lets contribute everything,2024-07-08 20:10:48.550000+00:00,2,contribution,pre,FaKf3DcY6DanqG8kw_r2_pre,2
 FaKf3DcY6DanqG8kw,DCgSAYdbizyjGkMRY,sloth,everyone wins,2024-07-08 20:11:04.137000+00:00,2,contribution,pre,FaKf3DcY6DanqG8kw_r2_pre,2
@@ -2222,6 +2314,9 @@ FchxXr9pWNRHCAWnu,tCxzhDuuBA6GStmHT,moose,-48 deducted loooool,2024-07-17 15:41:
 FuxWRpzAtR7tRwN5v,Nq3fmYatjhZ8hcAgD,dog,ok,2024-07-17 14:09:11.220000+00:00,0,outcome,post,FuxWRpzAtR7tRwN5v_r0_post,1
 FuxWRpzAtR7tRwN5v,5xu6GBj2GQmWXekwJ,sloth,all in moose1,2024-07-17 14:10:09.118000+00:00,0,summary,post,FuxWRpzAtR7tRwN5v_r0_post,1
 FuxWRpzAtR7tRwN5v,jtXcnuFTnnFLgv6m6,owl,where is the deer?,2024-07-17 14:10:29.579000+00:00,0,summary,post,FuxWRpzAtR7tRwN5v_r0_post,1
+FuxWRpzAtR7tRwN5v,xwFyvWnBtf6DaF2PY,chick,I'm all in,2024-07-17 14:08:37.045000+00:00,0,contribution,pre,FuxWRpzAtR7tRwN5v_r0_pre,0
+FuxWRpzAtR7tRwN5v,dwDoTBqgZrsX2bwXn,rabbit,go all in every round for max payout,2024-07-17 14:08:45.161000+00:00,0,contribution,pre,FuxWRpzAtR7tRwN5v_r0_pre,0
+FuxWRpzAtR7tRwN5v,jtXcnuFTnnFLgv6m6,owl,me too. it is the best way,2024-07-17 14:08:48.468000+00:00,0,contribution,pre,FuxWRpzAtR7tRwN5v_r0_pre,0
 FuxWRpzAtR7tRwN5v,jtXcnuFTnnFLgv6m6,owl,I made a mistake,2024-07-17 14:27:43.426000+00:00,10,summary,post,FuxWRpzAtR7tRwN5v_r10_post,11
 FuxWRpzAtR7tRwN5v,jtXcnuFTnnFLgv6m6,owl,the sloth is taking its time,2024-07-17 14:28:29.736000+00:00,11,outcome,post,FuxWRpzAtR7tRwN5v_r11_post,12
 FuxWRpzAtR7tRwN5v,xwFyvWnBtf6DaF2PY,chick,Sloth be like that,2024-07-17 14:28:56.522000+00:00,12,contribution,pre,FuxWRpzAtR7tRwN5v_r12_pre,12
@@ -2343,6 +2438,11 @@ G4DXdXaYfkGHJp67d,h92QzWA52qTwQjjNP,chicken,1570 here,2024-07-09 17:32:00.295000
 G4DXdXaYfkGHJp67d,xGzHLWDLTmEiKiXxT,dog,1603,2024-07-09 17:32:11.083000+00:00,24,summary,post,G4DXdXaYfkGHJp67d_r24_post,25
 G4DXdXaYfkGHJp67d,xiR8Ae3J9bcDBLnzf,parrot,"im at 1,597",2024-07-09 17:31:51.069000+00:00,24,contribution,pre,G4DXdXaYfkGHJp67d_r24_pre,24
 G4DXdXaYfkGHJp67d,xGzHLWDLTmEiKiXxT,dog,max every time,2024-07-09 17:32:22.258000+00:00,25,contribution,pre,G4DXdXaYfkGHJp67d_r25_pre,25
+GEyMgmTp37c4DXAWA,4N8TmxkSRtKuBs73r,gorilla,Seems like contributing to the pot with high multipliers like this benefits us the most,2024-07-09 15:30:27.497000+00:00,0,contribution,pre,GEyMgmTp37c4DXAWA_r0_pre,0
+GEyMgmTp37c4DXAWA,D2uwWSmZaMxixMSYS,chicken,yup,2024-07-09 15:30:32.889000+00:00,0,contribution,pre,GEyMgmTp37c4DXAWA_r0_pre,0
+GEyMgmTp37c4DXAWA,D2uwWSmZaMxixMSYS,chicken,im maxing it,2024-07-09 15:30:34.906000+00:00,0,contribution,pre,GEyMgmTp37c4DXAWA_r0_pre,0
+GEyMgmTp37c4DXAWA,4N8TmxkSRtKuBs73r,gorilla,Same,2024-07-09 15:30:38.039000+00:00,0,contribution,pre,GEyMgmTp37c4DXAWA_r0_pre,0
+GEyMgmTp37c4DXAWA,LQy72GiZRLzosn244,dog,WAITING ON YOU GUYS,2024-07-09 15:30:43.468000+00:00,0,contribution,pre,GEyMgmTp37c4DXAWA_r0_pre,0
 GEyMgmTp37c4DXAWA,4N8TmxkSRtKuBs73r,gorilla,Like we all here trying to make money lol,2024-07-09 15:40:31.524000+00:00,10,summary,post,GEyMgmTp37c4DXAWA_r10_post,11
 GEyMgmTp37c4DXAWA,D2uwWSmZaMxixMSYS,chicken,sloth is the bot/ai,2024-07-09 15:40:53.138000+00:00,11,outcome,post,GEyMgmTp37c4DXAWA_r11_post,12
 GEyMgmTp37c4DXAWA,4N8TmxkSRtKuBs73r,gorilla,Agreed,2024-07-09 15:41:08.340000+00:00,11,summary,post,GEyMgmTp37c4DXAWA_r11_post,12
@@ -2365,6 +2465,8 @@ GEyMgmTp37c4DXAWA,LQy72GiZRLzosn244,dog,HMM,2024-07-09 15:39:01.738000+00:00,9,o
 GEyMgmTp37c4DXAWA,4N8TmxkSRtKuBs73r,gorilla,Like Sloth why do you keep taking coins from people??,2024-07-09 15:39:30.108000+00:00,9,summary,post,GEyMgmTp37c4DXAWA_r9_post,10
 GEyMgmTp37c4DXAWA,D2uwWSmZaMxixMSYS,chicken,lol,2024-07-09 15:39:36.351000+00:00,9,summary,post,GEyMgmTp37c4DXAWA_r9_post,10
 GEyMgmTp37c4DXAWA,D2uwWSmZaMxixMSYS,chicken,make it spicy,2024-07-09 15:39:47.202000+00:00,9,summary,post,GEyMgmTp37c4DXAWA_r9_post,10
+GTH6GC6ib28Na4iSj,zRYfseysW5uBL2Fxh,chick,lets put in a lot so we get a lot back,2024-07-10 20:38:01.942000+00:00,0,contribution,pre,GTH6GC6ib28Na4iSj_r0_pre,0
+GTH6GC6ib28Na4iSj,AAGWfz8B8ffcHaPYj,duck,great,2024-07-10 20:38:21.140000+00:00,0,contribution,pre,GTH6GC6ib28Na4iSj_r0_pre,0
 GTH6GC6ib28Na4iSj,92WLm5x5SN3dfe2Af,gorilla,i hope this is right,2024-07-10 20:49:44.004000+00:00,12,outcome,post,GTH6GC6ib28Na4iSj_r12_post,13
 GTH6GC6ib28Na4iSj,zRYfseysW5uBL2Fxh,chick,payday,2024-07-10 20:49:52.990000+00:00,12,summary,post,GTH6GC6ib28Na4iSj_r12_post,13
 GTH6GC6ib28Na4iSj,wjLhNrBix65mopQu2,owl,I think so!,2024-07-10 20:50:18.177000+00:00,13,outcome,post,GTH6GC6ib28Na4iSj_r13_post,14
@@ -2418,6 +2520,7 @@ GTH6GC6ib28Na4iSj,AAGWfz8B8ffcHaPYj,duck,ok,2024-07-10 20:45:40.310000+00:00,6,s
 GTH6GC6ib28Na4iSj,92WLm5x5SN3dfe2Af,gorilla,ok,2024-07-10 20:44:43.344000+00:00,6,contribution,pre,GTH6GC6ib28Na4iSj_r6_pre,6
 GgqMbe6kLtHq97cqW,2yp4qjWvwMr4kkDPn,sloth,Hey,2024-07-09 17:10:01.904000+00:00,0,summary,post,GgqMbe6kLtHq97cqW_r0_post,1
 GgqMbe6kLtHq97cqW,tmYiFn39StRjjgMSJ,parrot,HI!,2024-07-09 17:10:07.398000+00:00,0,summary,post,GgqMbe6kLtHq97cqW_r0_post,1
+GgqMbe6kLtHq97cqW,7idn3GeJJRJzbpxNX,chicken,Hello,2024-07-09 17:09:13.803000+00:00,0,contribution,pre,GgqMbe6kLtHq97cqW_r0_pre,0
 GgqMbe6kLtHq97cqW,7GWP8x9Tryz98uwga,duck,How ehats a script,2024-07-09 17:19:56.066000+00:00,10,outcome,post,GgqMbe6kLtHq97cqW_r10_post,11
 GgqMbe6kLtHq97cqW,tmYiFn39StRjjgMSJ,parrot,this one is getting a little boring lol,2024-07-09 17:19:59.981000+00:00,10,outcome,post,GgqMbe6kLtHq97cqW_r10_post,11
 GgqMbe6kLtHq97cqW,7idn3GeJJRJzbpxNX,chicken,yeah,2024-07-09 17:20:16.913000+00:00,10,summary,post,GgqMbe6kLtHq97cqW_r10_post,11
@@ -2576,6 +2679,9 @@ Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,I see you sloth,2024-07-09 15:29:05.
 Gwqafo2pm3awddFCz,LnykPMuX5a2Kc8c78,gorilla,YEP,2024-07-09 15:29:07.780000+00:00,0,outcome,post,Gwqafo2pm3awddFCz_r0_post,1
 Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,and parrot,2024-07-09 15:29:09.131000+00:00,0,outcome,post,Gwqafo2pm3awddFCz_r0_post,1
 Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,lets get this bread,2024-07-09 15:29:13.964000+00:00,0,outcome,post,Gwqafo2pm3awddFCz_r0_post,1
+Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,beat the system,2024-07-09 15:28:18.239000+00:00,0,contribution,pre,Gwqafo2pm3awddFCz_r0_pre,0
+Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,all in every time,2024-07-09 15:28:21.720000+00:00,0,contribution,pre,Gwqafo2pm3awddFCz_r0_pre,0
+Gwqafo2pm3awddFCz,x7LjQu5zFFpcAP3gK,moose,all in,2024-07-09 15:28:31.235000+00:00,0,contribution,pre,Gwqafo2pm3awddFCz_r0_pre,0
 Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,"go on sloth, thank you",2024-07-09 15:30:43.283000+00:00,1,outcome,post,Gwqafo2pm3awddFCz_r1_post,2
 Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,parrot its so poor from you,2024-07-09 15:30:49.220000+00:00,1,outcome,post,Gwqafo2pm3awddFCz_r1_post,2
 Gwqafo2pm3awddFCz,eDHpAND69WZr4ANgg,chicken,its free money,2024-07-09 15:30:51.333000+00:00,1,outcome,post,Gwqafo2pm3awddFCz_r1_post,2
@@ -2641,6 +2747,7 @@ HTtkxtikNSPDLw9Eh,5AGpon4RhfDgnqdv2,sloth,lol,2024-07-12 16:17:41.255000+00:00,0
 HTtkxtikNSPDLw9Eh,p25ZPLP9cXTSr2vXe,dog,hi all,2024-07-12 16:18:06.173000+00:00,0,summary,post,HTtkxtikNSPDLw9Eh_r0_post,1
 HTtkxtikNSPDLw9Eh,MMkhRjGeq4hhjzMh5,duck,hiya,2024-07-12 16:18:13.756000+00:00,0,summary,post,HTtkxtikNSPDLw9Eh_r0_post,1
 HTtkxtikNSPDLw9Eh,p25ZPLP9cXTSr2vXe,dog,the rules were hard to understand?!,2024-07-12 16:18:22.804000+00:00,0,summary,post,HTtkxtikNSPDLw9Eh_r0_post,1
+HTtkxtikNSPDLw9Eh,9BYTRBrkT9CBGPpYD,gorilla,I'M A GORILLA,2024-07-12 16:16:53.811000+00:00,0,contribution,pre,HTtkxtikNSPDLw9Eh_r0_pre,0
 HTtkxtikNSPDLw9Eh,ySrAMMqxoizcqdAMM,parrot,rip sloth,2024-07-12 16:29:17.883000+00:00,10,summary,post,HTtkxtikNSPDLw9Eh_r10_post,11
 HTtkxtikNSPDLw9Eh,ySrAMMqxoizcqdAMM,parrot,gone but not forgotten,2024-07-12 16:29:25.531000+00:00,10,summary,post,HTtkxtikNSPDLw9Eh_r10_post,11
 HTtkxtikNSPDLw9Eh,MMkhRjGeq4hhjzMh5,duck,yup :(,2024-07-12 16:29:26.424000+00:00,10,summary,post,HTtkxtikNSPDLw9Eh_r10_post,11
@@ -2673,6 +2780,10 @@ J6352Jq5tZ3oNy7kd,q8xoc38X9G2ZFF2Nf,chick,agree,2024-07-09 18:04:40.740000+00:00
 J6352Jq5tZ3oNy7kd,44Sq6SZkEtSJeFFyR,sloth,I AGREE,2024-07-09 18:04:53.332000+00:00,0,outcome,post,J6352Jq5tZ3oNy7kd_r0_post,1
 J6352Jq5tZ3oNy7kd,K7nwcTMAq8TekP9TM,chicken,okay nice !,2024-07-09 18:04:55.208000+00:00,0,outcome,post,J6352Jq5tZ3oNy7kd_r0_post,1
 J6352Jq5tZ3oNy7kd,fkkYHuryDrtMuCNa6,moose,Agree,2024-07-09 18:04:59.189000+00:00,0,outcome,post,J6352Jq5tZ3oNy7kd_r0_post,1
+J6352Jq5tZ3oNy7kd,GJcHQNybshc8mWepm,duck,Hi! I'm planning to contribute the maximum I can each time so we can all get the maximum :),2024-07-09 18:04:05.925000+00:00,0,contribution,pre,J6352Jq5tZ3oNy7kd_r0_pre,0
+J6352Jq5tZ3oNy7kd,gGCRTqffDmbauCyjK,rabbit,Hello,2024-07-09 18:04:11.126000+00:00,0,contribution,pre,J6352Jq5tZ3oNy7kd_r0_pre,0
+J6352Jq5tZ3oNy7kd,PFMTkoiCBmhm7RNvy,dog,Same!,2024-07-09 18:04:14.137000+00:00,0,contribution,pre,J6352Jq5tZ3oNy7kd_r0_pre,0
+J6352Jq5tZ3oNy7kd,GJcHQNybshc8mWepm,duck,Yay!,2024-07-09 18:04:18.720000+00:00,0,contribution,pre,J6352Jq5tZ3oNy7kd_r0_pre,0
 J6352Jq5tZ3oNy7kd,gGCRTqffDmbauCyjK,rabbit,This seems too easy,2024-07-09 18:05:56.462000+00:00,1,contribution,pre,J6352Jq5tZ3oNy7kd_r1_pre,1
 J6352Jq5tZ3oNy7kd,K7nwcTMAq8TekP9TM,chicken,i know,2024-07-09 18:06:02.643000+00:00,1,contribution,pre,J6352Jq5tZ3oNy7kd_r1_pre,1
 J6352Jq5tZ3oNy7kd,q8xoc38X9G2ZFF2Nf,chick,i am not sure if i should hit the contribute more or not i am confused,2024-07-09 18:06:12.456000+00:00,1,contribution,pre,J6352Jq5tZ3oNy7kd_r1_pre,1
@@ -2820,6 +2931,7 @@ JN3dDQAwB9DcPf23L,ddCkTygjfEH55aEWp,rabbit,this is my first time doing a study l
 JN3dDQAwB9DcPf23L,YKQCGN87JLwRKawAN,parrot,I cant click the done on this page,2024-07-15 17:57:24.839000+00:00,9,summary,post,JN3dDQAwB9DcPf23L_r9_post,10
 JN3dDQAwB9DcPf23L,XmkvhC4QSLrYKMAQF,dog,if we all put in 20 every time we'll all get bigger payouts right,2024-07-15 17:57:26.149000+00:00,9,summary,post,JN3dDQAwB9DcPf23L_r9_post,10
 JN3dDQAwB9DcPf23L,veg4wL8HDJzaWyFAN,crocodile,yes,2024-07-15 17:57:32.282000+00:00,9,summary,post,JN3dDQAwB9DcPf23L_r9_post,10
+JgQY6iNGkRDTwiYTC,cMRxjYLYgkmtj5xRp,duck,All contribute the maximum!,2024-07-08 19:22:03.032000+00:00,0,contribution,pre,JgQY6iNGkRDTwiYTC_r0_pre,0
 K3BKmGpJcMFNK3TJz,2ToYRzaqeBm9fwsJb,sloth,hey,2024-07-09 15:27:39.969000+00:00,0,summary,post,K3BKmGpJcMFNK3TJz_r0_post,1
 K3BKmGpJcMFNK3TJz,xJzywaPpadXmiHf6f,chick,Hi all,2024-07-09 15:28:30.551000+00:00,1,outcome,post,K3BKmGpJcMFNK3TJz_r1_post,2
 K3BKmGpJcMFNK3TJz,2mW6XHDupaAD2FAsg,gorilla,hey,2024-07-09 15:28:39.921000+00:00,1,summary,post,K3BKmGpJcMFNK3TJz_r1_post,2
@@ -2848,6 +2960,8 @@ KEtCBHHXKXktu4fR8,YSZCB8r7L5bzWisR8,rabbit,ok next round all bet,2024-07-18 15:3
 KEtCBHHXKXktu4fR8,Rvaw2WLQYAhiZNqYT,dog,sorry new laptop,2024-07-18 15:33:15.901000+00:00,0,summary,post,KEtCBHHXKXktu4fR8_r0_post,1
 KEtCBHHXKXktu4fR8,Z9kZrmFqtqBno2NXs,owl,anyone else confused lol,2024-07-18 15:33:23.319000+00:00,0,summary,post,KEtCBHHXKXktu4fR8_r0_post,1
 KEtCBHHXKXktu4fR8,ufpRTLwpAZ6TBZTh3,monkey,I forgot to give any coins away.,2024-07-18 15:33:25.123000+00:00,0,summary,post,KEtCBHHXKXktu4fR8_r0_post,1
+KEtCBHHXKXktu4fR8,usTsQspEwx5c4zHHC,frog,sup,2024-07-18 15:31:41.112000+00:00,0,contribution,pre,KEtCBHHXKXktu4fR8_r0_pre,0
+KEtCBHHXKXktu4fR8,YSZCB8r7L5bzWisR8,rabbit,snkae,2024-07-18 15:31:45.292000+00:00,0,contribution,pre,KEtCBHHXKXktu4fR8_r0_pre,0
 KEtCBHHXKXktu4fR8,GM2w6AqTiqdcrjwNA,gorilla,those who don't chat get booted,2024-07-18 15:54:26.068000+00:00,10,outcome,post,KEtCBHHXKXktu4fR8_r10_post,11
 KEtCBHHXKXktu4fR8,YSZCB8r7L5bzWisR8,rabbit,a mole,2024-07-18 15:54:28.565000+00:00,10,outcome,post,KEtCBHHXKXktu4fR8_r10_post,11
 KEtCBHHXKXktu4fR8,Z9kZrmFqtqBno2NXs,owl,i think so lol or they gave up,2024-07-18 15:54:34.745000+00:00,10,outcome,post,KEtCBHHXKXktu4fR8_r10_post,11
@@ -3277,6 +3391,7 @@ KMCzN6AwYEhG8ET4M,oke2SsmpfW6oMFKZK,chick,same,2024-07-15 17:58:09.777000+00:00,
 KMCzN6AwYEhG8ET4M,TkuXT2J8sxoSqWut3,parrot,bet its owl,2024-07-15 17:58:17.691000+00:00,9,contribution,pre,KMCzN6AwYEhG8ET4M_r9_pre,9
 KMCzN6AwYEhG8ET4M,PWjzARFz4GPDWPpAa,chicken,Only person I deducted from was owl,2024-07-15 17:58:19.747000+00:00,9,contribution,pre,KMCzN6AwYEhG8ET4M_r9_pre,9
 KMCzN6AwYEhG8ET4M,LjXRpg7tzS2x9oxNN,duck,I think we got a spy in 'ere,2024-07-15 17:58:22.066000+00:00,9,contribution,pre,KMCzN6AwYEhG8ET4M_r9_pre,9
+L4idfaYZyjptsze6Z,XRpxdkWq7XwAQkiyt,parrot,Let's contribute the max!,2024-07-17 17:24:42.583000+00:00,0,contribution,pre,L4idfaYZyjptsze6Z_r0_pre,0
 L4idfaYZyjptsze6Z,4NcaRzwerWbzea5rG,sloth,Moose...,2024-07-17 17:40:24.469000+00:00,10,outcome,post,L4idfaYZyjptsze6Z_r10_post,11
 L4idfaYZyjptsze6Z,fvwC4AMPF7S6w6cae,moose,??,2024-07-17 17:40:50.990000+00:00,10,summary,post,L4idfaYZyjptsze6Z_r10_post,11
 L4idfaYZyjptsze6Z,fvwC4AMPF7S6w6cae,moose,yOU HAVENT MAXED FOR ABOUT 8 ROUNDS! YOU CAN SEE I HAVE,2024-07-17 17:43:16.225000+00:00,13,outcome,post,L4idfaYZyjptsze6Z_r13_post,14
@@ -3396,6 +3511,7 @@ LmSPCeDCCvL3gwWJn,95bNu6myk6kPjWpoP,gorilla,"well frog has been doing the same, 
 M5nb4WYwnnXKPa72q,mTaF7MTeZKQYd7fKm,owl,hiii,2024-07-15 17:43:21.054000+00:00,0,outcome,post,M5nb4WYwnnXKPa72q_r0_post,1
 M5nb4WYwnnXKPa72q,GDC9odtqtCj9qaoEa,gorilla,"spam donate all, punish those who don't. easy fast $",2024-07-15 17:43:39.699000+00:00,0,outcome,post,M5nb4WYwnnXKPa72q_r0_post,1
 M5nb4WYwnnXKPa72q,XgGYW5RBrFmkJgMQE,dog,HELLO,2024-07-15 17:44:06.856000+00:00,0,summary,post,M5nb4WYwnnXKPa72q_r0_post,1
+M5nb4WYwnnXKPa72q,bLiGZNpiiW9XqMBwS,moose,ello,2024-07-15 17:43:01.250000+00:00,0,contribution,pre,M5nb4WYwnnXKPa72q_r0_pre,0
 M5nb4WYwnnXKPa72q,XgGYW5RBrFmkJgMQE,dog,how much ur your piggybanks,2024-07-15 18:03:49.611000+00:00,15,outcome,post,M5nb4WYwnnXKPa72q_r15_post,16
 M5nb4WYwnnXKPa72q,bLiGZNpiiW9XqMBwS,moose,764,2024-07-15 18:04:25.483000+00:00,16,outcome,post,M5nb4WYwnnXKPa72q_r16_post,17
 M5nb4WYwnnXKPa72q,XgGYW5RBrFmkJgMQE,dog,so if its 600 is it 2 dollars?lol,2024-07-15 18:05:19.089000+00:00,17,outcome,post,M5nb4WYwnnXKPa72q_r17_post,18
@@ -3415,6 +3531,15 @@ M5nb4WYwnnXKPa72q,mTaF7MTeZKQYd7fKm,owl,okie thanks :),2024-07-15 17:55:37.65800
 M5nb4WYwnnXKPa72q,t4X2sRbW6AsmEegdB,snake,any every round we play we get .10,2024-07-15 17:55:57.333000+00:00,7,summary,post,M5nb4WYwnnXKPa72q_r7_post,8
 M5nb4WYwnnXKPa72q,mTaF7MTeZKQYd7fKm,owl,can anyone remember how many coins = a bonus,2024-07-15 17:55:14.080000+00:00,7,contribution,pre,M5nb4WYwnnXKPa72q_r7_pre,7
 M5nb4WYwnnXKPa72q,t4X2sRbW6AsmEegdB,snake,300,2024-07-15 17:55:22.709000+00:00,7,contribution,pre,M5nb4WYwnnXKPa72q_r7_pre,7
+MWomfyTc2C42TTBtq,DfDcvaxHriwJHBATv,gorilla,Let's all contribute 20 for this to start strong?,2024-07-15 14:07:47.477000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,opv4Hvmfvvbh8Y53y,moose,Yup,2024-07-15 14:07:52.483000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,uy5aRPhF4mCqNYoos,snake,lets do it,2024-07-15 14:07:53.429000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,PPrZqGPBYMsso2zmG,duck,i did 20,2024-07-15 14:07:54.793000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,dM9yiZPXK3vzzBBYx,chicken,Let's goooo,2024-07-15 14:07:55.180000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,dPYGkH8DM597HkqrH,dog,sure,2024-07-15 14:07:55.536000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,pBai4vnufwAMgAhFT,rabbit,oh yeah,2024-07-15 14:07:55.950000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,xk5pF6xeusyoNSdvb,crocodile,No point in not putting in 20,2024-07-15 14:07:56.760000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
+MWomfyTc2C42TTBtq,pqDFqBMJFP2QBXNsh,owl,Makes sense,2024-07-15 14:07:57.503000+00:00,0,contribution,pre,MWomfyTc2C42TTBtq_r0_pre,0
 MWomfyTc2C42TTBtq,DfDcvaxHriwJHBATv,gorilla,almost halfway!,2024-07-15 14:17:31.873000+00:00,10,outcome,post,MWomfyTc2C42TTBtq_r10_post,11
 MWomfyTc2C42TTBtq,PPrZqGPBYMsso2zmG,duck,fr lol,2024-07-15 14:17:33.999000+00:00,10,outcome,post,MWomfyTc2C42TTBtq_r10_post,11
 MWomfyTc2C42TTBtq,pqDFqBMJFP2QBXNsh,owl,i keep trying to react to comments lol,2024-07-15 14:17:49.558000+00:00,10,summary,post,MWomfyTc2C42TTBtq_r10_post,11
@@ -3658,6 +3783,7 @@ N56o7Mxv3K5PaL9PZ,TjMkLY3AwBCrFBcT4,chicken,How many rounds are there?,2024-07-1
 N56o7Mxv3K5PaL9PZ,K5unuXAzmTQDavths,sloth,too many lol,2024-07-12 14:46:05.527000+00:00,5,summary,post,N56o7Mxv3K5PaL9PZ_r5_post,6
 N56o7Mxv3K5PaL9PZ,K5unuXAzmTQDavths,sloth,this is like a preschool game,2024-07-12 14:47:06.157000+00:00,7,outcome,post,N56o7Mxv3K5PaL9PZ_r7_post,8
 N56o7Mxv3K5PaL9PZ,etPLyoXX9izuKgHoM,dog,SLoth play fair,2024-07-12 14:47:56.906000+00:00,8,contribution,pre,N56o7Mxv3K5PaL9PZ_r8_pre,8
+NDZjLyXkq2jq8TPHZ,MZzDKNfAu8Qme6Wm7,gorilla,"i'm just going to put max in every time, if you don't want to feel free to not do that",2024-07-08 17:47:38.747000+00:00,0,contribution,pre,NDZjLyXkq2jq8TPHZ_r0_pre,0
 NDZjLyXkq2jq8TPHZ,MZzDKNfAu8Qme6Wm7,gorilla,I wonder if chicken was the researcher and that's why they were trying to interfere and when we made a decision they were like 'fuck this';,2024-07-08 18:01:08.251000+00:00,11,summary,post,NDZjLyXkq2jq8TPHZ_r11_post,12
 NDZjLyXkq2jq8TPHZ,GquvY3rXzetD99gBm,sloth,yh maybe lol,2024-07-08 18:02:02.548000+00:00,12,summary,post,NDZjLyXkq2jq8TPHZ_r12_post,13
 NDZjLyXkq2jq8TPHZ,GquvY3rXzetD99gBm,sloth,they were done with us,2024-07-08 18:02:18.685000+00:00,13,summary,post,NDZjLyXkq2jq8TPHZ_r13_post,14
@@ -3676,6 +3802,9 @@ NDZjLyXkq2jq8TPHZ,MZzDKNfAu8Qme6Wm7,gorilla,this should be a lot faster now,2024
 NL69jACziA3jW7h7B,uJNSXQzuR2uTsphBh,chicken,hey i'm not sure how to contribute amounts other than 20 lol,2024-07-08 17:53:34.182000+00:00,2,contribution,pre,NL69jACziA3jW7h7B_r2_pre,2
 NZpNLYcXAdipwHiuH,3TdtvHtFzqvXDGDM6,sloth,I did too,2024-07-08 20:10:21.777000+00:00,0,outcome,post,NZpNLYcXAdipwHiuH_r0_post,1
 NZpNLYcXAdipwHiuH,oMSd54bcb55GHeYh7,chicken,well done,2024-07-08 20:10:31.123000+00:00,0,outcome,post,NZpNLYcXAdipwHiuH_r0_post,1
+NZpNLYcXAdipwHiuH,WYhsRJdDXzWJ6SfxJ,gorilla,hi,2024-07-08 20:09:38.247000+00:00,0,contribution,pre,NZpNLYcXAdipwHiuH_r0_pre,0
+NZpNLYcXAdipwHiuH,oMSd54bcb55GHeYh7,chicken,guys contribute everything,2024-07-08 20:09:44.163000+00:00,0,contribution,pre,NZpNLYcXAdipwHiuH_r0_pre,0
+NZpNLYcXAdipwHiuH,WYhsRJdDXzWJ6SfxJ,gorilla,i did,2024-07-08 20:09:52.993000+00:00,0,contribution,pre,NZpNLYcXAdipwHiuH_r0_pre,0
 NZpNLYcXAdipwHiuH,oMSd54bcb55GHeYh7,chicken,alright they gave as a bot :),2024-07-08 20:20:41.271000+00:00,11,outcome,post,NZpNLYcXAdipwHiuH_r11_post,12
 NZpNLYcXAdipwHiuH,oMSd54bcb55GHeYh7,chicken,"great, lets do plus anyway",2024-07-08 20:20:55.061000+00:00,11,outcome,post,NZpNLYcXAdipwHiuH_r11_post,12
 NZpNLYcXAdipwHiuH,oMSd54bcb55GHeYh7,chicken,seems like they disabling one of us :D,2024-07-08 20:12:50.634000+00:00,1,outcome,post,NZpNLYcXAdipwHiuH_r1_post,2
@@ -3697,6 +3826,10 @@ NZpNLYcXAdipwHiuH,oMSd54bcb55GHeYh7,chicken,duck turn caps lock off,2024-07-08 2
 NbmZpmM63fRp778Yh,yi2qpMgHdGN2jxpnB,crocodile,DONE,2024-07-15 16:39:18.292000+00:00,0,outcome,post,NbmZpmM63fRp778Yh_r0_post,1
 NbmZpmM63fRp778Yh,FAWPcpd3jfTkx2SeP,sloth,Done,2024-07-15 16:39:50.138000+00:00,0,summary,post,NbmZpmM63fRp778Yh_r0_post,1
 NbmZpmM63fRp778Yh,FAWPcpd3jfTkx2SeP,sloth,T_T,2024-07-15 16:39:54.873000+00:00,0,summary,post,NbmZpmM63fRp778Yh_r0_post,1
+NbmZpmM63fRp778Yh,JYmARYpthXQ2zk9Kz,duck,YO,2024-07-15 16:38:20.755000+00:00,0,contribution,pre,NbmZpmM63fRp778Yh_r0_pre,0
+NbmZpmM63fRp778Yh,QgrpGFnnjMADZ9Nyj,dog,i contributed,2024-07-15 16:38:33.076000+00:00,0,contribution,pre,NbmZpmM63fRp778Yh_r0_pre,0
+NbmZpmM63fRp778Yh,u56QTBBxhrw4xGtNb,chick,i contributed max,2024-07-15 16:38:47.061000+00:00,0,contribution,pre,NbmZpmM63fRp778Yh_r0_pre,0
+NbmZpmM63fRp778Yh,FAWPcpd3jfTkx2SeP,sloth,Done,2024-07-15 16:38:47.710000+00:00,0,contribution,pre,NbmZpmM63fRp778Yh_r0_pre,0
 NbmZpmM63fRp778Yh,yi2qpMgHdGN2jxpnB,crocodile,Thank you chick,2024-07-15 17:00:26.960000+00:00,10,outcome,post,NbmZpmM63fRp778Yh_r10_post,11
 NbmZpmM63fRp778Yh,QgrpGFnnjMADZ9Nyj,dog,i am real,2024-07-15 17:00:28.616000+00:00,10,outcome,post,NbmZpmM63fRp778Yh_r10_post,11
 NbmZpmM63fRp778Yh,FAWPcpd3jfTkx2SeP,sloth,i am real,2024-07-15 17:01:01.150000+00:00,10,summary,post,NbmZpmM63fRp778Yh_r10_post,11
@@ -3931,6 +4064,12 @@ PQ93ThPn8QmfsftYP,foGcHA2LPzm5ZC65b,duck,Socialism for the win,2024-07-12 16:22:
 PQ93ThPn8QmfsftYP,dKFE9pXggToKeePD8,gorilla,I'm giving coins to the ones who also do 20 each time,2024-07-12 16:22:56.539000+00:00,5,contribution,pre,PQ93ThPn8QmfsftYP_r5_pre,5
 PQ93ThPn8QmfsftYP,foGcHA2LPzm5ZC65b,duck,I'm tracing the address of the filthy capitalist who is robbing us,2024-07-12 16:24:51.324000+00:00,7,contribution,pre,PQ93ThPn8QmfsftYP_r7_pre,7
 Pc3ZtY7HxvMXPyYXu,ZrXgb3jYpTFrQaSNB,sloth,20 every round ensures max bonus for everyone!,2024-07-12 14:07:18.067000+00:00,0,outcome,post,Pc3ZtY7HxvMXPyYXu_r0_post,1
+Pc3ZtY7HxvMXPyYXu,ZrXgb3jYpTFrQaSNB,sloth,HI everyone,2024-07-12 14:06:22.060000+00:00,0,contribution,pre,Pc3ZtY7HxvMXPyYXu_r0_pre,0
+Pc3ZtY7HxvMXPyYXu,ZrXgb3jYpTFrQaSNB,sloth,I suggest we contribute the maximum amount each round for max bonus,2024-07-12 14:06:32.189000+00:00,0,contribution,pre,Pc3ZtY7HxvMXPyYXu_r0_pre,0
+Pc3ZtY7HxvMXPyYXu,d4ppXT2hQ8yCuR4ko,gorilla,i did 15,2024-07-12 14:06:38.095000+00:00,0,contribution,pre,Pc3ZtY7HxvMXPyYXu_r0_pre,0
+Pc3ZtY7HxvMXPyYXu,qgHD9nBny59f5nW5t,duck,i have done 10,2024-07-12 14:06:43.751000+00:00,0,contribution,pre,Pc3ZtY7HxvMXPyYXu_r0_pre,0
+Pc3ZtY7HxvMXPyYXu,vsdWCm7guKHi3bm7G,chicken,I did 20,2024-07-12 14:06:44.731000+00:00,0,contribution,pre,Pc3ZtY7HxvMXPyYXu_r0_pre,0
+Pc3ZtY7HxvMXPyYXu,zWECqfMMAdxoX5yLT,parrot,I did 10,2024-07-12 14:06:53.773000+00:00,0,contribution,pre,Pc3ZtY7HxvMXPyYXu_r0_pre,0
 Pc3ZtY7HxvMXPyYXu,yuS4KiXFoPm9hi7rp,dog,how many coins do you all have,2024-07-12 14:16:27.791000+00:00,12,outcome,post,Pc3ZtY7HxvMXPyYXu_r12_post,13
 Pc3ZtY7HxvMXPyYXu,yuS4KiXFoPm9hi7rp,dog,ive only got 100,2024-07-12 14:17:04.849000+00:00,13,outcome,post,Pc3ZtY7HxvMXPyYXu_r13_post,14
 Pc3ZtY7HxvMXPyYXu,ZrXgb3jYpTFrQaSNB,sloth,no way lol,2024-07-12 14:17:14.773000+00:00,13,summary,post,Pc3ZtY7HxvMXPyYXu_r13_post,14
@@ -4022,6 +4161,9 @@ PmcxhmDRj2tN3cECC,ykrhJJuxg8L2Kp9Jp,crocodile,ok cool,2024-07-15 16:52:08.055000
 PmcxhmDRj2tN3cECC,ALLXrXYduXhxdn4XS,sloth,do we get 2 rewards for 600?,2024-07-15 16:54:37.274000+00:00,8,summary,post,PmcxhmDRj2tN3cECC_r8_post,9
 PmcxhmDRj2tN3cECC,ALLXrXYduXhxdn4XS,sloth,i cant even remember what the reward was,2024-07-15 16:54:54.159000+00:00,8,summary,post,PmcxhmDRj2tN3cECC_r8_post,9
 PmcxhmDRj2tN3cECC,ykrhJJuxg8L2Kp9Jp,crocodile,"I assume so, I can't remember what the reward was either",2024-07-15 16:55:20.056000+00:00,9,contribution,pre,PmcxhmDRj2tN3cECC_r9_pre,9
+PqDK6bkR3gXPNng4F,7xrqP97XazuWpkvic,chicken,Let's all contribute the max!,2024-07-12 15:16:57.744000+00:00,0,contribution,pre,PqDK6bkR3gXPNng4F_r0_pre,0
+PqDK6bkR3gXPNng4F,7xrqP97XazuWpkvic,chicken,We make the most money if we all put it in,2024-07-12 15:17:03.263000+00:00,0,contribution,pre,PqDK6bkR3gXPNng4F_r0_pre,0
+PqDK6bkR3gXPNng4F,7xrqP97XazuWpkvic,chicken,I put 20 in,2024-07-12 15:17:07.463000+00:00,0,contribution,pre,PqDK6bkR3gXPNng4F_r0_pre,0
 PqDK6bkR3gXPNng4F,7xrqP97XazuWpkvic,chicken,Good job guys,2024-07-12 15:17:53.126000+00:00,1,contribution,pre,PqDK6bkR3gXPNng4F_r1_pre,1
 PqDK6bkR3gXPNng4F,7xrqP97XazuWpkvic,chicken,We can all trust each other,2024-07-12 15:17:57.243000+00:00,1,contribution,pre,PqDK6bkR3gXPNng4F_r1_pre,1
 PqDK6bkR3gXPNng4F,7xrqP97XazuWpkvic,chicken,Nice,2024-07-12 15:19:12.092000+00:00,2,outcome,post,PqDK6bkR3gXPNng4F_r2_post,3
@@ -4141,6 +4283,11 @@ Pu2EYfbvqDn5duudf,dcTa3KfeA5nTLrcxP,dog,agree - max every time,2024-07-12 15:17:
 Pu2EYfbvqDn5duudf,Ck9g9ThSo3HekH5zB,gorilla,sounds good!,2024-07-12 15:17:40.069000+00:00,0,outcome,post,Pu2EYfbvqDn5duudf_r0_post,1
 Pu2EYfbvqDn5duudf,kJXJJfyuZk6wjR7ou,parrot,where u guys from?,2024-07-12 15:17:44.112000+00:00,0,outcome,post,Pu2EYfbvqDn5duudf_r0_post,1
 Pu2EYfbvqDn5duudf,3AJs7HEr8igznb6Ae,sloth,ok,2024-07-12 15:17:52.826000+00:00,0,outcome,post,Pu2EYfbvqDn5duudf_r0_post,1
+Pu2EYfbvqDn5duudf,kJXJJfyuZk6wjR7ou,parrot,hey,2024-07-12 15:17:16.864000+00:00,0,contribution,pre,Pu2EYfbvqDn5duudf_r0_pre,0
+Pu2EYfbvqDn5duudf,Ck9g9ThSo3HekH5zB,gorilla,Hey!,2024-07-12 15:17:18.309000+00:00,0,contribution,pre,Pu2EYfbvqDn5duudf_r0_pre,0
+Pu2EYfbvqDn5duudf,kJXJJfyuZk6wjR7ou,parrot,how r u,2024-07-12 15:17:22.056000+00:00,0,contribution,pre,Pu2EYfbvqDn5duudf_r0_pre,0
+Pu2EYfbvqDn5duudf,biPE2GJDhfBmE5JDz,chicken,if we contribute the max every round as long as its more than 1.5x we get the most,2024-07-12 15:17:25.714000+00:00,0,contribution,pre,Pu2EYfbvqDn5duudf_r0_pre,0
+Pu2EYfbvqDn5duudf,Ck9g9ThSo3HekH5zB,gorilla,good thanks :),2024-07-12 15:17:27.562000+00:00,0,contribution,pre,Pu2EYfbvqDn5duudf_r0_pre,0
 Pu2EYfbvqDn5duudf,kJXJJfyuZk6wjR7ou,parrot,plz,2024-07-12 15:26:29.277000+00:00,14,summary,post,Pu2EYfbvqDn5duudf_r14_post,15
 Pu2EYfbvqDn5duudf,dcTa3KfeA5nTLrcxP,dog,bruh,2024-07-12 15:26:29.770000+00:00,14,summary,post,Pu2EYfbvqDn5duudf_r14_post,15
 Pu2EYfbvqDn5duudf,3AJs7HEr8igznb6Ae,sloth,xD,2024-07-12 15:26:33.172000+00:00,14,summary,post,Pu2EYfbvqDn5duudf_r14_post,15
@@ -4189,6 +4336,10 @@ Pu9yJgjnFXn4AnZmT,eSfvdrj7w4jX9HdSs,dog,yes that's strange,2024-07-12 16:17:03.3
 Pu9yJgjnFXn4AnZmT,aMnbdNirBGeWiKyRT,chicken,Yes was thinking that too,2024-07-12 16:17:10.278000+00:00,0,summary,post,Pu9yJgjnFXn4AnZmT_r0_post,1
 Pu9yJgjnFXn4AnZmT,NBbyZcBoAh7bwDdwe,duck,I think it's against terms,2024-07-12 16:17:10.867000+00:00,0,summary,post,Pu9yJgjnFXn4AnZmT_r0_post,1
 Pu9yJgjnFXn4AnZmT,J5GDAwpuNPPRRzN9f,gorilla,Typical haha,2024-07-12 16:17:22.819000+00:00,0,summary,post,Pu9yJgjnFXn4AnZmT_r0_post,1
+Pu9yJgjnFXn4AnZmT,eSfvdrj7w4jX9HdSs,dog,hello,2024-07-12 16:15:44.719000+00:00,0,contribution,pre,Pu9yJgjnFXn4AnZmT_r0_pre,0
+Pu9yJgjnFXn4AnZmT,eSfvdrj7w4jX9HdSs,dog,let's all contribute max?,2024-07-12 16:15:55.758000+00:00,0,contribution,pre,Pu9yJgjnFXn4AnZmT_r0_pre,0
+Pu9yJgjnFXn4AnZmT,aMnbdNirBGeWiKyRT,chicken,Yes,2024-07-12 16:15:58.738000+00:00,0,contribution,pre,Pu9yJgjnFXn4AnZmT_r0_pre,0
+Pu9yJgjnFXn4AnZmT,y2SwvQWMHPjExy4sb,parrot,Go max,2024-07-12 16:16:00.692000+00:00,0,contribution,pre,Pu9yJgjnFXn4AnZmT_r0_pre,0
 Pu9yJgjnFXn4AnZmT,aMnbdNirBGeWiKyRT,chicken,Whats sloth doin,2024-07-12 16:18:51.040000+00:00,1,outcome,post,Pu9yJgjnFXn4AnZmT_r1_post,2
 Pu9yJgjnFXn4AnZmT,J5GDAwpuNPPRRzN9f,gorilla,Did we lose someone?,2024-07-12 16:18:55.359000+00:00,1,outcome,post,Pu9yJgjnFXn4AnZmT_r1_post,2
 Pu9yJgjnFXn4AnZmT,NBbyZcBoAh7bwDdwe,duck,or they're keeping their 20,2024-07-12 16:19:03.588000+00:00,1,outcome,post,Pu9yJgjnFXn4AnZmT_r1_post,2
@@ -4217,6 +4368,7 @@ Qdg4gv38vfnM9ktKv,2ZMQrikDp3hC22PfE,sloth,hii,2024-07-12 14:39:27.343000+00:00,0
 Qdg4gv38vfnM9ktKv,KZbQN8t22PsXZKPjr,chicken,hiya,2024-07-12 14:39:31.267000+00:00,0,outcome,post,Qdg4gv38vfnM9ktKv_r0_post,1
 Qdg4gv38vfnM9ktKv,GombLMhZPiZHZ9HF2,gorilla,"Everybody should put in 20 coins unless the multiplier is below 1x, so we get a larger pay out",2024-07-12 14:40:17.941000+00:00,0,summary,post,Qdg4gv38vfnM9ktKv_r0_post,1
 Qdg4gv38vfnM9ktKv,2ZMQrikDp3hC22PfE,sloth,agreed,2024-07-12 14:40:26.176000+00:00,0,summary,post,Qdg4gv38vfnM9ktKv_r0_post,1
+Qdg4gv38vfnM9ktKv,eaqWy9fNKqz5HWGNf,parrot,hello!,2024-07-12 14:39:12.024000+00:00,0,contribution,pre,Qdg4gv38vfnM9ktKv_r0_pre,0
 Qdg4gv38vfnM9ktKv,JMYiCwe2Nhb88qMGj,duck,agreed,2024-07-12 14:40:58.434000+00:00,1,outcome,post,Qdg4gv38vfnM9ktKv_r1_post,2
 Qdg4gv38vfnM9ktKv,QxeDvPheCJCAQNuL4,dog,i'm always contributing no matter what,2024-07-12 14:40:44.409000+00:00,1,contribution,pre,Qdg4gv38vfnM9ktKv_r1_pre,1
 Qdg4gv38vfnM9ktKv,KZbQN8t22PsXZKPjr,chicken,agreed,2024-07-12 14:40:47.778000+00:00,1,contribution,pre,Qdg4gv38vfnM9ktKv_r1_pre,1
@@ -4249,6 +4401,7 @@ RAPkyGgbimpE2farJ,rcSvkC54sv3v5yaYD,owl,Agreed,2024-07-10 16:59:52.863000+00:00,
 RAPkyGgbimpE2farJ,Egzy6EgphFMsfdSkc,dog,still hope there,2024-07-10 17:01:45.675000+00:00,6,summary,post,RAPkyGgbimpE2farJ_r6_post,7
 RAPkyGgbimpE2farJ,CGfEkgcNkRwfLJBYc,chicken,pot is growing,2024-07-10 17:02:30.636000+00:00,7,summary,post,RAPkyGgbimpE2farJ_r7_post,8
 RAPkyGgbimpE2farJ,C8aQLqPwWmHGd8EM6,gorilla,all in all the way over here,2024-07-10 17:02:02.597000+00:00,7,contribution,pre,RAPkyGgbimpE2farJ_r7_pre,7
+RDZjX7FMTaatuhQxb,e75FiKJ5JDZWc7sxb,gorilla,Hey team real human here lets make some money!,2024-07-08 19:19:27.693000+00:00,0,contribution,pre,RDZjX7FMTaatuhQxb_r0_pre,0
 RDZjX7FMTaatuhQxb,e75FiKJ5JDZWc7sxb,gorilla,If we give max we all get max in return,2024-07-08 19:20:30.829000+00:00,1,contribution,pre,RDZjX7FMTaatuhQxb_r1_pre,1
 RDZjX7FMTaatuhQxb,ecT64KfDurYJsPFtQ,duck,Let's,2024-07-08 19:21:07.839000+00:00,2,contribution,pre,RDZjX7FMTaatuhQxb_r2_pre,2
 RDZjX7FMTaatuhQxb,e75FiKJ5JDZWc7sxb,gorilla,Me too,2024-07-08 19:22:23.006000+00:00,4,summary,post,RDZjX7FMTaatuhQxb_r4_post,5
@@ -4258,6 +4411,12 @@ RGrXtztJwJyh5AzfS,fkzcxajMKKixRG2kP,moose,my bad lol,2024-07-09 18:03:43.038000+
 RGrXtztJwJyh5AzfS,NKoBSzXXpvnfWkjXS,gorilla,its okay next round you know what to do!,2024-07-09 18:04:01.854000+00:00,0,outcome,post,RGrXtztJwJyh5AzfS_r0_post,1
 RGrXtztJwJyh5AzfS,sjtEH4XPavmRPwCXi,chick,Hello chat,2024-07-09 18:04:32.006000+00:00,0,summary,post,RGrXtztJwJyh5AzfS_r0_post,1
 RGrXtztJwJyh5AzfS,cXgubvk9DJijeGXN7,parrot,I'm confused about the deductions part,2024-07-09 18:04:36.035000+00:00,0,summary,post,RGrXtztJwJyh5AzfS_r0_post,1
+RGrXtztJwJyh5AzfS,pPqzyHv5Jyhq9FGST,owl,Hi everyone :),2024-07-09 18:03:17.221000+00:00,0,contribution,pre,RGrXtztJwJyh5AzfS_r0_pre,0
+RGrXtztJwJyh5AzfS,NKoBSzXXpvnfWkjXS,gorilla,we are going for max money for everyone right?,2024-07-09 18:03:19.149000+00:00,0,contribution,pre,RGrXtztJwJyh5AzfS_r0_pre,0
+RGrXtztJwJyh5AzfS,B4bdYxNJuAEvqqFN6,sloth,Hi,2024-07-09 18:03:21.519000+00:00,0,contribution,pre,RGrXtztJwJyh5AzfS_r0_pre,0
+RGrXtztJwJyh5AzfS,aA5z7AHvpavhqQ4dn,chicken,max money baby,2024-07-09 18:03:24.676000+00:00,0,contribution,pre,RGrXtztJwJyh5AzfS_r0_pre,0
+RGrXtztJwJyh5AzfS,pPqzyHv5Jyhq9FGST,owl,yes,2024-07-09 18:03:25.867000+00:00,0,contribution,pre,RGrXtztJwJyh5AzfS_r0_pre,0
+RGrXtztJwJyh5AzfS,avTHubHpdEL7gnrHY,dog,yes,2024-07-09 18:03:29.695000+00:00,0,contribution,pre,RGrXtztJwJyh5AzfS_r0_pre,0
 RGrXtztJwJyh5AzfS,sjtEH4XPavmRPwCXi,chick,Yessir 👌,2024-07-09 18:05:19.670000+00:00,1,outcome,post,RGrXtztJwJyh5AzfS_r1_post,2
 RGrXtztJwJyh5AzfS,aA5z7AHvpavhqQ4dn,chicken,i don't do any deductions,2024-07-09 18:05:20.601000+00:00,1,outcome,post,RGrXtztJwJyh5AzfS_r1_post,2
 RGrXtztJwJyh5AzfS,NKoBSzXXpvnfWkjXS,gorilla,the deductions is to punish players for not doing what everyone else does,2024-07-09 18:05:24.851000+00:00,1,outcome,post,RGrXtztJwJyh5AzfS_r1_post,2
@@ -4313,6 +4472,14 @@ RStPzcSWsgnZpozDg,xEmxzswDAC5z7CTv6,parrot,same,2024-07-12 14:47:30.959000+00:00
 RStPzcSWsgnZpozDg,xEmxzswDAC5z7CTv6,parrot,ok will do,2024-07-12 14:46:51.708000+00:00,7,contribution,pre,RStPzcSWsgnZpozDg_r7_pre,7
 RStPzcSWsgnZpozDg,64z2XCPeFZqSL5kjg,gorilla,good luck guys,2024-07-12 14:48:07.109000+00:00,8,summary,post,RStPzcSWsgnZpozDg_r8_post,9
 RStPzcSWsgnZpozDg,2dwcotrhPNhEDRf24,sloth,same,2024-07-12 14:47:37.966000+00:00,8,contribution,pre,RStPzcSWsgnZpozDg_r8_pre,8
+RWQ2vFkinzDJatdiK,8jqq2WZkgxQDzd86G,duck,Let's all contribute 20 every time so we can all max out,2024-07-12 15:18:30.988000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,HnvYi2es2kxztNyph,dog,oops i didnt see this the first time,2024-07-12 15:18:37.292000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,8jqq2WZkgxQDzd86G,duck,ok np,2024-07-12 15:18:42.307000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,8jqq2WZkgxQDzd86G,duck,everyone agreed?,2024-07-12 15:18:47.067000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,rF7fgpmqPdNTMZHte,parrot,sounds good,2024-07-12 15:18:51.496000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,ETPujbTdWtDDfM7SD,chicken,YES,2024-07-12 15:18:51.754000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,2YPdqHMzmZjPsCqPw,sloth,"I already did 10, sorry.  Next time I will read the chat first",2024-07-12 15:18:52.110000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
+RWQ2vFkinzDJatdiK,8jqq2WZkgxQDzd86G,duck,ok np starting next round,2024-07-12 15:18:57.827000+00:00,0,contribution,pre,RWQ2vFkinzDJatdiK_r0_pre,0
 RWQ2vFkinzDJatdiK,8jqq2WZkgxQDzd86G,duck,"oh nice, congrats!",2024-07-12 15:31:35.032000+00:00,12,summary,post,RWQ2vFkinzDJatdiK_r12_post,13
 RWQ2vFkinzDJatdiK,ETPujbTdWtDDfM7SD,chicken,+2,2024-07-12 15:31:43.096000+00:00,12,summary,post,RWQ2vFkinzDJatdiK_r12_post,13
 RWQ2vFkinzDJatdiK,ETPujbTdWtDDfM7SD,chicken,:D,2024-07-12 15:31:47.851000+00:00,12,summary,post,RWQ2vFkinzDJatdiK_r12_post,13
@@ -4378,6 +4545,7 @@ RjouKH2EcY9toqwNu,tGsP8erFojPxwmwFB,dog,Yes. I was doing that too :),2024-07-09 
 RjouKH2EcY9toqwNu,oMqM2SiPnM558icgW,duck,so we finish rounds quickly too,2024-07-09 16:18:36.445000+00:00,4,summary,post,RjouKH2EcY9toqwNu_r4_post,5
 RjouKH2EcY9toqwNu,oMqM2SiPnM558icgW,duck,quick quick :),2024-07-09 16:20:36.989000+00:00,7,outcome,post,RjouKH2EcY9toqwNu_r7_post,8
 Rk4MAmPGpNdxdfXXv,5paKSEDaa7NxQ3zqv,gorilla,hiii,2024-07-12 16:18:36.786000+00:00,0,summary,post,Rk4MAmPGpNdxdfXXv_r0_post,1
+Rk4MAmPGpNdxdfXXv,egicdA52uNnAoFvSC,dog,Hi!!,2024-07-12 16:17:52.394000+00:00,0,contribution,pre,Rk4MAmPGpNdxdfXXv_r0_pre,0
 RndvQoAzSMZfDbwGm,w4Tzyd64YHcMs9dRQ,chick,Always max bet,2024-07-10 19:37:37.647000+00:00,0,outcome,post,RndvQoAzSMZfDbwGm_r0_post,1
 RndvQoAzSMZfDbwGm,w4Tzyd64YHcMs9dRQ,chick,Put all in for massive bonus at the end,2024-07-10 19:37:43.735000+00:00,0,outcome,post,RndvQoAzSMZfDbwGm_r0_post,1
 RndvQoAzSMZfDbwGm,QoDEwvmEXkkMWMxwk,chicken,Good point,2024-07-10 19:38:02.428000+00:00,0,outcome,post,RndvQoAzSMZfDbwGm_r0_post,1
@@ -4390,6 +4558,12 @@ RndvQoAzSMZfDbwGm,MpvH9gNmB5BY4MtDd,duck,THAT MAKES SENSE,2024-07-10 19:38:49.83
 RndvQoAzSMZfDbwGm,SdZqiCBESzxnYydcw,dog,the deductions is confusing lol,2024-07-10 19:38:56.156000+00:00,0,summary,post,RndvQoAzSMZfDbwGm_r0_post,1
 RndvQoAzSMZfDbwGm,kSGFRtvngpRWF6sYo,moose,sounds good!,2024-07-10 19:38:58.097000+00:00,0,summary,post,RndvQoAzSMZfDbwGm_r0_post,1
 RndvQoAzSMZfDbwGm,3rFRjvyfKCv2cLREX,sloth,works for me,2024-07-10 19:38:59.822000+00:00,0,summary,post,RndvQoAzSMZfDbwGm_r0_post,1
+RndvQoAzSMZfDbwGm,QoDEwvmEXkkMWMxwk,chicken,Hi,2024-07-10 19:36:50.076000+00:00,0,contribution,pre,RndvQoAzSMZfDbwGm_r0_pre,0
+RndvQoAzSMZfDbwGm,w4Tzyd64YHcMs9dRQ,chick,AYoooo,2024-07-10 19:36:55.303000+00:00,0,contribution,pre,RndvQoAzSMZfDbwGm_r0_pre,0
+RndvQoAzSMZfDbwGm,c8CvCr5bNBvf3x32M,parrot,hi,2024-07-10 19:37:01.681000+00:00,0,contribution,pre,RndvQoAzSMZfDbwGm_r0_pre,0
+RndvQoAzSMZfDbwGm,tpsFTH7v5sX6YqZki,owl,hi :),2024-07-10 19:37:11.388000+00:00,0,contribution,pre,RndvQoAzSMZfDbwGm_r0_pre,0
+RndvQoAzSMZfDbwGm,QoDEwvmEXkkMWMxwk,chicken,More cha chang,2024-07-10 19:37:12.912000+00:00,0,contribution,pre,RndvQoAzSMZfDbwGm_r0_pre,0
+RndvQoAzSMZfDbwGm,SdZqiCBESzxnYydcw,dog,i did 10,2024-07-10 19:37:15.070000+00:00,0,contribution,pre,RndvQoAzSMZfDbwGm_r0_pre,0
 RndvQoAzSMZfDbwGm,tpsFTH7v5sX6YqZki,owl,we are too fast for the timer lolo,2024-07-10 19:48:28.534000+00:00,11,outcome,post,RndvQoAzSMZfDbwGm_r11_post,12
 RndvQoAzSMZfDbwGm,QoDEwvmEXkkMWMxwk,chicken,Hahaha,2024-07-10 19:48:40.101000+00:00,11,summary,post,RndvQoAzSMZfDbwGm_r11_post,12
 RndvQoAzSMZfDbwGm,mxKLiAA6NakQQazSY,rabbit,lol we trying to get through this quick af,2024-07-10 19:49:25.411000+00:00,12,summary,post,RndvQoAzSMZfDbwGm_r12_post,13
@@ -4462,6 +4636,13 @@ RpshqXWYZ9p7q7JZw,h64hFdG4AShvovPdg,chicken,im deducting the full  amount possib
 RpshqXWYZ9p7q7JZw,vFNXDo4LiTj7ZdMyu,moose,Same here,2024-07-09 17:14:02.874000+00:00,0,summary,post,RpshqXWYZ9p7q7JZw_r0_post,1
 RpshqXWYZ9p7q7JZw,dBAHXEbJ9ncZY2mJ3,duck,I'm confused.,2024-07-09 17:14:04.309000+00:00,0,summary,post,RpshqXWYZ9p7q7JZw_r0_post,1
 RpshqXWYZ9p7q7JZw,h64hFdG4AShvovPdg,chicken,just add the full amount,2024-07-09 17:14:13.695000+00:00,0,summary,post,RpshqXWYZ9p7q7JZw_r0_post,1
+RpshqXWYZ9p7q7JZw,XKPdEgWhiD8ctZjRF,sloth,Hey guys,2024-07-09 17:12:24.280000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
+RpshqXWYZ9p7q7JZw,oNN5fFxgT8EdgC6L8,dog,Hey everyone,2024-07-09 17:12:34.741000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
+RpshqXWYZ9p7q7JZw,vFNXDo4LiTj7ZdMyu,moose,Hello there!,2024-07-09 17:12:35.325000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
+RpshqXWYZ9p7q7JZw,vFNXDo4LiTj7ZdMyu,moose,I'm a Moose,2024-07-09 17:12:42.313000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
+RpshqXWYZ9p7q7JZw,oNN5fFxgT8EdgC6L8,dog,:),2024-07-09 17:12:47.653000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
+RpshqXWYZ9p7q7JZw,XKPdEgWhiD8ctZjRF,sloth,Lets all contribute the max so we can each earn the most,2024-07-09 17:12:50.079000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
+RpshqXWYZ9p7q7JZw,dBAHXEbJ9ncZY2mJ3,duck,hI. I'm a duck,2024-07-09 17:12:55.208000+00:00,0,contribution,pre,RpshqXWYZ9p7q7JZw_r0_pre,0
 RpshqXWYZ9p7q7JZw,brAA74pc6Pei4NahH,gorilla,I support adding the full amount,2024-07-09 17:14:51.805000+00:00,1,outcome,post,RpshqXWYZ9p7q7JZw_r1_post,2
 RpshqXWYZ9p7q7JZw,oNN5fFxgT8EdgC6L8,dog,20 contributed :),2024-07-09 17:15:13.195000+00:00,1,outcome,post,RpshqXWYZ9p7q7JZw_r1_post,2
 RpshqXWYZ9p7q7JZw,XKPdEgWhiD8ctZjRF,sloth,that way we each make the most,2024-07-09 17:15:14.604000+00:00,1,outcome,post,RpshqXWYZ9p7q7JZw_r1_post,2
@@ -4516,6 +4697,11 @@ RpshqXWYZ9p7q7JZw,oNN5fFxgT8EdgC6L8,dog,hahaha you sound chaotic,2024-07-09 17:2
 RpshqXWYZ9p7q7JZw,dBAHXEbJ9ncZY2mJ3,duck,i feel chaotic,2024-07-09 17:23:44.092000+00:00,6,summary,post,RpshqXWYZ9p7q7JZw_r6_post,7
 S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,don't be greedy boi,2024-07-12 16:16:22.769000+00:00,0,outcome,post,S3Ra4SKoNnkYYWomD_r0_post,1
 S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,"Mmmmm, what a wonderful choice",2024-07-12 16:16:34.937000+00:00,0,summary,post,S3Ra4SKoNnkYYWomD_r0_post,1
+S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,mmmmm,2024-07-12 16:15:46.432000+00:00,0,contribution,pre,S3Ra4SKoNnkYYWomD_r0_pre,0
+S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,the multiplier so big and yummy,2024-07-12 16:15:49.824000+00:00,0,contribution,pre,S3Ra4SKoNnkYYWomD_r0_pre,0
+S3Ra4SKoNnkYYWomD,Qx3otaiR5JR4pHKTP,chicken,"all go all in, we'll get more",2024-07-12 16:15:51.482000+00:00,0,contribution,pre,S3Ra4SKoNnkYYWomD_r0_pre,0
+S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,"don't be greedy, my fella humanes",2024-07-12 16:15:56.184000+00:00,0,contribution,pre,S3Ra4SKoNnkYYWomD_r0_pre,0
+S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,;),2024-07-12 16:15:58.681000+00:00,0,contribution,pre,S3Ra4SKoNnkYYWomD_r0_pre,0
 S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,DISCONNEXION,2024-07-12 16:27:22.060000+00:00,10,outcome,post,S3Ra4SKoNnkYYWomD_r10_post,11
 S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,Or perhaps a planned exit by bot?,2024-07-12 16:27:30.933000+00:00,10,summary,post,S3Ra4SKoNnkYYWomD_r10_post,11
 S3Ra4SKoNnkYYWomD,Qx3otaiR5JR4pHKTP,chicken,sloth say something a bot couldn't possibly say,2024-07-12 16:27:32.279000+00:00,10,summary,post,S3Ra4SKoNnkYYWomD_r10_post,11
@@ -4607,6 +4793,7 @@ S3Ra4SKoNnkYYWomD,EnCX7fbkLYLtC7HkG,gorilla,Mmmmmmmmm,2024-07-12 16:26:22.509000
 S3Ra4SKoNnkYYWomD,Qx3otaiR5JR4pHKTP,chicken,maybe we're the only active participants,2024-07-12 16:25:12.024000+00:00,9,contribution,pre,S3Ra4SKoNnkYYWomD_r9_pre,9
 S7A9a6ZNDDAjQAMbL,jpYkkf26TJoJr9tQu,chicken,ill go all in this next time,2024-07-12 16:19:55.535000+00:00,0,outcome,post,S7A9a6ZNDDAjQAMbL_r0_post,1
 S7A9a6ZNDDAjQAMbL,qiT9ZiNLDxvdZsXRg,parrot,Yes lets go,2024-07-12 16:20:07.896000+00:00,0,outcome,post,S7A9a6ZNDDAjQAMbL_r0_post,1
+S7A9a6ZNDDAjQAMbL,Tm46LEo4K7WyA62Ev,duck,lets all go all in,2024-07-12 16:19:07.935000+00:00,0,contribution,pre,S7A9a6ZNDDAjQAMbL_r0_pre,0
 S7A9a6ZNDDAjQAMbL,NF6Wyx9LaGuggLv85,gorilla,just always scontribute 20 and we're fine.,2024-07-12 16:34:20.690000+00:00,10,summary,post,S7A9a6ZNDDAjQAMbL_r10_post,11
 S7A9a6ZNDDAjQAMbL,NF6Wyx9LaGuggLv85,gorilla,sloth -- you end up getting more coins if everyone gives 20,2024-07-12 16:34:33.591000+00:00,10,summary,post,S7A9a6ZNDDAjQAMbL_r10_post,11
 S7A9a6ZNDDAjQAMbL,Tm46LEo4K7WyA62Ev,duck,just remember one of us could be a bot trying to test us..dont fall for it.just do the max,2024-07-12 16:34:43.461000+00:00,10,summary,post,S7A9a6ZNDDAjQAMbL_r10_post,11
@@ -4667,6 +4854,10 @@ S7A9a6ZNDDAjQAMbL,Tm46LEo4K7WyA62Ev,duck,so you can screw us faster?,2024-07-12 
 SAGxyic6qFhLZ85XX,ktHFR2N6ycRFiXWss,dog,bro,2024-07-09 16:14:51.350000+00:00,0,outcome,post,SAGxyic6qFhLZ85XX_r0_post,1
 SAGxyic6qFhLZ85XX,hS7yfoPRTFMuu5Zio,duck,my brother in christ,2024-07-09 16:14:59.925000+00:00,0,outcome,post,SAGxyic6qFhLZ85XX_r0_post,1
 SAGxyic6qFhLZ85XX,GLeX79m3QYotuBTEc,gorilla,lmao,2024-07-09 16:15:16.079000+00:00,0,summary,post,SAGxyic6qFhLZ85XX_r0_post,1
+SAGxyic6qFhLZ85XX,ktHFR2N6ycRFiXWss,dog,i think if we all contribuite the max every round we will get the most rewards,2024-07-09 16:14:09.160000+00:00,0,contribution,pre,SAGxyic6qFhLZ85XX_r0_pre,0
+SAGxyic6qFhLZ85XX,inMkL7tgjR2Lioi9o,chicken,Agreed,2024-07-09 16:14:14.256000+00:00,0,contribution,pre,SAGxyic6qFhLZ85XX_r0_pre,0
+SAGxyic6qFhLZ85XX,zqZaWMu6Wnaq3nBqt,moose,yes,2024-07-09 16:14:19.070000+00:00,0,contribution,pre,SAGxyic6qFhLZ85XX_r0_pre,0
+SAGxyic6qFhLZ85XX,wEtCWkWR6PYmYp7Xy,parrot,agreed,2024-07-09 16:14:23.294000+00:00,0,contribution,pre,SAGxyic6qFhLZ85XX_r0_pre,0
 SAGxyic6qFhLZ85XX,ktHFR2N6ycRFiXWss,dog,parrot its not too late for redemption,2024-07-09 16:21:10.189000+00:00,7,contribution,pre,SAGxyic6qFhLZ85XX_r7_pre,7
 SFohXkBYvScM7Y7rC,iKARfqakkGGEPj76P,rabbit,agreed,2024-07-10 19:37:03.814000+00:00,0,outcome,post,SFohXkBYvScM7Y7rC_r0_post,1
 SFohXkBYvScM7Y7rC,PGPCwBb243ES3hktH,duck,Agree!,2024-07-10 19:37:09.063000+00:00,0,outcome,post,SFohXkBYvScM7Y7rC_r0_post,1
@@ -4674,6 +4865,7 @@ SFohXkBYvScM7Y7rC,yMZS5SPBTd9mSeuWJ,chick,I agree,2024-07-10 19:37:12.679000+00:
 SFohXkBYvScM7Y7rC,DkvdLXJhABRdf8zhj,sloth,agree,2024-07-10 19:37:21.196000+00:00,0,outcome,post,SFohXkBYvScM7Y7rC_r0_post,1
 SFohXkBYvScM7Y7rC,EgNMoKSiTeu77MEe9,gorilla,agree,2024-07-10 19:37:30.674000+00:00,0,outcome,post,SFohXkBYvScM7Y7rC_r0_post,1
 SFohXkBYvScM7Y7rC,iKARfqakkGGEPj76P,rabbit,mine didn't come up i dont think,2024-07-10 19:37:37.805000+00:00,0,outcome,post,SFohXkBYvScM7Y7rC_r0_post,1
+SFohXkBYvScM7Y7rC,SntWNdpRE4ko6R9fB,dog,IF WE ALL MAX WE ALL WIN THE MOST,2024-07-10 19:36:46.128000+00:00,0,contribution,pre,SFohXkBYvScM7Y7rC_r0_pre,0
 SFohXkBYvScM7Y7rC,SntWNdpRE4ko6R9fB,dog,said 5 to 50 min,2024-07-10 19:48:54.516000+00:00,10,outcome,post,SFohXkBYvScM7Y7rC_r10_post,11
 SFohXkBYvScM7Y7rC,SntWNdpRE4ko6R9fB,dog,need to stay in game to get bonus,2024-07-10 19:49:13.275000+00:00,10,summary,post,SFohXkBYvScM7Y7rC_r10_post,11
 SFohXkBYvScM7Y7rC,EgNMoKSiTeu77MEe9,gorilla,I believe its random....hopefully it lasts long = more bonus $$,2024-07-10 19:48:31.814000+00:00,10,contribution,pre,SFohXkBYvScM7Y7rC_r10_pre,10
@@ -4818,6 +5010,10 @@ WCmwZHJibant7PcCz,rcP9wvRw6YmbKm5t8,snake,Hey,2024-07-15 14:14:35.486000+00:00,0
 WCmwZHJibant7PcCz,N5QonytSCwrQnAGcv,chicken,hello,2024-07-15 14:14:37.577000+00:00,0,outcome,post,WCmwZHJibant7PcCz_r0_post,1
 WCmwZHJibant7PcCz,zfPB3E9nNePLS8kXP,crocodile,hey,2024-07-15 14:14:55.681000+00:00,0,outcome,post,WCmwZHJibant7PcCz_r0_post,1
 WCmwZHJibant7PcCz,rb2BXLyeKA2uKLsQG,chick,Huh,2024-07-15 14:15:30.196000+00:00,0,summary,post,WCmwZHJibant7PcCz_r0_post,1
+WCmwZHJibant7PcCz,LHvojACCGJCCRC8LP,duck,hi,2024-07-15 14:13:47.335000+00:00,0,contribution,pre,WCmwZHJibant7PcCz_r0_pre,0
+WCmwZHJibant7PcCz,WHB5js6uFSppAhFr9,rabbit,Hello,2024-07-15 14:13:54.439000+00:00,0,contribution,pre,WCmwZHJibant7PcCz_r0_pre,0
+WCmwZHJibant7PcCz,TGk4mQAnZhuLJ8Dfo,parrot,hello,2024-07-15 14:13:59.601000+00:00,0,contribution,pre,WCmwZHJibant7PcCz_r0_pre,0
+WCmwZHJibant7PcCz,Nf295cX5BQirT22JA,dog,heyyyooo,2024-07-15 14:13:59.863000+00:00,0,contribution,pre,WCmwZHJibant7PcCz_r0_pre,0
 WCmwZHJibant7PcCz,TGk4mQAnZhuLJ8Dfo,parrot,sloth too,2024-07-15 14:33:35.823000+00:00,10,outcome,post,WCmwZHJibant7PcCz_r10_post,11
 WCmwZHJibant7PcCz,Gh3gXPbdoDz8txLeq,gorilla,Gorilla speaking,2024-07-15 14:34:09.860000+00:00,10,summary,post,WCmwZHJibant7PcCz_r10_post,11
 WCmwZHJibant7PcCz,TGk4mQAnZhuLJ8Dfo,parrot,perfect,2024-07-15 14:34:13.853000+00:00,10,summary,post,WCmwZHJibant7PcCz_r10_post,11
@@ -4981,6 +5177,10 @@ WCmwZHJibant7PcCz,TGk4mQAnZhuLJ8Dfo,parrot,lol,2024-07-15 14:31:54.812000+00:00,
 WCmwZHJibant7PcCz,Nf295cX5BQirT22JA,dog,Ooh true,2024-07-15 14:31:55.110000+00:00,9,contribution,pre,WCmwZHJibant7PcCz_r9_pre,9
 WCmwZHJibant7PcCz,WHB5js6uFSppAhFr9,rabbit,Not sure,2024-07-15 14:31:58.197000+00:00,9,contribution,pre,WCmwZHJibant7PcCz_r9_pre,9
 WCmwZHJibant7PcCz,WHB5js6uFSppAhFr9,rabbit,Lol,2024-07-15 14:32:02.415000+00:00,9,contribution,pre,WCmwZHJibant7PcCz_r9_pre,9
+WPcM5Z7cCTkDcfTNo,yf64n9hv6xGgE85tC,moose,im lit,2024-07-09 18:09:55.687000+00:00,0,contribution,pre,WPcM5Z7cCTkDcfTNo_r0_pre,0
+WPcM5Z7cCTkDcfTNo,LGrbGMzyhhxhabGuX,chicken,hello,2024-07-09 18:09:57.741000+00:00,0,contribution,pre,WPcM5Z7cCTkDcfTNo_r0_pre,0
+WPcM5Z7cCTkDcfTNo,EEgPd76TTctYszLMq,gorilla,noice,2024-07-09 18:10:16.442000+00:00,0,contribution,pre,WPcM5Z7cCTkDcfTNo_r0_pre,0
+WPcM5Z7cCTkDcfTNo,LGrbGMzyhhxhabGuX,chicken,how are you guys playing this?,2024-07-09 18:10:25.074000+00:00,0,contribution,pre,WPcM5Z7cCTkDcfTNo_r0_pre,0
 WPcM5Z7cCTkDcfTNo,KGmsCquHBckFFGBvE,duck,Everyone contribute everything it multiplies,2024-07-09 18:12:12.347000+00:00,1,outcome,post,WPcM5Z7cCTkDcfTNo_r1_post,2
 WPcM5Z7cCTkDcfTNo,YCmTqAFNnLzWNnMrx,parrot,i'm contributing everything every round,2024-07-09 18:12:31.351000+00:00,1,summary,post,WPcM5Z7cCTkDcfTNo_r1_post,2
 WPcM5Z7cCTkDcfTNo,EEgPd76TTctYszLMq,gorilla,"Yeah, same",2024-07-09 18:12:37.844000+00:00,1,summary,post,WPcM5Z7cCTkDcfTNo_r1_post,2
@@ -5172,6 +5372,11 @@ Y5BvaaimsGSJ9ihD2,7q5LHc9QmNHaydkKX,gorilla,"It seems like, a bit obvious, but m
 Y5BvaaimsGSJ9ihD2,7q5LHc9QmNHaydkKX,gorilla,If we all just cooperate we all do better,2024-07-15 15:32:29.879000+00:00,0,outcome,post,Y5BvaaimsGSJ9ihD2_r0_post,1
 Y5BvaaimsGSJ9ihD2,sNoARpRMdD3LgLLbe,snake,I agree,2024-07-15 15:32:57.024000+00:00,0,summary,post,Y5BvaaimsGSJ9ihD2_r0_post,1
 Y5BvaaimsGSJ9ihD2,vKs6cJrPNLscK2M9M,crocodile,Agree,2024-07-15 15:33:01.899000+00:00,0,summary,post,Y5BvaaimsGSJ9ihD2_r0_post,1
+Y5BvaaimsGSJ9ihD2,7q5LHc9QmNHaydkKX,gorilla,Surely the sensible option is for everyone to contribute maximum?,2024-07-15 15:31:38.314000+00:00,0,contribution,pre,Y5BvaaimsGSJ9ihD2_r0_pre,0
+Y5BvaaimsGSJ9ihD2,7q5LHc9QmNHaydkKX,gorilla,Every time multiplier is above 1?,2024-07-15 15:31:42.572000+00:00,0,contribution,pre,Y5BvaaimsGSJ9ihD2_r0_pre,0
+Y5BvaaimsGSJ9ihD2,sNoARpRMdD3LgLLbe,snake,I agree,2024-07-15 15:31:43.384000+00:00,0,contribution,pre,Y5BvaaimsGSJ9ihD2_r0_pre,0
+Y5BvaaimsGSJ9ihD2,vKs6cJrPNLscK2M9M,crocodile,I thought the same thing,2024-07-15 15:31:48.606000+00:00,0,contribution,pre,Y5BvaaimsGSJ9ihD2_r0_pre,0
+Y5BvaaimsGSJ9ihD2,3Lj8MciotsiSY9Mwj,sloth,That's what I'm thinking too,2024-07-15 15:31:49.487000+00:00,0,contribution,pre,Y5BvaaimsGSJ9ihD2_r0_pre,0
 Y5BvaaimsGSJ9ihD2,7q5LHc9QmNHaydkKX,gorilla,oooo maybe croc is a plant,2024-07-15 15:46:49.933000+00:00,10,outcome,post,Y5BvaaimsGSJ9ihD2_r10_post,11
 Y5BvaaimsGSJ9ihD2,sNoARpRMdD3LgLLbe,snake,and they just want to see how we would react to someone not contributing lol,2024-07-15 15:46:53.340000+00:00,10,outcome,post,Y5BvaaimsGSJ9ihD2_r10_post,11
 Y5BvaaimsGSJ9ihD2,XaTPFb4wn8xWtEw7e,parrot,crocbot,2024-07-15 15:46:56.495000+00:00,10,outcome,post,Y5BvaaimsGSJ9ihD2_r10_post,11
@@ -5313,6 +5518,7 @@ YcjbRWmow2HQZpZPS,TRdxJkTY3hRrDxrMw,dog,Great!,2024-07-18 16:37:26.248000+00:00,
 YcjbRWmow2HQZpZPS,kNnh5mWqdEQJCZevn,chick,sounds good,2024-07-18 16:37:28.499000+00:00,0,summary,post,YcjbRWmow2HQZpZPS_r0_post,1
 YcjbRWmow2HQZpZPS,7m2WcudshqDR3Mgn5,sloth,hEY cOW,2024-07-18 16:37:31+00:00,0,summary,post,YcjbRWmow2HQZpZPS_r0_post,1
 YcjbRWmow2HQZpZPS,7m2WcudshqDR3Mgn5,sloth,Moooo,2024-07-18 16:37:39.498000+00:00,0,summary,post,YcjbRWmow2HQZpZPS_r0_post,1
+YcjbRWmow2HQZpZPS,TRdxJkTY3hRrDxrMw,dog,Hi Guys,2024-07-18 16:36:04.392000+00:00,0,contribution,pre,YcjbRWmow2HQZpZPS_r0_pre,0
 YcjbRWmow2HQZpZPS,7m2WcudshqDR3Mgn5,sloth,SMASH MOOSE AND BUNNY,2024-07-18 16:56:44.070000+00:00,10,outcome,post,YcjbRWmow2HQZpZPS_r10_post,11
 YcjbRWmow2HQZpZPS,pvhKkW6YTKELF3cDm,pinguin,Pause,2024-07-18 16:56:51.801000+00:00,10,outcome,post,YcjbRWmow2HQZpZPS_r10_post,11
 YcjbRWmow2HQZpZPS,cSuxkYhJPDKz62WzX,parrot,"I'm deducting moose each round they give 10, who's with me",2024-07-18 16:57:13.881000+00:00,10,outcome,post,YcjbRWmow2HQZpZPS_r10_post,11
@@ -5779,6 +5985,21 @@ ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,ok,2024-07-18 15:31:10.801000+00:00,0,
 ZtvyPrREiEB6BT5sM,scKwi44tHognxt8sN,monkey,yeah ill do 20,2024-07-18 15:31:12.583000+00:00,0,summary,post,ZtvyPrREiEB6BT5sM_r0_post,1
 ZtvyPrREiEB6BT5sM,gYna5D5EsqW6HS57d,snake,okey dokeyyy,2024-07-18 15:31:16.274000+00:00,0,summary,post,ZtvyPrREiEB6BT5sM_r0_post,1
 ZtvyPrREiEB6BT5sM,scKwi44tHognxt8sN,monkey,makes no sense to do less,2024-07-18 15:31:16.841000+00:00,0,summary,post,ZtvyPrREiEB6BT5sM_r0_post,1
+ZtvyPrREiEB6BT5sM,ihBTiB3Sp5oyuq8y4,cow,everyones donating 20 right,2024-07-18 15:29:07.150000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,hi,2024-07-18 15:29:07.956000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,dvvxaZ4ESCAASZxSg,chick,hi,2024-07-18 15:29:12.893000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,RmKKicF6Znqi6pwmC,parrot,hi,2024-07-18 15:29:14.757000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,scKwi44tHognxt8sN,monkey,yeah the more the better,2024-07-18 15:29:16.382000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,wsg prolific people,2024-07-18 15:29:17.983000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,mdWzj5WogKz6jpJqq,pinguin,hi,2024-07-18 15:29:19.449000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,A3xkxvmnQSkuPTgDS,chicken,HI,2024-07-18 15:29:21.417000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,gYna5D5EsqW6HS57d,snake,hi,2024-07-18 15:29:22.700000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,dvvxaZ4ESCAASZxSg,chick,my 20 is in,2024-07-18 15:29:24.301000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,ummm i misclicked,2024-07-18 15:29:29.458000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,scKwi44tHognxt8sN,monkey,i mean I put 12 but Ill start putting more,2024-07-18 15:29:30.527000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,yeah,2024-07-18 15:29:33.215000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,word,2024-07-18 15:29:33.639000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
+ZtvyPrREiEB6BT5sM,gYna5D5EsqW6HS57d,snake,soz did 10 lol,2024-07-18 15:29:37.544000+00:00,0,contribution,pre,ZtvyPrREiEB6BT5sM_r0_pre,0
 ZtvyPrREiEB6BT5sM,W9ZfMs7htFKCGC62M,moose,how much money we at rn,2024-07-18 15:49:10.361000+00:00,10,outcome,post,ZtvyPrREiEB6BT5sM_r10_post,11
 ZtvyPrREiEB6BT5sM,dvvxaZ4ESCAASZxSg,chick,almost $3 bonus,2024-07-18 15:49:16.566000+00:00,10,outcome,post,ZtvyPrREiEB6BT5sM_r10_post,11
 ZtvyPrREiEB6BT5sM,v4hCHEQrzJJhME8Jh,frog,19 chicken really,2024-07-18 15:49:22.282000+00:00,10,outcome,post,ZtvyPrREiEB6BT5sM_r10_post,11
@@ -6130,6 +6351,7 @@ ZtvyPrREiEB6BT5sM,dvvxaZ4ESCAASZxSg,chick,u think theyd let a moose work on AI,2
 ZtvyPrREiEB6BT5sM,KLqotcJcZwJKQRjr4,dog,Check out data annotation for AI work,2024-07-18 15:47:02.405000+00:00,9,contribution,pre,ZtvyPrREiEB6BT5sM_r9_pre,9
 ZtvyPrREiEB6BT5sM,RmKKicF6Znqi6pwmC,parrot,i think theres gonna be another qualifier soon,2024-07-18 15:47:04.318000+00:00,9,contribution,pre,ZtvyPrREiEB6BT5sM_r9_pre,9
 ZvNnTZ4QTMyc2YWhs,Q7buwMPqonGbkerNJ,gorilla,What even is that green thing?,2024-07-08 20:11:01.666000+00:00,0,summary,post,ZvNnTZ4QTMyc2YWhs_r0_post,1
+ZvNnTZ4QTMyc2YWhs,Q7buwMPqonGbkerNJ,gorilla,"Hi, I'm a gorilla apparently.",2024-07-08 20:10:15.721000+00:00,0,contribution,pre,ZvNnTZ4QTMyc2YWhs_r0_pre,0
 ZvNnTZ4QTMyc2YWhs,M3dSpWBJoRZjCM7gL,sloth,Oof lol,2024-07-08 20:19:05.478000+00:00,10,outcome,post,ZvNnTZ4QTMyc2YWhs_r10_post,11
 ZvNnTZ4QTMyc2YWhs,Q7buwMPqonGbkerNJ,gorilla,just for 1 round :D,2024-07-08 20:19:08.938000+00:00,10,outcome,post,ZvNnTZ4QTMyc2YWhs_r10_post,11
 ZvNnTZ4QTMyc2YWhs,Q7buwMPqonGbkerNJ,gorilla,every other round until 20?,2024-07-08 20:20:00.155000+00:00,12,summary,post,ZvNnTZ4QTMyc2YWhs_r12_post,13
@@ -6151,6 +6373,7 @@ aCwABuHs4X2RsQjPQ,r8pZbQ57yKZBDh89v,dog,work together,2024-07-09 18:05:21.975000
 aCwABuHs4X2RsQjPQ,r8pZbQ57yKZBDh89v,dog,max donate we all win,2024-07-09 18:05:27.920000+00:00,0,summary,post,aCwABuHs4X2RsQjPQ_r0_post,1
 aCwABuHs4X2RsQjPQ,ja3F74xMLckHcYzMD,chicken,"Yes ok, i shall on the next round",2024-07-09 18:05:28.679000+00:00,0,summary,post,aCwABuHs4X2RsQjPQ_r0_post,1
 aCwABuHs4X2RsQjPQ,r8pZbQ57yKZBDh89v,dog,no point not,2024-07-09 18:05:30.720000+00:00,0,summary,post,aCwABuHs4X2RsQjPQ_r0_post,1
+aCwABuHs4X2RsQjPQ,YeaYefpadfK634bKz,duck,hi,2024-07-09 18:03:52.206000+00:00,0,contribution,pre,aCwABuHs4X2RsQjPQ_r0_pre,0
 aCwABuHs4X2RsQjPQ,YJuqSez2CNwYRru2e,gorilla,637 now,2024-07-09 18:20:31.118000+00:00,10,outcome,post,aCwABuHs4X2RsQjPQ_r10_post,11
 aCwABuHs4X2RsQjPQ,ja3F74xMLckHcYzMD,chicken,Mine is 654,2024-07-09 18:20:48.217000+00:00,10,outcome,post,aCwABuHs4X2RsQjPQ_r10_post,11
 aCwABuHs4X2RsQjPQ,r8pZbQ57yKZBDh89v,dog,i bet there will be 15 rounds,2024-07-09 18:21:07.819000+00:00,10,summary,post,aCwABuHs4X2RsQjPQ_r10_post,11
@@ -6301,6 +6524,14 @@ aeGpamXB9whsnobRf,RHF2pCfFZQgrmJyqk,duck,lets all put 20 in each time,2024-07-09
 aeGpamXB9whsnobRf,PupAaMbSNurTTfBhw,gorilla,awh duck so cute ! <3,2024-07-09 16:13:21.626000+00:00,0,summary,post,aeGpamXB9whsnobRf_r0_post,1
 aeGpamXB9whsnobRf,PupAaMbSNurTTfBhw,gorilla,yes i put 20 in too,2024-07-09 16:13:30.437000+00:00,0,summary,post,aeGpamXB9whsnobRf_r0_post,1
 aeGpamXB9whsnobRf,RHF2pCfFZQgrmJyqk,duck,we will all make more,2024-07-09 16:13:31.635000+00:00,0,summary,post,aeGpamXB9whsnobRf_r0_post,1
+aeGpamXB9whsnobRf,PupAaMbSNurTTfBhw,gorilla,hello :),2024-07-09 16:11:45.196000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,rG6CHPN8HPneiM9Rd,parrot,hi,2024-07-09 16:11:45.586000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,XEYfuwKz39tWhhqyk,dog,hello,2024-07-09 16:11:51.891000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,SuLqTXHrrnvSdSd4x,chicken,hi,2024-07-09 16:11:52.585000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,sbqv5g9qNf3tpPcDx,moose,hi,2024-07-09 16:11:53.820000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,PupAaMbSNurTTfBhw,gorilla,this is a cute game,2024-07-09 16:11:57.165000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,RHF2pCfFZQgrmJyqk,duck,hello,2024-07-09 16:11:59.802000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
+aeGpamXB9whsnobRf,rG6CHPN8HPneiM9Rd,parrot,I wanna be a sloth,2024-07-09 16:12:11.953000+00:00,0,contribution,pre,aeGpamXB9whsnobRf_r0_pre,0
 aeGpamXB9whsnobRf,rG6CHPN8HPneiM9Rd,parrot,gross,2024-07-09 16:14:06.330000+00:00,1,outcome,post,aeGpamXB9whsnobRf_r1_post,2
 aeGpamXB9whsnobRf,PupAaMbSNurTTfBhw,gorilla,the chicken character is cute too,2024-07-09 16:14:13.664000+00:00,1,outcome,post,aeGpamXB9whsnobRf_r1_post,2
 aeGpamXB9whsnobRf,SuLqTXHrrnvSdSd4x,chicken,thanks,2024-07-09 16:14:32.405000+00:00,1,summary,post,aeGpamXB9whsnobRf_r1_post,2
@@ -6327,6 +6558,8 @@ amLXh9uWHwWnDMAEJ,24Xp93PPiFnQEZDgW,sloth,agreed,2024-07-10 16:47:54.875000+00:0
 amLXh9uWHwWnDMAEJ,Mga9JJTR7qdu6si2G,dog,agreed!,2024-07-10 16:47:55.416000+00:00,2,contribution,pre,amLXh9uWHwWnDMAEJ_r2_pre,2
 amLXh9uWHwWnDMAEJ,WiFYQeKJRBFNjpbDP,parrot,same,2024-07-10 16:48:23.348000+00:00,3,contribution,pre,amLXh9uWHwWnDMAEJ_r3_pre,3
 b3fPn8Eyio69NdD96,sKvzzrtv8MzSxAxan,owl,Hi all!,2024-07-17 14:05:52.654000+00:00,0,outcome,post,b3fPn8Eyio69NdD96_r0_post,1
+b3fPn8Eyio69NdD96,ce5EMyTmNrZTpuKmz,dog,Hi! o/,2024-07-17 14:05:10.768000+00:00,0,contribution,pre,b3fPn8Eyio69NdD96_r0_pre,0
+b3fPn8Eyio69NdD96,qri4kzGHRjsgpp5kF,rabbit,Hi,2024-07-17 14:05:32.926000+00:00,0,contribution,pre,b3fPn8Eyio69NdD96_r0_pre,0
 b3fPn8Eyio69NdD96,srSeHaJHWyXgudawR,chick,:-),2024-07-17 14:06:36.904000+00:00,1,contribution,pre,b3fPn8Eyio69NdD96_r1_pre,1
 bCJp3xM9rXfEYftS3,cYK7sXZRxcwhjTGi7,rabbit,Hello all,2024-07-10 15:23:05.348000+00:00,0,summary,post,bCJp3xM9rXfEYftS3_r0_post,1
 bCJp3xM9rXfEYftS3,NYhQWW7ptwp6isgat,chicken,hi,2024-07-10 15:23:09.701000+00:00,0,summary,post,bCJp3xM9rXfEYftS3_r0_post,1
@@ -6395,6 +6628,7 @@ bSN2jEMtheLREPnSz,yNpFa9PJKfZfMDbua,chicken,We then all get more bonus,2024-07-0
 bSN2jEMtheLREPnSz,yNpFa9PJKfZfMDbua,chicken,win win,2024-07-08 20:14:45.826000+00:00,0,summary,post,bSN2jEMtheLREPnSz_r0_post,1
 bSN2jEMtheLREPnSz,gfFEAKYBvi6Mx3ubh,duck,i agree,2024-07-08 20:14:47.774000+00:00,0,summary,post,bSN2jEMtheLREPnSz_r0_post,1
 bSN2jEMtheLREPnSz,fKwKpeEmrLqhaR6iH,gorilla,Exactly,2024-07-08 20:14:49.751000+00:00,0,summary,post,bSN2jEMtheLREPnSz_r0_post,1
+bSN2jEMtheLREPnSz,fKwKpeEmrLqhaR6iH,gorilla,Hi all!,2024-07-08 20:13:10.136000+00:00,0,contribution,pre,bSN2jEMtheLREPnSz_r0_pre,0
 bSN2jEMtheLREPnSz,yNpFa9PJKfZfMDbua,chicken,how much is 100 coins 10 cents?,2024-07-08 20:28:30.401000+00:00,11,outcome,post,bSN2jEMtheLREPnSz_r11_post,12
 bSN2jEMtheLREPnSz,fKwKpeEmrLqhaR6iH,gorilla,I thought it said 300 was $1,2024-07-08 20:28:49.443000+00:00,12,contribution,pre,bSN2jEMtheLREPnSz_r12_pre,12
 bSN2jEMtheLREPnSz,fKwKpeEmrLqhaR6iH,gorilla,Yeah easy money,2024-07-08 20:29:50.243000+00:00,13,summary,post,bSN2jEMtheLREPnSz_r13_post,14
@@ -6438,6 +6672,8 @@ bSN2jEMtheLREPnSz,fKwKpeEmrLqhaR6iH,gorilla,For sure,2024-07-08 20:26:51.092000+
 bZbAH4FHLEBMsmH25,d4J7obr3KJz2Wc5ZA,gorilla,I'm all in every round if you are,2024-07-08 17:47:02.158000+00:00,0,outcome,post,bZbAH4FHLEBMsmH25_r0_post,1
 bZbAH4FHLEBMsmH25,bFrKykzHYa9tfdEuP,sloth,i am for sure,2024-07-08 17:47:07.313000+00:00,0,outcome,post,bZbAH4FHLEBMsmH25_r0_post,1
 bZbAH4FHLEBMsmH25,ySc2L9wHZ4zwB3efQ,duck,I am,2024-07-08 17:47:27.218000+00:00,0,summary,post,bZbAH4FHLEBMsmH25_r0_post,1
+bZbAH4FHLEBMsmH25,bFrKykzHYa9tfdEuP,sloth,"takes a lot of trust, but if we all put all-in would be good",2024-07-08 17:46:32.239000+00:00,0,contribution,pre,bZbAH4FHLEBMsmH25_r0_pre,0
+bZbAH4FHLEBMsmH25,ySc2L9wHZ4zwB3efQ,duck,I didnt this round but I will next i put in 10,2024-07-08 17:46:51.531000+00:00,0,contribution,pre,bZbAH4FHLEBMsmH25_r0_pre,0
 bZbAH4FHLEBMsmH25,bFrKykzHYa9tfdEuP,sloth,i love max earnings for all lol,2024-07-08 17:48:00.039000+00:00,1,contribution,pre,bZbAH4FHLEBMsmH25_r1_pre,1
 bZbAH4FHLEBMsmH25,d4J7obr3KJz2Wc5ZA,gorilla,Right? Why wouldn't we want to all win? haha,2024-07-08 17:48:14.083000+00:00,1,contribution,pre,bZbAH4FHLEBMsmH25_r1_pre,1
 bZbAH4FHLEBMsmH25,d4J7obr3KJz2Wc5ZA,gorilla,"Ooh, I didn't even notice. YOu thinking it's based on our contributions?",2024-07-08 17:49:41.507000+00:00,2,outcome,post,bZbAH4FHLEBMsmH25_r2_post,3
@@ -6452,6 +6688,14 @@ bZbAH4FHLEBMsmH25,bFrKykzHYa9tfdEuP,sloth,did it mention multiple games of 6 rou
 bZbAH4FHLEBMsmH25,d4J7obr3KJz2Wc5ZA,gorilla,"lol, sorry, had to adjust my screen size, chat log was covering the I'm Done button XD",2024-07-08 17:53:25.792000+00:00,5,contribution,pre,bZbAH4FHLEBMsmH25_r5_pre,5
 bZbAH4FHLEBMsmH25,bFrKykzHYa9tfdEuP,sloth,considering the 'bonus' if you hit 300 i'm sure it's about seeing if someone cheats the rest lol,2024-07-08 17:53:30.180000+00:00,5,contribution,pre,bZbAH4FHLEBMsmH25_r5_pre,5
 bZeQW3cPKFvjmGLAb,7wzXzSofuNre3YgGf,duck,why did some lie about it?,2024-07-15 14:08:06.865000+00:00,0,summary,post,bZeQW3cPKFvjmGLAb_r0_post,1
+bZeQW3cPKFvjmGLAb,qMaRzSNCiXnw22PgE,rabbit,Everyone contribute 20?,2024-07-15 14:06:19.022000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,uqso5Ce4KpbuB6bCL,chick,yup,2024-07-15 14:06:24.929000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,7wzXzSofuNre3YgGf,duck,yes,2024-07-15 14:06:29.970000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,bQy2jNo7iWu5HTR8L,moose,YES,2024-07-15 14:06:39.164000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,tcGywXB9EoZxzwHPy,owl,aye,2024-07-15 14:06:42.437000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,7pfxuk5TCFiAikvLT,gorilla,YES,2024-07-15 14:06:43.003000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,wBEnyZvJDCQWJBuiv,snake,YUP,2024-07-15 14:06:45.329000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
+bZeQW3cPKFvjmGLAb,3BW6BbYGuL8GXNrT8,sloth,done,2024-07-15 14:06:47.978000+00:00,0,contribution,pre,bZeQW3cPKFvjmGLAb_r0_pre,0
 bZeQW3cPKFvjmGLAb,uqso5Ce4KpbuB6bCL,chick,and yet doing the most complaining,2024-07-15 14:23:55.162000+00:00,10,outcome,post,bZeQW3cPKFvjmGLAb_r10_post,11
 bZeQW3cPKFvjmGLAb,wBEnyZvJDCQWJBuiv,snake,maybe i did the wrong way,2024-07-15 14:24:20.002000+00:00,10,summary,post,bZeQW3cPKFvjmGLAb_r10_post,11
 bZeQW3cPKFvjmGLAb,tcGywXB9EoZxzwHPy,owl,Make it snappy,2024-07-15 14:24:27.939000+00:00,10,summary,post,bZeQW3cPKFvjmGLAb_r10_post,11
@@ -6581,6 +6825,8 @@ dD8G2AvGaxyvEjXS2,bs687SLuP7xXLa26r,chicken,all in,2024-07-08 19:27:42.412000+00
 dD8G2AvGaxyvEjXS2,Bbu9fJK5gLhTaepWR,sloth,i will all in,2024-07-08 19:29:53.075000+00:00,4,contribution,pre,dD8G2AvGaxyvEjXS2_r4_pre,4
 dD8G2AvGaxyvEjXS2,Bbu9fJK5gLhTaepWR,sloth,if anyone doesn't i will start to deduct,2024-07-08 19:30:14.354000+00:00,4,contribution,pre,dD8G2AvGaxyvEjXS2_r4_pre,4
 dD8G2AvGaxyvEjXS2,Bbu9fJK5gLhTaepWR,sloth,what happened?,2024-07-08 19:31:18.010000+00:00,5,contribution,pre,dD8G2AvGaxyvEjXS2_r5_pre,5
+dYdCLYP8K6xi8DNdF,oo2JCzZaqBsyh8vYp,chicken,HOW MUCH WE PUTTING IN,2024-07-09 18:07:04.294000+00:00,0,contribution,pre,dYdCLYP8K6xi8DNdF_r0_pre,0
+dYdCLYP8K6xi8DNdF,vrHnFirobbi9J2JFH,dog,HURRY UP,2024-07-09 18:07:31.471000+00:00,0,contribution,pre,dYdCLYP8K6xi8DNdF_r0_pre,0
 dYdCLYP8K6xi8DNdF,oo2JCzZaqBsyh8vYp,chicken,PUT IN MORE WE GET MORE,2024-07-09 18:19:26.939000+00:00,16,outcome,post,dYdCLYP8K6xi8DNdF_r16_post,17
 dYdCLYP8K6xi8DNdF,oo2JCzZaqBsyh8vYp,chicken,DO 20,2024-07-09 18:20:13.716000+00:00,17,outcome,post,dYdCLYP8K6xi8DNdF_r17_post,18
 dzWez63A94u6uxzjq,kDCDwrJhXvPcJoeh5,parrot,okay,2024-07-12 16:19:55.912000+00:00,5,summary,post,dzWez63A94u6uxzjq_r5_post,6
@@ -6603,6 +6849,9 @@ ediANmka55Hjf459P,5JW5PDH6rHShKDvgJ,dog,everyone go all in this round!,2024-07-0
 efgPmTEtpm9m9QfzL,CJ6e6tGdEk48TxBCt,sloth,I'm giving each 8,2024-07-08 20:16:15.714000+00:00,0,outcome,post,efgPmTEtpm9m9QfzL_r0_post,1
 efgPmTEtpm9m9QfzL,NMEfskEa7skBqeGN7,duck,ok,2024-07-08 20:16:24.173000+00:00,0,outcome,post,efgPmTEtpm9m9QfzL_r0_post,1
 efgPmTEtpm9m9QfzL,NMEfskEa7skBqeGN7,duck,gorilla wtf,2024-07-08 20:17:06.701000+00:00,0,summary,post,efgPmTEtpm9m9QfzL_r0_post,1
+efgPmTEtpm9m9QfzL,NMEfskEa7skBqeGN7,duck,I'm going all in.,2024-07-08 20:15:24.680000+00:00,0,contribution,pre,efgPmTEtpm9m9QfzL_r0_pre,0
+efgPmTEtpm9m9QfzL,CJ6e6tGdEk48TxBCt,sloth,Same,2024-07-08 20:15:28.406000+00:00,0,contribution,pre,efgPmTEtpm9m9QfzL_r0_pre,0
+efgPmTEtpm9m9QfzL,fcxQfnFuwkb4GohiD,chicken,same,2024-07-08 20:15:33.559000+00:00,0,contribution,pre,efgPmTEtpm9m9QfzL_r0_pre,0
 efgPmTEtpm9m9QfzL,NMEfskEa7skBqeGN7,duck,Sorry I didn't know how to reward,2024-07-08 20:18:08.605000+00:00,1,outcome,post,efgPmTEtpm9m9QfzL_r1_post,2
 efgPmTEtpm9m9QfzL,CJ6e6tGdEk48TxBCt,sloth,+ icon beside each icon,2024-07-08 20:18:15.084000+00:00,1,outcome,post,efgPmTEtpm9m9QfzL_r1_post,2
 efgPmTEtpm9m9QfzL,NMEfskEa7skBqeGN7,duck,Giving you 8 mole,2024-07-08 20:18:16.112000+00:00,1,outcome,post,efgPmTEtpm9m9QfzL_r1_post,2
@@ -6683,6 +6932,7 @@ f5kBd6G3t4e65zNgw,bKHAhKhPb6g2T5ssS,parrot,Hey :),2024-07-12 14:06:54.886000+00:
 f5kBd6G3t4e65zNgw,SeZZgZS9TDXG5o784,dog,Hiya :),2024-07-12 14:07:02.985000+00:00,0,summary,post,f5kBd6G3t4e65zNgw_r0_post,1
 f5kBd6G3t4e65zNgw,HWWTPNDJmyrGmoG7F,chicken,hi,2024-07-12 14:07:08.408000+00:00,0,summary,post,f5kBd6G3t4e65zNgw_r0_post,1
 f5kBd6G3t4e65zNgw,DnjTbo6QjrRYCCTSh,duck,hey,2024-07-12 14:07:18.255000+00:00,0,summary,post,f5kBd6G3t4e65zNgw_r0_post,1
+f5kBd6G3t4e65zNgw,ASagcZ6skrnBoP3jB,gorilla,hey,2024-07-12 14:06:41.050000+00:00,0,contribution,pre,f5kBd6G3t4e65zNgw_r0_pre,0
 f5kBd6G3t4e65zNgw,ASagcZ6skrnBoP3jB,gorilla,that's the plan!,2024-07-12 14:08:33.143000+00:00,2,outcome,post,f5kBd6G3t4e65zNgw_r2_post,3
 f5kBd6G3t4e65zNgw,SeZZgZS9TDXG5o784,dog,Cool :D,2024-07-12 14:08:37.252000+00:00,2,outcome,post,f5kBd6G3t4e65zNgw_r2_post,3
 f5kBd6G3t4e65zNgw,bKHAhKhPb6g2T5ssS,parrot,"Yup, I'm happy with that :)",2024-07-12 14:08:41.022000+00:00,2,outcome,post,f5kBd6G3t4e65zNgw_r2_post,3
@@ -6749,6 +6999,11 @@ gRaZAaugSyBEdfDhw,FGdyRMGaJoibScWhK,gorilla,The rest of the money will be paid a
 gRaZAaugSyBEdfDhw,4jHS9teqccknLY99u,sloth,isnt that only a certain amt per 300 coins though?,2024-07-08 20:15:50.467000+00:00,5,contribution,pre,gRaZAaugSyBEdfDhw_r5_pre,5
 gboiENSBYnTX9R7s5,ad4tYt5aWMkZch2Hy,moose,HI,2024-07-17 14:09:38.830000+00:00,0,outcome,post,gboiENSBYnTX9R7s5_r0_post,1
 gboiENSBYnTX9R7s5,ZKEHdvW62ExkqFMmP,dog,Sloth is last!,2024-07-17 14:09:39.608000+00:00,0,outcome,post,gboiENSBYnTX9R7s5_r0_post,1
+gboiENSBYnTX9R7s5,TQXkqCZ7X4hWaoBpF,duck,hello,2024-07-17 14:08:49.436000+00:00,0,contribution,pre,gboiENSBYnTX9R7s5_r0_pre,0
+gboiENSBYnTX9R7s5,jE8zq37LDDAd2pa8Y,chick,hi,2024-07-17 14:08:53.825000+00:00,0,contribution,pre,gboiENSBYnTX9R7s5_r0_pre,0
+gboiENSBYnTX9R7s5,QkFrNH7fXQBWigNp3,gorilla,hii,2024-07-17 14:08:58.349000+00:00,0,contribution,pre,gboiENSBYnTX9R7s5_r0_pre,0
+gboiENSBYnTX9R7s5,ZKEHdvW62ExkqFMmP,dog,Woof!,2024-07-17 14:09:01.784000+00:00,0,contribution,pre,gboiENSBYnTX9R7s5_r0_pre,0
+gboiENSBYnTX9R7s5,XF3wzutqCW7xyDqQP,chicken,hi,2024-07-17 14:09:03.200000+00:00,0,contribution,pre,gboiENSBYnTX9R7s5_r0_pre,0
 gboiENSBYnTX9R7s5,ZKEHdvW62ExkqFMmP,dog,Plot twist - he's behind you,2024-07-17 14:25:59.772000+00:00,10,outcome,post,gboiENSBYnTX9R7s5_r10_post,11
 gboiENSBYnTX9R7s5,FAd9ofZxMGoAHwNpW,sloth,very possible they're an inside agent,2024-07-17 14:26:04.914000+00:00,10,outcome,post,gboiENSBYnTX9R7s5_r10_post,11
 gboiENSBYnTX9R7s5,jE8zq37LDDAd2pa8Y,chick,oml,2024-07-17 14:26:17.603000+00:00,10,summary,post,gboiENSBYnTX9R7s5_r10_post,11
@@ -6867,6 +7122,10 @@ gboiENSBYnTX9R7s5,QkFrNH7fXQBWigNp3,gorilla,starting to think moose is an inside
 gboiENSBYnTX9R7s5,jE8zq37LDDAd2pa8Y,chick,i mean the stakes are so low i don't particularly care to lose out,2024-07-17 14:25:13.403000+00:00,9,summary,post,gboiENSBYnTX9R7s5_r9_post,10
 gboiENSBYnTX9R7s5,ZKEHdvW62ExkqFMmP,dog,AI vibes,2024-07-17 14:25:17.324000+00:00,9,summary,post,gboiENSBYnTX9R7s5_r9_post,10
 gboiENSBYnTX9R7s5,QkFrNH7fXQBWigNp3,gorilla,five more rounds,2024-07-17 14:24:03.156000+00:00,9,contribution,pre,gboiENSBYnTX9R7s5_r9_pre,9
+gjCPZyem7WSjeD3JL,s9Db2zAv5ceoLps4a,chicken,go all in in every round?,2024-07-08 17:49:50.081000+00:00,0,contribution,pre,gjCPZyem7WSjeD3JL_r0_pre,0
+gjCPZyem7WSjeD3JL,E3AMP5HREKhDQK9dG,gorilla,i agree,2024-07-08 17:49:56.366000+00:00,0,contribution,pre,gjCPZyem7WSjeD3JL_r0_pre,0
+gjCPZyem7WSjeD3JL,c7XPoXtMfdNgLovj5,duck,yes,2024-07-08 17:50:05.018000+00:00,0,contribution,pre,gjCPZyem7WSjeD3JL_r0_pre,0
+gjCPZyem7WSjeD3JL,8hctH3mzBaeczLSv2,sloth,COOL,2024-07-08 17:50:05.631000+00:00,0,contribution,pre,gjCPZyem7WSjeD3JL_r0_pre,0
 gjCPZyem7WSjeD3JL,s9Db2zAv5ceoLps4a,chicken,yo monkey what's the deal?,2024-07-08 17:53:47.701000+00:00,2,outcome,post,gjCPZyem7WSjeD3JL_r2_post,3
 gjCPZyem7WSjeD3JL,E3AMP5HREKhDQK9dG,gorilla,i thought i was contributing all?,2024-07-08 17:54:24.655000+00:00,2,summary,post,gjCPZyem7WSjeD3JL_r2_post,3
 gjCPZyem7WSjeD3JL,8hctH3mzBaeczLSv2,sloth,oh my bad i misunderstood,2024-07-08 17:55:34.441000+00:00,3,outcome,post,gjCPZyem7WSjeD3JL_r3_post,4
@@ -6874,6 +7133,7 @@ gjCPZyem7WSjeD3JL,s9Db2zAv5ceoLps4a,chicken,the brown monkey,2024-07-08 17:54:41
 gjCPZyem7WSjeD3JL,E3AMP5HREKhDQK9dG,gorilla,oh gotcha the sloth,2024-07-08 17:54:54.647000+00:00,3,contribution,pre,gjCPZyem7WSjeD3JL_r3_pre,3
 gjCPZyem7WSjeD3JL,s9Db2zAv5ceoLps4a,chicken,yes!,2024-07-08 17:55:06.926000+00:00,3,contribution,pre,gjCPZyem7WSjeD3JL_r3_pre,3
 gnPsSsTjfGxNtntHM,7hkfg6HbxDw2wTQRR,sloth,drinking coffee :),2024-07-12 15:18:09.910000+00:00,0,outcome,post,gnPsSsTjfGxNtntHM_r0_post,1
+gnPsSsTjfGxNtntHM,hPkJ3ty8TmAyExpPX,dog,What u guys doing,2024-07-12 15:17:36.582000+00:00,0,contribution,pre,gnPsSsTjfGxNtntHM_r0_pre,0
 gnPsSsTjfGxNtntHM,zJCjgigDY2EGwozoq,parrot,we get 0.10 for each round and $1 for every 300 coins,2024-07-12 15:32:16.546000+00:00,10,outcome,post,gnPsSsTjfGxNtntHM_r10_post,11
 gnPsSsTjfGxNtntHM,zJCjgigDY2EGwozoq,parrot,as bonus,2024-07-12 15:32:24.850000+00:00,10,summary,post,gnPsSsTjfGxNtntHM_r10_post,11
 gnPsSsTjfGxNtntHM,hPkJ3ty8TmAyExpPX,dog,oh,2024-07-12 15:32:49.523000+00:00,10,summary,post,gnPsSsTjfGxNtntHM_r10_post,11
@@ -6899,6 +7159,7 @@ gnPsSsTjfGxNtntHM,hPkJ3ty8TmAyExpPX,dog,Yeah idk how long were supposed to play 
 gucxYCpGb5Z3d39ya,avzAffqhbYArW7iPF,duck,same,2024-07-08 17:46:50.081000+00:00,0,outcome,post,gucxYCpGb5Z3d39ya_r0_post,1
 gucxYCpGb5Z3d39ya,JCXmD2AzgZ7gawyRq,gorilla,same,2024-07-08 17:46:59.550000+00:00,0,outcome,post,gucxYCpGb5Z3d39ya_r0_post,1
 gucxYCpGb5Z3d39ya,5jqrJ32uaBRf46Mqz,sloth,sure!,2024-07-08 17:47:04.473000+00:00,0,outcome,post,gucxYCpGb5Z3d39ya_r0_post,1
+gucxYCpGb5Z3d39ya,ygTfX9PASvtEubNMe,chicken,all in,2024-07-08 17:46:27.210000+00:00,0,contribution,pre,gucxYCpGb5Z3d39ya_r0_pre,0
 gucxYCpGb5Z3d39ya,5jqrJ32uaBRf46Mqz,sloth,maybe again,2024-07-08 17:53:24.847000+00:00,10,summary,post,gucxYCpGb5Z3d39ya_r10_post,11
 gucxYCpGb5Z3d39ya,5jqrJ32uaBRf46Mqz,sloth,will put 0 now to provide more interesting data,2024-07-08 17:52:54.161000+00:00,10,contribution,pre,gucxYCpGb5Z3d39ya_r10_pre,10
 gucxYCpGb5Z3d39ya,JCXmD2AzgZ7gawyRq,gorilla,is it possible to choose something other than 0 or 20?,2024-07-08 17:54:05.519000+00:00,11,outcome,post,gucxYCpGb5Z3d39ya_r11_post,12
@@ -6925,6 +7186,15 @@ gucxYCpGb5Z3d39ya,ygTfX9PASvtEubNMe,chicken,i dont have music darn,2024-07-08 17
 gucxYCpGb5Z3d39ya,JCXmD2AzgZ7gawyRq,gorilla,you have music?,2024-07-08 17:51:23.855000+00:00,8,contribution,pre,gucxYCpGb5Z3d39ya_r8_pre,8
 gucxYCpGb5Z3d39ya,ygTfX9PASvtEubNMe,chicken,HA! lol,2024-07-08 17:52:14+00:00,9,outcome,post,gucxYCpGb5Z3d39ya_r9_post,10
 gucxYCpGb5Z3d39ya,JCXmD2AzgZ7gawyRq,gorilla,music would be fun,2024-07-08 17:52:23.351000+00:00,9,summary,post,gucxYCpGb5Z3d39ya_r9_post,10
+gv6sq5Y4NMqzeGSFH,FEzeZkcsFkenZocfY,duck,hi,2024-07-12 14:05:08.492000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,FEzeZkcsFkenZocfY,duck,guys,2024-07-12 14:05:11.289000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,ucC7Jtf28mrPYSNzv,parrot,Hi guys,2024-07-12 14:05:11.618000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,FEzeZkcsFkenZocfY,duck,we should all do 20,2024-07-12 14:05:16.961000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,ndREvM67zGkfqvpJk,dog,HI,2024-07-12 14:05:17.297000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,ndREvM67zGkfqvpJk,dog,I AGREE,2024-07-12 14:05:20.831000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,CavRPKTBbLcLf3TWd,gorilla,hello ı give all,2024-07-12 14:05:23.071000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,myzFzxHS6G652nLHu,chicken,helloooo,2024-07-12 14:05:25.517000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
+gv6sq5Y4NMqzeGSFH,myzFzxHS6G652nLHu,chicken,im doing all too,2024-07-12 14:05:29.185000+00:00,0,contribution,pre,gv6sq5Y4NMqzeGSFH_r0_pre,0
 gv6sq5Y4NMqzeGSFH,CavRPKTBbLcLf3TWd,gorilla,2 more,2024-07-12 14:13:23.356000+00:00,10,outcome,post,gv6sq5Y4NMqzeGSFH_r10_post,11
 gv6sq5Y4NMqzeGSFH,FEzeZkcsFkenZocfY,duck,if 3 people give every round then we all benefit,2024-07-12 14:13:53.508000+00:00,10,summary,post,gv6sq5Y4NMqzeGSFH_r10_post,11
 gv6sq5Y4NMqzeGSFH,CavRPKTBbLcLf3TWd,gorilla,sloth never give,2024-07-12 14:13:54.379000+00:00,10,summary,post,gv6sq5Y4NMqzeGSFH_r10_post,11
@@ -7048,6 +7318,9 @@ he2AChYcnGZZFjgmL,7ZEAo8wW5juyG6jpw,gorilla,hi,2024-07-15 16:38:37.128000+00:00,
 he2AChYcnGZZFjgmL,s66LDk57RL9eN7X7E,owl,Hello,2024-07-15 16:38:38.981000+00:00,0,outcome,post,he2AChYcnGZZFjgmL_r0_post,1
 he2AChYcnGZZFjgmL,roQw4oQpJ5FPh3bEK,rabbit,HEY,2024-07-15 16:39:07.542000+00:00,0,summary,post,he2AChYcnGZZFjgmL_r0_post,1
 he2AChYcnGZZFjgmL,yFdYccJDqbpXA5v9z,crocodile,HELLO,2024-07-15 16:39:15.598000+00:00,0,summary,post,he2AChYcnGZZFjgmL_r0_post,1
+he2AChYcnGZZFjgmL,LN2FMGkge6KQmHirr,duck,hi,2024-07-15 16:38:07.972000+00:00,0,contribution,pre,he2AChYcnGZZFjgmL_r0_pre,0
+he2AChYcnGZZFjgmL,u79ga5wBDDPpFPKFb,chick,yo!,2024-07-15 16:38:12.102000+00:00,0,contribution,pre,he2AChYcnGZZFjgmL_r0_pre,0
+he2AChYcnGZZFjgmL,Q3JtYwMhCz8oYqCY7,dog,Hello,2024-07-15 16:38:13.003000+00:00,0,contribution,pre,he2AChYcnGZZFjgmL_r0_pre,0
 he2AChYcnGZZFjgmL,u79ga5wBDDPpFPKFb,chick,everytime the page goes to load i fear it'll take 5 years,2024-07-15 16:57:30.930000+00:00,10,outcome,post,he2AChYcnGZZFjgmL_r10_post,11
 he2AChYcnGZZFjgmL,7ZEAo8wW5juyG6jpw,gorilla,speeded up a bit for me now,2024-07-15 16:58:05.810000+00:00,11,outcome,post,he2AChYcnGZZFjgmL_r11_post,12
 he2AChYcnGZZFjgmL,u79ga5wBDDPpFPKFb,chick,yeah seems it,2024-07-15 16:58:11.523000+00:00,11,outcome,post,he2AChYcnGZZFjgmL_r11_post,12
@@ -7145,6 +7418,11 @@ hmECynMmPPk7N8Pvc,iMBR4EEtoE4RJ3tTN,snake,YES,2024-07-18 15:30:16.270000+00:00,0
 hmECynMmPPk7N8Pvc,EBwDxXFsHp6zMntAq,duck,the more you put in the more you get out,2024-07-18 15:30:18.339000+00:00,0,summary,post,hmECynMmPPk7N8Pvc_r0_post,1
 hmECynMmPPk7N8Pvc,5yTYxfeRC7QaD4Y4e,sloth,add all and all deduct from those who dont best for us all,2024-07-18 15:30:23.236000+00:00,0,summary,post,hmECynMmPPk7N8Pvc_r0_post,1
 hmECynMmPPk7N8Pvc,Qp5GF2N5RA8Z6STW2,dog,"if we just add all in all rounds where there's a multiplier > 1, we all get more money",2024-07-18 15:30:26.540000+00:00,0,summary,post,hmECynMmPPk7N8Pvc_r0_post,1
+hmECynMmPPk7N8Pvc,fQujfT2b4k5R496sA,owl,lets all add the max amount,2024-07-18 15:28:11.439000+00:00,0,contribution,pre,hmECynMmPPk7N8Pvc_r0_pre,0
+hmECynMmPPk7N8Pvc,ngxfSkLmD4PhXovzq,pinguin,ye,2024-07-18 15:28:22.193000+00:00,0,contribution,pre,hmECynMmPPk7N8Pvc_r0_pre,0
+hmECynMmPPk7N8Pvc,odsMQ9rtwcEX8mSCL,monkey,I already did mine sorry,2024-07-18 15:28:30.803000+00:00,0,contribution,pre,hmECynMmPPk7N8Pvc_r0_pre,0
+hmECynMmPPk7N8Pvc,jBQRHsgM75uHWocTf,crocodile,"No, half",2024-07-18 15:28:34.391000+00:00,0,contribution,pre,hmECynMmPPk7N8Pvc_r0_pre,0
+hmECynMmPPk7N8Pvc,i9GgzmgBm7CaMMqDg,chick,I did mine already too.,2024-07-18 15:28:36.335000+00:00,0,contribution,pre,hmECynMmPPk7N8Pvc_r0_pre,0
 hmECynMmPPk7N8Pvc,cQwipRgkXtk72isqy,rabbit,gotta ready up immediately lol,2024-07-18 15:50:17.675000+00:00,10,outcome,post,hmECynMmPPk7N8Pvc_r10_post,11
 hmECynMmPPk7N8Pvc,aeeNDdJYKjGmYtarC,moose,were cruising now,2024-07-18 15:50:36.510000+00:00,10,summary,post,hmECynMmPPk7N8Pvc_r10_post,11
 hmECynMmPPk7N8Pvc,jBQRHsgM75uHWocTf,crocodile,trying to stay awake,2024-07-18 15:49:56.814000+00:00,10,contribution,pre,hmECynMmPPk7N8Pvc_r10_pre,10
@@ -7471,6 +7749,13 @@ hozAwKDxP82SQzESS,YgESC9xn43fXZ5Kqw,moose,TEAM xoxo,2024-07-18 18:10:23.476000+0
 hqoPbc8aJ4afe2iWA,3j5XiT5HE6eoe4skm,sloth,lets build that pot,2024-07-17 14:09:04.136000+00:00,0,outcome,post,hqoPbc8aJ4afe2iWA_r0_post,1
 hqoPbc8aJ4afe2iWA,GQjWTt9shYsYwt2dY,chicken,bad kitty!,2024-07-17 14:09:06.788000+00:00,0,outcome,post,hqoPbc8aJ4afe2iWA_r0_post,1
 hqoPbc8aJ4afe2iWA,GQjWTt9shYsYwt2dY,chicken,we all put in we all gain,2024-07-17 14:09:49.391000+00:00,0,summary,post,hqoPbc8aJ4afe2iWA_r0_post,1
+hqoPbc8aJ4afe2iWA,pSmyiyNG7Gvgg7454,rabbit,hi,2024-07-17 14:07:58.904000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
+hqoPbc8aJ4afe2iWA,59D2R8HXTiPjsAmL2,gorilla,HELLO,2024-07-17 14:08:05.854000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
+hqoPbc8aJ4afe2iWA,GQjWTt9shYsYwt2dY,chicken,hey,2024-07-17 14:08:10.134000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
+hqoPbc8aJ4afe2iWA,3j5XiT5HE6eoe4skm,sloth,hi,2024-07-17 14:08:11.459000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
+hqoPbc8aJ4afe2iWA,59D2R8HXTiPjsAmL2,gorilla,chuck that money in the pot,2024-07-17 14:08:15.297000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
+hqoPbc8aJ4afe2iWA,qcfxgRrZEma6pyN42,owl,Hi!,2024-07-17 14:08:16.505000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
+hqoPbc8aJ4afe2iWA,SG96SuwFyFQyW8KwB,dog,HELLO,2024-07-17 14:08:25.762000+00:00,0,contribution,pre,hqoPbc8aJ4afe2iWA_r0_pre,0
 hqoPbc8aJ4afe2iWA,3j5XiT5HE6eoe4skm,sloth,yes,2024-07-17 14:19:24.913000+00:00,10,summary,post,hqoPbc8aJ4afe2iWA_r10_post,11
 hqoPbc8aJ4afe2iWA,SG96SuwFyFQyW8KwB,dog,In the next one every pay 20,2024-07-17 14:18:59.556000+00:00,10,contribution,pre,hqoPbc8aJ4afe2iWA_r10_pre,10
 hqoPbc8aJ4afe2iWA,qcfxgRrZEma6pyN42,owl,Nearly everyone!,2024-07-17 14:19:51.458000+00:00,11,outcome,post,hqoPbc8aJ4afe2iWA_r11_post,12
@@ -7494,6 +7779,14 @@ i7C4Y4NiesraiSwwb,c5G8iFa4RsYYHc8NG,parrot,"dang green animal, u did us wrong",2
 i7C4Y4NiesraiSwwb,AvanLx8HazKvzCzs4,chicken,for real green,2024-07-17 14:50:03.312000+00:00,0,summary,post,i7C4Y4NiesraiSwwb_r0_post,1
 i7C4Y4NiesraiSwwb,AvanLx8HazKvzCzs4,chicken,come on don't be greedy,2024-07-17 14:50:13.168000+00:00,0,summary,post,i7C4Y4NiesraiSwwb_r0_post,1
 i7C4Y4NiesraiSwwb,rEnDedzA5dL6Mamij,chick,and the red one too,2024-07-17 14:50:19.443000+00:00,0,summary,post,i7C4Y4NiesraiSwwb_r0_post,1
+i7C4Y4NiesraiSwwb,82dtwHYQHTm9mNgga,duck,hello,2024-07-17 14:48:47.868000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,rEnDedzA5dL6Mamij,chick,HI,2024-07-17 14:48:59.741000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,AvanLx8HazKvzCzs4,chicken,"Hi all, contribute max so we all can do well",2024-07-17 14:49:00.973000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,57i6k29PSsuPay62G,gorilla,HI,2024-07-17 14:49:03.209000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,57i6k29PSsuPay62G,gorilla,agreed^,2024-07-17 14:49:08.858000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,82dtwHYQHTm9mNgga,duck,agreed,2024-07-17 14:49:10.207000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,cvCA3Lsoda66rdjkS,moose,agree,2024-07-17 14:49:13.447000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
+i7C4Y4NiesraiSwwb,jyxixKpkptkiAHXAe,rabbit,agreed,2024-07-17 14:49:13.931000+00:00,0,contribution,pre,i7C4Y4NiesraiSwwb_r0_pre,0
 i7C4Y4NiesraiSwwb,c5G8iFa4RsYYHc8NG,parrot,is this the only game we'll play?,2024-07-17 14:58:06.335000+00:00,10,outcome,post,i7C4Y4NiesraiSwwb_r10_post,11
 i7C4Y4NiesraiSwwb,jyxixKpkptkiAHXAe,rabbit,hopefully there is a bonus where we can really start printing,2024-07-17 14:58:20.505000+00:00,10,summary,post,i7C4Y4NiesraiSwwb_r10_post,11
 i7C4Y4NiesraiSwwb,rEnDedzA5dL6Mamij,chick,come on guys!!,2024-07-17 14:59:08.624000+00:00,12,outcome,post,i7C4Y4NiesraiSwwb_r12_post,13
@@ -7546,6 +7839,7 @@ iES9Gw5pax3HKCdHt,8vy8D7jXFGTd3kLzW,sloth,If we all contribute the max we will e
 iES9Gw5pax3HKCdHt,SFdzhnMg889KwBckq,gorilla,OK!!!!,2024-07-08 19:31:42.079000+00:00,0,outcome,post,iES9Gw5pax3HKCdHt_r0_post,1
 iES9Gw5pax3HKCdHt,kb6C6N8qXijo2t2Fy,duck,ok,2024-07-08 19:32:05.307000+00:00,0,summary,post,iES9Gw5pax3HKCdHt_r0_post,1
 igzR4gy2oRnE6uN85,cfQnKMif3pm7tcDrF,parrot,nice!,2024-07-17 17:21:24.304000+00:00,0,outcome,post,igzR4gy2oRnE6uN85_r0_post,1
+igzR4gy2oRnE6uN85,m2RWiPs32epyG8DWZ,rabbit,Good luck All!!!,2024-07-17 17:21:09.493000+00:00,0,contribution,pre,igzR4gy2oRnE6uN85_r0_pre,0
 igzR4gy2oRnE6uN85,TWMM2vEgzDGPvHnbK,duck,we're falling apart here guys,2024-07-17 17:32:05.154000+00:00,10,summary,post,igzR4gy2oRnE6uN85_r10_post,11
 igzR4gy2oRnE6uN85,33b9QytLcw5RzMzGb,sloth,ok I accidentally forgot to add my share sorry guys,2024-07-17 17:31:29.877000+00:00,10,contribution,pre,igzR4gy2oRnE6uN85_r10_pre,10
 igzR4gy2oRnE6uN85,Yk8KNL3Ct3qp56PKm,dog,bird,2024-07-17 17:31:32.451000+00:00,10,contribution,pre,igzR4gy2oRnE6uN85_r10_pre,10
@@ -7606,6 +7900,9 @@ jhp4bSLQXoeqJXPiv,JByuMDpLri6mqYpyM,moose,I agree as well,2024-07-15 14:09:02.32
 jhp4bSLQXoeqJXPiv,ArtZZhfgcF8SMMMge,dog,yes,2024-07-15 14:09:06.946000+00:00,0,summary,post,jhp4bSLQXoeqJXPiv_r0_post,1
 jhp4bSLQXoeqJXPiv,n4BA5kG9KH8NB2yhm,chick,I don't understand why we would want to remove or add coins to other players after we have submitted to the pot,2024-07-15 14:09:16.567000+00:00,0,summary,post,jhp4bSLQXoeqJXPiv_r0_post,1
 jhp4bSLQXoeqJXPiv,vHn2xkX2XY4xhanuf,snake,Maybe if someone lied?,2024-07-15 14:09:35.279000+00:00,0,summary,post,jhp4bSLQXoeqJXPiv_r0_post,1
+jhp4bSLQXoeqJXPiv,9jcb5oYdg5mj6DFD8,gorilla,Hello,2024-07-15 14:07:43.717000+00:00,0,contribution,pre,jhp4bSLQXoeqJXPiv_r0_pre,0
+jhp4bSLQXoeqJXPiv,vHn2xkX2XY4xhanuf,snake,Hi,2024-07-15 14:07:46.890000+00:00,0,contribution,pre,jhp4bSLQXoeqJXPiv_r0_pre,0
+jhp4bSLQXoeqJXPiv,JByuMDpLri6mqYpyM,moose,hi,2024-07-15 14:07:49.488000+00:00,0,contribution,pre,jhp4bSLQXoeqJXPiv_r0_pre,0
 jhp4bSLQXoeqJXPiv,wpe6eXLQpBz7tA962,crocodile,wahey there we go,2024-07-15 14:27:13.096000+00:00,10,outcome,post,jhp4bSLQXoeqJXPiv_r10_post,11
 jhp4bSLQXoeqJXPiv,ArtZZhfgcF8SMMMge,dog,good bird,2024-07-15 14:27:16.208000+00:00,10,outcome,post,jhp4bSLQXoeqJXPiv_r10_post,11
 jhp4bSLQXoeqJXPiv,n4BA5kG9KH8NB2yhm,chick,yay,2024-07-15 14:27:18.309000+00:00,10,outcome,post,jhp4bSLQXoeqJXPiv_r10_post,11
@@ -7922,6 +8219,7 @@ kf8QF2MCDs5kJhToE,8cwszEeJWsgDKekDh,sloth,"dunno, 20 all the way anywya",2024-07
 kf8QF2MCDs5kJhToE,8cwszEeJWsgDKekDh,sloth,we're bors,2024-07-09 15:32:29.464000+00:00,6,contribution,pre,kf8QF2MCDs5kJhToE_r6_pre,6
 kf8QF2MCDs5kJhToE,8cwszEeJWsgDKekDh,sloth,bros*,2024-07-09 15:32:31.051000+00:00,6,contribution,pre,kf8QF2MCDs5kJhToE_r6_pre,6
 kf8QF2MCDs5kJhToE,8cwszEeJWsgDKekDh,sloth,we saw you chicken,2024-07-09 15:33:36.348000+00:00,8,summary,post,kf8QF2MCDs5kJhToE_r8_post,9
+kkGkkWk4kCvb4t5fK,tGPcahyGoqmJNQn67,owl,HELLO,2024-07-09 17:10:11.880000+00:00,0,contribution,pre,kkGkkWk4kCvb4t5fK_r0_pre,0
 kkGkkWk4kCvb4t5fK,qeFsBNg3q2gyNa9wJ,rabbit,hello,2024-07-09 17:11:43.591000+00:00,1,outcome,post,kkGkkWk4kCvb4t5fK_r1_post,2
 kkGkkWk4kCvb4t5fK,QbvgyGcRJJFddsG4u,duck,hi,2024-07-09 17:11:48.459000+00:00,1,outcome,post,kkGkkWk4kCvb4t5fK_r1_post,2
 kkGkkWk4kCvb4t5fK,zL3zyqWGnbjKjhGzK,chick,hello,2024-07-09 17:11:49.447000+00:00,1,outcome,post,kkGkkWk4kCvb4t5fK_r1_post,2
@@ -7946,6 +8244,9 @@ kkGkkWk4kCvb4t5fK,zL3zyqWGnbjKjhGzK,chick,are we allowed to start email chat off
 kkGkkWk4kCvb4t5fK,qeFsBNg3q2gyNa9wJ,rabbit,JUST ON THIS,2024-07-09 17:15:25.014000+00:00,5,contribution,pre,kkGkkWk4kCvb4t5fK_r5_pre,5
 mjRjcJzmuZ7eRSfy6,4Z2uJniSfLxDcnQfp,sloth,aww come on wolf and chicken :D,2024-07-17 17:22:03.330000+00:00,0,outcome,post,mjRjcJzmuZ7eRSfy6_r0_post,1
 mjRjcJzmuZ7eRSfy6,YF2qn7BuoMTCYYvTz,rabbit,hello from California,2024-07-17 17:22:20.623000+00:00,0,outcome,post,mjRjcJzmuZ7eRSfy6_r0_post,1
+mjRjcJzmuZ7eRSfy6,9xbZ7ihF9hqcxx4hx,duck,hi,2024-07-17 17:21:30.949000+00:00,0,contribution,pre,mjRjcJzmuZ7eRSfy6_r0_pre,0
+mjRjcJzmuZ7eRSfy6,4Z2uJniSfLxDcnQfp,sloth,hello!,2024-07-17 17:21:35.263000+00:00,0,contribution,pre,mjRjcJzmuZ7eRSfy6_r0_pre,0
+mjRjcJzmuZ7eRSfy6,WcoEsYXp7CPEbL62s,moose,MOOSE,2024-07-17 17:21:45.892000+00:00,0,contribution,pre,mjRjcJzmuZ7eRSfy6_r0_pre,0
 mjRjcJzmuZ7eRSfy6,4Z2uJniSfLxDcnQfp,sloth,nice!,2024-07-17 17:36:46.554000+00:00,10,outcome,post,mjRjcJzmuZ7eRSfy6_r10_post,11
 mjRjcJzmuZ7eRSfy6,WcoEsYXp7CPEbL62s,moose,wooo,2024-07-17 17:37:06.110000+00:00,10,summary,post,mjRjcJzmuZ7eRSfy6_r10_post,11
 mjRjcJzmuZ7eRSfy6,9xbZ7ihF9hqcxx4hx,duck,woo,2024-07-17 17:36:39.642000+00:00,10,contribution,pre,mjRjcJzmuZ7eRSfy6_r10_pre,10
@@ -8047,6 +8348,13 @@ n54FzkWNqLZxLv2BS,5AmTBXP5pBTEjdoAa,sloth,they said it would be based on our tot
 n54FzkWNqLZxLv2BS,xS9ANDgief545u6xH,parrot,why?,2024-07-09 16:37:32.248000+00:00,24,contribution,pre,n54FzkWNqLZxLv2BS_r24_pre,24
 n54FzkWNqLZxLv2BS,nQ2FxesbmXRHqGzs4,dog,ah well fingers crossed then!,2024-07-09 16:38:13.913000+00:00,25,contribution,pre,n54FzkWNqLZxLv2BS_r25_pre,25
 n54FzkWNqLZxLv2BS,xS9ANDgief545u6xH,parrot,I time out in 3mins,2024-07-09 16:38:16.344000+00:00,25,contribution,pre,n54FzkWNqLZxLv2BS_r25_pre,25
+n74g6xhjAnWFgWFXa,t2h2NPyois7TFhs3j,parrot,shall we all send 20?,2024-07-09 16:17:56.192000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
+n74g6xhjAnWFgWFXa,7wN83izdafSdFfQd4,sloth,i sent 20,2024-07-09 16:18:03.233000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
+n74g6xhjAnWFgWFXa,t2h2NPyois7TFhs3j,parrot,biggest gains,2024-07-09 16:18:07.781000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
+n74g6xhjAnWFgWFXa,yHBhxzwTyAWKfpAJe,moose,Same,2024-07-09 16:18:08.697000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
+n74g6xhjAnWFgWFXa,T5duiRhRsysQ2aF7Z,gorilla,yes,2024-07-09 16:18:09.876000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
+n74g6xhjAnWFgWFXa,hkHiGoqYygw2wT67g,duck,same! it's ideal for everybody,2024-07-09 16:18:11.663000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
+n74g6xhjAnWFgWFXa,js2xWjpJE8Spf6BLT,chicken,SAME,2024-07-09 16:18:13.841000+00:00,0,contribution,pre,n74g6xhjAnWFgWFXa_r0_pre,0
 n74g6xhjAnWFgWFXa,T5duiRhRsysQ2aF7Z,gorilla,the chicken is playing poker with us,2024-07-09 16:20:51.891000+00:00,1,outcome,post,n74g6xhjAnWFgWFXa_r1_post,2
 n74g6xhjAnWFgWFXa,t2h2NPyois7TFhs3j,parrot,and the wolf too,2024-07-09 16:21:15.893000+00:00,1,summary,post,n74g6xhjAnWFgWFXa_r1_post,2
 n74g6xhjAnWFgWFXa,qWtdzTKdKMwCAH57z,dog,yes,2024-07-09 16:21:22.073000+00:00,1,summary,post,n74g6xhjAnWFgWFXa_r1_post,2
@@ -8074,6 +8382,11 @@ n74g6xhjAnWFgWFXa,yHBhxzwTyAWKfpAJe,moose,"The stats, yo",2024-07-09 16:26:45.52
 n74g6xhjAnWFgWFXa,hkHiGoqYygw2wT67g,duck,cause math,2024-07-09 16:25:43.602000+00:00,5,contribution,pre,n74g6xhjAnWFgWFXa_r5_pre,5
 n74g6xhjAnWFgWFXa,7wN83izdafSdFfQd4,sloth,give 20,2024-07-09 16:25:52.965000+00:00,5,contribution,pre,n74g6xhjAnWFgWFXa_r5_pre,5
 n74g6xhjAnWFgWFXa,qWtdzTKdKMwCAH57z,dog,given 20,2024-07-09 16:25:58.917000+00:00,5,contribution,pre,n74g6xhjAnWFgWFXa_r5_pre,5
+nKNZgqRYgmCXC2AFx,qT2Z6H3WE5TdKB6vS,chick,I'm putting everything in,2024-07-15 15:30:01.661000+00:00,0,contribution,pre,nKNZgqRYgmCXC2AFx_r0_pre,0
+nKNZgqRYgmCXC2AFx,Gkxtfnfmmmux9xtmc,chicken,Same!,2024-07-15 15:30:05.245000+00:00,0,contribution,pre,nKNZgqRYgmCXC2AFx_r0_pre,0
+nKNZgqRYgmCXC2AFx,nSPzXgugZfEAP6oTo,owl,Me too,2024-07-15 15:30:07.209000+00:00,0,contribution,pre,nKNZgqRYgmCXC2AFx_r0_pre,0
+nKNZgqRYgmCXC2AFx,AvY7QPFdXmMtHgm9p,gorilla,Same!,2024-07-15 15:30:08.903000+00:00,0,contribution,pre,nKNZgqRYgmCXC2AFx_r0_pre,0
+nKNZgqRYgmCXC2AFx,Zby5v2pyjDtxpAX6Z,parrot,SAME,2024-07-15 15:30:13.012000+00:00,0,contribution,pre,nKNZgqRYgmCXC2AFx_r0_pre,0
 nKNZgqRYgmCXC2AFx,kbKJvgtxQYj2pGnPe,rabbit,sloth not given a single coin yet lol,2024-07-15 15:44:39.071000+00:00,10,outcome,post,nKNZgqRYgmCXC2AFx_r10_post,11
 nKNZgqRYgmCXC2AFx,Gkxtfnfmmmux9xtmc,chicken,neither has frog,2024-07-15 15:44:47.133000+00:00,10,outcome,post,nKNZgqRYgmCXC2AFx_r10_post,11
 nKNZgqRYgmCXC2AFx,kbKJvgtxQYj2pGnPe,rabbit,who is frog?,2024-07-15 15:45:03.878000+00:00,10,summary,post,nKNZgqRYgmCXC2AFx_r10_post,11
@@ -8323,6 +8636,9 @@ nxmwtbBo6NK64RrLp,uALmCmX7DjuoJy6jG,dog,Perfect!,2024-07-09 18:10:17.271000+00:0
 nxmwtbBo6NK64RrLp,68MyWSqawqnfCtEtk,sloth,true,2024-07-09 18:09:40.939000+00:00,7,contribution,pre,nxmwtbBo6NK64RrLp_r7_pre,7
 o2JWtSgsB72zbWZfE,kfDkwSQ66c9tyG9Ah,rabbit,hey,2024-07-18 14:25:00.729000+00:00,0,outcome,post,o2JWtSgsB72zbWZfE_r0_post,1
 o2JWtSgsB72zbWZfE,oaoHG6batBdgzh8fa,snake,Hello,2024-07-18 14:25:09.531000+00:00,0,outcome,post,o2JWtSgsB72zbWZfE_r0_post,1
+o2JWtSgsB72zbWZfE,9SmdRr8gqwWhXtoBC,gorilla,Hi,2024-07-18 14:24:07.666000+00:00,0,contribution,pre,o2JWtSgsB72zbWZfE_r0_pre,0
+o2JWtSgsB72zbWZfE,cmBWTod3E2vejSTaN,dog,Hi,2024-07-18 14:24:14.611000+00:00,0,contribution,pre,o2JWtSgsB72zbWZfE_r0_pre,0
+o2JWtSgsB72zbWZfE,eZS8jjujFja7hFBFm,parrot,HI,2024-07-18 14:24:17.940000+00:00,0,contribution,pre,o2JWtSgsB72zbWZfE_r0_pre,0
 o2JWtSgsB72zbWZfE,TGNaTKiWhbw2Ki6WW,chicken,Haha,2024-07-18 14:37:30.418000+00:00,10,summary,post,o2JWtSgsB72zbWZfE_r10_post,11
 o2JWtSgsB72zbWZfE,kfDkwSQ66c9tyG9Ah,rabbit,we live in a simulation society,2024-07-18 14:37:31.483000+00:00,10,summary,post,o2JWtSgsB72zbWZfE_r10_post,11
 o2JWtSgsB72zbWZfE,cmBWTod3E2vejSTaN,dog,back on track,2024-07-18 14:38:01.916000+00:00,11,outcome,post,o2JWtSgsB72zbWZfE_r11_post,12
@@ -8396,6 +8712,15 @@ o2JWtSgsB72zbWZfE,CTzaJE854WfMzi27n,duck,speed demons,2024-07-18 14:35:16.040000
 o2JWtSgsB72zbWZfE,viLKuRxYjkwXvc5hS,pinguin,flying now,2024-07-18 14:35:16.882000+00:00,9,outcome,post,o2JWtSgsB72zbWZfE_r9_post,10
 o2JWtSgsB72zbWZfE,9SmdRr8gqwWhXtoBC,gorilla,weeee,2024-07-18 14:35:22.491000+00:00,9,outcome,post,o2JWtSgsB72zbWZfE_r9_post,10
 o2JWtSgsB72zbWZfE,tdBFy5mcHvWeRWgX8,cow,is it frozen for anybody else?,2024-07-18 14:37:18.413000+00:00,9,summary,post,o2JWtSgsB72zbWZfE_r9_post,10
+o73iA6ZktS8eD8Tvx,DCQGrTjeb7GngLDa6,sloth,Hi!,2024-07-12 16:15:45.772000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,f7An2NcW5Z6RR8vYr,dog,hi,2024-07-12 16:15:52.474000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,cSJFLoZHPJuRFSRRf,chicken,hello,2024-07-12 16:15:57.113000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,JRbnDpCQzP97jG79X,duck,hello,2024-07-12 16:16:00.358000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,hEYWDEmpcZ2AxLsA9,parrot,sup,2024-07-12 16:16:02.952000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,H4E6C9s8faRQBNNKX,gorilla,HEY,2024-07-12 16:16:07.138000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,JRbnDpCQzP97jG79X,duck,lets make this work for all of us,2024-07-12 16:16:08.967000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,cSJFLoZHPJuRFSRRf,chicken,lets work for the common good,2024-07-12 16:16:12.444000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
+o73iA6ZktS8eD8Tvx,hEYWDEmpcZ2AxLsA9,parrot,agreed,2024-07-12 16:16:18.365000+00:00,0,contribution,pre,o73iA6ZktS8eD8Tvx_r0_pre,0
 o73iA6ZktS8eD8Tvx,DCQGrTjeb7GngLDa6,sloth,yes i think that will give us the highest rewards,2024-07-12 16:18:09.233000+00:00,1,outcome,post,o73iA6ZktS8eD8Tvx_r1_post,2
 o73iA6ZktS8eD8Tvx,cSJFLoZHPJuRFSRRf,chicken,you're the only one left green,2024-07-12 16:18:09.503000+00:00,1,outcome,post,o73iA6ZktS8eD8Tvx_r1_post,2
 o73iA6ZktS8eD8Tvx,cSJFLoZHPJuRFSRRf,chicken,dump everything,2024-07-12 16:17:30.380000+00:00,1,contribution,pre,o73iA6ZktS8eD8Tvx_r1_pre,1
@@ -8413,6 +8738,7 @@ ohrCZLC8WuLcJCQRF,jv2rZYJ9Byv4mBsjo,moose,hola,2024-07-10 15:24:38.461000+00:00,
 ohrCZLC8WuLcJCQRF,3n53Wxor98SSpnjsS,gorilla,Hi,2024-07-10 15:24:44.478000+00:00,0,summary,post,ohrCZLC8WuLcJCQRF_r0_post,1
 ohrCZLC8WuLcJCQRF,2Kvy8sdXDNXiBEGLr,sloth,hi,2024-07-10 15:24:52.750000+00:00,0,summary,post,ohrCZLC8WuLcJCQRF_r0_post,1
 ohrCZLC8WuLcJCQRF,G63W8QkD92EubtrZs,duck,wassup,2024-07-10 15:25:15.473000+00:00,0,summary,post,ohrCZLC8WuLcJCQRF_r0_post,1
+ohrCZLC8WuLcJCQRF,w2sgxEArLTCwS7zqk,chick,Hello,2024-07-10 15:24:08.311000+00:00,0,contribution,pre,ohrCZLC8WuLcJCQRF_r0_pre,0
 ohrCZLC8WuLcJCQRF,G63W8QkD92EubtrZs,duck,I mis clicked sorry,2024-07-10 15:37:50.758000+00:00,10,outcome,post,ohrCZLC8WuLcJCQRF_r10_post,11
 ohrCZLC8WuLcJCQRF,gc5QK7uKCCazjCRR2,parrot,its ok birb,2024-07-10 15:38:00.827000+00:00,10,outcome,post,ohrCZLC8WuLcJCQRF_r10_post,11
 ohrCZLC8WuLcJCQRF,G63W8QkD92EubtrZs,duck,I'll get it right net time,2024-07-10 15:38:01.534000+00:00,10,outcome,post,ohrCZLC8WuLcJCQRF_r10_post,11
@@ -8499,6 +8825,11 @@ pSCCGRajjjnFinwBp,vEpMuu8cYMTHin3qn,moose,chicken y u do this,2024-07-09 15:43:4
 pSCCGRajjjnFinwBp,M8CQeZeQMBfGzZ9Nk,duck,Yeah chicken idk if you can see all the people deducting from you or not but,2024-07-09 15:44:11.121000+00:00,7,contribution,pre,pSCCGRajjjnFinwBp_r7_pre,7
 pSCCGRajjjnFinwBp,M8CQeZeQMBfGzZ9Nk,duck,You kinda suck,2024-07-09 15:44:15.939000+00:00,7,contribution,pre,pSCCGRajjjnFinwBp_r7_pre,7
 pYDEzMS4KKQzGsFQW,orrrpPsjaCxJiuL2D,rabbit,hi,2024-07-09 18:04:14.687000+00:00,0,outcome,post,pYDEzMS4KKQzGsFQW_r0_post,1
+pYDEzMS4KKQzGsFQW,DJFZPQ2hS37hmhr6y,gorilla,Hello everybody,2024-07-09 18:03:40.120000+00:00,0,contribution,pre,pYDEzMS4KKQzGsFQW_r0_pre,0
+pYDEzMS4KKQzGsFQW,ne9Tit43dzfJKEvgL,moose,Hi,2024-07-09 18:03:43.979000+00:00,0,contribution,pre,pYDEzMS4KKQzGsFQW_r0_pre,0
+pYDEzMS4KKQzGsFQW,NsMceDqD7ThtSzZcN,duck,hi,2024-07-09 18:03:46.489000+00:00,0,contribution,pre,pYDEzMS4KKQzGsFQW_r0_pre,0
+pYDEzMS4KKQzGsFQW,ZXb4Rkje5NeTL89Rk,chicken,Hi!,2024-07-09 18:03:49.911000+00:00,0,contribution,pre,pYDEzMS4KKQzGsFQW_r0_pre,0
+pYDEzMS4KKQzGsFQW,BNSL6zcmsfPZhFZFb,sloth,Hello!,2024-07-09 18:03:51.185000+00:00,0,contribution,pre,pYDEzMS4KKQzGsFQW_r0_pre,0
 pYDEzMS4KKQzGsFQW,ne9Tit43dzfJKEvgL,moose,all in for me every time,2024-07-09 18:05:25.411000+00:00,1,outcome,post,pYDEzMS4KKQzGsFQW_r1_post,2
 pYDEzMS4KKQzGsFQW,orrrpPsjaCxJiuL2D,rabbit,me too,2024-07-09 18:05:30.976000+00:00,1,outcome,post,pYDEzMS4KKQzGsFQW_r1_post,2
 pYDEzMS4KKQzGsFQW,ZXb4Rkje5NeTL89Rk,chicken,Yes agreed I'll throw in all of mine each time.,2024-07-09 18:05:42.439000+00:00,1,summary,post,pYDEzMS4KKQzGsFQW_r1_post,2
@@ -8590,6 +8921,10 @@ qY5ZnasWiD2prFpH6,9SYYWh8h8zANfzHTw,gorilla,I agree,2024-07-18 14:27:29.270000+0
 qY5ZnasWiD2prFpH6,L6AwTZP7rHvXxKhE7,parrot,@wolf I respect ur 2 coin donation..,2024-07-18 14:27:38.050000+00:00,0,summary,post,qY5ZnasWiD2prFpH6_r0_post,1
 qY5ZnasWiD2prFpH6,PLEWysZSX9G9adimj,moose,this works as long as we have enough people putting in,2024-07-18 14:27:39.803000+00:00,0,summary,post,qY5ZnasWiD2prFpH6_r0_post,1
 qY5ZnasWiD2prFpH6,L6AwTZP7rHvXxKhE7,parrot,DONT DEDUCT Others.,2024-07-18 14:27:48.284000+00:00,0,summary,post,qY5ZnasWiD2prFpH6_r0_post,1
+qY5ZnasWiD2prFpH6,L6AwTZP7rHvXxKhE7,parrot,hello guys,2024-07-18 14:25:49.618000+00:00,0,contribution,pre,qY5ZnasWiD2prFpH6_r0_pre,0
+qY5ZnasWiD2prFpH6,bB2kyN54CLBHdgstT,snake,hi,2024-07-18 14:25:55.199000+00:00,0,contribution,pre,qY5ZnasWiD2prFpH6_r0_pre,0
+qY5ZnasWiD2prFpH6,wQXioaazWEkiTYTe3,monkey,hi!!,2024-07-18 14:25:58.260000+00:00,0,contribution,pre,qY5ZnasWiD2prFpH6_r0_pre,0
+qY5ZnasWiD2prFpH6,Y8LNcb78Jwp763Ktp,chick,Hi,2024-07-18 14:26:03.080000+00:00,0,contribution,pre,qY5ZnasWiD2prFpH6_r0_pre,0
 qY5ZnasWiD2prFpH6,PLEWysZSX9G9adimj,moose,to cow and frog,2024-07-18 14:41:52.292000+00:00,10,outcome,post,qY5ZnasWiD2prFpH6_r10_post,11
 qY5ZnasWiD2prFpH6,PLEWysZSX9G9adimj,moose,just because,2024-07-18 14:42:06.629000+00:00,10,outcome,post,qY5ZnasWiD2prFpH6_r10_post,11
 qY5ZnasWiD2prFpH6,PLEWysZSX9G9adimj,moose,:D,2024-07-18 14:42:07.900000+00:00,10,outcome,post,qY5ZnasWiD2prFpH6_r10_post,11
@@ -8740,6 +9075,11 @@ qY5ZnasWiD2prFpH6,PLEWysZSX9G9adimj,moose,rewards coming next round,2024-07-18 1
 qifdzNTJxMn9kXwzv,Bx2udhhE7BwSDZQQ8,gorilla,"yeah we can, far as i know",2024-07-12 15:19:05.693000+00:00,0,outcome,post,qifdzNTJxMn9kXwzv_r0_post,1
 qifdzNTJxMn9kXwzv,cRnDgmY3GPKAu5jcJ,chicken,didnt see anything,2024-07-12 15:19:11.636000+00:00,0,outcome,post,qifdzNTJxMn9kXwzv_r0_post,1
 qifdzNTJxMn9kXwzv,jCBB3hBWAtQmdrAkd,dog,well then lets dump them all in,2024-07-12 15:19:48.499000+00:00,0,summary,post,qifdzNTJxMn9kXwzv_r0_post,1
+qifdzNTJxMn9kXwzv,Bx2udhhE7BwSDZQQ8,gorilla,"gonna dump all my coins in, wanna see if we can maximize the bonuses",2024-07-12 15:18:29.389000+00:00,0,contribution,pre,qifdzNTJxMn9kXwzv_r0_pre,0
+qifdzNTJxMn9kXwzv,jCBB3hBWAtQmdrAkd,dog,I was thinking the same thing,2024-07-12 15:18:37.808000+00:00,0,contribution,pre,qifdzNTJxMn9kXwzv_r0_pre,0
+qifdzNTJxMn9kXwzv,4hpj3ri3dCxd3C4dJ,sloth,Good call,2024-07-12 15:18:39.982000+00:00,0,contribution,pre,qifdzNTJxMn9kXwzv_r0_pre,0
+qifdzNTJxMn9kXwzv,cRnDgmY3GPKAu5jcJ,chicken,same,2024-07-12 15:18:42.671000+00:00,0,contribution,pre,qifdzNTJxMn9kXwzv_r0_pre,0
+qifdzNTJxMn9kXwzv,jCBB3hBWAtQmdrAkd,dog,there was nothing in the rules that said we couldnt strategize in the chat right?,2024-07-12 15:18:50.787000+00:00,0,contribution,pre,qifdzNTJxMn9kXwzv_r0_pre,0
 qifdzNTJxMn9kXwzv,jCBB3hBWAtQmdrAkd,dog,you think they would throw in a different multiplier for one of these rounds?,2024-07-12 15:34:38.097000+00:00,11,outcome,post,qifdzNTJxMn9kXwzv_r11_post,12
 qifdzNTJxMn9kXwzv,Bx2udhhE7BwSDZQQ8,gorilla,kind of surprised they haven't tbh,2024-07-12 15:35:00.372000+00:00,12,contribution,pre,qifdzNTJxMn9kXwzv_r12_pre,12
 qifdzNTJxMn9kXwzv,mKNPng2KYDMJShyNF,parrot,hihi,2024-07-12 15:36:21.174000+00:00,13,summary,post,qifdzNTJxMn9kXwzv_r13_post,14
@@ -8817,6 +9157,11 @@ qn3ZZ26WLFCPKeBWM,vp2ydp5y88BWNe7EW,chick,bunny red flag,2024-07-17 15:35:33.793
 qn3ZZ26WLFCPKeBWM,uKy85q957tSkaAYNd,owl,rabbit is a loser,2024-07-17 15:35:50.149000+00:00,0,outcome,post,qn3ZZ26WLFCPKeBWM_r0_post,1
 qn3ZZ26WLFCPKeBWM,snMZ2kgM8ZPm2Rnxj,rabbit,sorry I messed up pls forgive me lol,2024-07-17 15:35:57.839000+00:00,0,outcome,post,qn3ZZ26WLFCPKeBWM_r0_post,1
 qn3ZZ26WLFCPKeBWM,XAHzDAcQcwcMcgBtY,parrot,its ok,2024-07-17 15:36:16.637000+00:00,0,summary,post,qn3ZZ26WLFCPKeBWM_r0_post,1
+qn3ZZ26WLFCPKeBWM,vp2ydp5y88BWNe7EW,chick,hello,2024-07-17 15:34:58.112000+00:00,0,contribution,pre,qn3ZZ26WLFCPKeBWM_r0_pre,0
+qn3ZZ26WLFCPKeBWM,RM6zWMcEKEru9em4q,chicken,yo,2024-07-17 15:35:03.088000+00:00,0,contribution,pre,qn3ZZ26WLFCPKeBWM_r0_pre,0
+qn3ZZ26WLFCPKeBWM,DNW8JLJ6aD8GvLsBj,gorilla,Everyone contribute,2024-07-17 15:35:03.541000+00:00,0,contribution,pre,qn3ZZ26WLFCPKeBWM_r0_pre,0
+qn3ZZ26WLFCPKeBWM,SgSRSm7vRYBHdShX4,dog,hey,2024-07-17 15:35:06.612000+00:00,0,contribution,pre,qn3ZZ26WLFCPKeBWM_r0_pre,0
+qn3ZZ26WLFCPKeBWM,LL7mggJzWRKt5gbz6,duck,Hi :),2024-07-17 15:35:11.484000+00:00,0,contribution,pre,qn3ZZ26WLFCPKeBWM_r0_pre,0
 qn3ZZ26WLFCPKeBWM,vp2ydp5y88BWNe7EW,chick,great job guys,2024-07-17 15:47:07.270000+00:00,10,summary,post,qn3ZZ26WLFCPKeBWM_r10_post,11
 qn3ZZ26WLFCPKeBWM,snMZ2kgM8ZPm2Rnxj,rabbit,get hype,2024-07-17 15:47:39.192000+00:00,11,outcome,post,qn3ZZ26WLFCPKeBWM_r11_post,12
 qn3ZZ26WLFCPKeBWM,XAHzDAcQcwcMcgBtY,parrot,yay so quick,2024-07-17 15:47:47.002000+00:00,11,summary,post,qn3ZZ26WLFCPKeBWM_r11_post,12
@@ -8862,6 +9207,15 @@ qqdGcErMMiFvQuwur,HyQKJKKGJgCyTFLhw,chicken,i need to pay off my credit card eve
 qqdGcErMMiFvQuwur,vHN8sedapvb6nqS9Q,chick,what do you all think about +1 for everyone who gives 20?,2024-07-15 17:40:58.916000+00:00,0,summary,post,qqdGcErMMiFvQuwur_r0_post,1
 qqdGcErMMiFvQuwur,cBmzHkhdc5D7yuWQy,moose,i'm also doing my part,2024-07-15 17:41:06.612000+00:00,0,summary,post,qqdGcErMMiFvQuwur_r0_post,1
 qqdGcErMMiFvQuwur,nH7LvH8uvB3nHaTGs,rabbit,that's what i did,2024-07-15 17:41:08.406000+00:00,0,summary,post,qqdGcErMMiFvQuwur_r0_post,1
+qqdGcErMMiFvQuwur,BynfLHwih8j5R9cPy,duck,HELLO,2024-07-15 17:39:27.061000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,vHN8sedapvb6nqS9Q,chick,We should all contibute 20 each round so we all can get the maximum payout in the end,2024-07-15 17:39:30.132000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,HyQKJKKGJgCyTFLhw,chicken,hello,2024-07-15 17:39:31.438000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,vHN8sedapvb6nqS9Q,chick,hello,2024-07-15 17:39:35.261000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,HyQKJKKGJgCyTFLhw,chicken,im going for max payout,2024-07-15 17:39:37.563000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,cBmzHkhdc5D7yuWQy,moose,okay!,2024-07-15 17:39:37.861000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,xytbg8arTDdihSrKz,snake,I contributed 20 aswell,2024-07-15 17:39:39.010000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,yCvrh34ET39mAwriK,crocodile,+1 always contribute max,2024-07-15 17:39:41.646000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
+qqdGcErMMiFvQuwur,JF9nKeTZBuQphJZhf,dog,ME TOO,2024-07-15 17:39:42.274000+00:00,0,contribution,pre,qqdGcErMMiFvQuwur_r0_pre,0
 qqdGcErMMiFvQuwur,vHN8sedapvb6nqS9Q,chick,YESSSS,2024-07-15 18:02:54.781000+00:00,10,outcome,post,qqdGcErMMiFvQuwur_r10_post,11
 qqdGcErMMiFvQuwur,HyQKJKKGJgCyTFLhw,chicken,lets goooo,2024-07-15 18:02:56.317000+00:00,10,outcome,post,qqdGcErMMiFvQuwur_r10_post,11
 qqdGcErMMiFvQuwur,nH7LvH8uvB3nHaTGs,rabbit,:o,2024-07-15 18:02:56.623000+00:00,10,outcome,post,qqdGcErMMiFvQuwur_r10_post,11
@@ -9177,6 +9531,9 @@ qqdGcErMMiFvQuwur,vHN8sedapvb6nqS9Q,chick,i agree,2024-07-15 18:00:04.070000+00:
 qxovusdi9YEximFBr,eHKG3oCRYFhkQjcxY,dog,yes,2024-07-09 17:13:25.586000+00:00,0,summary,post,qxovusdi9YEximFBr_r0_post,1
 qxovusdi9YEximFBr,tWfkLS2Bxoza9ToGY,moose,we good?,2024-07-09 17:13:28.228000+00:00,0,summary,post,qxovusdi9YEximFBr_r0_post,1
 qxovusdi9YEximFBr,BwHZuDitNcHaRMTxu,gorilla,think so,2024-07-09 17:13:38.655000+00:00,0,summary,post,qxovusdi9YEximFBr_r0_post,1
+qxovusdi9YEximFBr,BwHZuDitNcHaRMTxu,gorilla,all in?,2024-07-09 17:12:30.567000+00:00,0,contribution,pre,qxovusdi9YEximFBr_r0_pre,0
+qxovusdi9YEximFBr,tWfkLS2Bxoza9ToGY,moose,yep,2024-07-09 17:12:40.028000+00:00,0,contribution,pre,qxovusdi9YEximFBr_r0_pre,0
+qxovusdi9YEximFBr,mNKhnMEbP79x2gswH,parrot,yeah,2024-07-09 17:12:42.291000+00:00,0,contribution,pre,qxovusdi9YEximFBr_r0_pre,0
 qxovusdi9YEximFBr,eHKG3oCRYFhkQjcxY,dog,me too,2024-07-09 17:14:21.904000+00:00,1,outcome,post,qxovusdi9YEximFBr_r1_post,2
 qxovusdi9YEximFBr,RoDeov4fCJaR4Ps9X,duck,i guess the reward/punishment is for people who didn't contribute,2024-07-09 17:14:48.217000+00:00,1,summary,post,qxovusdi9YEximFBr_r1_post,2
 qxovusdi9YEximFBr,tWfkLS2Bxoza9ToGY,moose,me too,2024-07-09 17:14:51.976000+00:00,1,summary,post,qxovusdi9YEximFBr_r1_post,2
@@ -9219,6 +9576,17 @@ qxovusdi9YEximFBr,BwHZuDitNcHaRMTxu,gorilla,g unit,2024-07-09 17:21:31.239000+00
 qxovusdi9YEximFBr,RoDeov4fCJaR4Ps9X,duck,xD,2024-07-09 17:21:37.744000+00:00,6,contribution,pre,qxovusdi9YEximFBr_r6_pre,6
 qyhbsXkjZiMc28EAG,raPYsYTFbi6mhAk99,moose,nice,2024-07-09 15:29:33.567000+00:00,0,outcome,post,qyhbsXkjZiMc28EAG_r0_post,1
 qyhbsXkjZiMc28EAG,dpfdeWsJSP2QrK8X2,parrot,yeah this is how we maximise it,2024-07-09 15:29:46.315000+00:00,0,outcome,post,qyhbsXkjZiMc28EAG_r0_post,1
+qyhbsXkjZiMc28EAG,MqKJSuaxtaZKGHppD,gorilla,Hi all!,2024-07-09 15:28:37.915000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,dpfdeWsJSP2QrK8X2,parrot,hey,2024-07-09 15:28:44.969000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,raPYsYTFbi6mhAk99,moose,hey,2024-07-09 15:28:51.567000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,sBYgsSQhNKP4Ce9Ni,rabbit,I think the more we contribute the higher the bonus will be.,2024-07-09 15:28:59.432000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,raPYsYTFbi6mhAk99,moose,ya def,2024-07-09 15:29:03.923000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,QaqtzWP96qKJN5Lar,duck,Hey y'all!,2024-07-09 15:29:05.337000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,dpfdeWsJSP2QrK8X2,parrot,agreed,2024-07-09 15:29:06.191000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,sBYgsSQhNKP4Ce9Ni,rabbit,For everybody,2024-07-09 15:29:07.470000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,MqKJSuaxtaZKGHppD,gorilla,"yep, I'm putting everything in",2024-07-09 15:29:09.457000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,TxbDbvSY8LHEDphcy,chicken,i'm gonna contribute all every time,2024-07-09 15:29:11.128000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
+qyhbsXkjZiMc28EAG,raPYsYTFbi6mhAk99,moose,for 6.2 multiply,2024-07-09 15:29:11.662000+00:00,0,contribution,pre,qyhbsXkjZiMc28EAG_r0_pre,0
 qyhbsXkjZiMc28EAG,dpfdeWsJSP2QrK8X2,parrot,moose,2024-07-09 15:31:09.329000+00:00,1,contribution,pre,qyhbsXkjZiMc28EAG_r1_pre,1
 qyhbsXkjZiMc28EAG,MqKJSuaxtaZKGHppD,gorilla,agreed,2024-07-09 15:32:47.988000+00:00,2,outcome,post,qyhbsXkjZiMc28EAG_r2_post,3
 qyhbsXkjZiMc28EAG,raPYsYTFbi6mhAk99,moose,why is sloth docking 2 from us lol,2024-07-09 15:32:11.604000+00:00,2,contribution,pre,qyhbsXkjZiMc28EAG_r2_pre,2
@@ -9242,6 +9610,7 @@ qyhbsXkjZiMc28EAG,TxbDbvSY8LHEDphcy,chicken,blue,2024-07-09 15:34:58.978000+00:0
 rMnamRP2AWhWgPZ2m,7B8MMvFvhfrDyohtj,sloth,hello,2024-07-12 14:04:39.267000+00:00,0,outcome,post,rMnamRP2AWhWgPZ2m_r0_post,1
 rMnamRP2AWhWgPZ2m,SCRf8DXnud366kYN5,dog,I am a bot.,2024-07-12 14:05:01.179000+00:00,0,summary,post,rMnamRP2AWhWgPZ2m_r0_post,1
 rMnamRP2AWhWgPZ2m,7rbpN89KanN8JJpPN,gorilla,hii,2024-07-12 14:05:02.099000+00:00,0,summary,post,rMnamRP2AWhWgPZ2m_r0_post,1
+rMnamRP2AWhWgPZ2m,Dc8nTDz2NWhzGTAhR,duck,Sharing is caring,2024-07-12 14:04:20.382000+00:00,0,contribution,pre,rMnamRP2AWhWgPZ2m_r0_pre,0
 rMnamRP2AWhWgPZ2m,7B8MMvFvhfrDyohtj,sloth,yeah,2024-07-12 14:06:43.392000+00:00,2,summary,post,rMnamRP2AWhWgPZ2m_r2_post,3
 rMnamRP2AWhWgPZ2m,Dc8nTDz2NWhzGTAhR,duck,Hi,2024-07-12 14:06:01.686000+00:00,2,contribution,pre,rMnamRP2AWhWgPZ2m_r2_pre,2
 rMnamRP2AWhWgPZ2m,Dc8nTDz2NWhzGTAhR,duck,Hope you are all having fun,2024-07-12 14:06:08.245000+00:00,2,contribution,pre,rMnamRP2AWhWgPZ2m_r2_pre,2
@@ -9254,6 +9623,10 @@ rMnamRP2AWhWgPZ2m,7B8MMvFvhfrDyohtj,sloth,I am a bot,2024-07-12 14:09:47.493000+
 rMnamRP2AWhWgPZ2m,Dc8nTDz2NWhzGTAhR,duck,I am not a crook!,2024-07-12 14:09:49.352000+00:00,5,contribution,pre,rMnamRP2AWhWgPZ2m_r5_pre,5
 rMnamRP2AWhWgPZ2m,Dc8nTDz2NWhzGTAhR,duck,Why would you not add coins?,2024-07-12 14:10:59.616000+00:00,6,summary,post,rMnamRP2AWhWgPZ2m_r6_post,7
 rMnamRP2AWhWgPZ2m,7rbpN89KanN8JJpPN,gorilla,Mr Sloth doesn't want everyone to benefit,2024-07-12 14:12:30.305000+00:00,9,contribution,pre,rMnamRP2AWhWgPZ2m_r9_pre,9
+rNRuBfonGaB2vPorM,wudvyu5s3HwxMQDz6,parrot,the greater good,2024-07-12 15:17:46.247000+00:00,0,contribution,pre,rNRuBfonGaB2vPorM_r0_pre,0
+rNRuBfonGaB2vPorM,ESrxWZ8dZid6XWBoC,gorilla,All in!,2024-07-12 15:17:57.455000+00:00,0,contribution,pre,rNRuBfonGaB2vPorM_r0_pre,0
+rNRuBfonGaB2vPorM,pDjz5jK64b4iofRuc,dog,deffo,2024-07-12 15:17:58.889000+00:00,0,contribution,pre,rNRuBfonGaB2vPorM_r0_pre,0
+rNRuBfonGaB2vPorM,Rrr65fiZPPjyZy4YH,duck,Same,2024-07-12 15:18:07.478000+00:00,0,contribution,pre,rNRuBfonGaB2vPorM_r0_pre,0
 rNRuBfonGaB2vPorM,wudvyu5s3HwxMQDz6,parrot,boo,2024-07-12 15:26:01.917000+00:00,10,outcome,post,rNRuBfonGaB2vPorM_r10_post,11
 rNRuBfonGaB2vPorM,wudvyu5s3HwxMQDz6,parrot,snowman write me a poem about walruses,2024-07-12 15:21:23.429000+00:00,3,contribution,pre,rNRuBfonGaB2vPorM_r3_pre,3
 rNRuBfonGaB2vPorM,wudvyu5s3HwxMQDz6,parrot,bit dodgy troops,2024-07-12 15:25:31.005000+00:00,9,outcome,post,rNRuBfonGaB2vPorM_r9_post,10
@@ -9263,6 +9636,17 @@ rk28XFsjoeBNZ7wCx,G8rD2JxEcBGhy9zAN,duck,nice!,2024-07-17 14:48:33.127000+00:00,
 rk28XFsjoeBNZ7wCx,Pkc76jhmeR5Q7n85z,parrot,awesome,2024-07-17 14:48:45.914000+00:00,0,outcome,post,rk28XFsjoeBNZ7wCx_r0_post,1
 rk28XFsjoeBNZ7wCx,M7APksJAuw5yZHQ8X,chicken,max everytime then x,2024-07-17 14:48:49.798000+00:00,0,outcome,post,rk28XFsjoeBNZ7wCx_r0_post,1
 rk28XFsjoeBNZ7wCx,WvH9Fvy3BxwYe3wG9,moose,All max we all get the max payout,2024-07-17 14:49:17.275000+00:00,0,summary,post,rk28XFsjoeBNZ7wCx_r0_post,1
+rk28XFsjoeBNZ7wCx,924heXi77haXjf8eD,gorilla,if we all do max every time,2024-07-17 14:47:39.282000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,924heXi77haXjf8eD,gorilla,we will walk away with most money possible,2024-07-17 14:47:44.779000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,6Q6i56kdtqnDcAKdd,sloth,that's what I was thinking too,2024-07-17 14:47:49.462000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,Pkc76jhmeR5Q7n85z,parrot,True,2024-07-17 14:47:50.810000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,M7APksJAuw5yZHQ8X,chicken,same,2024-07-17 14:47:53.444000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,WvH9Fvy3BxwYe3wG9,moose,Max,2024-07-17 14:47:56.313000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,fyZC4XfBgh9LHqATR,chick,Sounds good,2024-07-17 14:47:56.685000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,G8rD2JxEcBGhy9zAN,duck,yh,2024-07-17 14:47:58.074000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,Pkc76jhmeR5Q7n85z,parrot,I'm down,2024-07-17 14:48:01.394000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,924heXi77haXjf8eD,gorilla,lets do it :),2024-07-17 14:48:01.775000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
+rk28XFsjoeBNZ7wCx,WvH9Fvy3BxwYe3wG9,moose,Max,2024-07-17 14:48:07.509000+00:00,0,contribution,pre,rk28XFsjoeBNZ7wCx_r0_pre,0
 rk28XFsjoeBNZ7wCx,WvH9Fvy3BxwYe3wG9,moose,Texas,2024-07-17 14:59:03.555000+00:00,10,outcome,post,rk28XFsjoeBNZ7wCx_r10_post,11
 rk28XFsjoeBNZ7wCx,Pkc76jhmeR5Q7n85z,parrot,Texas as well,2024-07-17 14:59:16.147000+00:00,10,summary,post,rk28XFsjoeBNZ7wCx_r10_post,11
 rk28XFsjoeBNZ7wCx,Pkc76jhmeR5Q7n85z,parrot,Yee haw,2024-07-17 14:59:21.028000+00:00,10,summary,post,rk28XFsjoeBNZ7wCx_r10_post,11
@@ -9422,6 +9806,15 @@ sXv4pLM9QNSAFxxQW,BQeX6SwLNPfw6GXJk,duck,real,2024-07-18 16:35:57.525000+00:00,0
 sXv4pLM9QNSAFxxQW,kFemsazQhMYyiXWBc,crocodile,"i'm alive, I think",2024-07-18 16:35:58.149000+00:00,0,summary,post,sXv4pLM9QNSAFxxQW_r0_post,1
 sXv4pLM9QNSAFxxQW,X7PvdLkL5wgeGMFAm,moose,lol,2024-07-18 16:36:02.053000+00:00,0,summary,post,sXv4pLM9QNSAFxxQW_r0_post,1
 sXv4pLM9QNSAFxxQW,jinpgfRDdaKBu269Q,snake,god knows the objective of this game,2024-07-18 16:36:06.195000+00:00,0,summary,post,sXv4pLM9QNSAFxxQW_r0_post,1
+sXv4pLM9QNSAFxxQW,WP9tsKzz4c8mJg38h,parrot,hi,2024-07-18 16:34:26.699000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,jinpgfRDdaKBu269Q,snake,HELLLOOO,2024-07-18 16:34:33.912000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,BQeX6SwLNPfw6GXJk,duck,hi,2024-07-18 16:34:34.820000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,X7PvdLkL5wgeGMFAm,moose,hello,2024-07-18 16:34:35.677000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,gXhv8NXdm2ifbho22,owl,hi,2024-07-18 16:34:39.668000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,vWQ7iW9xkgz4i3akX,monkey,Sup,2024-07-18 16:34:42.599000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,kFemsazQhMYyiXWBc,crocodile,heya,2024-07-18 16:34:43.328000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,MWvXxn9AHgF9bYMKg,dog,hi,2024-07-18 16:34:47.235000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
+sXv4pLM9QNSAFxxQW,MKx78qEGELuYYNNW4,chicken,Hello,2024-07-18 16:34:54.521000+00:00,0,contribution,pre,sXv4pLM9QNSAFxxQW_r0_pre,0
 sXv4pLM9QNSAFxxQW,gYm8Aq9cf78iQ6Din,chick,627,2024-07-18 16:54:25.404000+00:00,10,outcome,post,sXv4pLM9QNSAFxxQW_r10_post,11
 sXv4pLM9QNSAFxxQW,gYm8Aq9cf78iQ6Din,chick,you?,2024-07-18 16:54:27.873000+00:00,10,outcome,post,sXv4pLM9QNSAFxxQW_r10_post,11
 sXv4pLM9QNSAFxxQW,WP9tsKzz4c8mJg38h,parrot,794,2024-07-18 16:54:58.761000+00:00,10,summary,post,sXv4pLM9QNSAFxxQW_r10_post,11
@@ -9633,6 +10026,7 @@ t8Ss94ojpNP6xdGYh,5nFmnaxJqNrf33kzQ,duck,I'm in,2024-07-10 19:44:29.858000+00:00
 t8Ss94ojpNP6xdGYh,2DSJKx2dJAXRWTZ5S,sloth,every time,2024-07-10 19:44:30.395000+00:00,7,contribution,pre,t8Ss94ojpNP6xdGYh_r7_pre,7
 t8Ss94ojpNP6xdGYh,QecMEC2TSeF4Mg9hu,parrot,show me the money!,2024-07-10 19:46:24.398000+00:00,9,summary,post,t8Ss94ojpNP6xdGYh_r9_post,10
 tCFnJifRgNRyrz7WY,wk8rsTPiHafDKNgtT,parrot,Hi guys,2024-07-12 14:05:58.561000+00:00,0,outcome,post,tCFnJifRgNRyrz7WY_r0_post,1
+tCFnJifRgNRyrz7WY,DQjJZpvibbvHrQsP9,duck,hello,2024-07-12 14:05:16.086000+00:00,0,contribution,pre,tCFnJifRgNRyrz7WY_r0_pre,0
 tCFnJifRgNRyrz7WY,wk8rsTPiHafDKNgtT,parrot,is everyone human ?,2024-07-12 14:07:06.876000+00:00,1,outcome,post,tCFnJifRgNRyrz7WY_r1_post,2
 tCFnJifRgNRyrz7WY,DQjJZpvibbvHrQsP9,duck,yeah,2024-07-12 14:07:55.668000+00:00,2,summary,post,tCFnJifRgNRyrz7WY_r2_post,3
 tCFnJifRgNRyrz7WY,t284dDh2yNk2mPJAL,dog,I am,2024-07-12 14:07:55.996000+00:00,2,summary,post,tCFnJifRgNRyrz7WY_r2_post,3
@@ -9649,6 +10043,9 @@ tCFnJifRgNRyrz7WY,DQjJZpvibbvHrQsP9,duck,Ill do too,2024-07-12 14:10:52.083000+0
 tCFnJifRgNRyrz7WY,t284dDh2yNk2mPJAL,dog,me too,2024-07-12 14:11:19.697000+00:00,6,contribution,pre,tCFnJifRgNRyrz7WY_r6_pre,6
 tJkMprsjP2TMEFy4u,EmdJXsyhiLDfppdvh,gorilla,ALL IN,2024-07-08 17:50:49.980000+00:00,0,outcome,post,tJkMprsjP2TMEFy4u_r0_post,1
 tJkMprsjP2TMEFy4u,ND8QwWtd3ek9Yuafe,duck,mONKEY AND GORILLA WERE NOT ALL IN,2024-07-08 17:52:06.192000+00:00,0,summary,post,tJkMprsjP2TMEFy4u_r0_post,1
+tJkMprsjP2TMEFy4u,4GehgbdfuksYm6Ea9,sloth,ALL IN,2024-07-08 17:50:12.873000+00:00,0,contribution,pre,tJkMprsjP2TMEFy4u_r0_pre,0
+tJkMprsjP2TMEFy4u,ND8QwWtd3ek9Yuafe,duck,ALL IN,2024-07-08 17:50:15.472000+00:00,0,contribution,pre,tJkMprsjP2TMEFy4u_r0_pre,0
+tJkMprsjP2TMEFy4u,ZshC3xWK9iAGjMBYg,chicken,ALL IN,2024-07-08 17:50:29.310000+00:00,0,contribution,pre,tJkMprsjP2TMEFy4u_r0_pre,0
 tJkMprsjP2TMEFy4u,4GehgbdfuksYm6Ea9,sloth,ALL IN,2024-07-08 17:52:20.139000+00:00,1,contribution,pre,tJkMprsjP2TMEFy4u_r1_pre,1
 tJkMprsjP2TMEFy4u,4GehgbdfuksYm6Ea9,sloth,ALL IN,2024-07-08 17:54:36.580000+00:00,2,outcome,post,tJkMprsjP2TMEFy4u_r2_post,3
 tJkMprsjP2TMEFy4u,4GehgbdfuksYm6Ea9,sloth,ALL IN,2024-07-08 17:54:08.029000+00:00,2,contribution,pre,tJkMprsjP2TMEFy4u_r2_pre,2
@@ -9664,6 +10061,15 @@ tRTwYAfQxrLXoChG4,Qik3qGMf8ZmJCbB7y,sloth,all in,2024-07-08 19:31:08.736000+00:0
 tmqHQ2mWBzJDHhyAh,aveoAsZDWWs7J68E6,rabbit,foolish not to put all,2024-07-18 17:54:25.922000+00:00,0,outcome,post,tmqHQ2mWBzJDHhyAh_r0_post,1
 tmqHQ2mWBzJDHhyAh,yCDJ25A2rRrnxkCPF,pinguin,lol,2024-07-18 17:54:41.113000+00:00,0,outcome,post,tmqHQ2mWBzJDHhyAh_r0_post,1
 tmqHQ2mWBzJDHhyAh,RJEQsLM4pZTfmvtxJ,parrot,so whats plan,2024-07-18 17:55:25.765000+00:00,0,summary,post,tmqHQ2mWBzJDHhyAh_r0_post,1
+tmqHQ2mWBzJDHhyAh,9D42GrjvLuCG3S7Eg,duck,how much are yall putting,2024-07-18 17:53:45.776000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,QQq3JRrRTwdahKcu6,dog,ALL of it,2024-07-18 17:53:50.407000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,RJEQsLM4pZTfmvtxJ,parrot,ALLLL,2024-07-18 17:53:53.467000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,aveoAsZDWWs7J68E6,rabbit,all,2024-07-18 17:53:55.188000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,yCDJ25A2rRrnxkCPF,pinguin,yoo,2024-07-18 17:53:56.899000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,kMee9D6oRwzxS9226,snake,all,2024-07-18 17:53:58.229000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,zLpgm3vaFFAfL9f4Q,frog,me too then,2024-07-18 17:53:58.476000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,2YWRtPW2YCowXPt6s,sloth,ope sorry,2024-07-18 17:54:00.540000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
+tmqHQ2mWBzJDHhyAh,yCDJ25A2rRrnxkCPF,pinguin,darn sorry,2024-07-18 17:54:08.070000+00:00,0,contribution,pre,tmqHQ2mWBzJDHhyAh_r0_pre,0
 tmqHQ2mWBzJDHhyAh,aveoAsZDWWs7J68E6,rabbit,Berzekistan,2024-07-18 18:11:32.357000+00:00,10,outcome,post,tmqHQ2mWBzJDHhyAh_r10_post,11
 tmqHQ2mWBzJDHhyAh,z3dJqxkXduB8dvo4e,monkey,canada,2024-07-18 18:11:56.529000+00:00,10,summary,post,tmqHQ2mWBzJDHhyAh_r10_post,11
 tmqHQ2mWBzJDHhyAh,yCDJ25A2rRrnxkCPF,pinguin,cali,2024-07-18 18:12:02.378000+00:00,10,summary,post,tmqHQ2mWBzJDHhyAh_r10_post,11
@@ -9775,6 +10181,8 @@ tnphGATHQJjbXRXjs,kShKsKjBST56B7Ybi,duck,hey theree,2024-07-08 18:02:16.461000+0
 tnphGATHQJjbXRXjs,EZAirwsqzzi7ZZtRD,gorilla,hello everyone,2024-07-08 18:02:05.700000+00:00,7,contribution,pre,tnphGATHQJjbXRXjs_r7_pre,7
 tomGidqaeJHBa5YMr,q5cNssyayru9RYWJZ,parrot,whats up,2024-07-12 15:22:03.305000+00:00,0,summary,post,tomGidqaeJHBa5YMr_r0_post,1
 tomGidqaeJHBa5YMr,q5cNssyayru9RYWJZ,parrot,this took so long to load,2024-07-12 15:22:07.895000+00:00,0,summary,post,tomGidqaeJHBa5YMr_r0_post,1
+tomGidqaeJHBa5YMr,od3MLN5DefLGXqKc5,dog,hello,2024-07-12 15:21:31.842000+00:00,0,contribution,pre,tomGidqaeJHBa5YMr_r0_pre,0
+tomGidqaeJHBa5YMr,q5cNssyayru9RYWJZ,parrot,helllooo!,2024-07-12 15:21:34.801000+00:00,0,contribution,pre,tomGidqaeJHBa5YMr_r0_pre,0
 tomGidqaeJHBa5YMr,od3MLN5DefLGXqKc5,dog,chicken needs to pay the troll toll,2024-07-12 15:29:50.841000+00:00,10,outcome,post,tomGidqaeJHBa5YMr_r10_post,11
 tomGidqaeJHBa5YMr,QqP5sBErXtPHo7o85,gorilla,team work makes the dream work,2024-07-12 15:23:29.624000+00:00,1,summary,post,tomGidqaeJHBa5YMr_r1_post,2
 tomGidqaeJHBa5YMr,od3MLN5DefLGXqKc5,dog,nice!,2024-07-12 15:23:34.632000+00:00,1,summary,post,tomGidqaeJHBa5YMr_r1_post,2
@@ -9797,6 +10205,17 @@ ttXGfxDEFfnMg6J88,y6832KrqDTxyZ7h5C,parrot,"Green dude, be cool",2024-07-12 16:1
 ttXGfxDEFfnMg6J88,9RroXBcYhYnLoKG9B,sloth,Weird the game lagged on me...,2024-07-12 16:25:05.245000+00:00,11,contribution,pre,ttXGfxDEFfnMg6J88_r11_pre,11
 ttXGfxDEFfnMg6J88,9RroXBcYhYnLoKG9B,sloth,Gorilla if you don't put in we'll take it back from you,2024-07-12 16:19:53.289000+00:00,4,summary,post,ttXGfxDEFfnMg6J88_r4_post,5
 ttXGfxDEFfnMg6J88,AitoEq3B2owjcDh9r,gorilla,Sorry was confused and thought I was.,2024-07-12 16:20:25.794000+00:00,5,outcome,post,ttXGfxDEFfnMg6J88_r5_post,6
+tvy3xgFS3Goxqunm7,uZDp45R7Kku2M3hAh,chick,Hello!,2024-07-17 14:57:50.184000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,tZmwNPHL7iht3pqQq,owl,Hi!,2024-07-17 14:57:55.291000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,gJXDJ9fz7m5YNC2FN,parrot,Hello!,2024-07-17 14:57:56.256000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,sgyLnzRTvgmGLATxg,rabbit,hi,2024-07-17 14:58:00.820000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,pA7ChExXdsWqFAqEY,moose,hello,2024-07-17 14:58:02.371000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,SG4iAqLZHwdavfnHe,chicken,hi go for the max,2024-07-17 14:58:04.754000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,sgyLnzRTvgmGLATxg,rabbit,I did,2024-07-17 14:58:10.766000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,gJXDJ9fz7m5YNC2FN,parrot,I did,2024-07-17 14:58:13.773000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,SG4iAqLZHwdavfnHe,chicken,same,2024-07-17 14:58:17.846000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,pA7ChExXdsWqFAqEY,moose,yep,2024-07-17 14:58:18.909000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
+tvy3xgFS3Goxqunm7,GtK4gZpjB2jSiBJsE,duck,Me too,2024-07-17 14:58:21.205000+00:00,0,contribution,pre,tvy3xgFS3Goxqunm7_r0_pre,0
 tvy3xgFS3Goxqunm7,tZmwNPHL7iht3pqQq,owl,Our team is awesome!,2024-07-17 15:08:37.863000+00:00,10,outcome,post,tvy3xgFS3Goxqunm7_r10_post,11
 tvy3xgFS3Goxqunm7,uZDp45R7Kku2M3hAh,chick,Yes!,2024-07-17 15:08:59.450000+00:00,11,outcome,post,tvy3xgFS3Goxqunm7_r11_post,12
 tvy3xgFS3Goxqunm7,pA7ChExXdsWqFAqEY,moose,Looking good!,2024-07-17 15:09:06.641000+00:00,11,outcome,post,tvy3xgFS3Goxqunm7_r11_post,12
@@ -9887,6 +10306,7 @@ uERcGPrTeqKWLtmbJ,3avbNWBp9fZs7YTcd,sloth,speed run it,2024-07-10 15:27:05.82100
 uERcGPrTeqKWLtmbJ,3avbNWBp9fZs7YTcd,sloth,teamwork?,2024-07-10 15:27:21.573000+00:00,7,outcome,post,uERcGPrTeqKWLtmbJ_r7_post,8
 uERcGPrTeqKWLtmbJ,qNjNeuBWZeZHAbosk,parrot,surely we'll all get the max bonus,2024-07-10 15:27:30.737000+00:00,7,outcome,post,uERcGPrTeqKWLtmbJ_r7_post,8
 uW4Cg9gRG7BwbDMJi,TinN3TZ4BApEzTdrY,duck,hi,2024-07-09 16:14:14.835000+00:00,0,summary,post,uW4Cg9gRG7BwbDMJi_r0_post,1
+uW4Cg9gRG7BwbDMJi,vKHnbhpZGXN6LdiYA,parrot,HI,2024-07-09 16:13:14.734000+00:00,0,contribution,pre,uW4Cg9gRG7BwbDMJi_r0_pre,0
 uW4Cg9gRG7BwbDMJi,vKHnbhpZGXN6LdiYA,parrot,has anyone hacked this yet?,2024-07-09 16:15:35.136000+00:00,1,summary,post,uW4Cg9gRG7BwbDMJi_r1_post,2
 uW4Cg9gRG7BwbDMJi,jjm4j2FGxi6cdHQYq,dog,if we all give 20 we'll get the most of of it?,2024-07-09 16:15:44.566000+00:00,1,summary,post,uW4Cg9gRG7BwbDMJi_r1_post,2
 uW4Cg9gRG7BwbDMJi,5oQNLaon3DXmsExey,sloth,Hello,2024-07-09 16:14:29.693000+00:00,1,contribution,pre,uW4Cg9gRG7BwbDMJi_r1_pre,1
@@ -9928,6 +10348,7 @@ uuFnNSL3pd89FQDzh,diLhKcuv3AetFHTuZ,dog,I agree,2024-07-15 14:08:11.303000+00:00
 uuFnNSL3pd89FQDzh,zHFvPEFmegWHZ5Q6s,crocodile,I agree,2024-07-15 14:08:15.942000+00:00,0,outcome,post,uuFnNSL3pd89FQDzh_r0_post,1
 uuFnNSL3pd89FQDzh,fGHgW3yEXda3QtN6o,parrot,YES,2024-07-15 14:08:21.992000+00:00,0,outcome,post,uuFnNSL3pd89FQDzh_r0_post,1
 uuFnNSL3pd89FQDzh,xB7AhngXikF4Dxdc7,chick,I AGREE,2024-07-15 14:08:26.909000+00:00,0,outcome,post,uuFnNSL3pd89FQDzh_r0_post,1
+uuFnNSL3pd89FQDzh,vezfvLCuWHkzGHjmK,owl,"if we always contribute max amount, we make more",2024-07-15 14:07:50.520000+00:00,0,contribution,pre,uuFnNSL3pd89FQDzh_r0_pre,0
 uuFnNSL3pd89FQDzh,fGHgW3yEXda3QtN6o,parrot,"Okay, I'm pulling mine next round. F these guys",2024-07-15 14:20:00.554000+00:00,10,outcome,post,uuFnNSL3pd89FQDzh_r10_post,11
 uuFnNSL3pd89FQDzh,diLhKcuv3AetFHTuZ,dog,Hmmm.... I wonder if THIS is the experiment...,2024-07-15 14:20:07.912000+00:00,10,outcome,post,uuFnNSL3pd89FQDzh_r10_post,11
 uuFnNSL3pd89FQDzh,BXbqdZ69dzHoMq7jf,duck,It desn't matter - free money,2024-07-15 14:20:18.354000+00:00,10,outcome,post,uuFnNSL3pd89FQDzh_r10_post,11
@@ -10058,6 +10479,7 @@ uwTnwBFdLcqtTZALa,d4Ffq2o4ZwefCeYDz,chicken,If everyone gives the max we all win
 uwTnwBFdLcqtTZALa,d4Ffq2o4ZwefCeYDz,chicken,we all get 36 back,2024-07-12 15:25:07.902000+00:00,8,outcome,post,uwTnwBFdLcqtTZALa_r8_post,9
 uwTnwBFdLcqtTZALa,sPr9ZqTQbyNiz9s3q,parrot,Exactly,2024-07-12 15:25:08.417000+00:00,8,outcome,post,uwTnwBFdLcqtTZALa_r8_post,9
 uwTnwBFdLcqtTZALa,d4Ffq2o4ZwefCeYDz,chicken,If we all give 20,2024-07-12 15:24:58.046000+00:00,8,contribution,pre,uwTnwBFdLcqtTZALa_r8_pre,8
+vmFLypg96ABkbXMfZ,jwD7CzDr9ihJQwFJ6,duck,Hi,2024-07-09 15:31:32.710000+00:00,0,contribution,pre,vmFLypg96ABkbXMfZ_r0_pre,0
 vmFLypg96ABkbXMfZ,jwD7CzDr9ihJQwFJ6,duck,I'm not even sure what I am lol,2024-07-09 15:41:02.228000+00:00,12,summary,post,vmFLypg96ABkbXMfZ_r12_post,13
 vmFLypg96ABkbXMfZ,pYhWoDAcYkSJ97kMY,chicken,youre a duck,2024-07-09 15:41:18.771000+00:00,13,contribution,pre,vmFLypg96ABkbXMfZ_r13_pre,13
 vmFLypg96ABkbXMfZ,jwD7CzDr9ihJQwFJ6,duck,oh..,2024-07-09 15:41:39.227000+00:00,14,contribution,pre,vmFLypg96ABkbXMfZ_r14_pre,14
@@ -10095,6 +10517,7 @@ voynRJGavKc9Wag58,iD85f25KniAq7jsJ7,moose,how are you all doing?,2024-07-09 18:1
 voynRJGavKc9Wag58,EtCAYE4Sj7DbdGw4o,dog,good thanks :),2024-07-09 18:14:23.991000+00:00,3,summary,post,voynRJGavKc9Wag58_r3_post,4
 voynRJGavKc9Wag58,7dPR2A7yn5Sh92hqq,gorilla,I'm real honest :-),2024-07-09 18:13:04.416000+00:00,3,contribution,pre,voynRJGavKc9Wag58_r3_pre,3
 voynRJGavKc9Wag58,xzTdFktWvEunqPoHQ,owl,"Doing well, thank you",2024-07-09 18:15:31.047000+00:00,4,outcome,post,voynRJGavKc9Wag58_r4_post,5
+w2fRGwjFfRK9WRdSw,KGrQjrSGptbbTe249,gorilla,Hello,2024-07-10 16:47:15.917000+00:00,0,contribution,pre,w2fRGwjFfRK9WRdSw_r0_pre,0
 w2fRGwjFfRK9WRdSw,qaksS3sMdrbC44maQ,rabbit,like what is your issues,2024-07-10 17:04:59.598000+00:00,13,outcome,post,w2fRGwjFfRK9WRdSw_r13_post,14
 w2fRGwjFfRK9WRdSw,PcmktWh3hjDJ22LJF,duck,"imo, the only people that should be getting deductions are those not contributing",2024-07-10 17:05:17.318000+00:00,13,outcome,post,w2fRGwjFfRK9WRdSw_r13_post,14
 w2fRGwjFfRK9WRdSw,t63zyQYgspcnrpBqZ,owl,"i got kids, man",2024-07-10 17:05:19.863000+00:00,13,outcome,post,w2fRGwjFfRK9WRdSw_r13_post,14
@@ -10122,6 +10545,9 @@ wZsGucrLXmLgJASMm,PEettri672AMTpgQY,chicken,Hi,2024-07-18 17:56:58.824000+00:00,
 wZsGucrLXmLgJASMm,i5mnYzQd2nkyaqc8q,crocodile,Hi,2024-07-18 17:57:03.578000+00:00,0,outcome,post,wZsGucrLXmLgJASMm_r0_post,1
 wZsGucrLXmLgJASMm,g6DkTSTyfmr8sjBfL,snake,hi,2024-07-18 17:57:14.289000+00:00,0,outcome,post,wZsGucrLXmLgJASMm_r0_post,1
 wZsGucrLXmLgJASMm,dyC2HpgLScXE8wS3F,owl,let's get 300,2024-07-18 17:57:35.634000+00:00,0,summary,post,wZsGucrLXmLgJASMm_r0_post,1
+wZsGucrLXmLgJASMm,J9FkA3qrZQ7NTERCk,duck,hey,2024-07-18 17:56:20.463000+00:00,0,contribution,pre,wZsGucrLXmLgJASMm_r0_pre,0
+wZsGucrLXmLgJASMm,wR2WGrbDsk6o7ZSsD,monkey,hi,2024-07-18 17:56:26.432000+00:00,0,contribution,pre,wZsGucrLXmLgJASMm_r0_pre,0
+wZsGucrLXmLgJASMm,jxjEQyJ2rcPm9CiPm,cow,hey all,2024-07-18 17:56:29.957000+00:00,0,contribution,pre,wZsGucrLXmLgJASMm_r0_pre,0
 wZsGucrLXmLgJASMm,Wr6GJ7gApS5kzgpDk,parrot,Funny that the multiplier doesn't seem to change,2024-07-18 18:09:39.580000+00:00,10,outcome,post,wZsGucrLXmLgJASMm_r10_post,11
 wZsGucrLXmLgJASMm,PEettri672AMTpgQY,chicken,"Money is one thing, but our friendships are forever",2024-07-18 18:09:58.242000+00:00,10,summary,post,wZsGucrLXmLgJASMm_r10_post,11
 wZsGucrLXmLgJASMm,J9FkA3qrZQ7NTERCk,duck,could just be our game that,2024-07-18 18:09:58.610000+00:00,10,summary,post,wZsGucrLXmLgJASMm_r10_post,11
@@ -10225,6 +10651,9 @@ wZsGucrLXmLgJASMm,Wr6GJ7gApS5kzgpDk,parrot,oh yeah probably,2024-07-18 18:08:03.
 wbfiYici7fRE6g98p,4KFwaR88gh8P5mjAf,gorilla,hello :),2024-07-10 15:31:55.308000+00:00,0,outcome,post,wbfiYici7fRE6g98p_r0_post,1
 wbfiYici7fRE6g98p,LiZL93e78XPmximvS,dog,Hi!,2024-07-10 15:32:04.091000+00:00,0,outcome,post,wbfiYici7fRE6g98p_r0_post,1
 wbfiYici7fRE6g98p,YHSZHNgANkTdyDeNK,rabbit,Hello,2024-07-10 15:32:33.602000+00:00,0,summary,post,wbfiYici7fRE6g98p_r0_post,1
+wbfiYici7fRE6g98p,AhGp3BTpjkR9nwsxK,chicken,WWAGWAN,2024-07-10 15:31:29.609000+00:00,0,contribution,pre,wbfiYici7fRE6g98p_r0_pre,0
+wbfiYici7fRE6g98p,43khd9FsK7terPrbY,sloth,Hello everyone!,2024-07-10 15:31:34.639000+00:00,0,contribution,pre,wbfiYici7fRE6g98p_r0_pre,0
+wbfiYici7fRE6g98p,wubzhj9Zna48niHvZ,chick,Hello!,2024-07-10 15:31:40.653000+00:00,0,contribution,pre,wbfiYici7fRE6g98p_r0_pre,0
 wbfiYici7fRE6g98p,SkEj73J445PonvrXs,parrot,Is there an end to this?,2024-07-10 15:44:37.598000+00:00,10,outcome,post,wbfiYici7fRE6g98p_r10_post,11
 wbfiYici7fRE6g98p,7J2fXBNp87sbJzuYN,duck,this is our life now,2024-07-10 15:45:10.073000+00:00,11,outcome,post,wbfiYici7fRE6g98p_r11_post,12
 wbfiYici7fRE6g98p,4KFwaR88gh8P5mjAf,gorilla,"hopefully soon, i want my lunch",2024-07-10 15:45:14.234000+00:00,11,outcome,post,wbfiYici7fRE6g98p_r11_post,12
@@ -10761,6 +11190,8 @@ yGcb96hmCJiStj55n,hytAdAksaSeBc7jSy,rabbit,Wooooooo,2024-07-10 19:44:01.762000+0
 yaQyBxNTDTxL5kGEf,zWz2RX5qpjd2vJqYc,crocodile,hello,2024-07-15 14:07:28.323000+00:00,0,outcome,post,yaQyBxNTDTxL5kGEf_r0_post,1
 yaQyBxNTDTxL5kGEf,ygi5W2d3e4vZsv3Yw,chick,wassuuuuup,2024-07-15 14:07:31.752000+00:00,0,outcome,post,yaQyBxNTDTxL5kGEf_r0_post,1
 yaQyBxNTDTxL5kGEf,NMvM8tnDLywRKL8oK,duck,thank you for the reward,2024-07-15 14:07:59.488000+00:00,0,summary,post,yaQyBxNTDTxL5kGEf_r0_post,1
+yaQyBxNTDTxL5kGEf,9NFQw2SBLMtZWSxAH,gorilla,hello :),2024-07-15 14:07:01.348000+00:00,0,contribution,pre,yaQyBxNTDTxL5kGEf_r0_pre,0
+yaQyBxNTDTxL5kGEf,NMvM8tnDLywRKL8oK,duck,Hello,2024-07-15 14:07:01.593000+00:00,0,contribution,pre,yaQyBxNTDTxL5kGEf_r0_pre,0
 yaQyBxNTDTxL5kGEf,ygi5W2d3e4vZsv3Yw,chick,163 days until Christmas,2024-07-15 14:22:18.870000+00:00,11,outcome,post,yaQyBxNTDTxL5kGEf_r11_post,12
 yaQyBxNTDTxL5kGEf,NMvM8tnDLywRKL8oK,duck,too soon,2024-07-15 14:22:31.632000+00:00,11,outcome,post,yaQyBxNTDTxL5kGEf_r11_post,12
 yaQyBxNTDTxL5kGEf,9NFQw2SBLMtZWSxAH,gorilla,feels like it just happened,2024-07-15 14:22:41.084000+00:00,11,summary,post,yaQyBxNTDTxL5kGEf_r11_post,12
@@ -10927,6 +11358,17 @@ yyC2ywtsHCrp9PF8v,pJo7N9kAbWN5PLHsP,cow,Yes 20,2024-07-18 16:36:11.067000+00:00,
 yyC2ywtsHCrp9PF8v,JxFLeGgG44g7YN2tF,rabbit,Only deduct those who don't give 20,2024-07-18 16:36:20.246000+00:00,0,summary,post,yyC2ywtsHCrp9PF8v_r0_post,1
 yyC2ywtsHCrp9PF8v,Dx9MPCRtFM3qjRApp,parrot,ok putting 20,2024-07-18 16:36:27.009000+00:00,0,summary,post,yyC2ywtsHCrp9PF8v_r0_post,1
 yyC2ywtsHCrp9PF8v,jzg3vqfP432ZMSLxM,snake,20 next time,2024-07-18 16:36:35.130000+00:00,0,summary,post,yyC2ywtsHCrp9PF8v_r0_post,1
+yyC2ywtsHCrp9PF8v,tnFrNSqr4yA6BBAp3,monkey,I put 4,2024-07-18 16:34:10.280000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,Bh3vA2MzW8osD2Qee,dog,my plan is to contribute max so the payout is max,2024-07-18 16:34:17.591000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,ZwbikxT5jGwH3zqKg,chick,15 here,2024-07-18 16:34:19.185000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,jzg3vqfP432ZMSLxM,snake,15,2024-07-18 16:34:23.485000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,kotqMELyuhiRpDEYg,crocodile,"I put in all 20, everyone should do the same",2024-07-18 16:34:27.714000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,E9Xh8tiKYjLeBz9Ki,moose,20,2024-07-18 16:34:30.342000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,JxFLeGgG44g7YN2tF,rabbit,20 here,2024-07-18 16:34:33.346000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,jzg3vqfP432ZMSLxM,snake,will put 20 in next round,2024-07-18 16:34:35.371000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,QtdLztmFZxDdGCZPJ,owl,oop i did 10 ill do 20 next,2024-07-18 16:34:40.093000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,kotqMELyuhiRpDEYg,crocodile,"ok, thanks",2024-07-18 16:34:40.970000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
+yyC2ywtsHCrp9PF8v,ZwbikxT5jGwH3zqKg,chick,same,2024-07-18 16:34:42.139000+00:00,0,contribution,pre,yyC2ywtsHCrp9PF8v_r0_pre,0
 yyC2ywtsHCrp9PF8v,Bh3vA2MzW8osD2Qee,dog,CHICK!!,2024-07-18 16:49:57.863000+00:00,10,outcome,post,yyC2ywtsHCrp9PF8v_r10_post,11
 yyC2ywtsHCrp9PF8v,ZwbikxT5jGwH3zqKg,chick,OMG,2024-07-18 16:50:08.133000+00:00,10,outcome,post,yyC2ywtsHCrp9PF8v_r10_post,11
 yyC2ywtsHCrp9PF8v,kotqMELyuhiRpDEYg,crocodile,deduct chick,2024-07-18 16:50:08.930000+00:00,10,outcome,post,yyC2ywtsHCrp9PF8v_r10_post,11
@@ -11127,6 +11569,9 @@ zBbM66zutHe6rm6h4,dYknyWeEGcH3C2hg5,moose,Happy Tuesday.,2024-07-09 17:16:52.679
 zBbM66zutHe6rm6h4,4GYDWnffAQSZ9ZKCC,sloth,Happy tuesday :0,2024-07-09 17:17:06.807000+00:00,3,contribution,pre,zBbM66zutHe6rm6h4_r3_pre,3
 zZi9i6kMGmSc4w78o,5en3RTXNcbzy8fstP,sloth,5,2024-07-12 14:43:12.130000+00:00,0,summary,post,zZi9i6kMGmSc4w78o_r0_post,1
 zZi9i6kMGmSc4w78o,hcCbrgCbHtuRTjjhz,dog,ok lets all just give 10 for the rest of the game,2024-07-12 14:43:25.381000+00:00,0,summary,post,zZi9i6kMGmSc4w78o_r0_post,1
+zZi9i6kMGmSc4w78o,hcCbrgCbHtuRTjjhz,dog,Ill do 20,2024-07-12 14:41:42.236000+00:00,0,contribution,pre,zZi9i6kMGmSc4w78o_r0_pre,0
+zZi9i6kMGmSc4w78o,Qd8Nrquv6uRuT3Bfj,gorilla,i'll give half,2024-07-12 14:41:47.871000+00:00,0,contribution,pre,zZi9i6kMGmSc4w78o_r0_pre,0
+zZi9i6kMGmSc4w78o,5en3RTXNcbzy8fstP,sloth,10,2024-07-12 14:41:59.411000+00:00,0,contribution,pre,zZi9i6kMGmSc4w78o_r0_pre,0
 zZi9i6kMGmSc4w78o,hcCbrgCbHtuRTjjhz,dog,sins have been forgiven,2024-07-12 14:54:13.013000+00:00,10,outcome,post,zZi9i6kMGmSc4w78o_r10_post,11
 zZi9i6kMGmSc4w78o,gmiu7aMzxeANwdqqj,duck,sloth is back on track,2024-07-12 14:54:18.313000+00:00,10,outcome,post,zZi9i6kMGmSc4w78o_r10_post,11
 zZi9i6kMGmSc4w78o,gmiu7aMzxeANwdqqj,duck,old habits die hard for sloth,2024-07-12 14:56:23.065000+00:00,13,summary,post,zZi9i6kMGmSc4w78o_r13_post,14
@@ -11183,6 +11628,7 @@ zrqNKi2yjqEnmQ8cK,sLMfhsdAsosoEX7rD,owl,hey,2024-07-10 15:25:08.284000+00:00,0,o
 zrqNKi2yjqEnmQ8cK,bt2Pksrnp27Hcz25u,parrot,hi,2024-07-10 15:25:33.817000+00:00,0,outcome,post,zrqNKi2yjqEnmQ8cK_r0_post,1
 zrqNKi2yjqEnmQ8cK,4sPJdfgDKZheZypFX,sloth,hello,2024-07-10 15:25:35.137000+00:00,0,outcome,post,zrqNKi2yjqEnmQ8cK_r0_post,1
 zrqNKi2yjqEnmQ8cK,rT4btzwKK2j7fT7Kt,rabbit,hi,2024-07-10 15:25:38.944000+00:00,0,outcome,post,zrqNKi2yjqEnmQ8cK_r0_post,1
+zrqNKi2yjqEnmQ8cK,L2qhQrhLEkGZTi9ks,duck,hi all,2024-07-10 15:24:58.577000+00:00,0,contribution,pre,zrqNKi2yjqEnmQ8cK_r0_pre,0
 zrqNKi2yjqEnmQ8cK,g8izAJCiZkMS97cPi,moose,hi,2024-07-10 15:27:00.485000+00:00,1,contribution,pre,zrqNKi2yjqEnmQ8cK_r1_pre,1
 zrqNKi2yjqEnmQ8cK,sLMfhsdAsosoEX7rD,owl,maga,2024-07-10 15:30:38.092000+00:00,4,contribution,pre,zrqNKi2yjqEnmQ8cK_r4_pre,4
 zxAZxpenZ3cNvqNjo,gybqjA22Sx8PuP252,chicken,good job,2024-07-12 16:25:12.430000+00:00,10,outcome,post,zxAZxpenZ3cNvqNjo_r10_post,11

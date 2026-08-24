@@ -17,65 +17,104 @@ chat table to a set of plausible signals worth testing.
 > **Which conversation features predict greater contribution in groups that
 > communicate, versus groups that do not?**
 
-The setting is an online **public goods game**. Groups of players repeatedly choose
-how much of a private endowment to put into a shared pot; the pot is multiplied and
-split evenly regardless of who paid in. Contributing is good for the group and
-costly for the individual, so contribution rates are a clean behavioral measure of
-cooperation.
+The setting is an online **public goods game**. Groups repeatedly choose how much of
+a private endowment to put into a shared pot; the pot is multiplied and split evenly
+regardless of who paid in. Contributing is good for the group and costly for the
+individual, so contribution rate is a clean behavioral measure of cooperation.
 
-Crucially, the experiment randomized **whether a group had a chat channel at all**,
-alongside every other rule of the game. That turns a vague question into a variance
-decomposition with three terms:
+The experiment randomized **whether a group had a chat channel at all**, alongside
+every other rule of the game. That turns a vague question into a decomposition:
 
-| Term | What it is | How much of the story? |
-|---|---|---|
-| **Rules & timing** | group size, multiplier, punishment and reward rules, how far into the game the round sits | the floor any conversation feature has to clear |
-| **Channel** | whether the group could talk at all | the "mere access" effect the literature reports |
-| **Content** | 136 toolkit features describing what was actually said | the part the Team Communication Toolkit exists to measure |
+| Term | What it is |
+|---|---|
+| **Rules & timing** | group size, multiplier, punishment and reward rules, how far into the game the round sits |
+| **Channel** | whether the group could talk at all |
+| **Spoke at all** | whether a group with a channel actually used it, in a given round |
+| **Content** | 168 toolkit features describing what was said |
 
-Groups without a channel are not a nuisance category to drop — they are the
-counterfactual that separates the second term from the third.
+Groups without a channel are not a nuisance category — they are the counterfactual
+that separates the channel from the content.
 
 ## Design
 
-* **Unit of analysis:** a **game-round** — one group, one round of play. There are
-  only a few hundred games but several thousand game-rounds, and that is what makes
-  the question answerable.
-* **Outcome:** the group's mean contribution rate in a round, as a share of endowment.
-* **Prediction runs forward in time:** a round's conversation predicts the *next*
-  round's contribution.
+* **Unit of analysis:** a **game-round** — one group, one round of play. 5,765 in the
+  learning split, 6,692 held out. There are only a few hundred games, and that is
+  what makes the game-round the workable unit.
+* **Outcome:** the group's mean contribution in a round, as a share of endowment.
+* **Two kinds of talk**, both predicting the *same* round's contribution but drawn
+  from different moments:
 
-  ```
-  talk during round k   ->   contribution in round k+1
-  ```
+  | Block | Source | Learning-split conversations |
+  |---|---|---|
+  | **Before the outcome** | that round's own contribution phase | 1,162 |
+  | **After the outcome** | the **previous** round's outcome and summary phases | 1,487 |
 
-  Round *k*'s chat spans its contribution, outcome, and summary phases, so it
-  includes the group reacting to how the round turned out. Using it to predict
-  round *k+1* keeps every message strictly earlier than the decision it predicts.
-* **Controls:** the randomized design parameters plus round timing (how far into
-  the game, how many rounds remain). Groups defect predictably as the end
-  approaches; a model without timing would credit that to whatever was being said.
-* **No-chat rounds keep neutral feature values.** Rounds with no channel have no
-  conversation to describe, so their conversation features are set to the mean of
-  the rounds that did have one — zero, since features are z-scored on the learning
-  split's conversing rounds. This is not cosmetic:
-  * for the linear model it is a reparameterization, so the fit is identical to
-    zero-filling, but the channel coefficient now reads as *the effect of having a
-    channel holding the conversation at a typical one*, rather than relative to a
-    conversation scoring zero on 136 features at once;
-  * for the random forest it changes the fit. Zero-filling would park every no-chat
-    round at the extreme edge of every feature, letting the trees identify them from
-    any column and dissolving the channel/content distinction.
-* **Games are held out whole.** Rounds within a game share a group, a treatment, and
+  Every message is therefore spoken before the decision it is used to predict. The
+  first block is contemporaneous with that decision rather than strictly prior to
+  it — a player may type after having already locked in a contribution — but it
+  cannot contain information about the outcome, which is not revealed until the
+  phase ends. The second block carries no such caveat.
+* **Two ways of locating a round in its game**, because games run from 3 to 30
+  rounds and the two disagree:
+
+  | Scheme | Definition |
+  |---|---|
+  | **By round number** (primary) | beginning = rounds 0–2, end = last 3 rounds, middle = the rest |
+  | **By thirds** | each stage is one third of the rounds played |
+
+  Under thirds, "beginning" means rounds 0–1 in a short game and rounds 0–9 in a long
+  one. Reporting both is not ceremony: the main timing result appears under one and
+  not the other.
+* **Three states of silence, encoded separately.** A round with no channel *could
+  not* talk; a round with a channel where nobody spoke *chose not to*; the second is
+  a behavior, and it is the largest of the three groups (1,751 of 5,765 for the
+  before-outcome block). No-channel rounds get neutral feature values as the
+  counterfactual; chosen silence is flagged by its own indicator and gets a truthful
+  zero on the two features that are genuine counts. The other 166 features are
+  per-message means and conversation-level ratios, which are *undefined* without a
+  conversation rather than zero.
+* **Games are held out whole.** Rounds within a game share a group, a treatment and
   often a conversation, so cross-validation folds split on `gameId` and every
-  confidence interval comes from a game-clustered bootstrap. Row-wise folds would
-  be predicting a game partly from itself.
-* **Two model families:** a penalized linear model (`ElasticNetCV`) and a
-  `RandomForestRegressor`, run side by side throughout. Where they disagree, the
-  disagreement is the finding.
-* **Validation:** every modeling decision — which features survive screening, the
-  z-scoring moments, model form, hyperparameters — is made on the **learning split**
-  alone. The **held-out split** is scored once, at the end.
+  interval comes from a game-clustered bootstrap.
+* **Two model families**, both with hyperparameters tuned *inside* each training
+  fold: `ElasticNetCV` and a `RandomForestRegressor`. Nesting matters here — tuning
+  the forest once on the same folds whose R² is then reported inflated it by 0.038,
+  more than the largest content effect in the study.
+* **Validation:** feature selection, scaling, model form and hyperparameters are all
+  decided on the learning split. The held-out split is scored once.
+
+## Feature extraction
+
+The toolkit's own redundancy reduction does the feature selection, new in v0.1.8:
+
+```python
+FeatureBuilder(
+    input_df=chat,
+    conversation_id_col="conv_id",   # one conversation = one game-round-and-block
+    speaker_id_col="playerId",
+    message_col="text",
+    timestamp_col="timestamp",
+    custom_features=["(BERT) Mimicry", "Moving Mimicry",
+                     "Forward Flow", "Discursive Diversity"],
+    drop_redundant_columns=True,
+    corr_thresh=0.9,
+    treat_zero_as_na=False,
+).featurize()
+```
+
+That took **3,083 columns to 248**, by finding 188 groups of features correlated
+above 0.9 and keeping one representative each. The groups are informative in their
+own right — ConvoKit politeness and Yeomans receptiveness measure much the same
+thing here, and after reduction **not one politeness column survives**; every one was
+absorbed into a group represented by a receptiveness or LIWC feature. Receptiveness
+itself fell from 34 columns to 9.
+
+One setting is deliberately not the default. `treat_zero_as_na=True` is better for
+*estimating* correlations between sparse features, but the frame it modifies is the
+one written to disk, so it also rewrites every zero in the output as NA — on a
+60-conversation sample, 7,642 zeros became 20,745 NAs. Here zero is data ("this
+conversation contained no greetings"), and the analysis reads NA as "no conversation
+happened".
 
 ## Repository layout
 
@@ -83,17 +122,18 @@ counterfactual that separates the second term from the third.
 .
 ├── data/
 │   ├── raw/           # the two experiment pickles, as collected
-│   └── processed/     # tidy CSVs written by step 1 and step 3
+│   └── processed/     # tidy CSVs written by steps 1 and 3
 ├── scripts/
-│   ├── config.py                 # paths and constants, imported everywhere
-│   ├── style.py                  # shared figure styling
-│   ├── compat/pgg_helper/        # stub module so the raw pickles unpickle
-│   ├── 01_prepare_data.py        # raw pickles  -> chat + game-round tables
-│   ├── 02_extract_features.py    # chat table   -> toolkit features
-│   ├── 03_build_analysis_table.py# features     -> one row per game-round
-│   ├── 04_analysis.py            # decomposition, families, timing, features
-│   ├── 05_figures.py             # the five figures
-│   └── run_all.py                # all of the above, in order
+│   ├── config.py                  # paths, controls, feature families
+│   ├── style.py                   # figure rules and shared styling
+│   ├── status.sh                  # pipeline tracker; -w to watch
+│   ├── compat/pgg_helper/         # stub module so the raw pickles unpickle
+│   ├── 01_prepare_data.py         # pickles      -> chat + game-round tables
+│   ├── 02_extract_features.py     # chat table   -> toolkit features
+│   ├── 03_build_analysis_table.py # features     -> one row per game-round
+│   ├── 04_analysis.py             # every result reported below
+│   ├── 05_figures.py              # the eight figures
+│   └── run_all.py                 # all of the above, in order
 └── outputs/
     ├── features/      # toolkit output at chat, speaker, conversation level
     ├── tables/        # analysis results as CSV
@@ -104,147 +144,164 @@ counterfactual that separates the second term from the third.
 
 ```bash
 pip install -r requirements.txt
-python scripts/run_all.py
+python scripts/run_all.py          # end to end
+bash scripts/status.sh -w          # watch progress in another terminal
 ```
 
-Step 2 is the slow one: it runs sentence embeddings and several classifiers over
-~23,000 messages, and takes on the order of an hour on a laptop CPU. Its outputs are
-cached, so re-running it is a no-op unless you pass `--force`. Step 4 takes a few
-minutes (the penalized models are refit inside every cross-validation fold, three
-times over). Every script also runs standalone.
+Step 2 is the slow one: sentence embeddings and several classifiers over ~23,000
+messages, on the order of an hour on a laptop CPU. Its outputs are cached, so
+re-running is a no-op unless you pass `--force`. Step 4 takes roughly 20 minutes,
+since both model families are retuned inside every cross-validation fold. Every
+script also runs standalone.
 
-## Using the toolkit
-
-The entire feature-extraction step is one call. This is the part worth copying:
-
-```python
-from team_comm_tools import FeatureBuilder
-
-FeatureBuilder(
-    input_df=chat,                 # one row per message
-    conversation_id_col="conv_id",  # one conversation == one game-round
-    speaker_id_col="playerId",
-    message_col="text",
-    timestamp_col="timestamp",
-    output_file_path_chat_level="outputs/features/learn_chat_level.csv",
-    output_file_path_user_level="outputs/features/learn_user_level.csv",
-    output_file_path_conv_level="outputs/features/learn_conv_level.csv",
-    custom_features=["(BERT) Mimicry", "Moving Mimicry",
-                     "Forward Flow", "Discursive Diversity"],
-).featurize()
-```
-
-Four columns in; three levels of analysis out. The conversation-level file is the
-one this case study models, since the question is about what a group said in a
-round rather than about individual messages.
+`scripts/status.sh` reports a stage as current only when its outputs postdate both
+the data they were computed from *and* the script that computed them, and prints a
+red `!` otherwise. That is worth having: several results in earlier drafts of this
+analysis were read off tables that a later change had already invalidated.
 
 ## Findings
 
-_Every number below is produced by `scripts/04_analysis.py`; full tables are in
+_Every number below comes from `scripts/04_analysis.py`; full tables are in
 `outputs/tables/`. Track a run with `bash scripts/status.sh -w`._
 
-### A. Groups that can talk contribute more
+### 1. Groups that can talk contribute more
 
 | Split | No channel | Channel open | Adjusted difference | p |
 |---|---|---|---|---|
-| Learning (5,408 game-rounds, 357 games) | 0.681 | 0.824 | **+0.152** [0.109, 0.195] | <.001 |
-| Held-out (6,246 game-rounds, 446 games) | 0.704 | 0.805 | **+0.069** [−0.005, 0.142] | .068 |
+| Learning (5,765 game-rounds, 357 games) | 0.682 | 0.816 | **+0.143** [0.102, 0.184] | <.001 |
+| Held out (6,692 game-rounds, 446 games) | 0.700 | 0.797 | **+0.063** [−0.008, 0.134] | .080 |
 
-Errors clustered by game. The effect replicates in direction but is roughly half the
-size and only marginally significant in the held-out split — worth stating plainly
-rather than averaging away.
+Errors clustered by game. The effect replicates in direction but is less than half
+the size and only marginally significant out of sample. That gap survived four
+redesigns, so it is a property of the data rather than of a modeling choice: the
+held-out split simply talks less, with 2,788 of its channel-open rounds silent
+against 1,751 in the learning split.
 
 ![The channel effect](outputs/figures/fig1_channel_effect.png)
 
-### B. The decomposition: momentum, then channel, then almost nothing
+### 2. Whether a group spoke matters more than what it said
 
-Cross-validated ΔR², games held out whole, game-clustered bootstrap CIs:
+Cross-validated ΔR², each term added to the one before it:
 
-| Step | Elastic net | Random forest |
+| Term | Elastic net | Random forest |
 |---|---|---|
-| Having a channel | **+0.103** [0.044, 0.158] | **+0.069** [0.033, 0.108] |
-| What they contributed last round | **+0.581** [0.509, 0.655] | **+0.467** [0.415, 0.523] |
-| Deliberation (PRE) | −0.000 [−0.001, 0.000] | +0.005 [−0.003, 0.011] |
-| Reaction (POST) | −0.001 [−0.001, 0.000] | +0.003 [−0.017, 0.014] |
-| Both blocks | −0.001 [−0.002, 0.000] | +0.003 [−0.016, 0.015] |
-
-Full models reach R² 0.77 (elastic net) and 0.67 (forest), from a base of 0.08 / 0.14
-on the game's rules alone. **Contribution is overwhelmingly predicted by what the
-group did last round** (r = 0.87 round to round). Having a channel is worth a real
-but far smaller amount. What was actually said adds nothing either model can detect.
+| Having a channel | **+0.094** [0.044, 0.144] | **+0.068** [0.030, 0.117] |
+| Spoke at all — this round, pre-outcome | −0.002 | +0.001 |
+| What was said — this round, pre-outcome | +0.001 | +0.043 [0.021, 0.066] |
+| Spoke at all — previous round, post-outcome | **+0.012** [0.000, 0.023] | +0.006 |
+| What was said — previous round, post-outcome | +0.001 | +0.004 |
 
 ![The decomposition](outputs/figures/fig2_decomposition.png)
 
-**The ordering of the first two steps is a substantive decision, not housekeeping.**
-Momentum is the strongest single predictor, so the tempting move is to control for it
-first and ask what survives. That is wrong for the channel: the channel was randomized
-at the *game* level and raises contribution in every round, so last round's
-contribution is a **mediator** of the channel effect, not a confounder. Entering it
-first blocks the channel's own causal pathway — doing so shrinks the channel from
-+0.103 to +0.004, which is an artifact of over-controlling. The channel therefore goes
-first (it was randomized and needs no adjustment); momentum follows; and the talk
-blocks are judged against that much tougher baseline, which *is* the right test for
-them, since POST-block talk reacts to the very number momentum encodes.
+Two things to read off this. The channel is worth five to ten times any talk term.
+And the one talk term that reaches significance under the honest linear model —
+previous-round speech, +0.012, held-out **+0.060** — is the *binary* one: whether
+the group said anything at all, not what it contained. Separating those two was
+what kept the study from reporting a content effect that is really a silence effect.
 
-### C. No feature family carries unique signal
+The forest's +0.043 for pre-outcome content is the clearest overfit in the study:
+strong in cross-validation, **−0.004** on held-out data.
 
-Dropping each toolkit family from the full model changes R² by less than 0.001 under
-the elastic net and by a negative amount under the forest — removing a family
-sometimes *helps*. The families are highly redundant with each other, and what little
-they capture is already carried by whether a channel existed at all.
+### 3. No family of features carries the model
+
+Removing each toolkit family in turn changes cross-validated R² by at most 0.008,
+and for the forest most families are negative — removing them *helps*. After
+redundancy reduction the families no longer overlap, so this is a cleaner null than
+it would have been on the raw output.
 
 ![Feature families](outputs/figures/fig3_family_importance.png)
 
-### D. The one place a content effect survives
+### 4. Talk predicts contribution only at the very start, and only by one definition
 
-Recomputing each block's ΔR² within thirds of a game, the two model families disagree:
-
-| Stage | Elastic net (PRE / POST) | Random forest (PRE / POST) |
+| Stage | Elastic net (held out) | Random forest (held out) |
 |---|---|---|
-| Early | −0.004 / −0.011 | **+0.033** [0.021, 0.044] / **+0.039** [0.014, 0.059] |
-| Middle | −0.001 / −0.008 | +0.017 [0.006, 0.026] / +0.014 [−0.011, 0.031] |
-| Late | +0.001 / −0.012 | +0.006 [−0.007, 0.015] / +0.004 [−0.016, 0.017] |
+| **Beginning** (rounds 0–2) | **+0.074** [0.016, 0.131] (**+0.070**) | +0.057 [−0.045, 0.149] (**+0.072**) |
+| Middle | +0.045 (+0.001) | +0.018 (+0.001) |
+| End (last 3 rounds) | −0.013 (+0.002) | −0.009 (−0.016) |
 
-The forest finds talk carrying real variance **early** in a game and decaying to
-nothing by the end — a plausible story about norm-setting, and the one result here
-pointing at a content effect. The elastic net finds nothing anywhere. When a
-nonlinear model sees signal a linear one cannot, the usual explanation is
-interactions the linear model has no way to represent; with the two families
-disagreeing this is a lead, not a result.
+This is previous-round talk, among rounds that actually had it. Both model families
+agree and both replicate out of sample — the only place in the study where that
+happens.
 
-![When talk matters](outputs/figures/fig4_round_stage.png)
+It also **disappears under the other staging definition**. Grouped into thirds of the
+game rather than by round number, the same analysis returns +0.014 and −0.012. The
+effect belongs to the literal opening rounds, not to the first third of a game, and
+a single staging scheme would have hidden that.
 
-### E. Controlling for momentum dissolves the feature-level findings
+![When talk matters](outputs/figures/fig4_staging_comparison.png)
 
-| | Without momentum control | With momentum control |
+### 5. Inside that one cell
+
+Restricted to the 204 conversations that follow an opening round, **61 of 168
+features reach p<0.05** — against roughly 8 expected by chance — and **24 survive
+FDR correction**. The leaders replicate on held-out data at p<0.001, and they group
+coherently rather than scattering:
+
+| Family | Leading features |
+|---|---|
+| Sentiment & emotion | positivity z-score, textblob subjectivity, neutral BERT |
+| Semantic dynamics | forward flow, discursive diversity, info diversity |
+| Lexical (LIWC) | relativity words |
+
+All positive. Groups whose post-outcome talk in the opening rounds ranges more
+widely and carries more subjective, positive content contribute more in the next
+round.
+
+![Inside the opening cell](outputs/figures/fig5_opening_reaction.png)
+
+### 6. Pooled across the game, almost nothing survives
+
+Across all rounds, 336 feature-by-block tests yield **5 clearing FDR and 1 replicating**.
+
+![Individual features](outputs/figures/fig6_feature_effects.png)
+
+### 7. What gets said changes, and so does what it predicts
+
+Opening deliberation runs 0.4–0.45 SD above average on mimicry and certainty
+language, while message volume, participation inequality and later-stage talk sit
+flat. The sampled messages match: opening talk is explicit coordination on a number
+("Okay, 20 it is", "yeah i agree, the multiplier is so big"), while later rounds are
+"yes", "max", "It's cool lol".
+
+![What gets said](outputs/figures/fig7_stage_profile.png)
+
+More strikingly, the features that predict at the beginning are **not** the ones that
+predict later. Correlations between stages' full coefficient vectors:
+
+| Comparison | Correlation | Significant in both, same sign |
 |---|---|---|
-| Features clearing FDR q<.05 on learn | 13 | **2** |
-| …also holding up on the held-out split | 7 | **0** |
+| Pre-outcome: beginning ↔ middle | **−0.42** | **0** of 16 and 52 |
+| Pre-outcome: beginning ↔ end | 0.00 | 0 |
+| Post-outcome: beginning ↔ end | −0.35 | 0 |
+| Post-outcome: middle ↔ end | +0.52 | 4 |
 
-279 feature-block combinations were tested. In the earlier specification, positive-emotion
-receptiveness, positive politeness, LIWC positive words and BERT positivity all looked
-like robust positive predictors that replicated out of sample. Once last round's
-contribution is controlled, they vanish. They were substantially encoding *"this group
-was already contributing a lot"* rather than adding independent signal.
+Deliberation features that predict contribution at the beginning predict it in the
+*opposite* direction mid-game. The later stages resemble each other; neither
+resembles the opening.
 
-![Individual features](outputs/figures/fig5_feature_effects.png)
+![Same features across stages](outputs/figures/fig8_stage_feature_effects.png)
 
 ### What the case study demonstrates about the toolkit
 
-Two things, and the second is the more useful one.
+The extraction is cheap: one `FeatureBuilder` call turned ~23,000 messages into 168
+non-redundant features at a grain — game-round × before/after outcome — chosen after
+the fact by changing one argument. The toolkit's redundancy reduction then did the
+feature selection better than the hand-rolled screen it replaced, and told us
+something substantive on the way: politeness and receptiveness are not separate
+measurements in this dataset.
 
-The workflow is cheap: **one `FeatureBuilder` call** turned ~23,000 raw messages into
-140 features per talk block, at a grain (game-round × pre/post) chosen after the fact
-by changing a single `conversation_id_col`. That is the toolkit working as intended.
+The results are mostly null, and the nulls are the point. A broad screen over 168
+features found no family carrying unique variance, almost nothing surviving both a
+multiplicity correction and a held-out test, and a content term that mostly turns
+out to be a silence term. One real signal survived: what a group says right after
+its first outcome.
 
-The results are mostly null, and the nulls are the point. A broad, cheap screen over
-140 features found: no family carrying unique variance, no feature surviving both an
-FDR correction and a held-out test, and a content term indistinguishable from zero
-under two model families. Getting there required three corrections that each changed
-the answer — clustering folds by game, entering the channel before its own mediator,
-and controlling for momentum at all. **A toolkit that makes features cheap does not
-make the study design cheap**, and the failure modes here were all design failures
-that cheap features made easy to walk into.
+Getting there required corrections that each changed the answer — clustering folds
+by game, nesting the forest's tuning, separating "spoke" from "said", encoding two
+kinds of silence differently, standardizing coefficients within subsample, and
+guarding against zero-variance regressions. **Cheap features do not make a cheap
+study**, and every one of those failure modes was easier to walk into *because* the
+features were cheap.
 
 ## A note on what this does and does not show
 

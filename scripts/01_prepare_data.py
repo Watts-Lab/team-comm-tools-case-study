@@ -20,7 +20,7 @@ Outputs (per split, into data/processed/):
     game-round-and-block it belongs to and the ``target_round`` it predicts.
   * ``rounds_{split}.csv`` - one row per game-round: the outcome, the previous
     round's contribution, whether the group had a channel, the design parameters,
-    and where the round sits in the game.
+    and where the round sits in the game under both staging schemes.
 
 Run:  python scripts/01_prepare_data.py
 """
@@ -29,6 +29,7 @@ import json
 import pickle
 import sys
 
+import numpy as np
 import pandas as pd
 
 from config import (COMPAT, CONFIG_COLS, DATA_PROCESSED, ENDOWMENT, MIN_ROUNDS,
@@ -151,8 +152,15 @@ def build_round_table(rounds):
     game_rounds["lagged_contribution"] = (game_rounds.groupby("gameId")
                                           ["contribution_rate"].shift(1))
 
-    # Round 0 has no previous round, so no POST block and no lagged contribution.
-    game_rounds = game_rounds[game_rounds["round_index"] >= 1].copy()
+    # Round 0 is kept. It has no previous round, so no POST block and no lagged
+    # contribution - its POST features fall back to the neutral value, which is
+    # exactly how a round with a channel but no reaction talk is already handled.
+    game_rounds["stage_absolute"] = np.where(
+        game_rounds["rounds_remaining"] <= 2, "endgame",
+        np.where(game_rounds["round_index"] <= 2, "opening", "middle"))
+    game_rounds["stage_relative"] = pd.cut(
+        game_rounds["round_position"], [0, 1 / 3, 2 / 3, 1.01],
+        right=False, labels=["early", "middle", "late"]).astype(str)
     game_rounds["conv_id_pre"] = (game_rounds["gameId"] + "_r"
                                   + game_rounds["round_index"].astype(str) + "_pre")
     game_rounds["conv_id_post"] = (game_rounds["gameId"] + "_r"
@@ -207,6 +215,7 @@ def prepare(split):
 
     print(f"game-rounds: {len(game_rounds)} from {game_rounds.gameId.nunique()} games")
     print(f"  channel open: {int(game_rounds.has_chat_channel.sum())}")
+    print(f"  by absolute stage: {game_rounds.stage_absolute.value_counts().to_dict()}")
     print(f"  with PRE (deliberation) talk:  {int(game_rounds.had_pre_talk.sum())}")
     print(f"  with POST (reaction) talk:     {int(game_rounds.had_post_talk.sum())}")
     print(f"messages: {len(chat)} across {chat.conv_id.nunique()} block-conversations "

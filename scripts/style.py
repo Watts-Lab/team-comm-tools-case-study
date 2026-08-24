@@ -1,12 +1,45 @@
-"""Shared matplotlib styling so every figure in outputs/figures/ reads as one set."""
+"""Shared matplotlib styling so every figure in outputs/figures/ reads as one set.
+
+FIGURE RULES - these are not preferences, and there are no exceptions.
+
+1. A figure must be readable by someone who has never seen this repository and was
+   not present for any discussion about it. Nothing in a figure may refer to the
+   process that produced it: no notes about why a model was specified one way
+   rather than another, no justification of an analysis choice, no allusion to an
+   earlier version. Those belong in the README. If a sentence would only make
+   sense to someone who watched the analysis being built, it is prohibited.
+
+2. Show only what is strictly necessary to read the chart. Necessary means: what
+   the axes are, what the marks are, what the uncertainty is, and what units. A
+   fact that is merely interesting, defensive, or explanatory goes in the README.
+
+3. No small grey caption text under the figure. It is unreadable at any realistic
+   size and is where extraneous explanation accumulates. Anything genuinely
+   required goes in the subtitle, directly under the headline, in legible type.
+
+4. The legend goes directly under the subtitle, above the plot area, laid out
+   horizontally. It never floats inside the data area, where it can cover marks.
+
+5. Nothing overlaps. Not title and subtitle, not subtitle and legend, not panel
+   titles and the headline, not tick labels and a neighbouring panel.
+
+6. Where a direction on an axis carries meaning that a reader cannot infer from
+   the label, mark the direction on the axis itself rather than explaining it in
+   prose.
+
+`header()` implements rules 3-5; use it for every figure and do not hand-place
+titles, subtitles, or legends.
+"""
 
 import textwrap
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Categorical slots, assigned in fixed order and never cycled.
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
+MAGENTA, GREEN, VIOLET = "#e87ba4", "#008300", "#4a3aa7"
 SURFACE = "#fcfcfb"
 INK, INK_2, INK_MUTED = "#0b0b0b", "#52514e", "#8a8880"
 GRID = "#e5e4df"
@@ -15,9 +48,9 @@ GRID = "#e5e4df"
 COLOR_CHANNEL = BLUE       # groups that could communicate
 COLOR_NO_CHANNEL = ORANGE  # groups that could not
 COLOR_LEARN = BLUE
+COLOR_VAL = AQUA
 COLOR_MODEL_LINEAR = BLUE
 COLOR_MODEL_FOREST = ORANGE
-COLOR_VAL = AQUA
 
 
 def use_style():
@@ -29,8 +62,8 @@ def use_style():
         "savefig.bbox": "tight",
         "font.size": 10,
         "font.family": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
-        "axes.titlesize": 12,
-        "axes.titleweight": "semibold",
+        "axes.titlesize": 11,
+        "axes.titleweight": "normal",
         "axes.titlelocation": "left",
         "axes.labelsize": 10,
         "axes.labelcolor": INK_2,
@@ -50,21 +83,110 @@ def use_style():
     })
 
 
-def title(ax, headline, subtitle=None):
-    """Headline in ink, optional subtitle beneath it in secondary ink."""
-    ax.set_title(headline, color=INK, pad=18 if subtitle else 8)
-    if subtitle:
-        ax.text(0, 1.02, subtitle, transform=ax.transAxes, fontsize=9,
-                color=INK_2, va="bottom", ha="left")
+def header(fig, axes, headline, subtitle=None, legend_from=None, ncol=4,
+           panel_titles=False, extra_top=0.0):
+    """Stack headline, subtitle and legend above the plot area, never overlapping.
 
+    Each element gets its own horizontal band, measured in inches and converted to
+    figure coordinates, so the layout holds at any figure height. Bands are
+    allocated bottom-up from the top of the axes: panel titles first (when the
+    figure has them), then the legend, then the subtitle, then the headline.
 
-def caption(fig, text, chars_per_inch=15):
-    """Footnote under the figure, wrapped to the figure's own width.
-
-    Matplotlib does not wrap text, and `bbox_inches="tight"` grows the canvas to
-    fit whatever it is given - so an unwrapped caption silently stretches the saved
-    image to several times its intended width.
+    :param legend_from: axis whose handles supply the legend, or None for no legend.
+    :param panel_titles: reserve a band for per-panel titles.
+    :param extra_top: further inches to reserve, for figures that stack another
+        label above the panel titles (row headers in a grid, for instance).
     """
-    width = max(40, int(fig.get_size_inches()[0] * chars_per_inch))
-    fig.text(0.0, -0.04, textwrap.fill(text, width), fontsize=8,
-             color=INK_MUTED, ha="left", va="top")
+    axes = np.atleast_1d(axes)
+    left_ax = axes.flat[0]
+    fig_h = fig.get_size_inches()[1]
+
+    handles, labels = [], []
+    if legend_from is not None:
+        raw_handles, raw_labels = legend_from.get_legend_handles_labels()
+        for handle, label in zip(raw_handles, raw_labels):
+            if label and not label.startswith("_") and label not in labels:
+                handles.append(handle)
+                labels.append(label)
+
+    # Matplotlib does not wrap text and `bbox_inches="tight"` grows the canvas to
+    # fit whatever it is given, so an unwrapped subtitle silently stretches the
+    # saved image to several times its intended width. Wrap to the figure's own
+    # width and pay for the extra lines in the reserved band.
+    if subtitle:
+        subtitle = textwrap.fill(subtitle,
+                                 max(60, int(fig.get_size_inches()[0] * 15)))
+    sub_lines = subtitle.count("\n") + 1 if subtitle else 0
+
+    H_GAP, H_PANEL, H_LEGEND, H_SUB, H_HEAD = 0.10, 0.46, 0.30, 0.22, 0.40
+    band = H_GAP + H_HEAD
+    band += H_PANEL if panel_titles else 0.0
+    # A legend with more entries than columns wraps, and every wrapped row needs
+    # its own space or it lands on the subtitle.
+    legend_rows = int(np.ceil(len(handles) / ncol)) if handles else 0
+    band += H_LEGEND * legend_rows
+    band += H_SUB * sub_lines
+    band += extra_top
+
+    fig.subplots_adjust(top=1 - band / fig_h)
+    x0 = left_ax.get_position().x0
+    y = 1 - band / fig_h                      # top edge of the axes, figure coords
+    y += extra_top / fig_h
+    if panel_titles:
+        y += H_PANEL / fig_h
+    if handles:
+        fig.legend(handles, labels, loc="lower left", ncol=ncol, frameon=False,
+                   fontsize=9, handletextpad=0.5, columnspacing=1.6,
+                   borderaxespad=0.0, bbox_to_anchor=(x0, y),
+                   bbox_transform=fig.transFigure)
+        y += H_LEGEND * legend_rows / fig_h
+    if subtitle:
+        fig.text(x0, y, subtitle, ha="left", va="bottom", fontsize=9.5, color=INK_2,
+                 linespacing=1.45)
+        y += H_SUB * sub_lines / fig_h
+    fig.text(x0, y, headline, ha="left", va="bottom", fontsize=12.5,
+             fontweight="semibold", color=INK)
+
+
+def axis_direction(ax, low, high, axis="x", pad=-32):
+    """Label what each end of an axis means, on the axis itself.
+
+    For quantities where the sign carries the interpretation and a reader cannot
+    recover it from the axis label alone.
+    """
+    kw = dict(xycoords="axes fraction", textcoords="offset points",
+              fontsize=8.5, color=INK_MUTED, annotation_clip=False)
+    if axis == "x":
+        ax.annotate(f"← {low}", xy=(0, 0), xytext=(0, pad), ha="left",
+                    va="top", **kw)
+        ax.annotate(f"{high} →", xy=(1, 0), xytext=(0, pad), ha="right",
+                    va="top", **kw)
+    else:
+        ax.annotate(f"← {low}", xy=(0, 0), xytext=(pad, 0), ha="right",
+                    va="bottom", rotation=90, **kw)
+        ax.annotate(f"{high} →", xy=(0, 1), xytext=(pad, 0), ha="right",
+                    va="top", rotation=90, **kw)
+
+
+def panel_title(ax, text):
+    """Title for one panel of a multi-panel figure.
+
+    Deliberately heavier and darker than the subtitle: at the same weight the two
+    read as one block of text and the panel boundary disappears.
+    """
+    ax.set_title(text, fontsize=11.5, color=INK, fontweight="semibold", loc="left",
+                 pad=12)
+
+
+def bold_label(text):
+    """Mathtext label with the construct name bold and any qualifier left plain.
+
+    Feature names carry an aggregation qualifier in brackets - "certainty (LIWC)
+    [max of speaker min]" - which is needed for precision but swamps the construct
+    if both are set the same way. Matplotlib cannot mix weights inside one tick
+    label, so the bold half goes through mathtext.
+    """
+    head, sep, tail = text.partition(" [")
+    escaped = head.replace(" ", r"\ ")
+    bold = rf"$\bf{{{escaped}}}$"
+    return bold + (sep + tail if sep else "")

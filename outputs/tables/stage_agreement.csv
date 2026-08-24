@@ -1,0 +1,7 @@
+block,stage_a,stage_b,n_features,coef_correlation,n_sig_a,n_sig_b,n_sig_both,n_sig_both_same_sign
+pre,opening,middle,168,-0.4155562333848078,16,52,5,0
+pre,opening,endgame,167,0.003635655116635423,16,7,0,0
+pre,middle,endgame,167,0.08012506009458467,52,7,3,3
+post,opening,middle,168,-0.2441679188787421,61,19,6,4
+post,opening,endgame,168,-0.3504597215148781,61,15,4,0
+post,middle,endgame,168,0.5167629267841521,19,15,4,4

@@ -107,4 +107,4 @@ FEATURE_FAMILIES = [
 # about one arbitrary message, not features of the conversation.
 TCT_ID_COLS = {"conversation_num", "conv_id", "gameId", "conversation_id",
                "Unnamed: 0", "playerId", "avatar", "text", "timestamp",
-               "round_index", "phase", "source_round", "target_round"}
+               "round_index", "phase", "source_round", "target_round", "block"}

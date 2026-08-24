@@ -13,6 +13,29 @@ DONE="\033[32m✔\033[0m"; RUN="\033[33m…\033[0m"; TODO="\033[90m·\033[0m"
 DIM="\033[90m"; BOLD="\033[1m"; OFF="\033[0m"
 
 rows() { [ -f "$1" ] && echo "$(($(wc -l < "$1") - 1))" || echo "-"; }
+
+# A stage counts as done only if its output is NEWER than every input it depends
+# on - the data it was computed from AND the script that computed it. Existence
+# alone is not enough: a file left over from an earlier design looks identical to
+# a fresh one, and acting on stale results has been the main hazard here. Counting
+# the script as an input matters just as much: a table can postdate the data and
+# still predate the bug fix that changes what it says.
+# Staleness is asymmetric on purpose: an output is stale only when an input is
+# STRICTLY newer than it. Testing `out -nt input` instead looks equivalent but is
+# not, because shell timestamps have one-second granularity - a figure written in
+# the same second as the script that drew it would fail that test and be reported
+# stale despite being perfectly current.
+fresh() {
+  local out=$1; shift
+  [ -f "$out" ] || return 1
+  local input
+  for input in "$@"; do
+    [ -f "$input" ] || continue
+    [ "$input" -nt "$out" ] && return 1
+  done
+  return 0
+}
+STALE="\033[31m!\033[0m"
 age()  { [ -f "$1" ] && date -r "$1" "+%H:%M" || echo "  -  "; }
 
 # Is a pipeline script actually executing? Match the interpreter path so that
@@ -35,7 +58,14 @@ elapsed() {
   ps -o etime= -p "$pid" | tr -d ' '
 }
 
-mark() { if [ "$1" = done ]; then printf "$DONE"; elif [ "$1" = run ]; then printf "$RUN"; else printf "$TODO"; fi; }
+mark() {
+  case "$1" in
+    done)  printf "$DONE" ;;
+    run)   printf "$RUN" ;;
+    stale) printf "$STALE" ;;
+    *)     printf "$TODO" ;;
+  esac
+}
 
 snapshot() {
   printf "${BOLD}Team Comm Toolkit case study${OFF}  ${DIM}%s${OFF}\n\n" "$(date '+%a %H:%M:%S')"
@@ -72,9 +102,12 @@ snapshot() {
 
   # ---- 3. analysis table ------------------------------------------------
   st=todo
-  [ -f data/processed/analysis_val.csv ] && st=done
+  [ -f data/processed/analysis_val.csv ] && st=stale
+  fresh data/processed/analysis_val.csv $conv/val_conv_level.csv \
+        scripts/03_build_analysis_table.py && st=done
   running 03_build && st=run
   printf " %b 3  build analysis table" "$(mark $st)"
+  [ "$st" = stale ] && printf "  ${DIM}stale: older than the feature files${OFF}"
   printf "\n"
   [ -f data/processed/analysis_learn.csv ] && \
     printf "      ${DIM}learn %s rows   val %s rows   %s${OFF}\n" \
@@ -83,16 +116,23 @@ snapshot() {
 
   # ---- 4. analysis ------------------------------------------------------
   st=todo
-  [ -f outputs/tables/variance_decomposition.csv ] && st=run
-  [ -f outputs/tables/round_stage.csv ] && [ -f outputs/tables/feature_effects.csv ] && st=done
+  [ -f outputs/tables/variance_decomposition.csv ] && st=stale
+  fresh outputs/tables/feature_effects.csv data/processed/analysis_val.csv \
+        scripts/04_analysis.py && st=done
   running 04_analysis && st=run
   printf " %b 4  analysis" "$(mark $st)"
   running 04_analysis && printf "  ${DIM}running %s${OFF}" "$(elapsed 04_analysis)"
+  [ "$st" = stale ] && printf "  ${DIM}stale: older than the data or the script${OFF}"
   printf "\n"
-  for t in channel_effect model_comparison variance_decomposition family_importance \
-           round_stage feature_effects; do
-    if [ -f outputs/tables/$t.csv ]; then
+  for t in channel_effect model_comparison variance_decomposition speech_vs_content \
+           family_importance \
+           round_stage stage_profile stage_examples stage_feature_effects \
+           stage_agreement feature_effects; do
+    if fresh outputs/tables/$t.csv data/processed/analysis_val.csv \
+             scripts/04_analysis.py; then
       printf "      ${DONE} ${DIM}%-24s %s${OFF}\n" "$t" "$(age outputs/tables/$t.csv)"
+    elif [ -f outputs/tables/$t.csv ]; then
+      printf "      ${STALE} ${DIM}%-24s %s  stale${OFF}\n" "$t" "$(age outputs/tables/$t.csv)"
     else
       printf "      ${TODO} ${DIM}%s${OFF}\n" "$t"
     fi
@@ -104,10 +144,20 @@ snapshot() {
 
   # ---- 5. figures -------------------------------------------------------
   st=todo
-  local n; n=$(ls outputs/figures/*.png 2>/dev/null | wc -l | tr -d ' ')
-  [ "$n" -gt 0 ] && st=run; [ "$n" -ge 5 ] && st=done
+  local n fresh_n=0 f newest_table
+  n=$(ls outputs/figures/*.png 2>/dev/null | wc -l | tr -d ' ')
+  # Compare against the NEWEST table, not one chosen table. A figure can easily
+  # postdate the single table it was checked against while being drawn from six
+  # others that have since been rewritten - which is exactly how this line came
+  # to report seven stale figures as current.
+  newest_table=$(ls -t outputs/tables/*.csv 2>/dev/null | head -1)
+  for f in outputs/figures/*.png; do
+    fresh "$f" "$newest_table" scripts/05_figures.py && fresh_n=$((fresh_n + 1))
+  done
+  [ "$n" -gt 0 ] && st=stale
+  [ "$fresh_n" -ge 8 ] && st=done
   running 05_figures && st=run
-  printf " %b 5  figures  ${DIM}%s of 5${OFF}\n" "$(mark $st)" "$n"
+  printf " %b 5  figures  ${DIM}%s of 8 drawn, %s current${OFF}\n" "$(mark $st)" "$n" "$fresh_n"
 }
 
 if [ "$1" = "-w" ] || [ "$1" = "--watch" ]; then

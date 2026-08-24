@@ -8,35 +8,27 @@ models are built up one block at a time:
 
     M0  design parameters + round timing     the rules of the game
     M1  + chat channel indicator             the *mere channel*
-    M2  + last round's contribution          momentum: what they were already doing
-    M3  + PRE features   (deliberation)      what they said while deciding
-    M4  + POST features  (reaction)          what they said about the last result
-    M5  + both blocks
+    M2  + PRE features   (deliberation)      what they said while deciding
+    M3  + POST features  (reaction)          what they said about the last result
+    M4  + both blocks
 
-M3, M4 and M5 are each compared against M2 rather than chained, so the two talk
+M2, M3 and M4 are each compared against M1 rather than chained, so the two talk
 blocks are not competing for whichever happens to be entered first.
 
-The order of the channel and momentum is deliberate, and it is not the obvious one.
-Contribution is autocorrelated at r = 0.87, so last round's contribution is by far
-the strongest single predictor - it alone takes cross-validated R² from 0.08 to
-0.76. It is tempting to control for it first and ask what else survives. That would
-be a mistake for the channel: the channel was randomized at the *game* level and
-raises contribution in every round, so last round's contribution is a **mediator**
-of the channel effect rather than a confounder of it. Entering it first blocks the
-channel's own causal pathway and shrinks its apparent contribution from about 0.10
-to 0.004 - an artifact of over-controlling, not a finding.
-
-So the channel is measured against the game's rules alone, which is valid because
-it was randomized and needs no adjustment. Momentum then enters *after* it, and the
-talk blocks are judged against that much tougher baseline - which is the right test
-for them, since POST-block talk is a reaction to the previous result and could
-otherwise look predictive purely by proxying for it.
+Last round's contribution is not a control here. It is by far the strongest single
+predictor (r = 0.87 round to round) and conditioning on it leaves nothing for talk
+to explain, so it answers a different and narrower question. The cost is that any
+talk effect below is partly confounded with a group's own trajectory - POST-block
+talk in particular reacts to the previous result. Read the talk terms as
+"associated with", not "adds beyond what the group was already doing".
 
 Follow-ups: which toolkit feature family carries any content term, whether talk
 matters more early or late in a game, and which individual features move
 contribution - screened with FDR on the learning split and re-tested on held-out data.
 
-Two model families throughout: a penalized linear model and a random forest.
+Two model families throughout: a penalized linear model and a random forest. Both
+have their hyperparameters chosen inside each training fold, so neither gets to
+peek at the data its cross-validated score is computed on.
 Everything is fit on the learning split; held-out data is scored once, at the end.
 
 Run:  python scripts/04_analysis.py
@@ -48,7 +40,7 @@ import statsmodels.api as sm
 from scipy.linalg import qr as scipy_qr
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import ElasticNetCV
-from sklearn.model_selection import GroupKFold, cross_val_predict
+from sklearn.model_selection import GroupKFold, GroupShuffleSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from statsmodels.stats.multitest import multipletests
@@ -60,6 +52,16 @@ GROUP = "gameId"          # rounds within a game are not independent observation
 CHANNEL = "has_chat_channel"
 MOMENTUM = "lagged_contribution"
 BLOCKS = {"pre": "deliberation", "post": "reaction"}
+
+# Two ways of saying where a round sits in its game; they answer different
+# questions and disagree substantially, because games run from 3 to 30 rounds.
+# Absolute staging is primary: round 1 is round 1 in every game, which is what
+# makes "what gets said early" readable. Relative staging is the robustness check.
+STAGINGS = {
+    "absolute": ("stage_absolute", ["opening", "middle", "endgame"]),
+    "relative": ("stage_relative", ["early", "middle", "late"]),
+}
+PRIMARY_STAGING = "absolute"
 N_FOLDS = 10
 N_BOOT = 2000
 
@@ -89,11 +91,29 @@ def manifest():
     return pd.read_csv(TABLES / "feature_manifest.csv")
 
 
-def block_features(df, block):
-    """The kept toolkit features for one talk block, as they appear in the table."""
+def block_features(df, block, with_indicator=True):
+    """The kept toolkit features for one talk block, as they appear in the table.
+
+    Two indicators ride along by default. Without them the models cannot tell a
+    round with no conversation from a round with a perfectly average one - both
+    carry the neutral fill on all 140 columns - and since only about a fifth of
+    game-rounds have talk of a given kind, most rows would otherwise be
+    indistinguishable constants that the features can only overfit.
+
+    ``chose_silence_{block}`` is the more interesting of the two: it marks a group
+    that *had* a channel and said nothing, which is a behaviour rather than a
+    missing value, and which describes more game-rounds than actual talk does. A
+    linear model cannot construct it from the channel and talk indicators on its
+    own, since it is their interaction.
+    """
     m = manifest()
     cols = [f"{f}__{block}" for f in m.loc[m["kept"], "feature"]]
-    return [c for c in cols if c in df.columns]
+    cols = [c for c in cols if c in df.columns]
+    if with_indicator:
+        for flag in (f"has_features_{block}", f"chose_silence_{block}"):
+            if flag in df.columns and df[flag].nunique() > 1:
+                cols.append(flag)
+    return cols
 
 
 def families(df):
@@ -108,7 +128,12 @@ def families(df):
 
 
 def controls(df, extra=()):
-    """Everything known before this round's talk: rules, timing, and momentum.
+    """Everything known before this round's talk: the game's rules and the clock.
+
+    Momentum (last round's contribution) is deliberately **not** here. It predicts
+    contribution better than everything else combined (r = 0.87 round to round), so
+    conditioning on it leaves almost nothing for talk to explain, and it costs the
+    opening round of every game. It is available as a column for robustness checks.
 
     Two prunes, both necessary. Constant columns carry no information, and linearly
     dependent ones leave the regression rank-deficient - which OLS reports as an
@@ -116,8 +141,7 @@ def controls(df, extra=()):
     contains exact identities by construction (MPCR is the multiplier divided by the
     player count), and dependence is split-specific, so this runs per sample.
     """
-    cols = [c for c in CONFIG_COLS + TIMING_COLS + [MOMENTUM] + list(extra)
-            if c in df.columns]
+    cols = [c for c in CONFIG_COLS + TIMING_COLS + list(extra) if c in df.columns]
     cols = [c for c in cols if df[c].nunique(dropna=True) > 1]
     return drop_dependent_columns(design(df, cols))
 
@@ -160,19 +184,28 @@ def cluster_bootstrap(groups, stat, n_boot=N_BOOT):
 
 
 # ----------------------------------------------------------- model zoo ------
-def make_model(kind):
-    """The two model families, behind one interface."""
+# Forest regularization is not optional here. Because folds hold out whole games, a
+# default forest (leaf=5, every feature considered per split) memorizes
+# game-specific patterns and scores a *negative* cross-validated R² - worse than
+# predicting the mean. Leaf size is therefore tuned, and tuned *inside* each
+# training fold rather than once on the whole learning split: selecting on the same
+# folds whose R² is then reported would bias that R² upward, and the elastic net's
+# alpha is already chosen by an inner CV, so a fixed forest would enjoy an
+# advantage the linear model does not have.
+FOREST_LEAF_GRID = [20, 50, 100, 200]
+FOREST_TREES_TUNE = 200      # cheaper forests while comparing candidates
+FOREST_TREES_FINAL = 500
+
+
+def make_model(kind, min_samples_leaf=100, n_estimators=FOREST_TREES_FINAL):
+    """One model family, as a fitted-from-scratch pipeline."""
     if kind == "elastic net":
+        # alpha and l1_ratio are chosen by an inner CV, so this is already nested.
         estimator = ElasticNetCV(l1_ratio=[0.5, 1.0], n_alphas=30, cv=3,
                                  random_state=SEED, max_iter=5000, n_jobs=-1)
     elif kind == "random forest":
-        # Heavily regularized on purpose. Because folds hold out whole games, a
-        # default forest (leaf=5, all features per split) memorizes game-specific
-        # patterns and scores a *negative* cross-validated R² - worse than
-        # predicting the mean. Large leaves and a feature subsample fix that: on
-        # learning-split CV, leaf=5 scores -0.10 and leaf=100 scores +0.21.
-        # Chosen on the learning split alone.
-        estimator = RandomForestRegressor(n_estimators=500, min_samples_leaf=100,
+        estimator = RandomForestRegressor(n_estimators=n_estimators,
+                                          min_samples_leaf=min_samples_leaf,
                                           max_features=0.3, random_state=SEED,
                                           n_jobs=-1)
     else:
@@ -180,22 +213,48 @@ def make_model(kind):
     return Pipeline([("scale", StandardScaler()), ("model", estimator)])
 
 
+def fit_tuned(kind, X, y, groups):
+    """Fit one model, tuning the forest's leaf size on an inner group split.
+
+    The inner split holds out whole games too, so hyperparameter selection faces
+    the same generalization problem the outer folds measure. Returns the fitted
+    pipeline and whichever leaf size was chosen (None for the linear model).
+    """
+    if kind != "random forest":
+        return make_model(kind).fit(X, y), None
+
+    inner = GroupShuffleSplit(n_splits=1, test_size=0.25, random_state=SEED)
+    tr, te = next(inner.split(X, y, groups=groups))
+    best_leaf, best_score = FOREST_LEAF_GRID[0], -np.inf
+    for leaf in FOREST_LEAF_GRID:
+        candidate = make_model(kind, leaf, FOREST_TREES_TUNE).fit(X.iloc[tr], y[tr])
+        score = r2(y[te], np.clip(candidate.predict(X.iloc[te]), *OUTCOME_BOUNDS))
+        if score > best_score:
+            best_leaf, best_score = leaf, score
+    return make_model(kind, best_leaf).fit(X, y), best_leaf
+
+
 def out_of_fold(kind, df, cols):
-    """Out-of-fold predictions with games held out whole.
+    """Out-of-fold predictions with games held out whole, tuning inside each fold.
 
     Splitting on rows would leak: two rounds of the same game share a group, a
     treatment, and often a conversation, so a row-wise fold would be predicting a
-    game partly from itself.
+    game partly from itself. The loop is written out rather than delegated to
+    `cross_val_predict` so that the inner tuning split can also be group-aware.
     """
     X, y = design(df, cols), df[OUTCOME].to_numpy()
-    pred = cross_val_predict(make_model(kind), X, y,
-                             cv=GroupKFold(n_splits=N_FOLDS), groups=df[GROUP])
+    groups = df[GROUP].to_numpy()
+    pred = np.empty(len(y), dtype=float)
+    for train_idx, test_idx in GroupKFold(n_splits=N_FOLDS).split(X, y, groups):
+        model, _ = fit_tuned(kind, X.iloc[train_idx], y[train_idx], groups[train_idx])
+        pred[test_idx] = model.predict(X.iloc[test_idx])
     return np.clip(pred, *OUTCOME_BOUNDS)
 
 
 def fit_predict_heldout(kind, learn, val, cols):
+    """Fit on the whole learning split (tuning within it), then score the held-out."""
     X, y = design(learn, cols), learn[OUTCOME].to_numpy()
-    pipe = make_model(kind).fit(X, y)
+    pipe, _ = fit_tuned(kind, X, y, learn[GROUP].to_numpy())
     pred = pipe.predict(design(val, cols)[X.columns])
     return pipe, np.clip(pred, *OUTCOME_BOUNDS)
 
@@ -208,12 +267,8 @@ def channel_effect(splits):
     """
     rows = []
     for split, df in splits.items():
-        # Momentum is excluded here for the same reason it is entered after the
-        # channel in the decomposition: it is a mediator of the channel effect, and
-        # adjusting for it would report the channel's direct effect only.
-        ctrl = [c for c in controls(df) if c != MOMENTUM]
         X = pd.concat([df[CHANNEL].astype(float).rename(CHANNEL),
-                       design(df, ctrl)], axis=1)
+                       design(df, controls(df))], axis=1)
         model = sm.OLS(df[OUTCOME], sm.add_constant(X)).fit(
             cov_type="cluster", cov_kwds={"groups": df[GROUP]})
         ci = model.conf_int().loc[CHANNEL]
@@ -232,17 +287,15 @@ def channel_effect(splits):
 # ------------------------------------------- B. the nested decomposition ----
 def decomposition(learn, val):
     """R² of each nested model, and the ΔR² each block is worth."""
-    base = controls(learn)                       # rules + timing + momentum
-    rules = [c for c in base if c != MOMENTUM]
+    base = controls(learn)                       # rules + timing
     pre, post = block_features(learn, "pre"), block_features(learn, "post")
 
     specs = {
-        "M0 rules + timing": rules,
-        "M1 + chat channel": rules + [CHANNEL],
-        "M2 + momentum": base + [CHANNEL],
-        "M3 + deliberation (PRE)": base + [CHANNEL] + pre,
-        "M4 + reaction (POST)": base + [CHANNEL] + post,
-        "M5 + both blocks": base + [CHANNEL] + pre + post,
+        "M0 rules + timing": base,
+        "M1 + chat channel": base + [CHANNEL],
+        "M2 + deliberation (PRE)": base + [CHANNEL] + pre,
+        "M3 + reaction (POST)": base + [CHANNEL] + post,
+        "M4 + both blocks": base + [CHANNEL] + pre + post,
     }
 
     rows, preds = [], {}
@@ -263,10 +316,9 @@ def decomposition(learn, val):
 
     # Each step measured against the model it should be judged against.
     steps = [("channel", "M0 rules + timing", "M1 + chat channel"),
-             ("momentum", "M1 + chat channel", "M2 + momentum"),
-             ("deliberation (PRE)", "M2 + momentum", "M3 + deliberation (PRE)"),
-             ("reaction (POST)", "M2 + momentum", "M4 + reaction (POST)"),
-             ("both talk blocks", "M2 + momentum", "M5 + both blocks")]
+             ("deliberation (PRE)", "M1 + chat channel", "M2 + deliberation (PRE)"),
+             ("reaction (POST)", "M1 + chat channel", "M3 + reaction (POST)"),
+             ("both talk blocks", "M1 + chat channel", "M4 + both blocks")]
     y_learn = learn[OUTCOME].to_numpy()
     y_val = val[OUTCOME].to_numpy()
     deltas = []
@@ -285,6 +337,57 @@ def decomposition(learn, val):
     decomp = pd.DataFrame(deltas)
     decomp.to_csv(TABLES / "variance_decomposition.csv", index=False)
     return comparison, decomp
+
+
+# ----------------------------------- speaking at all, versus what was said ---
+def speech_vs_content(learn, val):
+    """Split each talk block into "did they speak" and "what did they say".
+
+    This is the check that decides what the case study is allowed to claim. A talk
+    block carries two quite different things: indicators for whether the group used
+    an open channel at all, and 140 features describing the conversation when they
+    did. Only the second is content, and only the second is what the toolkit is
+    for. Entered together, a block can look predictive on the strength of the
+    indicators alone - which would be a finding about silence, not about talk.
+    """
+    base = controls(learn) + [CHANNEL]
+    y, y_val = learn[OUTCOME].to_numpy(), val[OUTCOME].to_numpy()
+    rows = []
+
+    for block in BLOCKS:
+        indicators = [c for c in (f"has_features_{block}", f"chose_silence_{block}")
+                      if c in learn.columns and learn[c].nunique() > 1]
+        content = block_features(learn, block, with_indicator=False)
+        specs = {"base": base,
+                 "indicators": base + indicators,
+                 "full": base + indicators + content}
+
+        for kind in ("elastic net", "random forest"):
+            scores = {}
+            for name, cols in specs.items():
+                oof = out_of_fold(kind, learn, cols)
+                _, val_pred = fit_predict_heldout(kind, learn, val, cols)
+                scores[name] = (r2(y, oof), r2(y_val, val_pred), oof)
+
+            for label, lo_key, hi_key in [("spoke at all", "base", "indicators"),
+                                          ("what was said", "indicators", "full")]:
+                lo_r2, lo_val, lo_oof = scores[lo_key]
+                hi_r2, hi_val, hi_oof = scores[hi_key]
+                ci_lo, ci_hi = cluster_bootstrap(
+                    learn[GROUP],
+                    lambda idx, h=hi_oof, l=lo_oof: (r2(y[idx], h[idx])
+                                                     - r2(y[idx], l[idx])))
+                rows.append({"block": block, "block_meaning": BLOCKS[block],
+                             "model_family": kind, "component": label,
+                             "n_features": (len(indicators) if label == "spoke at all"
+                                            else len(content)),
+                             "delta_cv_r2": hi_r2 - lo_r2,
+                             "ci_low": ci_lo, "ci_high": ci_hi,
+                             "delta_r2_heldout": hi_val - lo_val})
+
+    out = pd.DataFrame(rows)
+    out.to_csv(TABLES / "speech_vs_content.csv", index=False)
+    return out
 
 
 # ------------------------------------------ which kind of talk carries it ---
@@ -320,39 +423,249 @@ def family_importance(learn, val):
 
 # --------------------------------------------------- when does talk matter --
 def round_stage(learn, val):
-    """Each talk block's contribution, recomputed within thirds of a game.
+    """Each talk block's ΔR² within each stage, among rounds that had that talk.
 
     This is the non-parametric version of interacting every feature with time: if
     talk matters more at one point in a game, the block's ΔR² should differ across
-    the three stages.
+    stages. Running it under both staging schemes shows whether any pattern is
+    about the clock or about the fraction of the game elapsed.
     """
     rows = []
-    for stage, lo_q, hi_q in [("early", 0.0, 1 / 3), ("middle", 1 / 3, 2 / 3),
-                              ("late", 2 / 3, 1.01)]:
-        l_sub = learn[(learn["round_position"] >= lo_q) & (learn["round_position"] < hi_q)]
-        v_sub = val[(val["round_position"] >= lo_q) & (val["round_position"] < hi_q)]
-        base_cols = controls(l_sub) + [CHANNEL]
-        y = l_sub[OUTCOME].to_numpy()
-
-        for kind in ("elastic net", "random forest"):
-            base = out_of_fold(kind, l_sub, base_cols)
-            _, base_val = fit_predict_heldout(kind, l_sub, v_sub, base_cols)
-            base_val_r2 = r2(v_sub[OUTCOME], base_val)
+    for staging, (col, order) in STAGINGS.items():
+        for stage in order:
             for block in BLOCKS:
-                cols = base_cols + block_features(l_sub, block)
-                full = out_of_fold(kind, l_sub, cols)
-                _, full_val = fit_predict_heldout(kind, l_sub, v_sub, cols)
-                lo, hi = cluster_bootstrap(
-                    l_sub[GROUP],
-                    lambda idx, f=full, b=base: r2(y[idx], f[idx]) - r2(y[idx], b[idx]))
-                rows.append({"stage": stage, "block": block,
-                             "model_family": kind, "n_game_rounds": len(l_sub),
-                             "delta_cv_r2_content": r2(y, full) - r2(y, base),
-                             "ci_low": lo, "ci_high": hi,
-                             "delta_heldout_r2_content": (r2(v_sub[OUTCOME], full_val)
-                                                          - base_val_r2)})
+                # Restricted to rounds that actually had this kind of talk. Across
+                # all rounds only about a fifth do, so the content question would
+                # otherwise be asked mostly of rows whose features are all the same
+                # neutral fill - and the answer would be about the fill, not the talk.
+                flag = f"has_features_{block}"
+                l_sub = learn[(learn[col] == stage) & learn[flag].astype(bool)]
+                v_sub = val[(val[col] == stage) & val[flag].astype(bool)]
+                if len(l_sub) < 150 or l_sub[GROUP].nunique() < N_FOLDS:
+                    continue
+                base_cols = controls(l_sub) + [CHANNEL]
+                feat_cols = base_cols + block_features(l_sub, block,
+                                                       with_indicator=False)
+                y = l_sub[OUTCOME].to_numpy()
+
+                for kind in ("elastic net", "random forest"):
+                    base = out_of_fold(kind, l_sub, base_cols)
+                    full = out_of_fold(kind, l_sub, feat_cols)
+                    _, base_val = fit_predict_heldout(kind, l_sub, v_sub, base_cols)
+                    _, full_val = fit_predict_heldout(kind, l_sub, v_sub, feat_cols)
+                    lo, hi = cluster_bootstrap(
+                        l_sub[GROUP],
+                        lambda idx, f=full, b=base: (r2(y[idx], f[idx])
+                                                     - r2(y[idx], b[idx])))
+                    rows.append({"staging": staging, "stage": stage, "block": block,
+                                 "model_family": kind,
+                                 "n_conversations": len(l_sub),
+                                 "delta_cv_r2_content": r2(y, full) - r2(y, base),
+                                 "ci_low": lo, "ci_high": hi,
+                                 "delta_heldout_r2_content": (r2(v_sub[OUTCOME], full_val)
+                                                              - r2(v_sub[OUTCOME], base_val))})
     out = pd.DataFrame(rows)
     out.to_csv(TABLES / "round_stage.csv", index=False)
+    return out
+
+
+# ------------------------------------------- what is actually said, by stage -
+def stage_profile(learn):
+    """How each toolkit feature differs across stages, in SD units.
+
+    Features are already z-scored against the pooled conversation distribution, so
+    a stage mean of +0.3 reads as "this stage runs 0.3 SD above a typical
+    conversation on this feature". Only conversations that actually happened are
+    included - neutral-filled rounds would drag every stage toward zero.
+    """
+    col, order = STAGINGS[PRIMARY_STAGING]
+    rows = []
+    for block in BLOCKS:
+        described = learn[learn[f"has_features_{block}"].astype(bool)]
+        feats = block_features(learn, block)
+        for stage in order:
+            sub = described[described[col] == stage]
+            if sub.empty:
+                continue
+            means = sub[feats].mean()
+            for feature, value in means.items():
+                rows.append({"block": block, "stage": stage,
+                             "feature": feature.rsplit("__", 1)[0],
+                             "mean_z": value, "n_conversations": len(sub)})
+    profile = pd.DataFrame(rows)
+
+    fam = manifest().set_index("feature")["family"].to_dict()
+    profile["family"] = profile["feature"].map(fam)
+
+    # How far each feature swings between the first and last stage, which is what
+    # makes it interesting to look at rather than merely present.
+    wide = profile.pivot_table(index=["block", "feature", "family"],
+                               columns="stage", values="mean_z")
+    wide["swing"] = wide[order[-1]] - wide[order[0]]
+    wide = wide.reset_index().sort_values("swing", key=abs, ascending=False)
+    wide.to_csv(TABLES / "stage_profile.csv", index=False)
+    return wide
+
+
+def stage_examples(split="learn", per_stage=8, seed=SEED):
+    """A sample of real messages from each stage, so the profile can be read.
+
+    Feature names describe a construct; the messages show what the construct looked
+    like in this dataset. Sampled at random within stage and block rather than
+    hand-picked, so they are representative rather than illustrative.
+    """
+    chat = pd.read_csv(DATA_PROCESSED / f"chat_{split}.csv")
+    rounds = pd.read_csv(DATA_PROCESSED / f"rounds_{split}.csv")
+    col, order = STAGINGS[PRIMARY_STAGING]
+
+    # A message is grouped by the stage of the round it *predicts*, not the round
+    # it was spoken in. POST-block talk comes from the previous round, so the two
+    # differ, and the analysis groups by the predicted round - these samples have to
+    # match it or they would illustrate a different partition than the results.
+    stage_of = rounds.set_index(["gameId", "round_index"])[col]
+    chat = chat.join(stage_of.rename("stage"), on=["gameId", "target_round"])
+    chat = chat.dropna(subset=["stage"])
+
+    rng_local = np.random.default_rng(seed)
+    picks = []
+    for block in BLOCKS:
+        for stage in order:
+            sub = chat[(chat["block"] == block) & (chat["stage"] == stage)]
+            if sub.empty:
+                continue
+            take = sub.iloc[rng_local.choice(len(sub), min(per_stage, len(sub)),
+                                             replace=False)]
+            picks.append(take.assign(block=block, stage=stage)
+                         [["block", "stage", "round_index", "text"]])
+    out = pd.concat(picks).reset_index(drop=True)
+    out.to_csv(TABLES / "stage_examples.csv", index=False)
+    return out
+
+
+# A feature must actually vary within a subsample before a regression on it means
+# anything. Testing `std == 0` is not enough: a column that is constant in a stage
+# subset still carries floating-point dust from the z-scoring, so its SD comes back
+# as something like 7e-18 rather than 0. statsmodels then solves a singular system
+# by pseudo-inverse and reports a coefficient of -11.8 with p = 7e-08 - a feature
+# with no variance at all looking like the strongest effect in the study. Features
+# are z-scored on the pooled distribution, so this floor is in pooled SD units;
+# 5% of feature-by-stage combinations fall below 0.35, and only these degenerate
+# ones fall below 0.05.
+MIN_FEATURE_SD = 0.05
+MIN_FEATURE_LEVELS = 3
+
+
+def _one_feature(df, feature, ctrl):
+    """OLS of the outcome on one z-scored feature plus controls, clustered by game.
+
+    Returns (coefficient, p, ci_low, ci_high), or NaNs when the feature does not
+    vary enough in this subsample to support a regression.
+    """
+    x = pd.to_numeric(df[feature], errors="coerce").fillna(0.0)
+    if (len(df) < 30 or x.std() < MIN_FEATURE_SD
+            or x.nunique() < MIN_FEATURE_LEVELS):
+        return (np.nan,) * 4
+
+    # Re-standardize within this subsample. Features arrive z-scored against the
+    # pooled distribution, but a subsample can contain far less variation than the
+    # pool: within one stage, `mean_positivity_zscore_conversation` varies by only
+    # 0.06 pooled SDs. Reporting its effect "per pooled SD" then extrapolates an
+    # order of magnitude beyond any observed value and returns a coefficient of
+    # 0.23 on an outcome bounded in [0, 1]. Rescaling makes every coefficient an
+    # effect per SD of variation that actually occurs in the data being fitted.
+    x = (x - x.mean()) / x.std()
+    X = sm.add_constant(pd.concat([x.rename("feature"), design(df, ctrl)], axis=1))
+    model = sm.OLS(df[OUTCOME], X).fit(cov_type="cluster",
+                                       cov_kwds={"groups": df[GROUP]})
+    ci = model.conf_int().loc["feature"]
+    return model.params["feature"], model.pvalues["feature"], ci[0], ci[1]
+
+
+# ------------------------------------ are the same features predictive when? -
+def stage_feature_effects(learn, val):
+    """Refit every feature's effect separately within each stage.
+
+    The question is not only whether talk predicts contribution, but whether the
+    *same* talk predicts it throughout. A feature that helps in the opening and
+    hurts in the endgame is a different phenomenon from one that helps throughout,
+    and a single pooled coefficient hides both.
+    """
+    col, order = STAGINGS[PRIMARY_STAGING]
+    fam_of = manifest().set_index("feature")["family"].to_dict()
+    rows = []
+
+    for block in BLOCKS:
+        flag = f"has_features_{block}"
+        for stage in order:
+            l_sub = learn[(learn[col] == stage) & learn[flag].astype(bool)]
+            v_sub = val[(val[col] == stage) & val[flag].astype(bool)]
+            if len(l_sub) < 100:
+                continue
+            ctrl_l, ctrl_v = controls(l_sub), controls(v_sub)
+
+            for feature in block_features(learn, block):
+                coef, p_val, lo, hi = _one_feature(l_sub, feature, ctrl_l)
+                if np.isnan(coef):
+                    continue
+                v_coef, v_p, v_lo, v_hi = _one_feature(v_sub, feature, ctrl_v)
+                base = feature.rsplit("__", 1)[0]
+                rows.append({"block": block, "stage": stage, "feature": base,
+                             "family": fam_of.get(base, "Other"),
+                             "n_game_rounds": len(l_sub),
+                             "coef_learn": coef, "p_learn": p_val,
+                             "ci_low_learn": lo, "ci_high_learn": hi,
+                             "coef_val": v_coef, "p_val": v_p,
+                             "ci_low_val": v_lo, "ci_high_val": v_hi})
+
+    out = pd.DataFrame(rows)
+    tested = len(block_features(learn, "pre", with_indicator=False)) * len(order) * 2
+    print(f"   (kept {len(out)} of {tested} feature-by-stage regressions; the rest "
+          f"had too little variance within their stage to estimate)")
+    # FDR is applied within each block-and-stage, since each is its own screen.
+    out["q_learn"] = np.nan
+    for (b, st), grp in out.groupby(["block", "stage"]):
+        out.loc[grp.index, "q_learn"] = multipletests(grp["p_learn"],
+                                                      method="fdr_bh")[1]
+    out["replicates"] = ((out["q_learn"] < 0.05) & (out["p_val"] < 0.05)
+                         & (np.sign(out["coef_learn"]) == np.sign(out["coef_val"])))
+    out = out.sort_values(["block", "stage", "p_learn"]).reset_index(drop=True)
+    out.to_csv(TABLES / "stage_feature_effects.csv", index=False)
+    return out
+
+
+def stage_agreement(stage_effects):
+    """Do the stages agree about which features matter?
+
+    Two summaries per pair of stages: the correlation between their full
+    coefficient vectors (do they rank features the same way?) and how many features
+    reach p<.05 in both with the same sign (do they agree on the strong ones?).
+    A low correlation means "different talk matters at different times"; a high one
+    means the pooled estimate was hiding nothing.
+    """
+    col, order = STAGINGS[PRIMARY_STAGING]
+    rows = []
+    for block in BLOCKS:
+        sub = stage_effects[stage_effects["block"] == block]
+        wide = sub.pivot_table(index="feature", columns="stage", values="coef_learn")
+        sig = {st: set(g.loc[g["p_learn"] < 0.05, "feature"])
+               for st, g in sub.groupby("stage")}
+        for i, a in enumerate(order):
+            for b in order[i + 1:]:
+                if a not in wide.columns or b not in wide.columns:
+                    continue
+                pair = wide[[a, b]].dropna()
+                both = sig.get(a, set()) & sig.get(b, set())
+                agree = sum(1 for f in both
+                            if np.sign(wide.loc[f, a]) == np.sign(wide.loc[f, b]))
+                rows.append({"block": block, "stage_a": a, "stage_b": b,
+                             "n_features": len(pair),
+                             "coef_correlation": pair[a].corr(pair[b]),
+                             "n_sig_a": len(sig.get(a, set())),
+                             "n_sig_b": len(sig.get(b, set())),
+                             "n_sig_both": len(both),
+                             "n_sig_both_same_sign": agree})
+    out = pd.DataFrame(rows)
+    out.to_csv(TABLES / "stage_agreement.csv", index=False)
     return out
 
 
@@ -375,22 +688,11 @@ def feature_effects(learn, val):
         v_t = val[val[flag].astype(bool)]
         l_controls, v_controls = controls(l_t), controls(v_t)
 
-        def fit_one(df, feature, ctrl):
-            x = pd.to_numeric(df[feature], errors="coerce").fillna(0.0)
-            if x.std() == 0:
-                return (np.nan,) * 4
-            X = sm.add_constant(pd.concat([x.rename("feature"),
-                                           design(df, ctrl)], axis=1))
-            model = sm.OLS(df[OUTCOME], X).fit(cov_type="cluster",
-                                               cov_kwds={"groups": df[GROUP]})
-            ci = model.conf_int().loc["feature"]
-            return model.params["feature"], model.pvalues["feature"], ci[0], ci[1]
-
         for feature in block_features(learn, block):
-            coef, p, lo, hi = fit_one(l_t, feature, l_controls)
+            coef, p, lo, hi = _one_feature(l_t, feature, l_controls)
             if np.isnan(coef):
                 continue
-            v_coef, v_p, v_lo, v_hi = fit_one(v_t, feature, v_controls)
+            v_coef, v_p, v_lo, v_hi = _one_feature(v_t, feature, v_controls)
             base = feature.rsplit("__", 1)[0]
             rows.append({"feature": base, "block": block,
                          "block_meaning": BLOCKS[block],
@@ -428,13 +730,38 @@ def main():
     print(comparison.to_string(index=False), "\n")
     print(decomp.to_string(index=False), "\n")
 
-    print("C. Which kind of talk carries any content term")
+    print("C. Speaking at all, versus what was said")
+    print(speech_vs_content(learn, val).to_string(index=False), "\n")
+
+    print("D. Which kind of talk carries any content term")
     print(family_importance(learn, val).to_string(index=False), "\n")
 
-    print("D. When in a game does talk matter")
-    print(round_stage(learn, val).to_string(index=False), "\n")
+    print("E. When in a game does talk matter")
+    stages = round_stage(learn, val)
+    print(stages[stages.staging == PRIMARY_STAGING].to_string(index=False), "\n")
+    print("   robustness, relative staging:")
+    print(stages[stages.staging == "relative"].to_string(index=False), "\n")
 
-    print("E. Individual features (top 12 by learn-split p-value)")
+    print("F. What is actually said at each stage (largest swings, PRE block)")
+    profile = stage_profile(learn)
+    print(profile[profile.block == "pre"].head(10).round(3).to_string(index=False))
+    print("\n   sample messages:")
+    ex = stage_examples()
+    for stage in STAGINGS[PRIMARY_STAGING][1]:
+        sub = ex[(ex.stage == stage) & (ex.block == "pre")].head(3)
+        for row in sub.itertuples():
+            print(f"     [{stage:<7} r{row.round_index:<2}] {str(row.text)[:78]}")
+    print()
+
+    print("G. Are the same features predictive at each stage?")
+    stage_effects = stage_feature_effects(learn, val)
+    agreement = stage_agreement(stage_effects)
+    print(agreement.round(3).to_string(index=False), "\n")
+    top = (stage_effects[stage_effects.p_learn < 0.05]
+           .groupby(["block", "stage"]).size().rename("n_features_p<.05"))
+    print(top.to_string(), "\n")
+
+    print("H. Individual features, pooled across stages (top 12)")
     effects = feature_effects(learn, val)
     cols = ["feature", "block", "family", "coef_learn", "q_learn", "coef_val", "p_val"]
     print(effects.head(12)[cols].to_string(index=False))

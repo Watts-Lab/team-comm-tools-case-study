@@ -9,6 +9,11 @@ Outputs (per split, under outputs/features/output/):
   * ``conv/{split}_conv_level.csv``  - one row per game-round conversation
     (the grain the analysis joins on)
 
+The learning split is written with the toolkit's redundancy reduction applied; the
+held-out split keeps every column, and step 3 selects the learning split's surviving
+columns from it. That way both splits carry exactly the same features and the
+selection never sees held-out data.
+
 The ``output/{level}/`` nesting is imposed by the toolkit: it rewrites whatever
 paths you hand it into that layout, so the paths below mirror the convention
 rather than fight it.
@@ -22,6 +27,31 @@ import pandas as pd
 from team_comm_tools import FeatureBuilder
 
 from config import DATA_PROCESSED, FEATURES, SPLITS, VECTOR_CACHE
+
+# --- redundancy reduction, new in team_comm_tools 0.1.8 ----------------------
+# The toolkit emits families of near-duplicate columns - politeness and
+# receptiveness overlap heavily, and every chat-level feature appears again as a
+# conversation mean - so it can group features correlated above a threshold and
+# keep one representative per group. Using it replaces the hand-rolled correlation
+# screen this case study used to carry.
+#
+# Two configuration choices are deliberate:
+#
+#   treat_zero_as_na=False. The toolkit's default is True, which is the better
+#   choice for *estimating* correlations between sparse features (co-absence is
+#   not evidence of similarity). But the same frame it modifies is the one written
+#   to disk, so the default also rewrites every zero in the output as NA. On a
+#   60-conversation sample that turned 7,642 zeros into 20,745 NAs. Here zero is
+#   meaningful - "this conversation contained no greetings" is data, not a missing
+#   value - and the downstream analysis reads NA as "no conversation happened".
+#
+#   Reduction runs on the learning split only. Which columns survive is a
+#   feature-selection decision, and every such decision in this study is made on
+#   the learning split and then applied unchanged to held-out data. Letting each
+#   split reduce independently would give them different feature sets.
+CORR_THRESH = 0.9
+MIN_NA_RATIO = 0.3
+MIN_ZERO_RATIO = 0.9
 
 # Features that need sentence embeddings, so they are opt-in in the toolkit.
 # All four describe how a conversation moves rather than what any single message
@@ -56,6 +86,7 @@ def output_paths(split):
 
 
 def featurize(split, force=False):
+    reduce_here = split == "learn"
     paths = output_paths(split)
     if not force and all(p.exists() for p in paths.values()):
         print(f"[{split}] outputs already exist; pass --force to regenerate")
@@ -70,7 +101,8 @@ def featurize(split, force=False):
     chat["timestamp"] = (ts.loc[ts.notna()].astype("int64") // 10**6)
 
     print(f"[{split}] featurizing {len(chat)} messages from "
-          f"{chat.conv_id.nunique()} round-conversations")
+          f"{chat.conv_id.nunique()} round-conversations"
+          + ("  (reducing redundant columns)" if reduce_here else "  (all columns)"))
 
     FeatureBuilder(
         input_df=chat,
@@ -87,6 +119,11 @@ def featurize(split, force=False):
         output_file_path_conv_level=str(paths["conv"]),
         custom_features=CUSTOM_FEATURES,
         turns=False,                      # each message stays its own row
+        drop_redundant_columns=reduce_here,
+        corr_thresh=CORR_THRESH,
+        min_na_ratio=MIN_NA_RATIO,
+        min_zero_ratio=MIN_ZERO_RATIO,
+        treat_zero_as_na=False,           # see the note above; zero is data here
     ).featurize()
 
     conv = pd.read_csv(paths["conv"])
