@@ -6,7 +6,8 @@ chat table to 100+ conversation features, in one call per split.
 Outputs (per split, under outputs/features/output/):
   * ``chat/{split}_chat_level.csv``  - one row per message
   * ``user/{split}_user_level.csv``  - one row per speaker per conversation
-  * ``conv/{split}_conv_level.csv``  - one row per conversation (the unit we analyze)
+  * ``conv/{split}_conv_level.csv``  - one row per game-round conversation
+    (the grain the analysis joins on)
 
 The ``output/{level}/`` nesting is imposed by the toolkit: it rewrites whatever
 paths you hand it into that layout, so the paths below mirror the convention
@@ -69,11 +70,14 @@ def featurize(split, force=False):
     chat["timestamp"] = (ts.loc[ts.notna()].astype("int64") // 10**6)
 
     print(f"[{split}] featurizing {len(chat)} messages from "
-          f"{chat.gameId.nunique()} conversations")
+          f"{chat.conv_id.nunique()} round-conversations")
 
     FeatureBuilder(
         input_df=chat,
-        conversation_id_col="gameId",     # one conversation == one game
+        # One conversation == one game-round. Features therefore describe what a
+        # particular group said during a particular round, which is the grain the
+        # analysis needs; TCT drops conversations with fewer than two speakers.
+        conversation_id_col="conv_id",
         speaker_id_col="playerId",
         message_col="text",
         timestamp_col="timestamp",

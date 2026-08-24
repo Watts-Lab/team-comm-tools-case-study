@@ -63,9 +63,48 @@ CONFIG_COLS = [
     "CONFIG_showRewardId",
 ]
 
+# Timing and group facts that are known before anyone speaks. They belong with the
+# design parameters as controls: groups defect predictably as the end of a game
+# approaches, and a model without that would credit the drop to whatever was being
+# said at the time.
+TIMING_COLS = [
+    "round_index",
+    "rounds_remaining",
+    "round_position",
+    "is_last_round",
+    "n_players_active",
+]
+
+# Feature families. The toolkit returns 100+ columns drawn from a dozen different
+# papers; grouping them by the construct family they came from turns "which of 136
+# columns matters" into the answerable "which *kind* of talk matters". Order is
+# meaningful: the first match wins, so the specific suffixes come before the
+# catch-all prefixes.
+FEATURE_FAMILIES = [
+    ("Politeness",             r"_politeness_convokit$"),
+    ("Receptiveness",          r"_receptiveness_yeomans$"),
+    ("Lexical (LIWC)",         r"_lexical_wordcount$"),
+    ("Sentiment & emotion",    r"(positive_bert|negative_bert|neutral_bert"
+                               r"|textblob_|positivity_zscore|certainty_rocklage)"),
+    ("Questions & repair",     r"(num_question_naive|NTRI|hedge_naive)"),
+    ("Participation & timing", r"(turn_taking_index|gini_coefficient|team_burstiness"
+                               r"|time_diff)"),
+    ("Semantic dynamics",      r"(mimicry|forward_flow|discursive_diversity"
+                               r"|info_diversity|variance_in_DD|within_person_disc_range"
+                               r"|incongruent_modulation|_accommodation"
+                               r"|info_exchange_zscore|first_pronouns_proportion)"),
+    ("Volume & form",          r"(num_words|num_chars|num_messages|num_links"
+                               r"|num_line_breaks|num_bullet_points|num_all_caps"
+                               r"|num_block_quote|num_quotes|num_ellipses"
+                               r"|num_numbered_points|num_emoji|num_emphasis"
+                               r"|num_reddit_users|num_parentheses|word_TTR"
+                               r"|dale_chall_score)"),
+]
+
 # Columns of the TCT conversation-level output that are identifiers or passed-through
 # input columns rather than conversation features. The toolkit carries the first row
 # of the input frame along for reference, so `timestamp` and `round_index` are data
 # about one arbitrary message, not features of the conversation.
-TCT_ID_COLS = {"conversation_num", "gameId", "conversation_id", "Unnamed: 0",
-               "playerId", "avatar", "text", "timestamp", "round_index", "phase"}
+TCT_ID_COLS = {"conversation_num", "conv_id", "gameId", "conversation_id",
+               "Unnamed: 0", "playerId", "avatar", "text", "timestamp",
+               "round_index", "phase", "source_round", "target_round"}

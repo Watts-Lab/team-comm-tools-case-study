@@ -1,13 +1,26 @@
-"""Step 1 - turn the raw experiment pickles into two tidy CSVs per split.
+"""Step 1 - turn the raw experiment pickles into tidy CSVs per split.
+
+The unit of analysis is a **game-round**: one group, one round of play. That is
+what makes the question answerable - there are only a few hundred games, but
+several thousand game-rounds.
+
+Prediction runs strictly forward in time. A round's conversation is used to
+predict the contribution decision in the *next* round:
+
+    talk during round k   ->   contribution in round k+1
+
+Round k's chat spans its contribution, outcome, and summary phases, so it
+includes the group reacting to how round k turned out. Using it to predict round
+k+1 keeps every message strictly earlier than the decision it predicts, which
+rules out leakage without discarding most of the text.
 
 Outputs (per split, into data/processed/):
-  * ``chat_{split}.csv``  - one row per message, in the four-column format the
-    Team Communication Toolkit expects: conversation id, speaker id, message,
-    timestamp. Extra bookkeeping columns ride along but are ignored by TCT.
-  * ``games_{split}.csv`` - one row per game: the outcome variable, whether the
-    group could talk, and the design parameters of the game.
-  * ``rounds_{split}.csv`` - one row per game per round, used only to plot how
-    contribution evolves over the course of a game.
+  * ``chat_{split}.csv``   - one row per message, in the four-column format the
+    Team Communication Toolkit expects, plus a ``conv_id`` naming the
+    game-round-and-block it belongs to and the ``target_round`` it predicts.
+  * ``rounds_{split}.csv`` - one row per game-round: the outcome, the previous
+    round's contribution, whether the group had a channel, the design parameters,
+    and where the round sits in the game.
 
 Run:  python scripts/01_prepare_data.py
 """
@@ -91,80 +104,80 @@ def attach_configs(rounds, md):
             if col in df.columns:
                 df[col] = df[col].astype(str)
 
-    out = (rounds
-           .merge(games, on="gameId", how="left")
-           .merge(treatments, on="treatmentId", how="left")
-           .merge(configs, left_on="treatment_name",
-                  right_on="CONFIG_treatmentName", how="left"))
-    return out
+    return (rounds
+            .merge(games, on="gameId", how="left")
+            .merge(treatments, on="treatmentId", how="left")
+            .merge(configs, left_on="treatment_name",
+                   right_on="CONFIG_treatmentName", how="left"))
 
 
-# --------------------------------------------------------- game outcomes -----
-def build_game_table(rounds):
-    """Collapse player-rounds to one row per game.
+# ---------------------------------------------------------- game-rounds -----
+def build_round_table(rounds):
+    """Collapse player-rounds to one row per game-round.
 
-    The outcome is the group's mean contribution *rate* in the penultimate round.
-    The penultimate round is used rather than the last because groups that know
-    the game is ending routinely defect in the final round, which says more about
-    the horizon than about how the group got along.
+    Carries two pieces of timing information that matter in a repeated game and
+    are known before any talk happens: how far into the game the round sits, and
+    how many rounds are left. Groups defect predictably as the end approaches, so
+    a model without these would credit that to whatever was being said at the time.
     """
     rounds = rounds.dropna(subset=["data.contribution"]).copy()
     rounds["contribution_rate"] = rounds["data.contribution"] / ENDOWMENT
 
-    last_round = rounds.groupby("gameId")["round_index"].max().rename("last_round")
-    n_rounds_played = (rounds.groupby("gameId")["round_index"].nunique()
-                       .rename("n_rounds_played"))
+    game_rounds = (rounds.groupby(["gameId", "round_index"])
+                   .agg(contribution_rate=("contribution_rate", "mean"),
+                        n_players_active=("playerId", "nunique"))
+                   .reset_index())
 
-    game = pd.concat([last_round, n_rounds_played], axis=1).reset_index()
-    game = game[game["n_rounds_played"] >= MIN_ROUNDS].copy()
-    game["penultimate_round"] = game["last_round"] - 1
+    played = game_rounds.groupby("gameId")["round_index"].agg(["max", "nunique"])
+    played.columns = ["last_round", "n_rounds_played"]
+    game_rounds = game_rounds.merge(played, on="gameId")
+    game_rounds = game_rounds[game_rounds["n_rounds_played"] >= MIN_ROUNDS]
 
-    # Outcome: mean contribution rate in the penultimate round.
-    pen = rounds.merge(game[["gameId", "penultimate_round"]], on="gameId")
-    pen = pen[pen["round_index"] == pen["penultimate_round"]]
-    game = game.merge(
-        pen.groupby("gameId")["contribution_rate"].mean()
-           .rename("contribution_penultimate").reset_index(),
-        on="gameId", how="inner")
+    game_rounds["rounds_remaining"] = game_rounds["last_round"] - game_rounds["round_index"]
+    game_rounds["round_position"] = (game_rounds["round_index"]
+                                     / game_rounds["last_round"].clip(lower=1))
+    game_rounds["is_last_round"] = game_rounds["rounds_remaining"] == 0
 
-    # Secondary outcome, for robustness checks: mean rate across all rounds.
-    game = game.merge(
-        rounds.groupby("gameId")["contribution_rate"].mean()
-              .rename("contribution_all_rounds").reset_index(),
-        on="gameId", how="left")
-
-    # Design parameters are constant within a game.
     config_cols = [c for c in ["CONFIG_chat"] + CONFIG_COLS if c in rounds.columns]
-    game = game.merge(rounds.groupby("gameId")[config_cols].first().reset_index(),
-                      on="gameId", how="left")
-    game["has_chat_channel"] = game["CONFIG_chat"].astype(bool)
-    return game
+    game_rounds = game_rounds.merge(
+        rounds.groupby("gameId")[config_cols].first().reset_index(),
+        on="gameId", how="left")
+    game_rounds["has_chat_channel"] = game_rounds["CONFIG_chat"].astype(bool)
+
+    # What the group did last round. Contributions are strongly autocorrelated and
+    # POST-block talk is a reaction to this number, so it has to be a control
+    # rather than left for the conversation features to proxy for.
+    game_rounds = game_rounds.sort_values(["gameId", "round_index"])
+    game_rounds["lagged_contribution"] = (game_rounds.groupby("gameId")
+                                          ["contribution_rate"].shift(1))
+
+    # Round 0 has no previous round, so no POST block and no lagged contribution.
+    game_rounds = game_rounds[game_rounds["round_index"] >= 1].copy()
+    game_rounds["conv_id_pre"] = (game_rounds["gameId"] + "_r"
+                                  + game_rounds["round_index"].astype(str) + "_pre")
+    game_rounds["conv_id_post"] = (game_rounds["gameId"] + "_r"
+                                   + (game_rounds["round_index"] - 1).astype(str) + "_post")
+    return game_rounds
 
 
-def build_round_table(rounds, game):
-    """Mean contribution rate per game per round, for the trajectory figure."""
-    rounds = rounds.dropna(subset=["data.contribution"]).copy()
-    rounds["contribution_rate"] = rounds["data.contribution"] / ENDOWMENT
-    per_round = (rounds.groupby(["gameId", "round_index"])["contribution_rate"]
-                 .mean().rename("contribution_rate").reset_index())
-    return per_round.merge(
-        game[["gameId", "has_chat_channel", "last_round", "n_rounds_played"]],
-        on="gameId", how="inner")
+def label_chat_with_block(chat, game_rounds):
+    """Assign each message to the PRE or POST block, and name its conversation.
 
-
-def filter_chat_to_predictive_window(chat, game):
-    """Keep only messages a group could have sent *before* the outcome is decided.
-
-    Contributions for round ``k`` are made during that round's "contribution"
-    phase, so everything from rounds before the penultimate round is fair game,
-    plus the penultimate round's own contribution-phase chat. Anything from the
-    penultimate round's outcome/summary phases onward would leak the result.
+    A message's conversation id encodes the round it was spoken in and its block,
+    so the toolkit treats deliberation and reaction as separate conversations.
     """
-    chat = chat.merge(game[["gameId", "penultimate_round"]], on="gameId", how="inner")
-    before = chat["round_index"] < chat["penultimate_round"]
-    during = ((chat["round_index"] == chat["penultimate_round"])
-              & (chat["phase"] == "contribution"))
-    return chat[before | during].drop(columns=["penultimate_round"])
+    chat = chat.copy()
+    chat["block"] = chat["phase"].map({"contribution": "pre",
+                                       "outcome": "post", "summary": "post"})
+    chat = chat.dropna(subset=["block"])
+    chat["conv_id"] = (chat["gameId"] + "_r" + chat["round_index"].astype(str)
+                       + "_" + chat["block"])
+
+    # PRE talk predicts its own round; POST talk predicts the round after it.
+    chat["target_round"] = chat["round_index"] + (chat["block"] == "post").astype(int)
+
+    wanted = set(game_rounds["conv_id_pre"]) | set(game_rounds["conv_id_post"])
+    return chat[chat["conv_id"].isin(wanted)].copy()
 
 
 # ------------------------------------------------------------------ main -----
@@ -173,35 +186,33 @@ def prepare(split):
     md = load_master(split)
 
     rounds = attach_configs(md.df_rounds.copy(), md)
-    game = build_game_table(rounds)
-
-    per_round = build_round_table(rounds, game)
+    game_rounds = build_round_table(rounds)
 
     chat = parse_chat_log(md.df_games)
     chat = chat.dropna(subset=["timestamp"])
     chat = chat[chat["text"].astype(str).str.strip() != ""]
-    chat = filter_chat_to_predictive_window(chat, game)
-    chat = chat.sort_values(["gameId", "timestamp"]).reset_index(drop=True)
+    chat = label_chat_with_block(chat, game_rounds)
+    chat = chat.sort_values(["conv_id", "timestamp"]).reset_index(drop=True)
 
-    # A group only counts as "communicating" if the channel was open *and* it was
-    # actually used; a chat-enabled group that never typed has no conversation to
-    # extract features from.
-    talked = set(chat["gameId"].unique())
-    game["did_communicate"] = game["gameId"].isin(talked)
-
-    per_round.to_csv(DATA_PROCESSED / f"rounds_{split}.csv", index=False)
+    spoke = set(chat["conv_id"].unique())
+    game_rounds["had_pre_talk"] = game_rounds["conv_id_pre"].isin(spoke)
+    game_rounds["had_post_talk"] = game_rounds["conv_id_post"].isin(spoke)
+    game_rounds["had_conversation"] = (game_rounds["had_pre_talk"]
+                                       | game_rounds["had_post_talk"])
 
     chat_path = DATA_PROCESSED / f"chat_{split}.csv"
-    game_path = DATA_PROCESSED / f"games_{split}.csv"
+    rounds_path = DATA_PROCESSED / f"rounds_{split}.csv"
     chat.to_csv(chat_path, index=False)
-    game.to_csv(game_path, index=False)
+    game_rounds.to_csv(rounds_path, index=False)
 
-    print(f"games: {len(game)}  (channel open: {int(game.has_chat_channel.sum())}, "
-          f"actually talked: {int(game.did_communicate.sum())})")
-    print(f"messages kept: {len(chat)} across {chat.gameId.nunique()} games")
-    print(f"mean penultimate contribution rate: "
-          f"{game.contribution_penultimate.mean():.3f}")
-    print(f"wrote {chat_path.name}, {game_path.name}")
+    print(f"game-rounds: {len(game_rounds)} from {game_rounds.gameId.nunique()} games")
+    print(f"  channel open: {int(game_rounds.has_chat_channel.sum())}")
+    print(f"  with PRE (deliberation) talk:  {int(game_rounds.had_pre_talk.sum())}")
+    print(f"  with POST (reaction) talk:     {int(game_rounds.had_post_talk.sum())}")
+    print(f"messages: {len(chat)} across {chat.conv_id.nunique()} block-conversations "
+          f"({chat.block.value_counts().to_dict()})")
+    print(f"mean contribution rate: {game_rounds.contribution_rate.mean():.3f}")
+    print(f"wrote {chat_path.name}, {rounds_path.name}")
 
 
 if __name__ == "__main__":

@@ -1,21 +1,43 @@
-"""Step 4 - answer the research question.
+"""Step 4 - decompose contribution into channel, deliberation, reaction, and momentum.
 
     Which conversation features predict greater contribution in groups that
     communicate, versus groups that do not?
 
-The question has three parts, and this script answers them in order:
+Every game-round is in the sample, whether or not the group had a channel, and the
+models are built up one block at a time:
 
-  A. Does having a channel matter at all?  (chat vs. no-chat groups)
-  B. Among groups that talked, which conversation features move contribution,
-     holding the rules of the game fixed?
-  C. Does conversation content buy predictive power that the game's design
-     parameters do not already provide - and does it hold up out of sample?
+    M0  design parameters + round timing     the rules of the game
+    M1  + chat channel indicator             the *mere channel*
+    M2  + last round's contribution          momentum: what they were already doing
+    M3  + PRE features   (deliberation)      what they said while deciding
+    M4  + POST features  (reaction)          what they said about the last result
+    M5  + both blocks
 
-Everything is fit on the learning split and then checked on a held-out split
-that played no part in any modeling decision.
+M3, M4 and M5 are each compared against M2 rather than chained, so the two talk
+blocks are not competing for whichever happens to be entered first.
 
-Outputs (into outputs/tables/): channel_effect.csv, feature_effects.csv,
-model_comparison.csv, selected_coefficients.csv
+The order of the channel and momentum is deliberate, and it is not the obvious one.
+Contribution is autocorrelated at r = 0.87, so last round's contribution is by far
+the strongest single predictor - it alone takes cross-validated R² from 0.08 to
+0.76. It is tempting to control for it first and ask what else survives. That would
+be a mistake for the channel: the channel was randomized at the *game* level and
+raises contribution in every round, so last round's contribution is a **mediator**
+of the channel effect rather than a confounder of it. Entering it first blocks the
+channel's own causal pathway and shrinks its apparent contribution from about 0.10
+to 0.004 - an artifact of over-controlling, not a finding.
+
+So the channel is measured against the game's rules alone, which is valid because
+it was randomized and needs no adjustment. Momentum then enters *after* it, and the
+talk blocks are judged against that much tougher baseline - which is the right test
+for them, since POST-block talk is a reaction to the previous result and could
+otherwise look predictive purely by proxying for it.
+
+Follow-ups: which toolkit feature family carries any content term, whether talk
+matters more early or late in a game, and which individual features move
+contribution - screened with FDR on the learning split and re-tested on held-out data.
+
+Two model families throughout: a penalized linear model and a random forest.
+Everything is fit on the learning split; held-out data is scored once, at the end.
 
 Run:  python scripts/04_analysis.py
 """
@@ -23,27 +45,38 @@ Run:  python scripts/04_analysis.py
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
-from sklearn.impute import SimpleImputer
-from sklearn.linear_model import ElasticNetCV, LinearRegression
-from sklearn.model_selection import KFold, cross_val_predict
+from scipy.linalg import qr as scipy_qr
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import ElasticNetCV
+from sklearn.model_selection import GroupKFold, cross_val_predict
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from statsmodels.stats.multitest import multipletests
 
-from config import CONFIG_COLS, DATA_PROCESSED, SEED, TABLES
+from config import CONFIG_COLS, DATA_PROCESSED, SEED, TABLES, TIMING_COLS
 
-OUTCOME = "contribution_penultimate"
+OUTCOME = "contribution_rate"
+GROUP = "gameId"          # rounds within a game are not independent observations
+CHANNEL = "has_chat_channel"
+MOMENTUM = "lagged_contribution"
+BLOCKS = {"pre": "deliberation", "post": "reaction"}
 N_FOLDS = 10
-N_REPEATS = 3     # repeats of the fold split, to damp fold-assignment noise
 N_BOOT = 2000
+
+# The outcome is a share of an endowment, so it cannot fall outside [0, 1]. Every
+# model here is unconstrained and will occasionally predict outside that range; on
+# a small subsample a single degenerate penalized fit once produced -5.6, which by
+# itself dragged that subsample's R² to -0.66. Predictions are therefore clipped to
+# the feasible range before scoring. This is a statement about the outcome, not a
+# tuning knob: it is applied identically to every model, split, and subsample.
+OUTCOME_BOUNDS = (0.0, 1.0)
 
 rng = np.random.default_rng(SEED)
 
 
 # ---------------------------------------------------------------- helpers ---
 def load(split):
-    df = pd.read_csv(DATA_PROCESSED / f"analysis_{split}.csv")
-    # Booleans arrive from CSV as True/False strings in some columns.
+    df = pd.read_csv(DATA_PROCESSED / f"analysis_{split}.csv", low_memory=False)
     for col in df.columns:
         if df[col].dtype == object:
             lowered = df[col].astype(str).str.lower()
@@ -52,123 +85,58 @@ def load(split):
     return df
 
 
-def feature_columns():
-    manifest = pd.read_csv(TABLES / "feature_manifest.csv")
-    return manifest.loc[manifest["kept"], "feature"].tolist()
+def manifest():
+    return pd.read_csv(TABLES / "feature_manifest.csv")
 
 
-def usable_configs(df):
-    """Config columns present and varying within this subset of games."""
-    return [c for c in CONFIG_COLS
-            if c in df.columns and df[c].nunique(dropna=True) > 1]
+def block_features(df, block):
+    """The kept toolkit features for one talk block, as they appear in the table."""
+    m = manifest()
+    cols = [f"{f}__{block}" for f in m.loc[m["kept"], "feature"]]
+    return [c for c in cols if c in df.columns]
+
+
+def families(df):
+    """{family: [feature columns across both blocks]}."""
+    m = manifest()
+    m = m[m["kept"]]
+    out = {}
+    for fam, sub in m.groupby("family"):
+        cols = [f"{f}__{b}" for f in sub["feature"] for b in BLOCKS]
+        out[fam] = [c for c in cols if c in df.columns]
+    return out
+
+
+def controls(df, extra=()):
+    """Everything known before this round's talk: rules, timing, and momentum.
+
+    Two prunes, both necessary. Constant columns carry no information, and linearly
+    dependent ones leave the regression rank-deficient - which OLS reports as an
+    astronomically wide confidence interval rather than an error. The config set
+    contains exact identities by construction (MPCR is the multiplier divided by the
+    player count), and dependence is split-specific, so this runs per sample.
+    """
+    cols = [c for c in CONFIG_COLS + TIMING_COLS + [MOMENTUM] + list(extra)
+            if c in df.columns]
+    cols = [c for c in cols if df[c].nunique(dropna=True) > 1]
+    return drop_dependent_columns(design(df, cols))
+
+
+def drop_dependent_columns(X, tol=1e-8):
+    """Keep a maximal set of linearly independent columns, via pivoted QR."""
+    A = X.to_numpy(dtype=float)
+    sd = A.std(axis=0)
+    A = (A - A.mean(axis=0)) / np.where(sd == 0, 1.0, sd)
+    _, R, pivots = scipy_qr(A, mode="economic", pivoting=True)
+    diag = np.abs(np.diag(R))
+    rank = int(np.sum(diag > tol * max(diag[0], 1.0)))
+    return [X.columns[i] for i in sorted(pivots[:rank])]
 
 
 def design(df, cols):
-    """Float design matrix with median imputation for the few missing cells.
-
-    The explicit float cast matters: several config columns are booleans, and a
-    frame mixing bool and float columns lands in statsmodels as dtype object.
-    """
+    """Float design matrix with median imputation for the few missing cells."""
     X = df[cols].apply(pd.to_numeric, errors="coerce").astype(float)
     return X.fillna(X.median())
-
-
-def talkers(df):
-    """Groups with an open channel that actually used it."""
-    return df[df["did_communicate"].astype(bool)].copy()
-
-
-def silent(df):
-    """Groups that had no channel at all - the counterfactual baseline."""
-    return df[~df["has_chat_channel"].astype(bool)].copy()
-
-
-# ------------------------------------------------ A. does the channel matter -
-def channel_effect(splits):
-    """Regress contribution on channel availability, controlling for game rules."""
-    rows = []
-    for split, df in splits.items():
-        configs = usable_configs(df)
-        X = pd.concat([df["has_chat_channel"].astype(float).rename("has_chat_channel"),
-                       design(df, configs)], axis=1)
-        model = sm.OLS(df[OUTCOME], sm.add_constant(X)).fit(cov_type="HC3")
-        ci = model.conf_int().loc["has_chat_channel"]
-        rows.append({
-            "split": split,
-            "n_games": len(df),
-            "mean_no_channel": df.loc[~df.has_chat_channel.astype(bool), OUTCOME].mean(),
-            "mean_channel": df.loc[df.has_chat_channel.astype(bool), OUTCOME].mean(),
-            "adj_coef": model.params["has_chat_channel"],
-            "ci_low": ci[0], "ci_high": ci[1],
-            "p_value": model.pvalues["has_chat_channel"],
-            "model_r2": model.rsquared,
-        })
-    out = pd.DataFrame(rows)
-    out.to_csv(TABLES / "channel_effect.csv", index=False)
-    return out
-
-
-# --------------------------------------- B. which conversation features matter
-def feature_effects(learn, val, features):
-    """One regression per conversation feature, among groups that talked.
-
-    Each feature is standardized within the split, so the coefficient reads as
-    "change in contribution rate per SD of this feature", holding the game's
-    design parameters fixed.
-
-    Two multiplicity controls are reported, and they answer different questions.
-    ``q_learn`` is a Benjamini-Hochberg correction across all features within the
-    learning split - the strict within-sample screen. ``replicates`` is the
-    out-of-sample test: the same feature reaching p<.05 with the same sign in a
-    split that played no part in selecting it. With ~150 conversations the FDR
-    screen has very little power, so replication is the more informative of the
-    two, and a feature that clears it while failing FDR is reported as exactly
-    that rather than as an established effect.
-    """
-    learn_t, val_t = talkers(learn), talkers(val)
-    configs = usable_configs(learn_t)
-
-    def fit_one(df, feature, config_cols):
-        x = pd.to_numeric(df[feature], errors="coerce")
-        if x.notna().sum() < 20 or x.std(skipna=True) == 0:
-            return np.nan, np.nan, np.nan, np.nan
-        z = ((x - x.mean()) / x.std()).fillna(0.0)
-        X = sm.add_constant(pd.concat([z.rename("feature"),
-                                       design(df, config_cols)], axis=1))
-        model = sm.OLS(df[OUTCOME], X).fit(cov_type="HC3")
-        ci = model.conf_int().loc["feature"]
-        return model.params["feature"], model.pvalues["feature"], ci[0], ci[1]
-
-    val_configs = usable_configs(val_t)
-    rows = []
-    for feature in features:
-        coef, p, lo, hi = fit_one(learn_t, feature, configs)
-        if np.isnan(coef):
-            continue
-        v_coef, v_p, v_lo, v_hi = fit_one(val_t, feature, val_configs)
-        rows.append({"feature": feature, "coef_learn": coef, "p_learn": p,
-                     "ci_low_learn": lo, "ci_high_learn": hi,
-                     "coef_val": v_coef, "p_val": v_p,
-                     "ci_low_val": v_lo, "ci_high_val": v_hi})
-
-    out = pd.DataFrame(rows)
-    out["q_learn"] = multipletests(out["p_learn"], method="fdr_bh")[1]
-    out["replicates"] = (out["p_learn"] < 0.05) & (out["p_val"] < 0.05) & \
-                        (np.sign(out["coef_learn"]) == np.sign(out["coef_val"]))
-    out = out.sort_values("p_learn").reset_index(drop=True)
-    out.to_csv(TABLES / "feature_effects.csv", index=False)
-    return out
-
-
-# ------------------------------------------ C. does conversation add prediction
-def model_pipeline(penalized):
-    """Standardized regression; penalized when the feature count is large."""
-    estimator = (ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9, 1.0], n_alphas=50, cv=5,
-                              random_state=SEED, max_iter=10000, n_jobs=-1)
-                 if penalized else LinearRegression())
-    return Pipeline([("impute", SimpleImputer(strategy="median")),
-                     ("scale", StandardScaler()),
-                     ("model", estimator)])
 
 
 def r2(y, pred):
@@ -176,146 +144,303 @@ def r2(y, pred):
     return 1 - np.sum((y - pred) ** 2) / np.sum((y - y.mean()) ** 2)
 
 
-def bootstrap_r2_ci(y, pred, n_boot=N_BOOT):
-    """Percentile CI for R², resampling games with replacement."""
-    y, pred = np.asarray(y), np.asarray(pred)
-    idx = rng.integers(0, len(y), size=(n_boot, len(y)))
-    draws = np.array([r2(y[i], pred[i]) for i in idx])
+def cluster_bootstrap(groups, stat, n_boot=N_BOOT):
+    """Percentile CI from resampling whole games, not individual rounds.
+
+    Rounds within a game share a group, a treatment, and a conversation, so
+    resampling rows would badly understate the uncertainty.
+    """
+    groups = np.asarray(groups)
+    index_of = {g: np.flatnonzero(groups == g) for g in np.unique(groups)}
+    unique = np.array(list(index_of))
+    draws = [stat(np.concatenate([index_of[g] for g in
+                                  rng.choice(unique, size=len(unique), replace=True)]))
+             for _ in range(n_boot)]
     return np.percentile(draws, [2.5, 97.5])
 
 
-def out_of_fold(pipe, X, y):
-    """Out-of-fold predictions, averaged over several independent fold splits.
+# ----------------------------------------------------------- model zoo ------
+def make_model(kind):
+    """The two model families, behind one interface."""
+    if kind == "elastic net":
+        estimator = ElasticNetCV(l1_ratio=[0.5, 1.0], n_alphas=30, cv=3,
+                                 random_state=SEED, max_iter=5000, n_jobs=-1)
+    elif kind == "random forest":
+        # Heavily regularized on purpose. Because folds hold out whole games, a
+        # default forest (leaf=5, all features per split) memorizes game-specific
+        # patterns and scores a *negative* cross-validated R² - worse than
+        # predicting the mean. Large leaves and a feature subsample fix that: on
+        # learning-split CV, leaf=5 scores -0.10 and leaf=100 scores +0.21.
+        # Chosen on the learning split alone.
+        estimator = RandomForestRegressor(n_estimators=500, min_samples_leaf=100,
+                                          max_features=0.3, random_state=SEED,
+                                          n_jobs=-1)
+    else:
+        raise ValueError(kind)
+    return Pipeline([("scale", StandardScaler()), ("model", estimator)])
 
-    With ~150 games a single 10-fold split is noisy enough that R² can swing by
-    a tenth on the choice of random seed alone. Averaging the out-of-fold
-    predictions across repeats damps that without touching any held-out data.
+
+def out_of_fold(kind, df, cols):
+    """Out-of-fold predictions with games held out whole.
+
+    Splitting on rows would leak: two rounds of the same game share a group, a
+    treatment, and often a conversation, so a row-wise fold would be predicting a
+    game partly from itself.
     """
-    preds = [cross_val_predict(pipe, X, y,
-                               cv=KFold(N_FOLDS, shuffle=True, random_state=SEED + r))
-             for r in range(N_REPEATS)]
-    return np.mean(preds, axis=0)
+    X, y = design(df, cols), df[OUTCOME].to_numpy()
+    pred = cross_val_predict(make_model(kind), X, y,
+                             cv=GroupKFold(n_splits=N_FOLDS), groups=df[GROUP])
+    return np.clip(pred, *OUTCOME_BOUNDS)
 
 
-def evaluate(name, learn_df, val_df, cols, penalized):
-    """Cross-validated fit on learn, then a single honest test on val."""
-    X_learn, y_learn = design(learn_df, cols), learn_df[OUTCOME].to_numpy()
-    pipe = model_pipeline(penalized)
-
-    oof = out_of_fold(pipe, X_learn, y_learn)
-    lo, hi = bootstrap_r2_ci(y_learn, oof)
-
-    pipe.fit(X_learn, y_learn)
-    X_val, y_val = design(val_df, cols), val_df[OUTCOME].to_numpy()
-    val_pred = pipe.predict(X_val[X_learn.columns])
-
-    row = {"model": name, "n_features": len(cols),
-           "n_learn": len(learn_df), "n_val": len(val_df),
-           "cv_r2_learn": r2(y_learn, oof), "cv_r2_ci_low": lo, "cv_r2_ci_high": hi,
-           "r2_heldout_val": r2(y_val, val_pred)}
-    predictions = {"y_learn": y_learn, "oof": oof, "y_val": y_val, "val": val_pred}
-    return row, pipe, predictions
+def fit_predict_heldout(kind, learn, val, cols):
+    X, y = design(learn, cols), learn[OUTCOME].to_numpy()
+    pipe = make_model(kind).fit(X, y)
+    pred = pipe.predict(design(val, cols)[X.columns])
+    return pipe, np.clip(pred, *OUTCOME_BOUNDS)
 
 
-def paired_delta_r2(better, baseline, n_boot=N_BOOT):
-    """Paired bootstrap of the R² difference between two models on the same games.
+# ------------------------------------- A. the channel effect, as a coefficient
+def channel_effect(splits):
+    """Regress contribution on channel availability, controlling for the rest.
 
-    Resampling the same game indices for both models keeps the comparison paired,
-    so the interval reflects how much better one model is rather than how much
-    each model varies on its own.
+    Standard errors are clustered by game, since a game contributes many rounds.
     """
-    def delta(key_y, key_pred):
-        y = better[key_y]
-        idx = rng.integers(0, len(y), size=(n_boot, len(y)))
-        draws = np.array([r2(y[i], better[key_pred][i]) - r2(y[i], baseline[key_pred][i])
-                          for i in idx])
-        point = r2(y, better[key_pred]) - r2(y, baseline[key_pred])
-        return point, *np.percentile(draws, [2.5, 97.5])
+    rows = []
+    for split, df in splits.items():
+        # Momentum is excluded here for the same reason it is entered after the
+        # channel in the decomposition: it is a mediator of the channel effect, and
+        # adjusting for it would report the channel's direct effect only.
+        ctrl = [c for c in controls(df) if c != MOMENTUM]
+        X = pd.concat([df[CHANNEL].astype(float).rename(CHANNEL),
+                       design(df, ctrl)], axis=1)
+        model = sm.OLS(df[OUTCOME], sm.add_constant(X)).fit(
+            cov_type="cluster", cov_kwds={"groups": df[GROUP]})
+        ci = model.conf_int().loc[CHANNEL]
+        rows.append({
+            "split": split, "n_game_rounds": len(df), "n_games": df[GROUP].nunique(),
+            "mean_no_channel": df.loc[df[CHANNEL] == 0, OUTCOME].mean(),
+            "mean_channel": df.loc[df[CHANNEL] == 1, OUTCOME].mean(),
+            "adj_coef": model.params[CHANNEL], "ci_low": ci[0], "ci_high": ci[1],
+            "p_value": model.pvalues[CHANNEL], "model_r2": model.rsquared,
+        })
+    out = pd.DataFrame(rows)
+    out.to_csv(TABLES / "channel_effect.csv", index=False)
+    return out
 
-    cv_point, cv_lo, cv_hi = delta("y_learn", "oof")
-    val_point, val_lo, val_hi = delta("y_val", "val")
-    return {"delta_cv_r2_learn": cv_point, "delta_cv_ci_low": cv_lo,
-            "delta_cv_ci_high": cv_hi, "delta_r2_heldout_val": val_point,
-            "delta_val_ci_low": val_lo, "delta_val_ci_high": val_hi}
+
+# ------------------------------------------- B. the nested decomposition ----
+def decomposition(learn, val):
+    """R² of each nested model, and the ΔR² each block is worth."""
+    base = controls(learn)                       # rules + timing + momentum
+    rules = [c for c in base if c != MOMENTUM]
+    pre, post = block_features(learn, "pre"), block_features(learn, "post")
+
+    specs = {
+        "M0 rules + timing": rules,
+        "M1 + chat channel": rules + [CHANNEL],
+        "M2 + momentum": base + [CHANNEL],
+        "M3 + deliberation (PRE)": base + [CHANNEL] + pre,
+        "M4 + reaction (POST)": base + [CHANNEL] + post,
+        "M5 + both blocks": base + [CHANNEL] + pre + post,
+    }
+
+    rows, preds = [], {}
+    for kind in ("elastic net", "random forest"):
+        for name, cols in specs.items():
+            oof = out_of_fold(kind, learn, cols)
+            _, val_pred = fit_predict_heldout(kind, learn, val, cols)
+            preds[(kind, name)] = (oof, val_pred)
+            y = learn[OUTCOME].to_numpy()
+            lo, hi = cluster_bootstrap(
+                learn[GROUP], lambda idx, o=oof: r2(y[idx], o[idx]))
+            rows.append({"model_family": kind, "model": name, "n_features": len(cols),
+                         "cv_r2_learn": r2(y, oof),
+                         "cv_r2_ci_low": lo, "cv_r2_ci_high": hi,
+                         "r2_heldout_val": r2(val[OUTCOME], val_pred)})
+    comparison = pd.DataFrame(rows)
+    comparison.to_csv(TABLES / "model_comparison.csv", index=False)
+
+    # Each step measured against the model it should be judged against.
+    steps = [("channel", "M0 rules + timing", "M1 + chat channel"),
+             ("momentum", "M1 + chat channel", "M2 + momentum"),
+             ("deliberation (PRE)", "M2 + momentum", "M3 + deliberation (PRE)"),
+             ("reaction (POST)", "M2 + momentum", "M4 + reaction (POST)"),
+             ("both talk blocks", "M2 + momentum", "M5 + both blocks")]
+    y_learn = learn[OUTCOME].to_numpy()
+    y_val = val[OUTCOME].to_numpy()
+    deltas = []
+    for kind in ("elastic net", "random forest"):
+        for label, base_name, plus_name in steps:
+            b_oof, b_val = preds[(kind, base_name)]
+            p_oof, p_val = preds[(kind, plus_name)]
+            lo, hi = cluster_bootstrap(
+                learn[GROUP],
+                lambda idx, b=b_oof, p=p_oof: r2(y_learn[idx], p[idx]) - r2(y_learn[idx], b[idx]))
+            deltas.append({
+                "model_family": kind, "step": label,
+                "delta_cv_r2": r2(y_learn, p_oof) - r2(y_learn, b_oof),
+                "ci_low": lo, "ci_high": hi,
+                "delta_r2_heldout": r2(y_val, p_val) - r2(y_val, b_val)})
+    decomp = pd.DataFrame(deltas)
+    decomp.to_csv(TABLES / "variance_decomposition.csv", index=False)
+    return comparison, decomp
 
 
-def model_comparison(learn, val, features):
-    configs = usable_configs(talkers(learn))
-    rows, fitted = [], {}
+# ------------------------------------------ which kind of talk carries it ---
+def family_importance(learn, val):
+    """Drop one feature family at a time (from both blocks) and watch R² fall.
 
-    specs = [
-        # Groups that could not talk: how far do the rules of the game alone go?
-        ("no channel: game rules only", silent(learn), silent(val), configs, False),
-        # Same model, groups that did talk - the like-for-like baseline.
-        ("communicating: game rules only", talkers(learn), talkers(val), configs, False),
-        # The question of interest: does what they said add anything?
-        ("communicating: game rules + conversation",
-         talkers(learn), talkers(val), configs + features, True),
-        # Conversation features alone, for reference.
-        ("communicating: conversation only",
-         talkers(learn), talkers(val), features, True),
-    ]
-    preds = {}
-    for name, l_df, v_df, cols, penalized in specs:
-        row, pipe, prediction = evaluate(name, l_df, v_df, cols, penalized)
-        rows.append(row)
-        fitted[name] = (pipe, cols)
-        preds[name] = prediction
+    Leave-one-family-out rather than family-alone: it asks what a family adds that
+    nothing else in the toolkit already captures, which is the question a researcher
+    choosing what to measure actually faces. Families overlap, so these do not sum
+    to the content term.
+    """
+    full_cols = (controls(learn) + [CHANNEL]
+                 + block_features(learn, "pre") + block_features(learn, "post"))
+    rows = []
+    for kind in ("elastic net", "random forest"):
+        full_oof = out_of_fold(kind, learn, full_cols)
+        _, full_val = fit_predict_heldout(kind, learn, val, full_cols)
+        full_r2, full_val_r2 = r2(learn[OUTCOME], full_oof), r2(val[OUTCOME], full_val)
+
+        for fam, cols in families(learn).items():
+            reduced = [c for c in full_cols if c not in set(cols)]
+            oof = out_of_fold(kind, learn, reduced)
+            _, val_pred = fit_predict_heldout(kind, learn, val, reduced)
+            rows.append({"model_family": kind, "feature_family": fam,
+                         "n_features": len(cols),
+                         "drop_in_cv_r2": full_r2 - r2(learn[OUTCOME], oof),
+                         "drop_in_heldout_r2": full_val_r2 - r2(val[OUTCOME], val_pred)})
+    out = pd.DataFrame(rows).sort_values(["model_family", "drop_in_cv_r2"],
+                                         ascending=[True, False])
+    out.to_csv(TABLES / "family_importance.csv", index=False)
+    return out
+
+
+# --------------------------------------------------- when does talk matter --
+def round_stage(learn, val):
+    """Each talk block's contribution, recomputed within thirds of a game.
+
+    This is the non-parametric version of interacting every feature with time: if
+    talk matters more at one point in a game, the block's ΔR² should differ across
+    the three stages.
+    """
+    rows = []
+    for stage, lo_q, hi_q in [("early", 0.0, 1 / 3), ("middle", 1 / 3, 2 / 3),
+                              ("late", 2 / 3, 1.01)]:
+        l_sub = learn[(learn["round_position"] >= lo_q) & (learn["round_position"] < hi_q)]
+        v_sub = val[(val["round_position"] >= lo_q) & (val["round_position"] < hi_q)]
+        base_cols = controls(l_sub) + [CHANNEL]
+        y = l_sub[OUTCOME].to_numpy()
+
+        for kind in ("elastic net", "random forest"):
+            base = out_of_fold(kind, l_sub, base_cols)
+            _, base_val = fit_predict_heldout(kind, l_sub, v_sub, base_cols)
+            base_val_r2 = r2(v_sub[OUTCOME], base_val)
+            for block in BLOCKS:
+                cols = base_cols + block_features(l_sub, block)
+                full = out_of_fold(kind, l_sub, cols)
+                _, full_val = fit_predict_heldout(kind, l_sub, v_sub, cols)
+                lo, hi = cluster_bootstrap(
+                    l_sub[GROUP],
+                    lambda idx, f=full, b=base: r2(y[idx], f[idx]) - r2(y[idx], b[idx]))
+                rows.append({"stage": stage, "block": block,
+                             "model_family": kind, "n_game_rounds": len(l_sub),
+                             "delta_cv_r2_content": r2(y, full) - r2(y, base),
+                             "ci_low": lo, "ci_high": hi,
+                             "delta_heldout_r2_content": (r2(v_sub[OUTCOME], full_val)
+                                                          - base_val_r2)})
+    out = pd.DataFrame(rows)
+    out.to_csv(TABLES / "round_stage.csv", index=False)
+    return out
+
+
+# --------------------------------------------- which individual features ----
+def feature_effects(learn, val):
+    """One regression per feature per block, among rounds that had that kind of talk.
+
+    Features are already z-scored, so a coefficient reads as "change in contribution
+    rate per SD", holding rules, timing and momentum fixed. Errors are clustered by
+    game. Learn-split p-values get an FDR correction across every feature tested;
+    the held-out column is the stronger test, since it uses data that played no part
+    in selection.
+    """
+    fam_of = manifest().set_index("feature")["family"].to_dict()
+    rows = []
+
+    for block in BLOCKS:
+        flag = f"has_features_{block}"
+        l_t = learn[learn[flag].astype(bool)]
+        v_t = val[val[flag].astype(bool)]
+        l_controls, v_controls = controls(l_t), controls(v_t)
+
+        def fit_one(df, feature, ctrl):
+            x = pd.to_numeric(df[feature], errors="coerce").fillna(0.0)
+            if x.std() == 0:
+                return (np.nan,) * 4
+            X = sm.add_constant(pd.concat([x.rename("feature"),
+                                           design(df, ctrl)], axis=1))
+            model = sm.OLS(df[OUTCOME], X).fit(cov_type="cluster",
+                                               cov_kwds={"groups": df[GROUP]})
+            ci = model.conf_int().loc["feature"]
+            return model.params["feature"], model.pvalues["feature"], ci[0], ci[1]
+
+        for feature in block_features(learn, block):
+            coef, p, lo, hi = fit_one(l_t, feature, l_controls)
+            if np.isnan(coef):
+                continue
+            v_coef, v_p, v_lo, v_hi = fit_one(v_t, feature, v_controls)
+            base = feature.rsplit("__", 1)[0]
+            rows.append({"feature": base, "block": block,
+                         "block_meaning": BLOCKS[block],
+                         "family": fam_of.get(base, "Other"),
+                         "n_game_rounds": len(l_t),
+                         "coef_learn": coef, "p_learn": p,
+                         "ci_low_learn": lo, "ci_high_learn": hi,
+                         "coef_val": v_coef, "p_val": v_p,
+                         "ci_low_val": v_lo, "ci_high_val": v_hi})
 
     out = pd.DataFrame(rows)
-    out.to_csv(TABLES / "model_comparison.csv", index=False)
-
-    # The question of interest, stated as one number: what does adding the
-    # conversation buy, over the same groups modeled from the game rules alone?
-    delta = paired_delta_r2(preds["communicating: game rules + conversation"],
-                            preds["communicating: game rules only"])
-    pd.DataFrame([delta]).to_csv(TABLES / "delta_r2.csv", index=False)
-
-    # Which conversation features did the penalized model actually keep?
-    pipe, cols = fitted["communicating: game rules + conversation"]
-    coefs = pd.DataFrame({"feature": cols,
-                          "coef_standardized": pipe.named_steps["model"].coef_})
-    coefs["is_conversation_feature"] = ~coefs["feature"].isin(configs)
-    coefs = coefs[coefs["coef_standardized"] != 0]
-    coefs = coefs.loc[coefs["coef_standardized"].abs()
-                      .sort_values(ascending=False).index]
-    coefs.to_csv(TABLES / "selected_coefficients.csv", index=False)
-    return out, coefs, delta
+    out["q_learn"] = multipletests(out["p_learn"], method="fdr_bh")[1]
+    out["replicates"] = ((out["q_learn"] < 0.05) & (out["p_val"] < 0.05)
+                         & (np.sign(out["coef_learn"]) == np.sign(out["coef_val"])))
+    out = out.sort_values("p_learn").reset_index(drop=True)
+    out.to_csv(TABLES / "feature_effects.csv", index=False)
+    return out
 
 
 # ------------------------------------------------------------------- main ---
 def main():
     learn, val = load("learn"), load("val")
-    features = [f for f in feature_columns()
-                if f in learn.columns and f in val.columns]
-    print(f"learn: {len(learn)} games ({len(talkers(learn))} talked, "
-          f"{len(silent(learn))} had no channel)")
-    print(f"val:   {len(val)} games ({len(talkers(val))} talked, "
-          f"{len(silent(val))} had no channel)")
-    print(f"conversation features carried into modeling: {len(features)}\n")
+    for name, df in (("learn", learn), ("val", val)):
+        print(f"{name}: {len(df)} game-rounds from {df[GROUP].nunique()} games "
+              f"({int(df[CHANNEL].sum())} with a channel, "
+              f"{int(df.has_features_pre.sum())} with deliberation talk, "
+              f"{int(df.has_features_post.sum())} with reaction talk)")
+    print(f"features per block: {len(block_features(learn, 'pre'))}\n")
 
     print("A. Channel effect")
     print(channel_effect({"learn": learn, "val": val}).to_string(index=False), "\n")
 
-    print("B. Conversation features (top 10 by learn-split p-value)")
-    effects = feature_effects(learn, val, features)
-    cols = ["feature", "coef_learn", "p_learn", "q_learn", "coef_val", "p_val"]
-    print(effects.head(10)[cols].to_string(index=False))
-    print(f"features passing FDR q<.05 within the learning split: "
-          f"{(effects.q_learn < 0.05).sum()}")
-    print(f"features replicating out of sample (p<.05 in both splits, same sign): "
-          f"{effects.replicates.sum()}\n")
+    print("B. Nested decomposition")
+    comparison, decomp = decomposition(learn, val)
+    print(comparison.to_string(index=False), "\n")
+    print(decomp.to_string(index=False), "\n")
 
-    print("C. Predictive comparison")
-    comparison, coefs, delta = model_comparison(learn, val, features)
-    print(comparison.to_string(index=False))
-    print(f"\nadding conversation to game rules, among groups that talked:")
-    print(f"  cross-validated dR2 = {delta['delta_cv_r2_learn']:+.3f} "
-          f"[{delta['delta_cv_ci_low']:+.3f}, {delta['delta_cv_ci_high']:+.3f}]")
-    print(f"  held-out         dR2 = {delta['delta_r2_heldout_val']:+.3f} "
-          f"[{delta['delta_val_ci_low']:+.3f}, {delta['delta_val_ci_high']:+.3f}]")
-    print(f"\nnon-zero coefficients retained: {len(coefs)} "
-          f"({int(coefs.is_conversation_feature.sum())} conversation features)")
+    print("C. Which kind of talk carries any content term")
+    print(family_importance(learn, val).to_string(index=False), "\n")
+
+    print("D. When in a game does talk matter")
+    print(round_stage(learn, val).to_string(index=False), "\n")
+
+    print("E. Individual features (top 12 by learn-split p-value)")
+    effects = feature_effects(learn, val)
+    cols = ["feature", "block", "family", "coef_learn", "q_learn", "coef_val", "p_val"]
+    print(effects.head(12)[cols].to_string(index=False))
+    print(f"tested: {len(effects)}; clearing FDR q<.05 on learn: "
+          f"{(effects.q_learn < 0.05).sum()}; also holding up on held-out data: "
+          f"{effects.replicates.sum()}")
     print("\ntables written to outputs/tables/")
 
 

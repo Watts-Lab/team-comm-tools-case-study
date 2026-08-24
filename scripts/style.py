@@ -1,5 +1,7 @@
 """Shared matplotlib styling so every figure in outputs/figures/ reads as one set."""
 
+import textwrap
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
@@ -13,6 +15,8 @@ GRID = "#e5e4df"
 COLOR_CHANNEL = BLUE       # groups that could communicate
 COLOR_NO_CHANNEL = ORANGE  # groups that could not
 COLOR_LEARN = BLUE
+COLOR_MODEL_LINEAR = BLUE
+COLOR_MODEL_FOREST = ORANGE
 COLOR_VAL = AQUA
 
 
@@ -54,5 +58,13 @@ def title(ax, headline, subtitle=None):
                 color=INK_2, va="bottom", ha="left")
 
 
-def caption(fig, text):
-    fig.text(0.0, -0.04, text, fontsize=8, color=INK_MUTED, ha="left", va="top")
+def caption(fig, text, chars_per_inch=15):
+    """Footnote under the figure, wrapped to the figure's own width.
+
+    Matplotlib does not wrap text, and `bbox_inches="tight"` grows the canvas to
+    fit whatever it is given - so an unwrapped caption silently stretches the saved
+    image to several times its intended width.
+    """
+    width = max(40, int(fig.get_size_inches()[0] * chars_per_inch))
+    fig.text(0.0, -0.04, textwrap.fill(text, width), fontsize=8,
+             color=INK_MUTED, ha="left", va="top")
