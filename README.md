@@ -83,6 +83,85 @@ that separates the channel from the content.
 * **Validation:** feature selection, scaling, model form and hyperparameters are all
   decided on the learning split. The held-out split is scored once.
 
+## What counts as a conversation, and how features are aggregated
+
+The toolkit computes each feature **at the utterance level** — one value per
+message — and then aggregates upward. What "upward" means depends on what you tell
+it a conversation is, so that choice does most of the work.
+
+**Here, one conversation is one game-round *and* one block.** A conversation id is
+`{gameId}_r{round}_{pre|post}`, so a single game contributes many conversations
+rather than one:
+
+| | Learning split |
+|---|---|
+| Games that talked | 148 |
+| Conversations | 2,649 |
+| Conversations per game | median 14, max 56 |
+| Messages per conversation | median 3 |
+
+A 30-round game yields close to sixty conversations, not thirty: up to one
+before-outcome conversation per round, plus one after-outcome conversation per round
+that has a successor. This is why the conversations are short — a median of three
+messages — and why conversation-level features like discursive diversity are noisier
+here than they would be over a whole game.
+
+Which messages land in which conversation:
+
+| Block | Messages | Predicts |
+|---|---|---|
+| `{game}_r{t}_pre` | round *t*'s contribution-phase chat | round *t*'s contribution |
+| `{game}_r{t}_post` | round *t*'s outcome- and summary-phase chat | round *t+1*'s contribution |
+
+So round *t*'s messages are split across two different conversations depending on
+whether they were sent before or after that round's result appeared, and those two
+conversations are featurized independently and predict different rounds. Nothing is
+double-counted, and nothing is discarded except messages with no round to predict:
+round 0's pre-outcome chat (there is no round before it to supply a POST block, and
+the analysis needs both) and the final round's post-outcome chat.
+
+The 248 surviving columns reach the conversation level three different ways:
+
+| Route | Columns | Example |
+|---|---|---|
+| **Native conversation-level** | 16 | `turn_taking_index`, `team_burstiness`, `discursive_diversity` — computed from the conversation as a whole, never aggregated from parts |
+| **Utterance → conversation** | 91 | `max_forward_flow` — the largest value across the messages in the conversation |
+| **Utterance → speaker → conversation** | 137 | `mean_user_max_positivity_zscore_chats` — each speaker's maximum across their own messages, then averaged across speakers |
+
+The two-stage columns are the ones with awkward names, and the extra stage matters:
+`mean_user_max_X` and `max_X` answer different questions — "how high does a typical
+participant get" versus "how high does anyone get" — and a three-person conversation
+can move them in opposite directions. Figures spell the route out in brackets after
+the feature name, so `certainty (LIWC) [max of speaker min]` reads as the
+conversation maximum, across speakers, of each speaker's minimum.
+
+## How the nested models are built
+
+Each ΔR² in the decomposition is the gain from adding one block of columns to a
+model that already contains everything above it *in its own group*:
+
+```
+M0   game rules + round timing
+M1   M0 + chat channel indicator                    -> ΔR² for the channel
+
+     within the before-outcome block:
+M2a  M1 + did this group speak this round           -> ΔR² for speaking
+M3a  M2a + 168 features describing what was said    -> ΔR² for content
+
+     within the after-outcome block:
+M2b  M1 + did this group speak last round           -> ΔR² for speaking
+M3b  M2b + 168 features describing what was said    -> ΔR² for content
+```
+
+The two talk blocks branch from the same point (M1) rather than chaining into each
+other, so neither gets an advantage from being entered first. Content is always
+measured *after* the speech indicators, which is what makes "what was said" mean
+what it says: any gain it shows is over and above knowing whether the group spoke.
+
+Every R² is out-of-fold, from 10-fold cross-validation with whole games held out, and
+every interval is a 95% percentile bootstrap resampling games rather than rows.
+Model hyperparameters are retuned inside each training fold.
+
 ## Feature extraction
 
 The toolkit's own redundancy reduction does the feature selection, new in v0.1.8:

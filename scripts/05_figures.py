@@ -128,7 +128,8 @@ def fig_decomposition():
     def bold_first(head, tail):
         return rf"$\bf{{{head.replace(' ', chr(92) + ' ')}}}$" + f"\n{tail}"
 
-    rows = [("Having a channel", decomp[decomp.step == "channel"])]
+    rows = [(bold_first("Having a channel", "channel open vs. closed"),
+             decomp[decomp.step == "channel"])]
     for block in ("pre", "post"):
         for component, name in [("spoke at all", "Spoke at all"),
                                 ("what was said", "What was said")]:
@@ -166,9 +167,11 @@ def fig_decomposition():
     ax.grid(axis="y", visible=False)
     ax.margins(y=0.10)
     header(fig, ax, "Whether a group spoke matters more than what it said",
-           "Each term added to the one above it, starting from a model of the game's "
-           "rules. 10-fold cross-validation holding out whole games; intervals are "
-           "game-clustered bootstraps.", legend_from=ax, ncol=3)
+           "The channel is added to a model of the game's rules. Within each kind of "
+           "talk, whether the group spoke is added to that, and what it said on top "
+           "of that again. 10-fold cross-validation holding out whole games; "
+           "intervals are 95% game-clustered bootstraps.",
+           legend_from=ax, ncol=3)
     fig.savefig(FIGURES / "fig2_decomposition.png")
     plt.close(fig)
 
