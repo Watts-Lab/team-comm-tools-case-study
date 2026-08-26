@@ -2,9 +2,7 @@
 
   fig1  when in a game talk matters, under both definitions of a game stage
   fig2  which features predict contribution in the opening rounds
-  fig3  which family of features carries the effect, in the opening rounds
-  fig4  what makes opening talk different from later talk
-  fig5  whether the same features predict later in the game
+  fig3  whether those same features predict later in the game
 
 The analyses these leave out - the channel effect, and whether the gain comes from
 speaking at all rather than from content - are still computed by 04_analysis.py and
@@ -25,8 +23,9 @@ import pandas as pd
 
 from config import DATA_PROCESSED, FIGURES, TABLES
 from style import (AQUA, COLOR_CHANNEL, COLOR_LEARN, COLOR_NO_CHANNEL, COLOR_VAL,
-                   GREEN, GRID, INK, INK_2, INK_MUTED, MAGENTA, ORANGE, VIOLET,
-                   YELLOW, axis_direction, bold_label, header, panel_title, use_style)
+                   GREEN, GRID, INK, INK_2, INK_MUTED, MAGENTA, ORANGE, SURFACE,
+                   VIOLET, YELLOW, axis_direction, bold_label, header, panel_title,
+                   use_style)
 
 use_style()
 
@@ -42,19 +41,21 @@ STAGE_COLORS = {"opening": COLOR_CHANNEL, "middle": AQUA, "endgame": ORANGE}
 # turns out; POST is the previous round's reaction, after its result was revealed.
 # The stages above are a different axis entirely - they locate the *round* within its
 # game - so the labels name the round explicitly to keep the two apart.
-BLOCK_LABEL = {"pre": "Talk in this round, before its outcome",
-               "post": "Talk in the previous round, after its outcome"}
-BLOCK_SHORT = {"pre": "this round, pre-outcome", "post": "previous round, post-outcome"}
+BLOCK_LABEL = {"pre": "Talk in this round, before revealing its outcome",
+               "post": "Talk in the previous round, after revealing its outcome"}
+BLOCK_SHORT = {"pre": "this round, before the reveal", "post": "previous round, after the reveal"}
 # Two-line form for axis ticks, where the single-line labels do not fit.
-BLOCK_WRAPPED = {"pre": "Talk in this round,\nbefore its outcome",
-                 "post": "Talk in the previous round,\nafter its outcome"}
+BLOCK_WRAPPED = {"pre": "Talk in this round,\nbefore revealing its outcome",
+                 "post": "Talk in the previous round,\nafter revealing its outcome"}
 BLOCK_COLORS = {"pre": COLOR_CHANNEL, "post": ORANGE}
 
 FAMILY_SUFFIXES = {"_lexical_wordcount": " (LIWC)", "_politeness_convokit": " (politeness)",
                    "_receptiveness_yeomans": " (receptiveness)", "_bert": " (BERT)",
                    "_chats": "", "_conversation": ""}
-AGG_WORDS = {"mean": "avg", "max": "max", "min": "min", "stdev": "SD", "sum": "total",
-             "gini": "gini"}
+# "gini" is deliberately absent: `gini_coefficient_sum_num_chars` is one native
+# conversation-level feature, not a gini aggregation of something else, and
+# stripping the prefix renamed it to "coefficient sum num chars [gini]".
+AGG_WORDS = {"mean": "avg", "max": "max", "min": "min", "stdev": "SD", "sum": "total"}
 
 
 def add_split_legend(ax):
@@ -101,9 +102,8 @@ def fig_family_importance():
         y = np.arange(len(order)) + (i - 0.5) * height
         ax.barh(y, sub["drop_in_cv_r2"], height=height * 0.9,
                 color=MODEL_COLORS[model], label=model, zorder=3)
-        ax.scatter(sub["drop_in_heldout_r2"], y, s=32, color=INK, zorder=5,
-                   edgecolor="white", linewidth=1.2,
-                   label="Held-out split" if i == 0 else None)
+        ax.scatter(sub["drop_in_heldout_r2"], y, s=34, color=MODEL_COLORS[model],
+                   marker="D", alpha=0.5, zorder=5, edgecolor="white", linewidth=1.0)
 
     ax.axvline(0, color=INK_MUTED, linewidth=1, zorder=2)
     counts = (fam[fam.model_family == "elastic net"]
@@ -113,11 +113,12 @@ def fig_family_importance():
     ax.set_xlabel("Change in R² when the family is removed")
     ax.grid(axis="y", visible=False)
     axis_direction(ax, "family was hurting accuracy", "family was helping accuracy")
-    header(fig, ax, "Sentiment carries the opening-round effect",
+    add_split_legend(ax)
+    header(fig, ax, "Only sentiment helps on held-out data, and the models disagree",
            f"Talk in the previous round, after its outcome, in the first three "
            f"rounds ({n_convs:,} conversations). Feature count per family in "
            "parentheses. Families overlap, so the changes do not sum.",
-           legend_from=ax, ncol=3)
+           legend_from=ax, ncol=4)
     fig.savefig(FIGURES / "fig3_opening_families.png")
     plt.close(fig)
 
@@ -168,78 +169,87 @@ def fig_opening_reaction(top_n=14):
     ax.set_xlabel("Change in contribution rate per SD of the feature, with 95% CI")
     ax.margins(y=0.04)
     add_split_legend(ax)
-    header(fig, ax, "What predicts contribution in the first three rounds",
-           f"Talk in the previous round, after its outcome ({n_convs:,} conversations).",
-           legend_from=ax, ncol=4)
+    header(fig, ax, "What early features predict contribution?",
+           f"Talk in the previous round, after revealing its outcome "
+           f"({n_convs:,} conversations from the first 3 rounds of a multi-round "
+           "public goods game).", legend_from=ax, ncol=3)
     fig.savefig(FIGURES / "fig2_opening_features.png")
     plt.close(fig)
 
-# ------------------------------------------------------------------ fig 7 ---
-def fig_stage_profile(top_n=10, block="post"):
-    """How opening talk differs from talk later in the game."""
-    prof = pd.read_csv(TABLES / "stage_profile.csv")
-    stages = [c for c in STAGE_ORDER if c in prof.columns]
-    sub = prof[prof["block"] == block].head(top_n).iloc[::-1]
-
-    fig, ax = plt.subplots(figsize=(8.6, 0.42 * len(sub) + 3.0))
-    y = np.arange(len(sub))
-    ax.hlines(y, sub[stages].min(axis=1), sub[stages].max(axis=1),
-              color=GRID, linewidth=2.5, zorder=2)
-    for stage in stages:
-        ax.scatter(sub[stage], y, s=52, color=STAGE_COLORS[stage],
-                   edgecolor="white", linewidth=1.2, zorder=4, label=stage)
-    ax.axvline(0, color=INK_MUTED, linewidth=1, zorder=3)
-    ax.set_yticks(y, [bold_label(pretty(f)) for f in sub["feature"]], fontsize=8.5)
-    ax.grid(axis="y", visible=False)
-    ax.set_xlabel("Stage mean, in SDs from the average conversation")
-    ax.margins(y=0.04)
-    header(fig, ax, "What gets said early differs from what gets said later",
-           "Talk in the previous round, after its outcome. Colour marks where the "
-           "round being predicted sits in its game. Features shown are those that "
-           "shift most between the first and last three rounds.",
-           legend_from=ax, ncol=3)
-    fig.savefig(FIGURES / "fig4_opening_talk_differs.png")
-    plt.close(fig)
-
-
 # ------------------------------------------------------------------ fig 8 ---
-def fig_stage_feature_effects(top_n=8, block="post"):
-    """Whether the features that predict early also predict later."""
+def fig_stage_feature_effects(top_n=10, block="post"):
+    """Which features predict early, and whether they keep predicting.
+
+    One line per feature across the three stages. Features are named at the
+    right-hand end, spread vertically so the labels do not collide, because a
+    slopegraph whose lines cannot be identified only shows that something
+    collapses, not what.
+    """
     eff = pd.read_csv(TABLES / "stage_feature_effects.csv")
     eff = eff[eff.block == block]
     stages = [s for s in STAGE_ORDER if s in set(eff["stage"])]
+    x = np.arange(len(stages))
 
-    # The features that matter at the opening, followed across the rest of the game.
-    opening = eff[(eff.stage == "opening")].nsmallest(top_n, "p_learn")
-    picks = opening["feature"].tolist()[::-1]
-
-    fig, ax = plt.subplots(figsize=(8.8, 0.44 * len(picks) + 3.0))
-    y = np.arange(len(picks))
-    for yi, feature in zip(y, picks):
+    opening = eff[eff.stage == "opening"].nsmallest(top_n, "p_learn")
+    tracks = []
+    for feature in opening["feature"]:
         by_stage = eff[eff.feature == feature].set_index("stage")
-        vals = [by_stage.loc[st, "coef_learn"] for st in stages if st in by_stage.index]
-        ax.hlines(yi, min(vals), max(vals), color=GRID, linewidth=2.5, zorder=2)
-        for stage in stages:
-            if stage not in by_stage.index:
-                continue
-            r = by_stage.loc[stage]
-            sig = r["p_learn"] < 0.05
-            ax.scatter(r["coef_learn"], yi, s=58 if sig else 34,
-                       color=STAGE_COLORS[stage], zorder=4,
-                       edgecolor="white" if sig else STAGE_COLORS[stage],
-                       linewidth=1.3, alpha=1.0 if sig else 0.40,
-                       label=stage if yi == y[0] else None)
+        if not all(st in by_stage.index for st in stages):
+            continue
+        tracks.append((feature,
+                       [by_stage.loc[st, "coef_learn"] for st in stages],
+                       [by_stage.loc[st, "p_learn"] < 0.05 for st in stages]))
 
-    ax.axvline(0, color=INK_MUTED, linewidth=1, zorder=3)
-    ax.set_yticks(y, [bold_label(pretty(f)) for f in picks], fontsize=8.5)
-    ax.grid(axis="y", visible=False)
-    ax.set_xlabel("Change in contribution rate per SD of the feature")
-    ax.margins(y=0.05)
-    header(fig, ax, "The features that predict early do not predict later",
-           f"The {top_n} strongest opening-round features, re-estimated within each "
-           "stage. Solid markers are significant within that stage; faded are not.",
-           legend_from=ax, ncol=3)
-    fig.savefig(FIGURES / "fig5_effects_across_stages.png")
+    fig, ax = plt.subplots(figsize=(7.4, 6.2))
+    lo = min(min(v) for _, v, _ in tracks)
+    hi = max(max(v) for _, v, _ in tracks)
+    pad = (hi - lo) * 0.08
+
+    # Label slots span the range of the *final* values, not of the whole chart.
+    # Spreading them over the full height puts a label at 0.04 next to a point at
+    # -0.02, and the leader lines then cross every line on the way.
+    finals = [v[-1] for _, v, _ in tracks]
+    ranked = sorted(range(len(tracks)), key=lambda i: finals[i])
+    span = max(finals) - min(finals)
+    slots = np.linspace(min(finals) - span * 0.08, max(finals) + span * 0.08,
+                        len(tracks))
+    label_y = {i: slots[rank] for rank, i in enumerate(ranked)}
+
+    for i, (feature, values, sig) in enumerate(tracks):
+        colour = COLOR_CHANNEL if values[0] > 0 else ORANGE
+        ax.plot(x, values, color=colour, alpha=0.45, linewidth=1.5, zorder=3)
+        for xi, value, is_sig in zip(x, values, sig):
+            ax.scatter(xi, value, s=46 if is_sig else 34, zorder=4,
+                       color=colour if is_sig else SURFACE,
+                       edgecolor=colour if not is_sig else "white", linewidth=1.2)
+        # Leader runs to the right spine; the label sits beyond it, in axes
+        # coordinates, so the gridlines never cross the text.
+        # Grey, matching the label text: in the series colour the leader reads as a
+        # continuation of the line plot rather than as a pointer to a name.
+        ax.plot([x[-1], x[-1] + 0.12], [values[-1], label_y[i]], color=INK_MUTED,
+                alpha=0.45, linewidth=0.8, zorder=2, clip_on=False)
+        ax.annotate(pretty(feature), xy=(1.015, label_y[i]),
+                    xycoords=("axes fraction", "data"), ha="left", va="center",
+                    fontsize=8.5, color=INK_2, annotation_clip=False)
+
+    ax.plot([], [], color=COLOR_CHANNEL, marker="o", markersize=7,
+            markeredgecolor="white", markeredgewidth=1.2,
+            label="predicts more contribution")
+    ax.scatter([], [], s=46, color=INK_MUTED, edgecolor="white", linewidth=1.2,
+               label="distinguishable from zero")
+    ax.scatter([], [], s=34, color=SURFACE, edgecolor=INK_MUTED, linewidth=1.2,
+               label="not distinguishable from zero")
+
+    ax.axhline(0, color=INK, linewidth=1.2, zorder=2)
+    ax.set_xticks(x, stages, fontsize=10)
+    ax.set_xlim(-0.12, x[-1] + 0.12)
+    ax.set_ylim(lo - pad, hi + pad)
+    ax.set_xlabel("Position of the round within its game")
+    ax.set_ylabel("Change in contribution rate per SD of the feature")
+    header(fig, ax, "Predictive features from early rounds are no longer meaningful signals in late rounds",
+           f"Each line is one of the {len(tracks)} strongest opening-round features, "
+           "re-estimated within each stage.", legend_from=ax, ncol=3)
+    fig.savefig(FIGURES / "fig3_effects_across_stages.png")
     plt.close(fig)
 
 
@@ -257,6 +267,54 @@ STAGE_SCHEMES = {
     "relative": (["early", "middle", "late"], "By thirds",
                  "beginning, middle and end are each one third of the rounds played"),
 }
+
+
+def fig_when_talk_matters():
+    """When talk predicts contribution, under the primary staging only.
+
+    The full comparison of the two staging definitions is a supplementary point
+    and lives in the archive; this is the version the story needs.
+    """
+    stage = pd.read_csv(TABLES / "round_stage.csv")
+    order = STAGE_SCHEMES[STAGING][0]
+    present = [s for s in order
+               if s in set(stage.loc[stage.staging == STAGING, "stage"])]
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.8), sharey=True,
+                             gridspec_kw={"wspace": 0.10})
+    x = np.arange(len(present))
+    for ax, block in zip(axes, BLOCK_LABEL):
+        for model, colour in MODEL_COLORS.items():
+            sub = (stage[(stage.staging == STAGING) & (stage.model_family == model)
+                         & (stage.block == block)]
+                   .set_index("stage").reindex(present))
+            # Trained on the learning split, scored on the held-out split: a
+            # feature's value is what it predicts in data it has never seen.
+            ax.plot(x, sub["delta_heldout_r2_content"], color=colour, marker="o",
+                    markersize=7, markeredgecolor="white", markeredgewidth=1.4,
+                    label=model, zorder=4)
+            ax.fill_between(x, sub["ci_low_heldout"], sub["ci_high_heldout"],
+                            color=colour, alpha=0.13, linewidth=0, zorder=2)
+        ax.axhline(0, color=INK_MUTED, linewidth=1, zorder=3)
+        n = (stage[(stage.staging == STAGING) & (stage.model_family == "elastic net")
+                   & (stage.block == block)]
+             .set_index("stage").reindex(present)["n_conversations_heldout"])
+        ax.set_xticks(x, [f"{tick}\n({int(n[st]):,} convs)"
+                          for tick, st in zip(STAGE_TICKS, present)], fontsize=9.5)
+        ax.margins(x=0.12)
+        panel_title(ax, BLOCK_LABEL[block])
+        ax.set_xlabel("Position of the round within its game")
+
+    axes[0].set_ylabel("Added out-of-sample R²")
+    axis_direction(axes[0], "talk predicts worse", "talk predicts better",
+                   axis="y", pad=-50)
+    header(fig, axes, "The most predictive conversations happen in early rounds, after revealing the outcome",
+           "Conversation features added to a model of the game's rules, fitted "
+           "separately within each stage. Trained on the learning split and scored "
+           "on held-out games; bands are 95% bootstrap intervals over those games.",
+           legend_from=axes[0], ncol=2, panel_titles=True)
+    fig.savefig(FIGURES / "fig1_when_talk_matters.png")
+    plt.close(fig)
 
 
 def fig_staging_comparison():
@@ -308,13 +366,12 @@ def fig_staging_comparison():
            "separately within each stage. 10-fold cross-validation holding out whole "
            "games; bands are game-clustered bootstrap 95% intervals.",
            legend_from=axes[0, 0], ncol=2, panel_titles=True, extra_top=0.34)
-    fig.savefig(FIGURES / "fig1_when_talk_matters.png")
+    fig.savefig(FIGURES / "archive" / "staging_comparison.png")
     plt.close(fig)
 
 
-FIGURES_TO_DRAW = [fig_staging_comparison, fig_opening_reaction,
-                   fig_family_importance, fig_stage_profile,
-                   fig_stage_feature_effects]
+FIGURES_TO_DRAW = [fig_when_talk_matters, fig_opening_reaction,
+                   fig_stage_feature_effects, fig_staging_comparison]
 
 if __name__ == "__main__":
     failures = []

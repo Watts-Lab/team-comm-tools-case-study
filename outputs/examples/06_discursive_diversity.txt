@@ -1,0 +1,159 @@
+==============================================================================
+discursive_diversity
+==============================================================================
+
+measures : discursive diversity
+scope    : talk in the previous round, after revealing its outcome,
+           in the first three rounds of a game
+sample   : 204 conversations
+
+effect on the next round's contribution, per SD of this feature:
+           learning split  +0.0367  (p = 0.0003)
+           held-out split  +0.0373  (p = 0.0009)
+
+Conversations are ordered by the feature; the highest and lowest scoring
+15 are shown. Speaker labels are per conversation, not per person.
+
+------------------------------------------------------------------------------
+HIGHEST 15
+------------------------------------------------------------------------------
+
+  round 0 | 2 messages | 2 speakers | feature z = +1.34 | next-round contribution 1.00
+     parrot: lovely
+    chicken: Why didn't 2 people contribute
+
+  round 0 | 2 messages | 2 speakers | feature z = +1.21 | next-round contribution 0.83
+    chicken: sloth, we can maximize our earnings if you put in all 20
+      sloth: will do!
+
+  round 1 | 3 messages | 2 speakers | feature z = +1.20 | next-round contribution 0.86
+      sloth: deducting removes value so we don't wanna do taht either
+    gorilla: I came in knowing what I was going to do throughout.
+      sloth: Yea, just wanna make sure we are all on same page :) ty gorilla
+             <3
+
+  round 1 | 4 messages | 4 speakers | feature z = +1.08 | next-round contribution 0.78
+        dog: lol some people are still giving 0
+        owl: It's gotta grow like a bank, bruh. lmao
+    chicken: clucky cluckity cluck
+       duck: should we reward each other for helping, otherwise people won't
+
+  round 1 | 2 messages | 2 speakers | feature z = +1.07 | next-round contribution 0.78
+       frog: ok
+    chicken: max contribution = maximum payout
+
+  round 1 | 5 messages | 5 speakers | feature z = +1.02 | next-round contribution 0.80
+     elephant: yes!
+    crocodile: Same average as before :/
+        moose: got it
+          cow: Whats taking people so long to click a button
+        chick: Bots, probably.
+
+  round 0 | 3 messages | 3 speakers | feature z = +1.01 | next-round contribution 0.82
+    chick: Everyone just do 20 and we'll all be happy.
+    sloth: echoed
+    moose: i agree
+
+  round 1 | 2 messages | 2 speakers | feature z = +1.01 | next-round contribution 1.00
+    gorilla: All rounds contribute the max, everyone agree?
+        dog: yep!
+
+  round 0 | 2 messages | 2 speakers | feature z = +0.99 | next-round contribution 0.70
+     walrus: Invest it all please
+    chicken: hi
+
+  round 1 | 3 messages | 3 speakers | feature z = +0.96 | next-round contribution 0.97
+      cow: brilliant
+    snake: why i get the snake lol im a nice guy!
+    moose: Yipie!
+
+  round 0 | 2 messages | 2 speakers | feature z = +0.95 | next-round contribution 0.56
+    sloth: Hope you'll like it!
+     duck: Hello all
+
+  round 0 | 5 messages | 4 speakers | feature z = +0.94 | next-round contribution 0.93
+    elephant: KACHING!!!
+         cow: I messed up ill do 20 from now on
+        frog: lmao
+         owl: make MIT angry
+         owl: they are testing group greed
+
+  round 0 | 4 messages | 3 speakers | feature z = +0.91 | next-round contribution 0.88
+    gorilla: Everyone always give!
+       duck: That's my plan!
+     parrot: cool
+    gorilla: If everyone always gives it's 2.5x payout for all. Nothing to
+             lose
+
+  round 0 | 4 messages | 4 speakers | feature z = +0.91 | next-round contribution 0.82
+       dog: gday
+     chick: If we all input the max, won't we get more of the bonus funds??
+    parrot: HI
+    rabbit: If we all do, yes.
+
+  round 1 | 5 messages | 5 speakers | feature z = +0.88 | next-round contribution 0.86
+    gorilla: yeah that was weird
+      chick: you rebel
+      sloth: again yellow face with 0
+        owl: rebel says the tight arse
+        cow: just all in and we all rise
+
+------------------------------------------------------------------------------
+LOWEST 15
+------------------------------------------------------------------------------
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.70 | next-round contribution 0.72
+     chick: Hi
+    rabbit: hi
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.70 | next-round contribution 0.65
+    elephant: Yeah !
+     chicken: Yeah!
+
+  round 0 | 6 messages | 6 speakers | feature z = -1.70 | next-round contribution 0.41
+     monkey: HI
+        cow: hi
+        dog: hi
+    pinguin: Hi
+    gorilla: hi
+        owl: Hi
+
+  round 0 | 3 messages | 3 speakers | feature z = -1.70 | next-round contribution 0.65
+    elephant: ok
+       horse: ok
+     pinguin: Ok
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.70 | next-round contribution 0.88
+     parrot: wagwan
+    chicken: Wagwan
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.70 | next-round contribution 0.62
+    chick: HI
+    snake: HI
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.50
+    sloth: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.75
+    gorilla: wolf deer and chicken didn't contribute...
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.42
+    sloth: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.79
+    moose: Lets go
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.64
+    dog: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.73
+    sloth: how many rounds is this again?
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.75
+    gorilla: I BET SOME people are bots
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.78
+    duck: Greetings
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.70 | next-round contribution 0.41
+    sloth: hihihi

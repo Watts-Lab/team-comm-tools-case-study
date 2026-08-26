@@ -1,0 +1,180 @@
+==============================================================================
+max_user_min_forward_flow
+==============================================================================
+
+measures : the largest value across speakers, of the smallest value across the messages, of forward flow
+scope    : talk in the previous round, after revealing its outcome,
+           in the first three rounds of a game
+sample   : 204 conversations
+
+effect on the next round's contribution, per SD of this feature:
+           learning split  +0.0373  (p = 0.0003)
+           held-out split  +0.0383  (p = 0.0005)
+
+Conversations are ordered by the feature; the highest and lowest scoring
+15 are shown. Speaker labels are per conversation, not per person.
+
+------------------------------------------------------------------------------
+HIGHEST 15
+------------------------------------------------------------------------------
+
+  round 0 | 2 messages | 2 speakers | feature z = +1.08 | next-round contribution 1.00
+     parrot: lovely
+    chicken: Why didn't 2 people contribute
+
+  round 0 | 3 messages | 3 speakers | feature z = +1.08 | next-round contribution 0.82
+    chick: Everyone just do 20 and we'll all be happy.
+    sloth: echoed
+    moose: i agree
+
+  round 1 | 4 messages | 4 speakers | feature z = +1.02 | next-round contribution 0.93
+      moose: im down
+    gorilla: im with ya
+        dog: The bonuses are on total points. Doesn't matter if there is a
+             winer
+       duck: cool
+
+  round 0 | 5 messages | 4 speakers | feature z = +1.01 | next-round contribution 0.93
+    elephant: KACHING!!!
+         cow: I messed up ill do 20 from now on
+        frog: lmao
+         owl: make MIT angry
+         owl: they are testing group greed
+
+  round 0 | 5 messages | 5 speakers | feature z = +0.99 | next-round contribution 0.62
+       duck: Hello
+      moose: best just put all the money in and let it evenly divide after
+             it doubles
+    chicken: agree
+      sloth: Agreed ^
+     parrot: Agreed!
+
+  round 0 | 2 messages | 2 speakers | feature z = +0.97 | next-round contribution 0.83
+    chicken: sloth, we can maximize our earnings if you put in all 20
+      sloth: will do!
+
+  round 0 | 6 messages | 5 speakers | feature z = +0.97 | next-round contribution 0.82
+    rabbit: 20 [2]
+     chick: Four greedy players...
+      frog: very greedy
+       cow: we should all do 20 every time to get the most money, i like
+            money do you?
+    monkey: aree
+    rabbit: fr
+
+  round 1 | 5 messages | 5 speakers | feature z = +0.96 | next-round contribution 0.80
+     elephant: yes!
+    crocodile: Same average as before :/
+        moose: got it
+          cow: Whats taking people so long to click a button
+        chick: Bots, probably.
+
+  round 1 | 7 messages | 7 speakers | feature z = +0.96 | next-round contribution 0.94
+        chick: whats the point in the rewarding?
+         frog: I don't think there is any really..
+    crocodile: chicken and parrot didn't contribute
+      gorilla: this chicken guy
+     elephant: get them!
+         duck: Lol
+        sloth: Not sure of the benefit of rewarding
+
+  round 1 | 3 messages | 2 speakers | feature z = +0.95 | next-round contribution 0.86
+      sloth: deducting removes value so we don't wanna do taht either
+    gorilla: I came in knowing what I was going to do throughout.
+      sloth: Yea, just wanna make sure we are all on same page :) ty gorilla
+             <3
+
+  round 1 | 4 messages | 4 speakers | feature z = +0.94 | next-round contribution 1.00
+        owl: two of you are being selfish
+     monkey: sorry I misunderstood! will put in 20 all the way now
+    chicken: u get more by putting 20
+       duck: THANKS MONKEY
+
+  round 1 | 4 messages | 4 speakers | feature z = +0.91 | next-round contribution 0.50
+        dog: hi
+    chicken: hi
+     rabbit: hi
+       duck: Max contrib = max payoff for all I think
+
+  round 1 | 3 messages | 3 speakers | feature z = +0.91 | next-round contribution 0.97
+      cow: brilliant
+    snake: why i get the snake lol im a nice guy!
+    moose: Yipie!
+
+  round 1 | 9 messages | 6 speakers | feature z = +0.88 | next-round contribution 0.88
+        moose: How many rounds
+       parrot: I don't think we know, it just ends
+          owl: The rabbit needs to contribute
+        moose: and sloth
+    crocodile: and the sloth
+       rabbit: and cow
+        moose: wait i have leff
+        moose: less
+          dog: This is very weird
+
+  round 1 | 13 messages | 9 speakers | feature z = +0.87 | next-round contribution 1.00
+    gorilla: me too :3
+     monkey: and me
+        dog: and me
+    chicken: real but could be a mixture
+    gorilla: think so too
+     rabbit: If we do max coins each game we will maximise our bonus
+      moose: how many coins have you got? I've got 130
+      snake: 150
+    gorilla: i agree bunny
+    gorilla: 150
+      sloth: yeah maxing coins will max our bonus its what I'm doing
+      moose: I've been doing that bunny
+        cow: Agreed! Max coins all the way
+
+------------------------------------------------------------------------------
+LOWEST 15
+------------------------------------------------------------------------------
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.50
+    sloth: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.75
+    gorilla: wolf deer and chicken didn't contribute...
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.42
+    sloth: hi
+
+  round 0 | 3 messages | 3 speakers | feature z = -1.73 | next-round contribution 0.65
+    elephant: ok
+       horse: ok
+     pinguin: Ok
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.79
+    moose: Lets go
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.64
+    dog: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.73
+    sloth: how many rounds is this again?
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.75
+    gorilla: I BET SOME people are bots
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.78
+    duck: Greetings
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.41
+    sloth: hihihi
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.73 | next-round contribution 0.72
+     chick: Hi
+    rabbit: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.70
+    chicken: The user interface is honestly pretty good
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.69
+    duck: +20
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.80
+    chick: 10
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.73 | next-round contribution 0.80
+    gorilla: good stuff guys, except for chicken

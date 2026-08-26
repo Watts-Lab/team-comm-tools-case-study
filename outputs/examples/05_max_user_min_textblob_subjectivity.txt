@@ -1,0 +1,306 @@
+==============================================================================
+max_user_min_textblob_subjectivity
+==============================================================================
+
+measures : the largest value across speakers, of the smallest value across the messages, of textblob subjectivity
+scope    : talk in the previous round, after revealing its outcome,
+           in the first three rounds of a game
+sample   : 204 conversations
+
+effect on the next round's contribution, per SD of this feature:
+           learning split  +0.0384  (p = 0.0003)
+           held-out split  +0.0470  (p = 0.0000)
+
+Conversations are ordered by the feature; the highest and lowest scoring
+15 are shown. Speaker labels are per conversation, not per person.
+
+------------------------------------------------------------------------------
+HIGHEST 15
+------------------------------------------------------------------------------
+
+  round 1 | 3 messages | 3 speakers | feature z = +1.48 | next-round contribution 0.50
+       owl: Anyone else drunk?
+     chick: no lol
+    parrot: I just want a cracker
+
+  round 0 | 5 messages | 5 speakers | feature z = +1.48 | next-round contribution 0.75
+        dog: Contribute 20, we all win.
+        owl: Exactly!  Yes contribute 20
+      chick: lets go
+    gorilla: NICE
+      snake: or 0
+
+  round 0 | 21 messages | 10 speakers | feature z = +1.48 | next-round contribution 0.99
+        moose: lets all in all
+       rabbit: All in next round everybody?
+       monkey: are you guys real?
+         frog: YES
+        moose: yes
+         duck: You guys know that we can see when you don't contribute much,
+               right?
+      chicken: all in next round i agree
+        snake: Yup
+      pinguin: I think I am
+         duck: ...
+        moose: all in
+      chicken: i am also real btw
+          cow: real chicken?
+       monkey: thats what bots would say
+      chicken: real chicken indeed
+    crocodile: thanks for the reward!
+      pinguin: I think we should go all in every round and try and maximise
+               the total pot
+         duck: That's the obvious strategy!
+    crocodile: can u type with chicken feet?
+        snake: Let's see what the multiplier is first
+         duck: Some people are too stubborn to agree
+
+  round 1 | 21 messages | 9 speakers | feature z = +1.48 | next-round contribution 0.98
+     rabbit: YOO
+       duck: Yay!!!
+    chicken: OMG LETS GO
+      snake: One 18
+     rabbit: we actually did it lmao
+     monkey: lets bankrupt the researcher
+      snake: Sorry but I'm gonna deduct from 18 lol
+       duck: Sloth... we see you
+      chick: Sloth did 18 but I guess it's not too bad. Go all in next time
+             Sloth!
+     rabbit: go easy on him!
+        cow: no mercy :P?
+      snake: No mercy
+    pinguin: I don't even think we should deduct as people might spite
+             deduct others. Let's just keep going all in and not deduct
+             anything. Trust exercise.
+    chicken: hear hear mr penguin
+     rabbit: that's right
+    chicken: or ms penguin
+     rabbit: power to the people
+      chick: You're right, I'm sorry.
+      snake: If someone plays selfish then sorry, I'm gonna deduct from them
+     parrot: So at this point we do nothing and just submit? Just want to
+             check :)
+      chick: Snake is right.
+
+  round 0 | 12 messages | 11 speakers | feature z = +1.48 | next-round contribution 0.78
+         dog: okay let's do twenty
+    elephant: agreed ill be doing 20
+     pinguin: agreed on 20
+        frog: I did 20
+      rabbit: 20
+       moose: 20
+       sloth: 15
+       chick: 20 Sounds good.
+     chicken: I'll do 20 from now on
+         cow: 20
+     gorilla: Great team!
+       sloth: 20 IT IS
+
+  round 0 | 10 messages | 5 speakers | feature z = +1.48 | next-round contribution 0.63
+        dog: lets give it our best shot
+     rabbit: yes
+      sloth: everyone please max it out, it'll be for the best
+     rabbit: ok
+    chicken: What is the best amount to contribute?
+        dog: all 20 coins
+     rabbit: 20
+        dog: for best outcome
+      moose: I'll be contributing everything every time, regardless of what
+             the rest of you do
+    chicken: Seriously?
+
+  round 1 | 4 messages | 4 speakers | feature z = +1.48 | next-round contribution 1.00
+        owl: two of you are being selfish
+     monkey: sorry I misunderstood! will put in 20 all the way now
+    chicken: u get more by putting 20
+       duck: THANKS MONKEY
+
+  round 1 | 9 messages | 7 speakers | feature z = +1.48 | next-round contribution 0.82
+        dog: im putting 20 every time, i like money
+    gorilla: nice, let's all do that
+      chick: nothing is working what color is arrow?
+       frog: ok
+      chick: Help
+        owl: I will give every time
+     rabbit: I wish we could give between 0 and 20
+        owl: just click on done
+       duck: frog, chicken, elephant an rabbit
+
+  round 0 | 5 messages | 4 speakers | feature z = +1.48 | next-round contribution 0.91
+         dog: omg amazing
+         dog: big money in the pot!!
+     gorilla: cool
+    elephant: great
+      parrot: the multipliers :)
+
+  round 1 | 9 messages | 5 speakers | feature z = +1.48 | next-round contribution 0.92
+       duck: yes!! well done team
+       duck: great job
+        cow: awesome guys
+       duck: no deductions, all in every time
+     parrot: so not to deduct from anyone
+       duck: keep it going, same every round
+    gorilla: We're a team we don't deduct from each other
+      chick: lets get max bonus money guys
+     parrot: some are though
+
+  round 1 | 11 messages | 8 speakers | feature z = +1.48 | next-round contribution 1.00
+       duck: lets go!!
+     parrot: first round doens't always have full trust.
+      snake: nice
+        owl: what's up with wolf
+     rabbit: Punish wolf
+     parrot: Punish for sure.
+       duck: wolfy wolfy wolfy
+     monkey: come on wolf, be a team player
+      sloth: YEP EVERYONE PUNISH WOLF
+        owl: let's goo
+    chicken: deduct from wolffff
+
+  round 1 | 15 messages | 10 speakers | feature z = +1.48 | next-round contribution 0.98
+       frog: eyyy lets go people!!
+      sloth: yayyy
+        cow: :D
+    chicken: ha, nice
+      chick: :)
+       duck: teamwork!
+    gorilla: nice work
+       frog: lets take their money!
+      moose: Thanks everyone
+      snake: Daddy needs some diapers today!! :D :D
+        owl: good job! now we can trust everyone to keep going!
+       frog: together!!
+       duck: I have the sneaking suspicion they'll change the rules at some
+             point lol
+        cow: let's all go to 300 points!!
+      snake: Anyone going to see that new 'A Quiet Place' movie coming out
+             tomorrow? So excited.
+
+  round 1 | 3 messages | 3 speakers | feature z = +1.48 | next-round contribution 0.97
+      cow: brilliant
+    snake: why i get the snake lol im a nice guy!
+    moose: Yipie!
+
+  round 1 | 12 messages | 9 speakers | feature z = +1.48 | next-round contribution 0.93
+        owl: I see you not doing 20 mr moose
+      chick: yea whats up with that moose
+      snake: mr moose will be pubnished for his crimes
+        owl: afk or being greedy for no reason
+     rabbit: if people don't do 20 just punish
+    pinguin: facts
+        dog: fine the moose
+      snake: FINE THE MOOSE
+     parrot: moose we're coming for you if you're not careful
+    gorilla: Don't let moose grad you down
+    chicken: pretty much
+      snake: I NEED MY BEER MONEY
+
+  round 0 | 6 messages | 6 speakers | feature z = +1.48 | next-round contribution 0.80
+    gorilla: some greedy people lol
+      moose: So sad
+      sloth: Hello everyone
+        dog: you get nothing if you do 0 right?
+     parrot: maybe they made a mistake and will contribute this time
+    chicken: Hi all!
+
+------------------------------------------------------------------------------
+LOWEST 15
+------------------------------------------------------------------------------
+
+  round 1 | 11 messages | 4 speakers | feature z = -1.22 | next-round contribution 0.90
+       owl: thank you rooster brother for joining
+       dog: deduct SLOTH
+     moose: make it hurt
+       owl: deduct -30 sloth
+    parrot: sloth  fitting name
+       owl: scummy sloth
+       dog: this is literally the easiest money you will make all day if you
+            MAX. Why would you NOT max?
+       owl: lmao no clue
+    parrot: agree
+     moose: no benefit to NOT putting in max
+     moose: none
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.22 | next-round contribution 0.50
+    sloth: hi
+
+  round 0 | 1 messages | 1 speakers | feature z = -1.22 | next-round contribution 0.42
+    sloth: hi
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.22 | next-round contribution 0.70
+     walrus: Invest it all please
+    chicken: hi
+
+  round 1 | 1 messages | 1 speakers | feature z = -1.22 | next-round contribution 0.79
+    moose: Lets go
+
+  round 1 | 2 messages | 2 speakers | feature z = -1.22 | next-round contribution 0.71
+     monkey: come on guys go 20
+    pinguin: what happened to doing 20
+
+  round 1 | 7 messages | 4 speakers | feature z = -1.22 | next-round contribution 0.69
+    chicken: Okies.
+     rabbit: may I contribute all
+        dog: some aitn contributing nothing still
+        dog: those contributing 1, 4 aint fair
+    chicken: That's why I was wondering if it's wise to contribute all.
+     rabbit: the more all contribute u gain more
+      sloth: rabbit what's going on
+
+  round 0 | 6 messages | 6 speakers | feature z = -1.22 | next-round contribution 0.82
+        chick: HI
+        sloth: Hello
+       rabbit: Hola
+        snake: hi everyone
+          cow: HI!
+    crocodile: Hi
+
+  round 1 | 3 messages | 3 speakers | feature z = -1.22 | next-round contribution 1.00
+        dog: That's my plan
+    gorilla: Agree
+      sloth: Yes
+
+  round 0 | 5 messages | 5 speakers | feature z = -1.22 | next-round contribution 0.84
+     parrot: hello whale
+       duck: 20 EACH, COME ON TEAM!
+     monkey: Hello I'm cheeky
+    chicken: 20 all the way
+       frog: ribbit
+
+  round 1 | 11 messages | 8 speakers | feature z = -1.22 | next-round contribution 1.00
+    gorilla: also i think theres AI players tryna throw off the game
+        dog: could be
+    gorilla: all whos not AI, say I am not AI
+    gorilla: I am not AI
+      moose: i am not AI
+        dog: i'm not AI
+      chick: I am not AI
+        owl: i am not AI
+     parrot: there's not negeative multiplier so all in always works i guess
+     rabbit: I'm not AI
+       duck: I AM NOT AI
+
+  round 1 | 4 messages | 4 speakers | feature z = -1.22 | next-round contribution 1.00
+     rabbit: heyo
+    gorilla: Hello
+     parrot: Hi
+    chicken: HI
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.22 | next-round contribution 0.83
+    chicken: sloth, we can maximize our earnings if you put in all 20
+      sloth: will do!
+
+  round 0 | 9 messages | 5 speakers | feature z = -1.22 | next-round contribution 0.67
+        cow: 20
+      chick: what do i press to put in coins?
+       duck: the arrow
+     rabbit: click help
+      chick: which arrow
+      chick: help
+    pinguin: it has to be on the page to give coins
+       duck: the coins have to be in the plate
+    pinguin: you aren't there currently
+
+  round 0 | 2 messages | 2 speakers | feature z = -1.22 | next-round contribution 0.56
+    sloth: Hope you'll like it!
+     duck: Hello all

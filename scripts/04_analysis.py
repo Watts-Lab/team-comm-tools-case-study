@@ -500,6 +500,7 @@ def round_stage(learn, val):
                                                        with_indicator=False)
                 y = l_sub[OUTCOME].to_numpy()
 
+                y_val = v_sub[OUTCOME].to_numpy()
                 for kind in ("elastic net", "random forest"):
                     base = out_of_fold(kind, l_sub, base_cols)
                     full = out_of_fold(kind, l_sub, feat_cols)
@@ -509,13 +510,22 @@ def round_stage(learn, val):
                         l_sub[GROUP],
                         lambda idx, f=full, b=base: (r2(y[idx], f[idx])
                                                      - r2(y[idx], b[idx])))
+                    # The held-out estimate gets its own interval, bootstrapped over
+                    # the held-out games. Reusing the cross-validated interval would
+                    # attach uncertainty from one sample to an estimate from another.
+                    lo_v, hi_v = cluster_bootstrap(
+                        v_sub[GROUP],
+                        lambda idx, f=full_val, b=base_val: (r2(y_val[idx], f[idx])
+                                                             - r2(y_val[idx], b[idx])))
                     rows.append({"staging": staging, "stage": stage, "block": block,
                                  "model_family": kind,
                                  "n_conversations": len(l_sub),
+                                 "n_conversations_heldout": len(v_sub),
                                  "delta_cv_r2_content": r2(y, full) - r2(y, base),
                                  "ci_low": lo, "ci_high": hi,
-                                 "delta_heldout_r2_content": (r2(v_sub[OUTCOME], full_val)
-                                                              - r2(v_sub[OUTCOME], base_val))})
+                                 "delta_heldout_r2_content": (r2(y_val, full_val)
+                                                              - r2(y_val, base_val)),
+                                 "ci_low_heldout": lo_v, "ci_high_heldout": hi_v})
     out = pd.DataFrame(rows)
     out.to_csv(TABLES / "round_stage.csv", index=False)
     return out
@@ -765,65 +775,109 @@ def feature_effects(learn, val):
 
 
 # ------------------------------------------------------------------- main ---
-def main():
+# Each section, with a rough cost. The expensive ones refit both model families
+# inside every cross-validation fold; the cheap ones are regressions or plain
+# aggregation over tables that already exist. Being able to re-run one section is
+# what makes iterating on a figure practical - a full run is about 40 minutes,
+# almost all of it model fitting, and most edits do not invalidate most sections.
+SECTIONS = {
+    "channel":        "A. channel effect                       (seconds)",
+    "decomposition":  "B. nested decomposition                 (~4 min)",
+    "speech":         "C. speaking at all vs. what was said    (~6 min)",
+    "families":       "D. feature families, pooled             (~5 min)",
+    "families_open":  "D. feature families, opening rounds     (~1 min)",
+    "stages":         "E. when talk matters                    (~15 min)",
+    "profile":        "F. what is said at each stage           (seconds)",
+    "stage_features": "G. per-feature effects by stage         (~2 min)",
+    "features":       "H. per-feature effects, pooled          (~1 min)",
+}
+
+
+def main(only=None):
+    run = set(only) if only else set(SECTIONS)
     learn, val = load("learn"), load("val")
     for name, df in (("learn", learn), ("val", val)):
         print(f"{name}: {len(df)} game-rounds from {df[GROUP].nunique()} games "
               f"({int(df[CHANNEL].sum())} with a channel, "
-              f"{int(df.has_features_pre.sum())} with deliberation talk, "
-              f"{int(df.has_features_post.sum())} with reaction talk)")
-    print(f"features per block: {len(block_features(learn, 'pre'))}\n")
+              f"{int(df.has_features_post.sum())} with previous-round talk)")
+    print(f"features per block: "
+          f"{len(block_features(learn, 'post', with_indicator=False))}")
+    print(f"running: {', '.join(sorted(run))}\n")
 
-    print("A. Channel effect")
-    print(channel_effect({"learn": learn, "val": val}).to_string(index=False), "\n")
+    if "channel" in run:
+        print("A. Channel effect")
+        print(channel_effect({"learn": learn, "val": val}).to_string(index=False), "\n")
 
-    print("B. Nested decomposition")
-    comparison, decomp = decomposition(learn, val)
-    print(comparison.to_string(index=False), "\n")
-    print(decomp.to_string(index=False), "\n")
+    if "decomposition" in run:
+        print("B. Nested decomposition")
+        comparison, decomp = decomposition(learn, val)
+        print(comparison.to_string(index=False), "\n")
+        print(decomp.to_string(index=False), "\n")
 
-    print("C. Speaking at all, versus what was said")
-    print(speech_vs_content(learn, val).to_string(index=False), "\n")
+    if "speech" in run:
+        print("C. Speaking at all, versus what was said")
+        print(speech_vs_content(learn, val).to_string(index=False), "\n")
 
-    print("D. Which kind of talk carries any content term")
-    print("   (opening rounds only)")
-    print(family_importance_opening(learn, val).to_string(index=False), "\n")
-    print(family_importance(learn, val).to_string(index=False), "\n")
+    if "families_open" in run:
+        print("D. Feature families, opening rounds only")
+        print(family_importance_opening(learn, val).to_string(index=False), "\n")
 
-    print("E. When in a game does talk matter")
-    stages = round_stage(learn, val)
-    print(stages[stages.staging == PRIMARY_STAGING].to_string(index=False), "\n")
-    print("   robustness, relative staging:")
-    print(stages[stages.staging == "relative"].to_string(index=False), "\n")
+    if "families" in run:
+        print("D. Feature families, pooled across all rounds")
+        print(family_importance(learn, val).to_string(index=False), "\n")
 
-    print("F. What is actually said at each stage (largest swings, PRE block)")
-    profile = stage_profile(learn)
-    print(profile[profile.block == "pre"].head(10).round(3).to_string(index=False))
-    print("\n   sample messages:")
-    ex = stage_examples()
-    for stage in STAGINGS[PRIMARY_STAGING][1]:
-        sub = ex[(ex.stage == stage) & (ex.block == "pre")].head(3)
-        for row in sub.itertuples():
-            print(f"     [{stage:<7} r{row.round_index:<2}] {str(row.text)[:78]}")
-    print()
+    if "stages" in run:
+        print("E. When in a game does talk matter")
+        stages = round_stage(learn, val)
+        print(stages[stages.staging == PRIMARY_STAGING].to_string(index=False), "\n")
+        print("   robustness, relative staging:")
+        print(stages[stages.staging == "relative"].to_string(index=False), "\n")
 
-    print("G. Are the same features predictive at each stage?")
-    stage_effects = stage_feature_effects(learn, val)
-    agreement = stage_agreement(stage_effects)
-    print(agreement.round(3).to_string(index=False), "\n")
-    top = (stage_effects[stage_effects.p_learn < 0.05]
-           .groupby(["block", "stage"]).size().rename("n_features_p<.05"))
-    print(top.to_string(), "\n")
+    if "profile" in run:
+        print("F. What is actually said at each stage")
+        profile = stage_profile(learn)
+        print(profile[profile.block == "post"].head(10).round(3).to_string(index=False))
+        print("\n   sample messages:")
+        ex = stage_examples()
+        for stage in STAGINGS[PRIMARY_STAGING][1]:
+            sub = ex[(ex.stage == stage) & (ex.block == "post")].head(3)
+            for row in sub.itertuples():
+                print(f"     [{stage:<7} r{row.round_index:<2}] {str(row.text)[:78]}")
+        print()
 
-    print("H. Individual features, pooled across stages (top 12)")
-    effects = feature_effects(learn, val)
-    cols = ["feature", "block", "family", "coef_learn", "q_learn", "coef_val", "p_val"]
-    print(effects.head(12)[cols].to_string(index=False))
-    print(f"tested: {len(effects)}; clearing FDR q<.05 on learn: "
-          f"{(effects.q_learn < 0.05).sum()}; also holding up on held-out data: "
-          f"{effects.replicates.sum()}")
+    if "stage_features" in run:
+        print("G. Are the same features predictive at each stage?")
+        stage_effects = stage_feature_effects(learn, val)
+        agreement = stage_agreement(stage_effects)
+        print(agreement.round(3).to_string(index=False), "\n")
+
+    if "features" in run:
+        print("H. Individual features, pooled across stages")
+        effects = feature_effects(learn, val)
+        cols = ["feature", "block", "family", "coef_learn", "q_learn", "coef_val", "p_val"]
+        print(effects.head(10)[cols].to_string(index=False))
+        print(f"tested: {len(effects)}; clearing FDR q<.05 on learn: "
+              f"{(effects.q_learn < 0.05).sum()}; also holding up on held-out data: "
+              f"{effects.replicates.sum()}")
+
     print("\ntables written to outputs/tables/")
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    ap = argparse.ArgumentParser(
+        description="Run the case study analysis, or one section of it.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="sections:\n  " + "\n  ".join(f"{k:<16}{v}" for k, v in SECTIONS.items()))
+    ap.add_argument("--only", help="comma-separated section names; default is all")
+    args = ap.parse_args()
+
+    chosen = None
+    if args.only:
+        chosen = [c.strip() for c in args.only.split(",")]
+        unknown = [c for c in chosen if c not in SECTIONS]
+        if unknown:
+            raise SystemExit(f"unknown section(s) {unknown}; "
+                             f"choose from {sorted(SECTIONS)}")
+    main(chosen)

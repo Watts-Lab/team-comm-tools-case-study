@@ -238,14 +238,30 @@ if __name__ == "__main__":
           f"{len(feature_cols)} survive the near-constant check")
     write_manifest(candidates, feature_cols, reasons)
 
-    # The held-out split keeps every column, so the learning split's surviving
-    # features must all be present in it. Anything absent is a real mismatch
-    # rather than something to paper over with a neutral fill.
-    val_cols = set(load_conv_features("val").columns)
-    missing = [c for c in feature_cols if c not in val_cols]
-    if missing:
-        raise SystemExit(f"{len(missing)} learn features absent from the held-out "
-                         f"split, e.g. {missing[:5]} - re-run 02 for both splits.")
+    # A feature has to exist in both splits to be usable. Some columns the toolkit
+    # produces for one split come back entirely empty for the other - every
+    # `positivity_zscore_chats` variant is fully populated on the learning split and
+    # all-NaN on the held-out split - and a feature that cannot be estimated out of
+    # sample cannot be part of a claim that rests on out-of-sample replication.
+    #
+    # This is a check on availability, not on performance: what is dropped is
+    # decided by whether the toolkit returned any values at all, never by how well
+    # a feature predicts. Nothing about the outcome is consulted.
+    val_conv = load_conv_features("val")
+    unavailable = [c for c in feature_cols
+                   if c not in val_conv.columns
+                   or val_conv[c].notna().sum() == 0
+                   or val_conv[c].nunique(dropna=True) < MIN_UNIQUE]
+    if unavailable:
+        print(f"dropping {len(unavailable)} feature(s) the held-out split cannot "
+              f"estimate: {sorted(unavailable)[:4]}"
+              + (" ..." if len(unavailable) > 4 else ""))
+        feature_cols = [c for c in feature_cols if c not in set(unavailable)]
+        manifest = pd.read_csv(TABLES / "feature_manifest.csv")
+        manifest.loc[manifest["feature"].isin(unavailable), "kept"] = False
+        manifest.loc[manifest["feature"].isin(unavailable), "drop_reason"] = \
+            "not estimable in the held-out split"
+        manifest.to_csv(TABLES / "feature_manifest.csv", index=False)
 
     moments = scaling_moments(learn_conv, feature_cols)
     for split in SPLITS:

@@ -1,0 +1,25 @@
+feature,column,extreme,conv_id,round_index,value_z,next_round_contribution,n_messages,text
+TextBlob subjectivity,max_user_min_textblob_subjectivity,high,3zSNGrLvJJYZhmW2p_r1_post,2,1.4840759320803396,0.5,3,Anyone else drunk? | no lol | I just want a cracker
+TextBlob subjectivity,max_user_min_textblob_subjectivity,high,4nKD5eDXT2JfQEFC2_r0_post,1,1.4840759320803396,0.75,5,"Contribute 20, we all win. | Exactly!  Yes contribute 20 | lets go | NICE | or 0"
+TextBlob subjectivity,max_user_min_textblob_subjectivity,high,5peepGs4D4ExMXS4R_r0_post,1,1.4840759320803396,0.99375,21,"lets all in all | All in next round everybody? | are you guys real? | YES | yes | You guys know that we can see when you don't contribute much, right? | all in next round i agree | Yup | I think I am | ... | all in | i am also real btw | real chicken? | thats what bots would say | real chicken indeed | thanks for the reward! | I think we should go all in every round and try and maximise the total pot | That's the obvious strategy! | can u type with chicken feet? | Let's see what the multiplier is first | Some people are too stubborn to agree"
+TextBlob subjectivity,max_user_min_textblob_subjectivity,low,2r5xvh4mLkmbyTPuW_r1_post,2,-1.2234659765310814,0.9,11,thank you rooster brother for joining | deduct SLOTH | make it hurt | deduct -30 sloth | sloth  fitting name | scummy sloth | this is literally the easiest money you will make all day if you MAX. Why would you NOT max? | lmao no clue | agree | no benefit to NOT putting in max | none
+TextBlob subjectivity,max_user_min_textblob_subjectivity,low,5qNajwPqTHZR4hzfB_r0_post,1,-1.2234659765310814,0.7,2,Invest it all please | hi
+TextBlob subjectivity,max_user_min_textblob_subjectivity,low,5srShkDRaeNasJntF_r1_post,2,-1.2234659765310814,0.7088235294117647,2,come on guys go 20 | what happened to doing 20
+Discursive diversity,discursive_diversity,high,v4ZA3KgMeMbhmDdPt_r0_post,1,1.3364440202052823,1.0,2,lovely | Why didn't 2 people contribute
+Discursive diversity,discursive_diversity,high,CK2s6TSodhYoinW7Z_r0_post,1,1.2134776790148252,0.8333333333333334,2,"sloth, we can maximize our earnings if you put in all 20 | will do!"
+Discursive diversity,discursive_diversity,high,dr8gXGDNPbKB3iuRR_r1_post,2,1.198815472809166,0.8571428571428571,3,"deducting removes value so we don't wanna do taht either | I came in knowing what I was going to do throughout. | Yea, just wanna make sure we are all on same page :) ty gorilla <3"
+Discursive diversity,discursive_diversity,low,KSbkpoF7LDj2u2BBi_r0_post,1,-1.701777319823333,0.725,2,Hi | hi
+Discursive diversity,discursive_diversity,low,XLvxd9EmkPHvF6pew_r0_post,1,-1.701777319823333,0.6470588235294118,2,Yeah ! | Yeah!
+Discursive diversity,discursive_diversity,low,tAg9q2ANecZSWFGaT_r0_post,1,-1.701777319823333,0.4125,6,HI | hi | hi | Hi | hi | Hi
+Forward flow,max_forward_flow,high,v4ZA3KgMeMbhmDdPt_r0_post,1,0.9116393090638564,1.0,2,lovely | Why didn't 2 people contribute
+Forward flow,max_forward_flow,high,ytqvPjvGXqkzDDsKY_r0_post,1,0.908342268115866,0.8157894736842105,3,Everyone just do 20 and we'll all be happy. | echoed | i agree
+Forward flow,max_forward_flow,high,XLvxd9EmkPHvF6pew_r1_post,2,0.844764488263696,0.8235294117647058,11,Me too | same | me too | Looks like someone isn't telling the truth.. haha | lol | lol | dang | Why lie if we're gonna see it lol | .. You're the one who lied haha | I was wondering that too | tough scene
+Forward flow,max_forward_flow,low,4Z5uDYPcFsmMAnBJf_r0_post,1,-1.8453307980056872,0.65,3,ok | ok | Ok
+Forward flow,max_forward_flow,low,KSbkpoF7LDj2u2BBi_r0_post,1,-1.8453307980056872,0.725,2,Hi | hi
+Forward flow,max_forward_flow,low,XLvxd9EmkPHvF6pew_r0_post,1,-1.8453307980056872,0.6470588235294118,2,Yeah ! | Yeah!
+Neutral BERT,stdev_user_min_neutral_bert,high,v4ZA3KgMeMbhmDdPt_r1_post,2,2.0429059465784096,1.0,3,Yes it depends on the multiplier. | if its 3x or more we should contribute no? | If the multiplier is 0 that would not be fun
+Neutral BERT,stdev_user_min_neutral_bert,high,wgkACXaDNh5bKmY9b_r1_post,2,1.9972960498190393,0.8214285714285714,8,waiting to finish work at 5pm | you? | Me too! | glad to finally get a study today haha | haha | Been a slow one | ive had one for 15 today | was that the risk one? where you choose a payoff today vs 3 months etc
+Neutral BERT,stdev_user_min_neutral_bert,high,oxXs2x9cdabyzpNX3_r1_post,2,1.9475768996948035,0.885,3,"Yes, that's much better! | rabbit put in o | Come on, rabbit."
+Neutral BERT,stdev_user_min_neutral_bert,low,rqeStug79wtjBMYn5_r0_post,1,-1.3153929513747702,0.625,2,HI | HI
+Neutral BERT,stdev_user_min_neutral_bert,low,KSbkpoF7LDj2u2BBi_r0_post,1,-1.2759935864014125,0.725,2,Hi | hi
+Neutral BERT,stdev_user_min_neutral_bert,low,FpYh3P5jAMzox9jXF_r0_post,1,-1.2386280591185497,0.6666666666666666,2,hi | Hey

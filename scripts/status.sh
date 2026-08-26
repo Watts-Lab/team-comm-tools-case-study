@@ -137,8 +137,10 @@ snapshot() {
   running 04_analysis && printf "  ${DIM}running %s${OFF}" "$(elapsed 04_analysis)"
   [ "$st" = stale ] && printf "  ${DIM}stale: older than the data or the script${OFF}"
   printf "\n"
+  # Reported in the order the analysis writes them, so a run reads top to bottom.
+  # The first four are archived analyses; the rest carry the case study's story.
   for t in channel_effect model_comparison variance_decomposition speech_vs_content \
-           family_importance \
+           family_importance family_importance_opening \
            round_stage stage_profile stage_examples stage_feature_effects \
            stage_agreement feature_effects; do
     if fresh outputs/tables/$t.csv $UP4; then
@@ -157,19 +159,19 @@ snapshot() {
   # ---- 5. figures -------------------------------------------------------
   st=todo
   local n fresh_n=0 f newest_table
-  n=$(ls outputs/figures/*.png 2>/dev/null | wc -l | tr -d ' ')
+  n=$(ls outputs/figures/fig[1-3]_*.png 2>/dev/null | wc -l | tr -d ' ')
   # Compare against the NEWEST table, not one chosen table. A figure can easily
   # postdate the single table it was checked against while being drawn from six
   # others that have since been rewritten - which is exactly how this line came
   # to report seven stale figures as current.
   newest_table=$(ls -t outputs/tables/*.csv 2>/dev/null | head -1)
-  for f in outputs/figures/*.png; do
+  for f in outputs/figures/fig[1-3]_*.png; do
     fresh "$f" "$newest_table" $UP5 && fresh_n=$((fresh_n + 1))
   done
   [ "$n" -gt 0 ] && st=stale
-  [ "$fresh_n" -ge 8 ] && st=done
+  [ "$fresh_n" -ge 3 ] && st=done
   running 05_figures && st=run
-  printf " %b 5  figures  ${DIM}%s of 8 drawn, %s current${OFF}\n" "$(mark $st)" "$n" "$fresh_n"
+  printf " %b 5  figures  ${DIM}%s of 3 drawn, %s current${OFF}\n" "$(mark $st)" "$n" "$fresh_n"
 }
 
 if [ "$1" = "-w" ] || [ "$1" = "--watch" ]; then
