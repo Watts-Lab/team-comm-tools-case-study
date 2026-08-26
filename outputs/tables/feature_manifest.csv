@@ -2,64 +2,63 @@ feature,kept,family,drop_reason
 turn_taking_index,True,Participation & timing,
 gini_coefficient_sum_num_messages,True,Participation & timing,
 team_burstiness,True,Participation & timing,
+mean_info_exchange_zscore_conversation,True,Semantic dynamics,
+stdev_info_exchange_zscore_conversation,False,Semantic dynamics,near-constant (4 unique values)
+stdev_forward_flow,True,Semantic dynamics,
+mean_positivity_zscore_conversation,True,Sentiment & emotion,
+stdev_positivity_zscore_conversation,False,Sentiment & emotion,near-constant (4 unique values)
 mean_num_messages,False,Volume & form,near-constant (1 unique values)
 min_num_messages,False,Volume & form,near-constant (1 unique values)
 max_num_messages,False,Volume & form,near-constant (1 unique values)
-mean_info_exchange_zscore_conversation,True,Semantic dynamics,
-stdev_info_exchange_zscore_conversation,False,Semantic dynamics,near-constant (4 unique values)
-mean_positivity_zscore_conversation,True,Sentiment & emotion,
-stdev_positivity_zscore_conversation,False,Sentiment & emotion,near-constant (4 unique values)
-sum_num_messages,True,Volume & form,
-mean_user_min_certainty_rocklage,True,Sentiment & emotion,
-mean_user_mean_num_messages,False,Volume & form,near-constant (1 unique values)
-mean_user_max_num_messages,False,Volume & form,near-constant (1 unique values)
-mean_user_min_num_messages,False,Volume & form,near-constant (1 unique values)
 mean_user_mean_info_exchange_zscore_conversation,True,Semantic dynamics,
 mean_user_max_info_exchange_zscore_conversation,True,Semantic dynamics,
 mean_user_min_info_exchange_zscore_conversation,True,Semantic dynamics,
+mean_user_min_forward_flow,True,Semantic dynamics,
 mean_user_mean_positivity_zscore_conversation,True,Sentiment & emotion,
 mean_user_max_positivity_zscore_conversation,True,Sentiment & emotion,
 mean_user_min_positivity_zscore_conversation,True,Sentiment & emotion,
-stdev_user_min_argue_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_min_positive_affect_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_min_num_question_naive,True,Questions & repair,
-stdev_user_min_quantifier_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_min_first_person_lexical_wordcount,True,Lexical (LIWC),
+mean_user_mean_num_messages,False,Volume & form,near-constant (1 unique values)
+mean_user_max_num_messages,False,Volume & form,near-constant (1 unique values)
+mean_user_min_num_messages,False,Volume & form,near-constant (1 unique values)
+mean_user_min_certainty_rocklage,True,Sentiment & emotion,
+mean_user_min_textblob_polarity,True,Sentiment & emotion,
+stdev_user_min_adverbs_lexical_wordcount,True,Lexical (LIWC),
 stdev_user_mean_info_exchange_zscore_conversation,True,Semantic dynamics,
 stdev_user_max_info_exchange_zscore_conversation,True,Semantic dynamics,
 stdev_user_min_info_exchange_zscore_conversation,True,Semantic dynamics,
+stdev_user_min_forward_flow,True,Semantic dynamics,
 stdev_user_mean_positivity_zscore_conversation,True,Sentiment & emotion,
 stdev_user_max_positivity_zscore_conversation,True,Sentiment & emotion,
 stdev_user_min_positivity_zscore_conversation,True,Sentiment & emotion,
-stdev_user_min_first_pronouns_proportion,True,Semantic dynamics,
-stdev_user_min_tentativeness_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_min_conjunction_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_min_inclusive_lexical_wordcount,True,Lexical (LIWC),
+stdev_user_min_positive_affect_lexical_wordcount,True,Lexical (LIWC),
+stdev_user_min_certainty_rocklage,True,Sentiment & emotion,
 stdev_user_min_positive_words_lexical_wordcount,True,Lexical (LIWC),
-min_user_max_certainty_rocklage,True,Sentiment & emotion,
 min_user_mean_num_messages,False,Volume & form,near-constant (1 unique values)
 min_user_max_num_messages,False,Volume & form,near-constant (1 unique values)
 min_user_min_num_messages,False,Volume & form,near-constant (1 unique values)
-max_user_min_certainty_rocklage,True,Sentiment & emotion,
+min_user_max_certainty_rocklage,True,Sentiment & emotion,
+min_user_max_textblob_polarity,True,Sentiment & emotion,
 max_user_mean_num_messages,False,Volume & form,near-constant (1 unique values)
 max_user_max_num_messages,False,Volume & form,near-constant (1 unique values)
 max_user_min_num_messages,False,Volume & form,near-constant (1 unique values)
+max_user_min_certainty_rocklage,True,Sentiment & emotion,
 discursive_diversity,True,Semantic dynamics,
 variance_in_DD,True,Semantic dynamics,
+incongruent_modulation,True,Semantic dynamics,
 within_person_disc_range,True,Semantic dynamics,
 max_First_Person_Plural_receptiveness_yeomans,True,Receptiveness,
 max_Second_Person_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
 max_mimicry_bert,True,Semantic dynamics,
 max_num_chars,True,Volume & form,
+mean_user_max_num_chars,True,Volume & form,
 stdev_user_max_num_chars,True,Volume & form,
 max_Conjunction_Start_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_Negation_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
 max_Negative_Emotion_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
 max_content_word_accommodation_per_conv,True,Semantic dynamics,
+max_hedge_words_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
 max_Impersonal_Pronoun_receptiveness_yeomans,True,Receptiveness,
 max_Positive_Emotion_receptiveness_yeomans,True,Receptiveness,
-mean_user_max_num_chars,True,Volume & form,
-max_article_lexical_wordcount,True,Lexical (LIWC),
 max_time_diff,True,Participation & timing,
 min_num_chars,True,Volume & form,
 min_user_max_num_chars,True,Volume & form,
@@ -70,12 +69,17 @@ max_Affirmation_receptiveness_yeomans,False,Receptiveness,near-constant (3 uniqu
 max_Bare_Command_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_First_Person_Single_receptiveness_yeomans,True,Receptiveness,
 max_Hedges_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
+max_Subjectivity_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_WH_Questions_receptiveness_yeomans,False,Receptiveness,near-constant (2 unique values)
 max_YesNo_Questions_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_achievement_lexical_wordcount,True,Lexical (LIWC),
+max_anger_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
 max_argue_lexical_wordcount,True,Lexical (LIWC),
+max_article_lexical_wordcount,True,Lexical (LIWC),
+max_bio_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_causation_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_certainty_lexical_wordcount,True,Lexical (LIWC),
+max_conjunction_lexical_wordcount,True,Lexical (LIWC),
 max_direct_question_politeness_convokit,False,Politeness,near-constant (2 unique values)
 max_discrepancies_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_exclusive_lexical_wordcount,True,Lexical (LIWC),
@@ -86,9 +90,11 @@ max_first_pronouns_proportion,True,Semantic dynamics,
 max_function_word_accommodation,True,Semantic dynamics,
 max_future_tense_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_hashedge_politeness_convokit,False,Politeness,near-constant (2 unique values)
+max_hear_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
 max_hedges_politeness_convokit,False,Politeness,near-constant (2 unique values)
 max_humans_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_inclusive_lexical_wordcount,True,Lexical (LIWC),
+max_inhibition_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
 max_insight_lexical_wordcount,True,Lexical (LIWC),
 max_money_lexical_wordcount,True,Lexical (LIWC),
 max_negative_affect_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
@@ -97,6 +103,7 @@ max_num_emoji,False,Volume & form,near-constant (3 unique values)
 max_num_question_naive,False,Questions & repair,near-constant (4 unique values)
 max_past_tense_lexical_wordcount,True,Lexical (LIWC),
 max_percept_lexical_wordcount,True,Lexical (LIWC),
+max_quantifier_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_see_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_tentativeness_lexical_wordcount,True,Lexical (LIWC),
 max_user_max_work_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
@@ -107,51 +114,37 @@ max_dale_chall_score,True,Volume & form,
 max_negative_bert,True,Sentiment & emotion,
 max_positive_affect_lexical_wordcount,True,Lexical (LIWC),
 max_positivity_zscore_chats,True,Sentiment & emotion,
-max_positive_words_lexical_wordcount,True,Lexical (LIWC),
 max_preposition_lexical_wordcount,True,Lexical (LIWC),
 max_relative_lexical_wordcount,True,Lexical (LIWC),
 max_social_lexical_wordcount,True,Lexical (LIWC),
 mean_user_max_positivity_zscore_chats,True,Sentiment & emotion,
-stdev_user_max_Impersonal_Pronoun_receptiveness_yeomans,True,Receptiveness,
 stdev_user_max_positivity_zscore_chats,True,Sentiment & emotion,
-max_bio_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_certainty_rocklage,True,Sentiment & emotion,
-max_conjunction_lexical_wordcount,True,Lexical (LIWC),
-max_inhibition_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
 max_num_line_breaks,False,Volume & form,near-constant (3 unique values)
-max_quantifier_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+max_positive_words_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_First_Person_Plural_receptiveness_yeomans,True,Receptiveness,
 max_user_min_Negation_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
 max_user_min_Negative_Emotion_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
+max_user_min_Second_Person_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
 max_user_min_content_word_accommodation_per_conv,True,Semantic dynamics,
 min_user_max_time_diff,True,Participation & timing,
+stdev_user_max_Impersonal_Pronoun_receptiveness_yeomans,True,Receptiveness,
 stdev_user_max_Positive_Emotion_receptiveness_yeomans,True,Receptiveness,
 max_cognitive_mech_lexical_wordcount,True,Lexical (LIWC),
-max_user_min_neutral_bert,True,Sentiment & emotion,
 max_present_tense_lexical_wordcount,True,Lexical (LIWC),
 max_textblob_polarity,True,Sentiment & emotion,
 max_user_max_verbs_lexical_wordcount,True,Lexical (LIWC),
 mean_user_max_cognitive_mech_lexical_wordcount,True,Lexical (LIWC),
-mean_user_max_forward_flow,True,Semantic dynamics,
 mean_user_max_neutral_bert,True,Sentiment & emotion,
-mean_user_max_nltk_english_stopwords_lexical_wordcount,True,Lexical (LIWC),
 mean_user_max_present_tense_lexical_wordcount,True,Lexical (LIWC),
-mean_user_max_textblob_polarity,True,Sentiment & emotion,
 mean_user_max_textblob_subjectivity,True,Sentiment & emotion,
 mean_user_max_verbs_lexical_wordcount,True,Lexical (LIWC),
-min_user_max_neutral_bert,True,Sentiment & emotion,
 min_num_line_breaks,False,Volume & form,near-constant (2 unique values)
 min_positivity_zscore_chats,True,Sentiment & emotion,
-min_user_max_relative_lexical_wordcount,True,Lexical (LIWC),
-min_user_max_social_lexical_wordcount,True,Lexical (LIWC),
-min_textblob_polarity,True,Sentiment & emotion,
 min_user_max_positivity_zscore_chats,True,Sentiment & emotion,
-stdev_user_max_adverbs_lexical_wordcount,True,Lexical (LIWC),
 stdev_user_max_auxiliary_verbs_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_max_certainty_rocklage,True,Sentiment & emotion,
 stdev_user_max_cognitive_mech_lexical_wordcount,True,Lexical (LIWC),
 stdev_user_max_dale_chall_score,True,Volume & form,
-stdev_user_max_forward_flow,True,Semantic dynamics,
 stdev_user_max_negative_bert,True,Sentiment & emotion,
 stdev_user_min_neutral_bert,True,Sentiment & emotion,
 stdev_user_max_preposition_lexical_wordcount,True,Lexical (LIWC),
@@ -167,58 +160,64 @@ max_user_min_2nd_person_politeness_convokit,False,Politeness,near-constant (2 un
 max_user_min_Affirmation_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_user_min_Bare_Command_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_user_min_First_Person_Single_receptiveness_yeomans,True,Receptiveness,
-max_user_min_Second_Person_receptiveness_yeomans,False,Receptiveness,near-constant (4 unique values)
 max_user_min_YesNo_Questions_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_user_min_achievement_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+max_user_min_argue_lexical_wordcount,True,Lexical (LIWC),
+max_user_min_article_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_causation_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_user_min_certainty_lexical_wordcount,True,Lexical (LIWC),
+max_user_min_conjunction_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_discrepancies_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_user_min_exclusive_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_user_min_feel_lexical_wordcount,False,Lexical (LIWC),near-constant (3 unique values)
+max_user_min_first_person_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_first_person_plural_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_first_person_singular_lexical_wordcount,True,Lexical (LIWC),
+max_user_min_first_pronouns_proportion,True,Semantic dynamics,
 max_user_min_function_word_accommodation,True,Semantic dynamics,
 max_user_min_future_tense_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_user_min_hashedge_politeness_convokit,False,Politeness,near-constant (2 unique values)
+max_user_min_inclusive_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_insight_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_money_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+max_user_min_num_all_caps,True,Volume & form,
+max_user_min_num_question_naive,False,Questions & repair,near-constant (3 unique values)
 max_user_min_past_tense_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_user_min_percept_lexical_wordcount,True,Lexical (LIWC),
-max_user_min_second_person_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+max_user_min_quantifier_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
 max_user_min_see_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+max_user_min_tentativeness_lexical_wordcount,True,Lexical (LIWC),
 max_user_min_work_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+mean_user_max_forward_flow,True,Semantic dynamics,
+mean_user_max_textblob_polarity,True,Sentiment & emotion,
 min_user_max_word_TTR,True,Volume & form,
 min_certainty_rocklage,True,Sentiment & emotion,
-stdev_user_max_conjunction_lexical_wordcount,True,Lexical (LIWC),
+min_textblob_polarity,True,Sentiment & emotion,
+stdev_user_max_adverbs_lexical_wordcount,True,Lexical (LIWC),
+stdev_user_max_certainty_rocklage,True,Sentiment & emotion,
 stdev_user_max_positive_affect_lexical_wordcount,True,Lexical (LIWC),
 stdev_user_max_positive_words_lexical_wordcount,True,Lexical (LIWC),
-stdev_user_max_quantifier_lexical_wordcount,True,Lexical (LIWC),
 gini_coefficient_sum_num_chars,True,Participation & timing,
-info_diversity,True,Semantic dynamics,
+sum_num_messages,True,Volume & form,
 max_forward_flow,True,Semantic dynamics,
 max_info_exchange_zscore_conversation,True,Semantic dynamics,
+max_neutral_bert,True,Sentiment & emotion,
 max_positivity_zscore_conversation,True,Sentiment & emotion,
 max_textblob_subjectivity,True,Sentiment & emotion,
 max_user_max_word_TTR,True,Volume & form,
 max_user_min_forward_flow,True,Semantic dynamics,
 max_user_min_info_exchange_zscore_conversation,True,Semantic dynamics,
+max_user_min_neutral_bert,True,Sentiment & emotion,
 max_user_min_positivity_zscore_conversation,True,Sentiment & emotion,
 max_user_min_textblob_subjectivity,True,Sentiment & emotion,
 max_user_min_word_TTR,True,Volume & form,
-max_user_min_argue_lexical_wordcount,True,Lexical (LIWC),
-max_user_min_conjunction_lexical_wordcount,True,Lexical (LIWC),
-max_user_min_first_person_lexical_wordcount,True,Lexical (LIWC),
-max_user_min_first_pronouns_proportion,True,Semantic dynamics,
-max_user_min_inclusive_lexical_wordcount,True,Lexical (LIWC),
-max_user_min_num_all_caps,True,Volume & form,
+max_user_min_Hedges_receptiveness_yeomans,False,Receptiveness,near-constant (3 unique values)
 max_user_min_num_line_breaks,False,Volume & form,near-constant (3 unique values)
-max_user_min_num_question_naive,False,Questions & repair,near-constant (3 unique values)
-max_user_min_quantifier_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
-max_user_min_tentativeness_lexical_wordcount,True,Lexical (LIWC),
-min_auxiliary_verbs_lexical_wordcount,True,Lexical (LIWC),
+max_user_min_positive_words_lexical_wordcount,True,Lexical (LIWC),
 min_cognitive_mech_lexical_wordcount,True,Lexical (LIWC),
 min_info_exchange_zscore_conversation,True,Semantic dynamics,
 min_negative_bert,True,Sentiment & emotion,
+min_neutral_bert,True,Sentiment & emotion,
 min_nltk_english_stopwords_lexical_wordcount,True,Lexical (LIWC),
 min_positivity_zscore_conversation,True,Sentiment & emotion,
 min_present_tense_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
@@ -228,12 +227,17 @@ min_user_max_cognitive_mech_lexical_wordcount,True,Lexical (LIWC),
 min_user_max_info_exchange_zscore_conversation,True,Semantic dynamics,
 min_user_max_mimicry_bert,True,Semantic dynamics,
 min_user_max_negative_bert,True,Sentiment & emotion,
+min_user_max_neutral_bert,True,Sentiment & emotion,
 min_user_max_nltk_english_stopwords_lexical_wordcount,True,Lexical (LIWC),
 min_user_max_positivity_zscore_conversation,True,Sentiment & emotion,
 min_user_max_preposition_lexical_wordcount,True,Lexical (LIWC),
 min_user_max_present_tense_lexical_wordcount,False,Lexical (LIWC),near-constant (4 unique values)
+min_user_max_relative_lexical_wordcount,True,Lexical (LIWC),
+min_user_max_social_lexical_wordcount,True,Lexical (LIWC),
 min_user_max_textblob_subjectivity,True,Sentiment & emotion,
 min_user_max_verbs_lexical_wordcount,True,Lexical (LIWC),
 min_user_min_verbs_lexical_wordcount,True,Lexical (LIWC),
+stdev_user_max_forward_flow,True,Semantic dynamics,
+stdev_user_min_Impersonal_Pronoun_receptiveness_yeomans,True,Receptiveness,
 stdev_user_min_Positive_Emotion_receptiveness_yeomans,True,Receptiveness,
 sum_num_chars,True,Volume & form,

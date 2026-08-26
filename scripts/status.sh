@@ -25,6 +25,21 @@ rows() { [ -f "$1" ] && echo "$(($(wc -l < "$1") - 1))" || echo "-"; }
 # not, because shell timestamps have one-second granularity - a figure written in
 # the same second as the script that drew it would fail that test and be reported
 # stale despite being perfectly current.
+# Inputs accumulate down the pipeline. Checking a stage only against its immediate
+# input is not enough: figures drawn from tables that are themselves out of date
+# would look current, because they postdate those tables. Each stage is therefore
+# checked against everything upstream of it, not just the step before.
+UP1="data/raw/learning_set_master_data.pkl scripts/01_prepare_data.py"
+UP2="$UP1 data/processed/chat_learn.csv data/processed/chat_val.csv \
+     data/processed/rounds_learn.csv data/processed/rounds_val.csv \
+     scripts/02_extract_features.py"
+UP3="$UP2 outputs/features/output/conv/learn_conv_level.csv \
+     outputs/features/output/conv/val_conv_level.csv scripts/03_build_analysis_table.py"
+UP4="$UP3 data/processed/analysis_learn.csv data/processed/analysis_val.csv \
+     scripts/04_analysis.py"
+UP5="$UP4 outputs/tables/round_stage.csv outputs/tables/feature_effects.csv \
+     outputs/tables/variance_decomposition.csv scripts/05_figures.py"
+
 fresh() {
   local out=$1; shift
   [ -f "$out" ] || return 1
@@ -103,8 +118,7 @@ snapshot() {
   # ---- 3. analysis table ------------------------------------------------
   st=todo
   [ -f data/processed/analysis_val.csv ] && st=stale
-  fresh data/processed/analysis_val.csv $conv/val_conv_level.csv \
-        scripts/03_build_analysis_table.py && st=done
+  fresh data/processed/analysis_val.csv $UP3 && st=done
   running 03_build && st=run
   printf " %b 3  build analysis table" "$(mark $st)"
   [ "$st" = stale ] && printf "  ${DIM}stale: older than the feature files${OFF}"
@@ -117,8 +131,7 @@ snapshot() {
   # ---- 4. analysis ------------------------------------------------------
   st=todo
   [ -f outputs/tables/variance_decomposition.csv ] && st=stale
-  fresh outputs/tables/feature_effects.csv data/processed/analysis_val.csv \
-        scripts/04_analysis.py && st=done
+  fresh outputs/tables/feature_effects.csv $UP4 && st=done
   running 04_analysis && st=run
   printf " %b 4  analysis" "$(mark $st)"
   running 04_analysis && printf "  ${DIM}running %s${OFF}" "$(elapsed 04_analysis)"
@@ -128,8 +141,7 @@ snapshot() {
            family_importance \
            round_stage stage_profile stage_examples stage_feature_effects \
            stage_agreement feature_effects; do
-    if fresh outputs/tables/$t.csv data/processed/analysis_val.csv \
-             scripts/04_analysis.py; then
+    if fresh outputs/tables/$t.csv $UP4; then
       printf "      ${DONE} ${DIM}%-24s %s${OFF}\n" "$t" "$(age outputs/tables/$t.csv)"
     elif [ -f outputs/tables/$t.csv ]; then
       printf "      ${STALE} ${DIM}%-24s %s  stale${OFF}\n" "$t" "$(age outputs/tables/$t.csv)"
@@ -152,7 +164,7 @@ snapshot() {
   # to report seven stale figures as current.
   newest_table=$(ls -t outputs/tables/*.csv 2>/dev/null | head -1)
   for f in outputs/figures/*.png; do
-    fresh "$f" "$newest_table" scripts/05_figures.py && fresh_n=$((fresh_n + 1))
+    fresh "$f" "$newest_table" $UP5 && fresh_n=$((fresh_n + 1))
   done
   [ "$n" -gt 0 ] && st=stale
   [ "$fresh_n" -ge 8 ] && st=done

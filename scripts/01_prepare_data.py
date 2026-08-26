@@ -165,6 +165,8 @@ def build_round_table(rounds):
                                   + game_rounds["round_index"].astype(str) + "_pre")
     game_rounds["conv_id_post"] = (game_rounds["gameId"] + "_r"
                                    + (game_rounds["round_index"] - 1).astype(str) + "_post")
+    game_rounds["conv_id_window"] = (game_rounds["gameId"] + "_r"
+                                     + game_rounds["round_index"].astype(str) + "_win")
     return game_rounds
 
 
@@ -185,7 +187,16 @@ def label_chat_with_block(chat, game_rounds):
     chat["target_round"] = chat["round_index"] + (chat["block"] == "post").astype(int)
 
     wanted = set(game_rounds["conv_id_pre"]) | set(game_rounds["conv_id_post"])
-    return chat[chat["conv_id"].isin(wanted)].copy()
+    chat = chat[chat["conv_id"].isin(wanted)].copy()
+
+    # The window is the same messages under a third conversation id, so the toolkit
+    # featurizes it independently. Rows are duplicated rather than moved: a message
+    # belongs both to its own half and to the merged stretch.
+    window = chat.copy()
+    window["block"] = "window"
+    window["conv_id"] = (window["gameId"] + "_r"
+                         + window["target_round"].astype(str) + "_win")
+    return pd.concat([chat, window], ignore_index=True)
 
 
 # ------------------------------------------------------------------ main -----
@@ -205,8 +216,8 @@ def prepare(split):
     spoke = set(chat["conv_id"].unique())
     game_rounds["had_pre_talk"] = game_rounds["conv_id_pre"].isin(spoke)
     game_rounds["had_post_talk"] = game_rounds["conv_id_post"].isin(spoke)
-    game_rounds["had_conversation"] = (game_rounds["had_pre_talk"]
-                                       | game_rounds["had_post_talk"])
+    game_rounds["had_window_talk"] = game_rounds["conv_id_window"].isin(spoke)
+    game_rounds["had_conversation"] = game_rounds["had_window_talk"]
 
     chat_path = DATA_PROCESSED / f"chat_{split}.csv"
     rounds_path = DATA_PROCESSED / f"rounds_{split}.csv"
@@ -216,8 +227,9 @@ def prepare(split):
     print(f"game-rounds: {len(game_rounds)} from {game_rounds.gameId.nunique()} games")
     print(f"  channel open: {int(game_rounds.has_chat_channel.sum())}")
     print(f"  by absolute stage: {game_rounds.stage_absolute.value_counts().to_dict()}")
-    print(f"  with PRE (deliberation) talk:  {int(game_rounds.had_pre_talk.sum())}")
-    print(f"  with POST (reaction) talk:     {int(game_rounds.had_post_talk.sum())}")
+    print(f"  with PRE (deliberation) talk:    {int(game_rounds.had_pre_talk.sum())}")
+    print(f"  with POST (reaction) talk:       {int(game_rounds.had_post_talk.sum())}")
+    print(f"  with WINDOW (both merged) talk:  {int(game_rounds.had_window_talk.sum())}")
     print(f"messages: {len(chat)} across {chat.conv_id.nunique()} block-conversations "
           f"({chat.block.value_counts().to_dict()})")
     print(f"mean contribution rate: {game_rounds.contribution_rate.mean():.3f}")

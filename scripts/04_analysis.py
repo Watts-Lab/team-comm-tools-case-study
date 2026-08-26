@@ -51,7 +51,11 @@ OUTCOME = "contribution_rate"
 GROUP = "gameId"          # rounds within a game are not independent observations
 CHANNEL = "has_chat_channel"
 MOMENTUM = "lagged_contribution"
-BLOCKS = {"pre": "deliberation", "post": "reaction"}
+# Three ways of bounding the talk that precedes one contribution decision. The
+# window is PRE and POST merged; it is the same messages, so it is not independent
+# of the other two and is never entered alongside them in a single model.
+BLOCKS = {"pre": "deliberation", "post": "reaction", "window": "both merged"}
+SPLIT_BLOCKS = ["pre", "post"]
 
 # Two ways of saying where a round sits in its game; they answer different
 # questions and disagree substantially, because games run from 3 to 30 rounds.
@@ -117,12 +121,12 @@ def block_features(df, block, with_indicator=True):
 
 
 def families(df):
-    """{family: [feature columns across both blocks]}."""
+    """{family: [feature columns]} for the merged-window block."""
     m = manifest()
     m = m[m["kept"]]
     out = {}
     for fam, sub in m.groupby("family"):
-        cols = [f"{f}__{b}" for f in sub["feature"] for b in BLOCKS]
+        cols = [f"{f}__window" for f in sub["feature"]]
         out[fam] = [c for c in cols if c in df.columns]
     return out
 
@@ -290,12 +294,14 @@ def decomposition(learn, val):
     base = controls(learn)                       # rules + timing
     pre, post = block_features(learn, "pre"), block_features(learn, "post")
 
+    window = block_features(learn, "window")
     specs = {
         "M0 rules + timing": base,
         "M1 + chat channel": base + [CHANNEL],
         "M2 + deliberation (PRE)": base + [CHANNEL] + pre,
         "M3 + reaction (POST)": base + [CHANNEL] + post,
         "M4 + both blocks": base + [CHANNEL] + pre + post,
+        "M5 + merged window": base + [CHANNEL] + window,
     }
 
     rows, preds = [], {}
@@ -318,7 +324,8 @@ def decomposition(learn, val):
     steps = [("channel", "M0 rules + timing", "M1 + chat channel"),
              ("deliberation (PRE)", "M1 + chat channel", "M2 + deliberation (PRE)"),
              ("reaction (POST)", "M1 + chat channel", "M3 + reaction (POST)"),
-             ("both talk blocks", "M1 + chat channel", "M4 + both blocks")]
+             ("both talk blocks", "M1 + chat channel", "M4 + both blocks"),
+             ("merged window", "M1 + chat channel", "M5 + merged window")]
     y_learn = learn[OUTCOME].to_numpy()
     y_val = val[OUTCOME].to_numpy()
     deltas = []
@@ -399,8 +406,7 @@ def family_importance(learn, val):
     choosing what to measure actually faces. Families overlap, so these do not sum
     to the content term.
     """
-    full_cols = (controls(learn) + [CHANNEL]
-                 + block_features(learn, "pre") + block_features(learn, "post"))
+    full_cols = controls(learn) + [CHANNEL] + block_features(learn, "window")
     rows = []
     for kind in ("elastic net", "random forest"):
         full_oof = out_of_fold(kind, learn, full_cols)
@@ -418,6 +424,52 @@ def family_importance(learn, val):
     out = pd.DataFrame(rows).sort_values(["model_family", "drop_in_cv_r2"],
                                          ascending=[True, False])
     out.to_csv(TABLES / "family_importance.csv", index=False)
+    return out
+
+
+def family_importance_opening(learn, val, block="post"):
+    """Leave-one-family-out, restricted to the cell where content actually predicts.
+
+    The pooled version asks which family matters across every round of every game,
+    and answers "none". That is the right answer to that question but the wrong
+    question: the content effect lives entirely in the opening rounds, so the
+    families are worth re-examining there rather than averaged against thousands of
+    rounds where nothing is happening.
+    """
+    col, _ = STAGINGS[PRIMARY_STAGING]
+    flag = f"has_features_{block}"
+    l_sub = learn[(learn[col] == "opening") & learn[flag].astype(bool)]
+    v_sub = val[(val[col] == "opening") & val[flag].astype(bool)]
+
+    base = controls(l_sub) + [CHANNEL]
+    feats = block_features(l_sub, block, with_indicator=False)
+    full_cols = base + feats
+
+    rows = []
+    for kind in ("elastic net", "random forest"):
+        full_oof = out_of_fold(kind, l_sub, full_cols)
+        _, full_val = fit_predict_heldout(kind, l_sub, v_sub, full_cols)
+        full_r2 = r2(l_sub[OUTCOME], full_oof)
+        full_val_r2 = r2(v_sub[OUTCOME], full_val)
+
+        m = manifest()
+        m = m[m["kept"]]
+        for fam, sub in m.groupby("family"):
+            cols = [f"{f}__{block}" for f in sub["feature"]]
+            cols = [c for c in cols if c in l_sub.columns]
+            if not cols:
+                continue
+            reduced = [c for c in full_cols if c not in set(cols)]
+            oof = out_of_fold(kind, l_sub, reduced)
+            _, val_pred = fit_predict_heldout(kind, l_sub, v_sub, reduced)
+            rows.append({"model_family": kind, "feature_family": fam,
+                         "n_features": len(cols), "n_conversations": len(l_sub),
+                         "drop_in_cv_r2": full_r2 - r2(l_sub[OUTCOME], oof),
+                         "drop_in_heldout_r2": full_val_r2 - r2(v_sub[OUTCOME], val_pred)})
+
+    out = pd.DataFrame(rows).sort_values(["model_family", "drop_in_cv_r2"],
+                                         ascending=[True, False])
+    out.to_csv(TABLES / "family_importance_opening.csv", index=False)
     return out
 
 
@@ -734,6 +786,8 @@ def main():
     print(speech_vs_content(learn, val).to_string(index=False), "\n")
 
     print("D. Which kind of talk carries any content term")
+    print("   (opening rounds only)")
+    print(family_importance_opening(learn, val).to_string(index=False), "\n")
     print(family_importance(learn, val).to_string(index=False), "\n")
 
     print("E. When in a game does talk matter")

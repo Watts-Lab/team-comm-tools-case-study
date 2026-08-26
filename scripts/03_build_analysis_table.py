@@ -73,6 +73,10 @@ from config import (CONV_FEATURES, DATA_PROCESSED, FEATURE_FAMILIES, SPLITS,
 # table, so a feature can be fine there and near-constant once merged.
 MIN_UNIQUE = 5          # drop near-constant features
 
+# The three ways of bounding the talk that precedes one contribution decision.
+# "window" is the other two merged; see scripts/01_prepare_data.py.
+BLOCKS = ("pre", "post", "window")
+
 
 def family_of(feature):
     """Map a toolkit column to its construct family; first pattern wins."""
@@ -206,7 +210,7 @@ def build(split, feature_cols, moments):
 
     analysis = pd.concat(
         [rounds] + [block_frame(rounds, conv, feature_cols, moments, b)
-                    for b in ("pre", "post")], axis=1)
+                    for b in BLOCKS], axis=1)
 
     # The first round of a game has no previous round to average, so momentum is
     # undefined there; those rows were already dropped in step 1, but a game whose
@@ -218,8 +222,8 @@ def build(split, feature_cols, moments):
     analysis.to_csv(out, index=False)
     print(f"[{split}] {len(analysis)} game-rounds x {analysis.shape[1]} columns "
           f"-> {out.name}")
-    for block in ("pre", "post"):
-        print(f"         {block.upper():<4} talked {int(analysis[f'has_features_{block}'].sum()):5d}"
+    for block in BLOCKS:
+        print(f"         {block.upper():<7} talked {int(analysis[f'has_features_{block}'].sum()):5d}"
               f"   chose silence {int(analysis[f'chose_silence_{block}'].sum()):5d}"
               f"   no channel {int((~analysis.has_chat_channel.astype(bool)).sum()):5d}")
     return analysis
