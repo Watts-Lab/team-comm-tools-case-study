@@ -277,6 +277,7 @@ report as settled.
     ├── features/      # toolkit output at chat, speaker, conversation level
     ├── tables/        # every result as CSV
     ├── examples/      # conversations behind each reported feature
+    ├── logs/          # the toolkit's own run logs from step 2
     └── figures/
         └── archive/   # analyses outside this story (see below)
 ```

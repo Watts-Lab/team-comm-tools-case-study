@@ -16,17 +16,24 @@ selection never sees held-out data.
 
 The ``output/{level}/`` nesting is imposed by the toolkit: it rewrites whatever
 paths you hand it into that layout, so the paths below mirror the convention
-rather than fight it.
+rather than fight it. Its logs go to ``outputs/logs/``.
 
 Run:  python scripts/02_extract_features.py [--force]
 """
 
 import argparse
+import os
 
 import pandas as pd
 from team_comm_tools import FeatureBuilder
 
-from config import DATA_PROCESSED, FEATURES, SPLITS, VECTOR_CACHE
+from config import DATA_PROCESSED, FEATURES, OUTPUTS, ROOT, SPLITS, VECTOR_CACHE
+
+# FeatureBuilder writes its log tree to ``./{output_file_base}/logs/``, relative to
+# the working directory. Naming the base "outputs" and running from the repo root
+# puts those logs in outputs/logs/ alongside everything else the pipeline produces,
+# instead of creating a second top-level output/ folder next to outputs/.
+LOG_BASE = OUTPUTS.name
 
 # --- redundancy reduction, new in team_comm_tools 0.1.8 ----------------------
 # The toolkit emits families of near-duplicate columns - politeness and
@@ -92,6 +99,11 @@ def featurize(split, force=False):
         print(f"[{split}] outputs already exist; pass --force to regenerate")
         return
 
+    # FeatureBuilder resolves its log directory against the working directory, so
+    # anchor to the repo root and the logs land in outputs/logs/ however the
+    # script was invoked.
+    os.chdir(ROOT)
+
     chat = pd.read_csv(DATA_PROCESSED / f"chat_{split}.csv")
 
     # The toolkit accepts either a datetime or a numeric timestamp; epoch
@@ -114,6 +126,7 @@ def featurize(split, force=False):
         message_col="text",
         timestamp_col="timestamp",
         vector_directory=vector_directory(),
+        output_file_base=LOG_BASE,        # log tree goes under outputs/, see above
         output_file_path_chat_level=str(paths["chat"]),
         output_file_path_user_level=str(paths["user"]),
         output_file_path_conv_level=str(paths["conv"]),
