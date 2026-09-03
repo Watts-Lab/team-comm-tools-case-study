@@ -58,8 +58,8 @@ A 30-round game contributes close to sixty conversations, not one.
 
 **Where a round sits in its game.** Games run from 3 to 30 rounds, so "early" needs
 defining. The main analysis uses round number — beginning is the first three
-rounds, end is the last three — and `outputs/figures/archive/staging_comparison.png`
-repeats everything using thirds of the game instead.
+rounds, end is the last three — and `outputs/tables/round_stage.csv` repeats
+everything using thirds of the game instead.
 
 **Controls.** The game's randomized design parameters (group size, multiplier,
 punishment and reward rules) and the round's position in its game.
@@ -140,7 +140,7 @@ Talk *before* the reveal predicts nothing at any stage — the left panel of the
 figure sits on zero throughout. What matters is what a group says once it has seen
 how the round went.
 
-![When talk matters](outputs/figures/fig1_when_talk_matters.png)
+![When talk matters](outputs/figures/main/fig1_when_talk_matters.png)
 
 The effect is specific to the literal opening rounds. Grouped into thirds of the
 game instead, it disappears: in a 30-round game the first third runs to round 9, and
@@ -154,7 +154,7 @@ Inside those 204 conversations, **54 of 151 features reach p<0.05** — against 
 8 expected by chance — **26 survive a false-discovery-rate correction**, and **23 of
 those also hold on held-out data**.
 
-![What predicts contribution early](outputs/figures/fig2_opening_features.png)
+![Opening features across stages](outputs/figures/main/fig2_effects_across_stages.png)
 
 Every surviving effect is positive, and they fall into two ideas:
 
@@ -180,7 +180,7 @@ separately in the middle and end of a game:
 | Middle | −0.006 | 1 of 10 |
 | End | −0.009 | **0 of 10** |
 
-![Effects across stages](outputs/figures/fig3_effects_across_stages.png)
+![Wider windows](outputs/figures/appendix/figS2_when_talk_matters_wide_windows.png)
 
 They do not reverse — the later coefficients are not distinguishable from zero — they
 simply stop carrying information. Across the full set of 151 features, the
@@ -269,17 +269,20 @@ report as settled.
 │   ├── 02_extract_features.py     # chat table   -> toolkit features
 │   ├── 03_build_analysis_table.py # features     -> one row per game-round
 │   ├── 04_analysis.py             # every number reported above
-│   ├── 05_figures.py              # the three figures
+│   ├── 13_window_figures.py       # the main and appendix figures
 │   ├── 06_feature_examples.py     # conversations behind each feature
 │   ├── 07_lexicon_words.py        # which words a lexicon feature counted
 │   └── run_all.py                 # steps 1-5, in order
 └── outputs/
-    ├── features/      # toolkit output at chat, speaker, conversation level
-    ├── tables/        # every result as CSV
-    ├── examples/      # conversations behind each reported feature
-    ├── logs/          # the toolkit's own run logs from step 2
+    ├── features/         # toolkit output at chat, speaker, conversation level
+    ├── features_cumulative/  # the same, for the cumulative window (step 9)
+    ├── tables/           # every result as CSV
+    │   └── windows/      # the four-window comparison and the first-N analysis
+    ├── examples/         # conversations behind each reported feature
+    ├── logs/             # the toolkit's own run logs from step 2
     └── figures/
-        └── archive/   # analyses outside this story (see below)
+        ├── main/         # the two figures the paper reports
+        └── appendix/     # the same analyses on the wider windows
 ```
 
 ## Running it
@@ -306,9 +309,9 @@ the data they were computed from and the script that computed them.
 
 ## Also in the repository
 
-Three analyses sit outside the story above. They are computed by `04_analysis.py`,
-their tables are in `outputs/tables/`, and their figures in
-`outputs/figures/archive/`:
+Three analyses sit outside the story above. They are computed by `04_analysis.py`
+and their tables are in `outputs/tables/`; they are reported as numbers rather than
+figures:
 
 - **The channel effect.** Whether a group had a chat channel at all was randomized.
   Having one raises contribution by 0.143 [0.102, 0.184] — far more than anything
