@@ -1,0 +1,125 @@
+comparison,binning,block_a,block_b,bin_a,bin_b,n_features,coef_correlation,n_sig_a,n_sig_b,n_sig_both,n_sig_both_same_sign,n_rounds,n_games,n_rounds_heldout,n_games_heldout,n_rounds_a,n_games_a,n_rounds_b,n_games_b
+blocks within bin,all,pre,post,all rounds,all rounds,151,0.3642278363168643,30,13,1,1,1162,143,1382,222,1162,143,1487,145
+blocks within bin,all,pre,window,all rounds,all rounds,151,0.37699796653755707,30,9,2,2,1162,143,1382,222,1162,143,1692,148
+blocks within bin,all,pre,cumulative,all rounds,all rounds,150,-0.29617568308714265,30,25,0,0,1162,143,1382,222,1162,143,2359,148
+blocks within bin,all,post,window,all rounds,all rounds,151,0.8984206557748613,13,9,7,7,1487,145,1904,229,1487,145,1692,148
+blocks within bin,all,post,cumulative,all rounds,all rounds,150,-0.1253229676543502,13,25,2,2,1487,145,1904,229,1487,145,2359,148
+blocks within bin,all,window,cumulative,all rounds,all rounds,150,-0.04864054984630566,9,25,1,1,1692,148,2236,233,1692,148,2359,148
+blocks within bin,round_bin,pre,window,round 1,round 1,146,0.9968175061959952,21,22,21,21,92,92,116,116,92,92,92,92
+blocks within bin,round_bin,pre,cumulative,round 1,round 1,145,0.9556291427137156,21,23,20,20,92,92,116,116,92,92,92,92
+blocks within bin,round_bin,window,cumulative,round 1,round 1,145,0.9741609897650367,22,23,20,20,92,92,116,116,92,92,92,92
+blocks within bin,round_bin,pre,post,round 2,round 2,146,0.3073056821256843,5,47,0,0,91,91,117,117,91,91,106,106
+blocks within bin,round_bin,pre,window,round 2,round 2,148,0.4210577005762724,5,19,0,0,91,91,117,117,91,91,118,118
+blocks within bin,round_bin,pre,cumulative,round 2,round 2,147,0.24010760185078237,5,20,0,0,91,91,117,117,91,91,124,124
+blocks within bin,round_bin,post,window,round 2,round 2,146,0.7471083657756462,47,19,18,18,106,106,127,127,106,106,118,118
+blocks within bin,round_bin,post,cumulative,round 2,round 2,146,0.5828390610135494,47,20,15,15,106,106,127,127,106,106,124,124
+blocks within bin,round_bin,window,cumulative,round 2,round 2,148,0.7936465391672319,19,20,12,12,118,118,159,159,118,118,124,124
+blocks within bin,round_bin,pre,post,round 3,round 3,151,-0.04470924175705068,12,20,1,1,86,86,108,108,86,86,111,111
+blocks within bin,round_bin,pre,window,round 3,round 3,151,0.15159893591377052,12,25,3,3,86,86,108,108,86,86,117,117
+blocks within bin,round_bin,pre,cumulative,round 3,round 3,142,0.02814554618604804,12,56,5,3,86,86,108,108,86,86,133,133
+blocks within bin,round_bin,post,window,round 3,round 3,151,0.8228886603112485,20,25,13,13,111,111,133,133,111,111,117,117
+blocks within bin,round_bin,post,cumulative,round 3,round 3,142,0.6713655247538393,20,56,17,17,111,111,133,133,111,111,133,133
+blocks within bin,round_bin,window,cumulative,round 3,round 3,142,0.7467916583264045,25,56,15,15,117,117,157,157,117,117,133,133
+blocks within bin,round_bin,pre,post,rounds 11+,rounds 11+,151,0.6511781731004621,36,12,6,6,470,83,537,130,470,83,667,88
+blocks within bin,round_bin,pre,window,rounds 11+,rounds 11+,151,0.8044453288172788,36,30,18,18,470,83,537,130,470,83,715,90
+blocks within bin,round_bin,pre,cumulative,rounds 11+,rounds 11+,144,0.24085050007504372,36,7,3,3,470,83,537,130,470,83,1122,106
+blocks within bin,round_bin,post,window,rounds 11+,rounds 11+,151,0.9302254663987061,12,30,10,10,667,88,844,151,667,88,715,90
+blocks within bin,round_bin,post,cumulative,rounds 11+,rounds 11+,144,0.21243499862766047,12,7,2,2,667,88,844,151,667,88,1122,106
+blocks within bin,round_bin,window,cumulative,rounds 11+,rounds 11+,144,0.22503605047264644,30,7,4,4,715,90,923,153,715,90,1122,106
+blocks within bin,round_bin,pre,post,rounds 4-6,rounds 4-6,150,-0.054622244970752014,28,20,4,2,208,102,249,150,208,102,289,116
+blocks within bin,round_bin,pre,window,rounds 4-6,rounds 4-6,150,0.1900450101665994,28,16,6,6,208,102,249,150,208,102,306,121
+blocks within bin,round_bin,pre,cumulative,rounds 4-6,rounds 4-6,146,-0.26653397435625836,28,46,4,0,208,102,249,150,208,102,403,139
+blocks within bin,round_bin,post,window,rounds 4-6,rounds 4-6,151,0.8559730881435065,20,16,7,7,289,116,405,183,289,116,306,121
+blocks within bin,round_bin,post,cumulative,rounds 4-6,rounds 4-6,147,0.42347260600673386,20,46,4,4,289,116,405,183,289,116,403,139
+blocks within bin,round_bin,window,cumulative,rounds 4-6,rounds 4-6,147,0.3827746692896643,16,46,3,2,306,121,447,197,306,121,403,139
+blocks within bin,round_bin,pre,post,rounds 7-10,rounds 7-10,150,0.5408943941372316,5,6,0,0,215,93,255,122,215,93,314,107
+blocks within bin,round_bin,pre,window,rounds 7-10,rounds 7-10,151,0.5762745447889203,5,7,0,0,215,93,255,122,215,93,344,109
+blocks within bin,round_bin,pre,cumulative,rounds 7-10,rounds 7-10,145,-0.40046263772171314,5,19,0,0,215,93,255,122,215,93,485,130
+blocks within bin,round_bin,post,window,rounds 7-10,rounds 7-10,150,0.8475243034280702,6,7,3,3,314,107,395,158,314,107,344,109
+blocks within bin,round_bin,post,cumulative,rounds 7-10,rounds 7-10,145,-0.22895653266756671,6,19,0,0,314,107,395,158,314,107,485,130
+blocks within bin,round_bin,window,cumulative,rounds 7-10,rounds 7-10,145,-0.3037468973561219,7,19,0,0,344,109,434,164,344,109,485,130
+blocks within bin,stage,pre,post,endgame,endgame,151,0.353452148818367,7,13,2,2,190,100,224,137,190,100,260,112
+blocks within bin,stage,pre,window,endgame,endgame,151,0.5670321261671911,7,22,2,2,190,100,224,137,190,100,291,117
+blocks within bin,stage,pre,cumulative,endgame,endgame,147,-0.04431074020347998,7,23,0,0,190,100,224,137,190,100,440,148
+blocks within bin,stage,post,window,endgame,endgame,151,0.8503996108177565,13,22,12,12,260,112,364,173,260,112,291,117
+blocks within bin,stage,post,cumulative,endgame,endgame,147,-0.06298059386218657,13,23,3,3,260,112,364,173,260,112,440,148
+blocks within bin,stage,window,cumulative,endgame,endgame,147,-0.09605189759026697,22,23,6,3,291,117,411,185,291,117,440,148
+blocks within bin,stage,pre,post,middle,middle,151,0.4839159395363714,50,15,1,1,715,108,817,165,715,108,1023,116
+blocks within bin,stage,pre,window,middle,middle,151,0.643821325819846,50,9,1,1,715,108,817,165,715,108,1091,117
+blocks within bin,stage,pre,cumulative,middle,middle,147,0.024696312552529767,50,8,2,1,715,108,817,165,715,108,1589,130
+blocks within bin,stage,post,window,middle,middle,151,0.9334284834388683,15,9,9,9,1023,116,1280,179,1023,116,1091,117
+blocks within bin,stage,post,cumulative,middle,middle,147,0.09015315691136828,15,8,0,0,1023,116,1280,179,1023,116,1589,130
+blocks within bin,stage,window,cumulative,middle,middle,147,0.08239487458677769,9,8,0,0,1091,117,1393,182,1091,117,1589,130
+blocks within bin,stage,pre,post,opening,opening,151,0.2282020683188955,17,54,6,6,204,117,260,162,257,120,204,117
+blocks within bin,stage,pre,window,opening,opening,151,0.4307417232789587,17,51,9,9,257,120,341,173,257,120,310,128
+blocks within bin,stage,pre,cumulative,opening,opening,150,0.340388448836168,17,64,8,8,257,120,341,173,257,120,330,128
+blocks within bin,stage,post,window,opening,opening,151,0.8043636605463732,54,51,40,40,204,117,260,162,204,117,310,128
+blocks within bin,stage,post,cumulative,opening,opening,150,0.690831790938946,54,64,35,35,204,117,260,162,204,117,330,128
+blocks within bin,stage,window,cumulative,opening,opening,150,0.8834158028387058,51,64,43,43,310,128,432,188,310,128,330,128
+bins within block,round_bin,cumulative,cumulative,round 1,round 2,143,0.2528105241140154,23,20,4,4,92,92,116,116,92,92,124,124
+bins within block,round_bin,cumulative,cumulative,round 1,round 3,140,0.08323056700395441,23,56,7,5,92,92,116,116,92,92,133,133
+bins within block,round_bin,cumulative,cumulative,round 1,rounds 4-6,143,0.328271912424368,23,46,8,8,92,92,116,116,92,92,403,139
+bins within block,round_bin,cumulative,cumulative,round 1,rounds 7-10,141,0.0480090520463603,23,19,4,4,92,92,116,116,92,92,485,130
+bins within block,round_bin,cumulative,cumulative,round 1,rounds 11+,142,-0.08982613339633658,23,7,1,1,92,92,116,116,92,92,1122,106
+bins within block,round_bin,cumulative,cumulative,round 2,round 3,142,0.8293928676736111,20,56,15,15,124,124,169,169,124,124,133,133
+bins within block,round_bin,cumulative,cumulative,round 2,rounds 4-6,147,0.7317850294803648,20,46,7,7,124,124,169,169,124,124,403,139
+bins within block,round_bin,cumulative,cumulative,round 2,rounds 7-10,145,0.6169154817814485,20,19,1,1,124,124,169,169,124,124,485,130
+bins within block,round_bin,cumulative,cumulative,round 2,rounds 11+,144,-0.10573131362704272,20,7,1,0,124,124,169,169,124,124,1122,106
+bins within block,round_bin,cumulative,cumulative,round 3,rounds 4-6,142,0.8119858051410487,56,46,26,26,133,133,188,188,133,133,403,139
+bins within block,round_bin,cumulative,cumulative,round 3,rounds 7-10,141,0.6863092547834265,56,19,6,6,133,133,188,188,133,133,485,130
+bins within block,round_bin,cumulative,cumulative,round 3,rounds 11+,142,-0.09715081591252951,56,7,3,2,133,133,188,188,133,133,1122,106
+bins within block,round_bin,cumulative,cumulative,rounds 4-6,rounds 7-10,145,0.7897851305904043,46,19,14,14,403,139,635,220,403,139,485,130
+bins within block,round_bin,cumulative,cumulative,rounds 4-6,rounds 11+,144,0.08574650505845889,46,7,2,2,403,139,635,220,403,139,1122,106
+bins within block,round_bin,cumulative,cumulative,rounds 7-10,rounds 11+,143,0.33706837910782617,19,7,1,1,485,130,684,183,485,130,1122,106
+bins within block,round_bin,post,post,round 2,round 3,148,0.5279206625078696,47,20,11,11,106,106,127,127,106,106,111,111
+bins within block,round_bin,post,post,round 2,rounds 4-6,148,0.4008605672697906,47,20,5,3,106,106,127,127,106,106,289,116
+bins within block,round_bin,post,post,round 2,rounds 7-10,147,-0.18348222512950763,47,6,2,1,106,106,127,127,106,106,314,107
+bins within block,round_bin,post,post,round 2,rounds 11+,148,-0.42061162103086236,47,12,3,0,106,106,127,127,106,106,667,88
+bins within block,round_bin,post,post,round 3,rounds 4-6,151,0.3823193856148753,20,20,2,1,111,111,133,133,111,111,289,116
+bins within block,round_bin,post,post,round 3,rounds 7-10,150,-0.17847907407644692,20,6,0,0,111,111,133,133,111,111,314,107
+bins within block,round_bin,post,post,round 3,rounds 11+,151,-0.3473308456027912,20,12,2,0,111,111,133,133,111,111,667,88
+bins within block,round_bin,post,post,rounds 4-6,rounds 7-10,150,0.03740223601484288,20,6,2,1,289,116,405,183,289,116,314,107
+bins within block,round_bin,post,post,rounds 4-6,rounds 11+,151,-0.049900842588996144,20,12,2,2,289,116,405,183,289,116,667,88
+bins within block,round_bin,post,post,rounds 7-10,rounds 11+,150,0.5691103749257695,6,12,2,2,314,107,395,158,314,107,667,88
+bins within block,round_bin,pre,pre,round 1,round 2,144,0.2945087316580743,21,5,1,1,91,91,117,117,92,92,91,91
+bins within block,round_bin,pre,pre,round 1,round 3,146,0.06486465448494808,21,12,3,1,86,86,108,108,92,92,86,86
+bins within block,round_bin,pre,pre,round 1,rounds 4-6,145,-0.4286501425997884,21,28,1,0,92,92,116,116,92,92,208,102
+bins within block,round_bin,pre,pre,round 1,rounds 7-10,146,-0.4290603791683415,21,5,0,0,92,92,116,116,92,92,215,93
+bins within block,round_bin,pre,pre,round 1,rounds 11+,146,-0.5310459512265796,21,36,5,0,92,92,116,116,92,92,470,83
+bins within block,round_bin,pre,pre,round 2,round 3,149,0.21123844166843445,5,12,0,0,86,86,108,108,91,91,86,86
+bins within block,round_bin,pre,pre,round 2,rounds 4-6,149,-0.28374736114017024,5,28,2,1,91,91,117,117,91,91,208,102
+bins within block,round_bin,pre,pre,round 2,rounds 7-10,149,-0.15150560940742772,5,5,0,0,91,91,117,117,91,91,215,93
+bins within block,round_bin,pre,pre,round 2,rounds 11+,149,-0.2530306491975183,5,36,0,0,91,91,117,117,91,91,470,83
+bins within block,round_bin,pre,pre,round 3,rounds 4-6,150,-0.1419565144618968,12,28,0,0,86,86,108,108,86,86,208,102
+bins within block,round_bin,pre,pre,round 3,rounds 7-10,151,0.0347138878775646,12,5,1,0,86,86,108,108,86,86,215,93
+bins within block,round_bin,pre,pre,round 3,rounds 11+,151,0.06489912220058115,12,36,1,0,86,86,108,108,86,86,470,83
+bins within block,round_bin,pre,pre,rounds 4-6,rounds 7-10,150,0.3715890072851119,28,5,2,1,208,102,249,150,208,102,215,93
+bins within block,round_bin,pre,pre,rounds 4-6,rounds 11+,150,0.529959815586529,28,36,10,10,208,102,249,150,208,102,470,83
+bins within block,round_bin,pre,pre,rounds 7-10,rounds 11+,151,0.6620462479613772,5,36,1,1,215,93,255,122,215,93,470,83
+bins within block,round_bin,window,window,round 1,round 2,144,0.18506618159882796,22,19,3,3,92,92,116,116,92,92,118,118
+bins within block,round_bin,window,window,round 1,round 3,146,0.31660205488026055,22,25,6,6,92,92,116,116,92,92,117,117
+bins within block,round_bin,window,window,round 1,rounds 4-6,146,0.12253354970726255,22,16,1,1,92,92,116,116,92,92,306,121
+bins within block,round_bin,window,window,round 1,rounds 7-10,146,-0.3020460009375397,22,7,0,0,92,92,116,116,92,92,344,109
+bins within block,round_bin,window,window,round 1,rounds 11+,146,-0.47011107559153237,22,30,6,1,92,92,116,116,92,92,715,90
+bins within block,round_bin,window,window,round 2,round 3,149,0.5420625436513792,19,25,6,6,117,117,157,157,118,118,117,117
+bins within block,round_bin,window,window,round 2,rounds 4-6,149,0.16861463239099858,19,16,1,1,118,118,159,159,118,118,306,121
+bins within block,round_bin,window,window,round 2,rounds 7-10,149,-0.33476218144903824,19,7,0,0,118,118,159,159,118,118,344,109
+bins within block,round_bin,window,window,round 2,rounds 11+,149,-0.5375126158403749,19,30,4,0,118,118,159,159,118,118,715,90
+bins within block,round_bin,window,window,round 3,rounds 4-6,151,0.3299578230592777,25,16,1,1,117,117,157,157,117,117,306,121
+bins within block,round_bin,window,window,round 3,rounds 7-10,151,-0.2772505264466037,25,7,0,0,117,117,157,157,117,117,344,109
+bins within block,round_bin,window,window,round 3,rounds 11+,151,-0.5469798423950015,25,30,7,0,117,117,157,157,117,117,715,90
+bins within block,round_bin,window,window,rounds 4-6,rounds 7-10,151,0.13041329668585977,16,7,2,2,306,121,447,197,306,121,344,109
+bins within block,round_bin,window,window,rounds 4-6,rounds 11+,151,0.01077134720311233,16,30,4,3,306,121,447,197,306,121,715,90
+bins within block,round_bin,window,window,rounds 7-10,rounds 11+,151,0.5511638299476823,7,30,1,1,344,109,434,164,344,109,715,90
+bins within block,stage,cumulative,cumulative,opening,middle,147,0.2590015839717487,64,8,3,3,330,128,473,188,330,128,1589,130
+bins within block,stage,cumulative,cumulative,opening,endgame,147,0.3900345092878009,64,23,7,6,330,128,473,188,330,128,440,148
+bins within block,stage,cumulative,cumulative,middle,endgame,145,0.6596784052766944,8,23,3,3,440,148,694,233,1589,130,440,148
+bins within block,stage,post,post,opening,middle,151,-0.17923518706638303,54,15,4,4,204,117,260,162,204,117,1023,116
+bins within block,stage,post,post,opening,endgame,151,-0.2929734910674135,54,13,2,0,204,117,260,162,204,117,260,112
+bins within block,stage,post,post,middle,endgame,151,0.47721429626967904,15,13,1,1,260,112,364,173,1023,116,260,112
+bins within block,stage,pre,pre,opening,middle,151,-0.42207928243846954,17,50,3,0,257,120,341,173,257,120,715,108
+bins within block,stage,pre,pre,opening,endgame,151,0.007700564389268973,17,7,0,0,190,100,224,137,257,120,190,100
+bins within block,stage,pre,pre,middle,endgame,151,0.12314059377424054,50,7,3,3,190,100,224,137,715,108,190,100
+bins within block,stage,window,window,opening,middle,151,-0.5430604688340609,51,9,3,1,310,128,432,188,310,128,1091,117
+bins within block,stage,window,window,opening,endgame,151,-0.3736907606080425,51,22,4,0,291,117,411,185,310,128,291,117
+bins within block,stage,window,window,middle,endgame,151,0.4666953483386719,9,22,1,1,291,117,411,185,1091,117,291,117

@@ -1,0 +1,7 @@
+split,stage,n_rounds,n_games,n_rounds_short_games,pct_rounds_short_games
+learn,opening,992,346,74,7.459677419354839
+learn,middle,3702,306,0,0.0
+learn,endgame,1071,357,153,14.285714285714285
+val,opening,1338,446,210,15.695067264573993
+val,middle,4016,376,0,0.0
+val,endgame,1338,446,210,15.695067264573993

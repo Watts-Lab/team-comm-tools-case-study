@@ -17,7 +17,15 @@ TABLES = OUTPUTS / "tables"
 FIGURES = OUTPUTS / "figures"
 VECTOR_CACHE = ROOT / "outputs" / "vector_cache"
 
-for _d in (DATA_PROCESSED, FEATURES, TABLES, FIGURES):
+# The cumulative block (step 8) is featurized into its own tree so that it cannot
+# overwrite or contaminate the per-round feature files the published analysis reads.
+FEATURES_CUMULATIVE = OUTPUTS / "features_cumulative"
+CONV_FEATURES_CUMULATIVE = FEATURES_CUMULATIVE / "output" / "conv"
+# Results for the window-comparison and first-N analyses (steps 11 and 12).
+TABLES_WINDOWS = TABLES / "windows"
+
+for _d in (DATA_PROCESSED, FEATURES, FEATURES_CUMULATIVE, TABLES,
+           TABLES_WINDOWS, FIGURES):
     _d.mkdir(parents=True, exist_ok=True)
 
 # The pickles were written from a `pgg_helper.preprocess.master_data` instance;
@@ -107,4 +115,57 @@ FEATURE_FAMILIES = [
 # about one arbitrary message, not features of the conversation.
 TCT_ID_COLS = {"conversation_num", "conv_id", "gameId", "conversation_id",
                "Unnamed: 0", "playerId", "avatar", "text", "timestamp",
-               "round_index", "phase", "source_round", "target_round", "block"}
+               "round_index", "phase", "source_round", "target_round", "block",
+               "cumulative_target_round"}
+
+# The four ways of bounding the talk that precedes one contribution decision.
+# They are alternatives, not additions: `window` is `pre` and `post` merged, and
+# `cumulative` is a superset of all three. No two are ever entered in the same model.
+BLOCK_MEANING = {
+    "pre":        "this round, before the outcome",
+    "post":       "last round, after the outcome",
+    "window":     "the whole gap between the two: post + pre",
+    "cumulative": "every message so far this game",
+}
+
+# The same four, spelled out. A round runs contribution -> outcome -> summary, so
+# for the contribution decision in round k the talk that precedes it splits at the
+# moment round k-1's result was revealed:
+#
+#     ... | round k-1 outcome+summary | round k contribution | DECISION k
+#           \_______ post _________/   \______ pre ______/
+#           \_____________ window ______________________/
+#     \_________________ cumulative ______________________/
+#
+# `window` is the one that is easy to misread: it is not a third kind of talk but
+# the complete contiguous stretch between one result and the next decision - the
+# whole gap, where `pre` and `post` are its two halves. It is the natural "all the
+# talk that immediately preceded this decision" window, and it is what the original
+# study's two blocks add up to.
+BLOCK_DEFINITION = {
+    "pre": (
+        "Messages in round k's own contribution phase: spoken while the group is "
+        "deciding, but before round k's result exists. Contemporaneous with the "
+        "decision rather than strictly prior to it, though it cannot contain any "
+        "information about the outcome it predicts."),
+    "post": (
+        "Messages in round k-1's outcome and summary phases: the group reacting to "
+        "how the previous round went. Strictly earlier than the decision it "
+        "predicts."),
+    "window": (
+        "post + pre for the same decision - the entire contiguous stretch of talk "
+        "between the reveal of round k-1's result and the round k decision. Not a "
+        "separate kind of talk: the union of the other two halves of the same gap."),
+    "cumulative": (
+        "Every message the group has spoken from the start of the game up to and "
+        "including that gap, i.e. all pre/post messages belonging to rounds 1..k. "
+        "A strict superset of the other three."),
+}
+
+# Which blocks contain which. Used to keep nested blocks out of a single model and
+# to document why cross-block comparisons need a paired test rather than a naive one.
+BLOCK_CONTAINS = {
+    "pre": [], "post": [],
+    "window": ["pre", "post"],
+    "cumulative": ["pre", "post", "window"],
+}

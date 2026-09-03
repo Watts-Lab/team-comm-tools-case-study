@@ -84,7 +84,8 @@ def use_style():
 
 
 def header(fig, axes, headline, subtitle=None, legend_from=None, ncol=4,
-           panel_titles=False, extra_top=0.0):
+           panel_titles=False, extra_top=0.0, headline_weight="semibold",
+           headline_size=12.5, legend_gap=0.0, legend_borderpad=0.4):
     """Stack headline, subtitle and legend above the plot area, never overlapping.
 
     Each element gets its own horizontal band, measured in inches and converted to
@@ -96,6 +97,15 @@ def header(fig, axes, headline, subtitle=None, legend_from=None, ncol=4,
     :param panel_titles: reserve a band for per-panel titles.
     :param extra_top: further inches to reserve, for figures that stack another
         label above the panel titles (row headers in a grid, for instance).
+    :param headline_weight: weight of the headline text; the default keeps the
+        published figures exactly as they are.
+    :param headline_size: point size of the headline text.
+    :param legend_borderpad: padding inside the legend box, in font units.
+        Matplotlib's default indents the first handle; pass 0 to sit the handle
+        flush with the headline's left edge.
+    :param legend_gap: inches to close up between the legend and the headline.
+        The legend rises by this much and the header block shrinks with it, so the
+        plot area gains the space. Zero leaves the published figures unchanged.
     """
     axes = np.atleast_1d(axes)
     left_ax = axes.flat[0]
@@ -119,12 +129,15 @@ def header(fig, axes, headline, subtitle=None, legend_from=None, ncol=4,
     sub_lines = subtitle.count("\n") + 1 if subtitle else 0
 
     H_GAP, H_PANEL, H_LEGEND, H_SUB, H_HEAD = 0.10, 0.46, 0.30, 0.22, 0.40
-    band = H_GAP + H_HEAD
+    # A figure whose panel titles carry the meaning does not need a headline; the
+    # band it would occupy is then not reserved, rather than left blank.
+    band = H_GAP + (H_HEAD if headline else 0.0)
     band += H_PANEL if panel_titles else 0.0
     # A legend with more entries than columns wraps, and every wrapped row needs
     # its own space or it lands on the subtitle.
     legend_rows = int(np.ceil(len(handles) / ncol)) if handles else 0
     band += H_LEGEND * legend_rows
+    band -= legend_gap if handles else 0.0
     band += H_SUB * sub_lines
     band += extra_top
 
@@ -137,15 +150,16 @@ def header(fig, axes, headline, subtitle=None, legend_from=None, ncol=4,
     if handles:
         fig.legend(handles, labels, loc="lower left", ncol=ncol, frameon=False,
                    fontsize=9, handletextpad=0.5, columnspacing=1.6,
-                   borderaxespad=0.0, bbox_to_anchor=(x0, y),
-                   bbox_transform=fig.transFigure)
-        y += H_LEGEND * legend_rows / fig_h
+                   borderaxespad=0.0, borderpad=legend_borderpad,
+                   bbox_to_anchor=(x0, y), bbox_transform=fig.transFigure)
+        y += (H_LEGEND * legend_rows - legend_gap) / fig_h
     if subtitle:
         fig.text(x0, y, subtitle, ha="left", va="bottom", fontsize=9.5, color=INK_2,
                  linespacing=1.45)
         y += H_SUB * sub_lines / fig_h
-    fig.text(x0, y, headline, ha="left", va="bottom", fontsize=12.5,
-             fontweight="semibold", color=INK)
+    if headline:
+        fig.text(x0, y, headline, ha="left", va="bottom", fontsize=headline_size,
+                 fontweight=headline_weight, color=INK)
 
 
 def axis_direction(ax, low, high, axis="x", pad=-32):
@@ -176,6 +190,36 @@ def panel_title(ax, text):
     """
     ax.set_title(text, fontsize=11.5, color=INK, fontweight="semibold", loc="left",
                  pad=12)
+
+
+FAMILY_SUFFIXES = {"_lexical_wordcount": " (LIWC)", "_politeness_convokit": " (politeness)",
+                   "_receptiveness_yeomans": " (receptiveness)", "_bert": " (BERT)",
+                   "_chats": "", "_conversation": ""}
+# "gini" is deliberately absent: `gini_coefficient_sum_num_chars` is one native
+# conversation-level feature, not a gini aggregation of something else, and
+# stripping the prefix renamed it to "coefficient sum num chars [gini]".
+AGG_WORDS = {"mean": "avg", "max": "max", "min": "min", "stdev": "SD", "sum": "total"}
+
+
+def pretty(name):
+    """Human-readable label: aggregation prefix in brackets, construct in words."""
+    for old, new in FAMILY_SUFFIXES.items():
+        name = name.replace(old, new)
+    prefix = []
+    while True:
+        head = name.split("_", 1)[0]
+        if head in AGG_WORDS and "_" in name:
+            rest = name.split("_", 1)[1]
+            if rest.startswith("user_"):
+                prefix.append(f"{AGG_WORDS[head]} of speaker")
+                name = rest[len("user_"):]
+            else:
+                prefix.append(AGG_WORDS[head])
+                name = rest
+        else:
+            break
+    label = name.replace("_", " ").strip()
+    return f"{label} [{' '.join(prefix)}]" if prefix else label
 
 
 def bold_label(text):

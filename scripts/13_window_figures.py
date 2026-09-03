@@ -1,0 +1,656 @@
+"""Step 13 - the window comparison as figures.
+
+Four ways of bounding the talk that precedes one contribution decision, read side
+by side. Every figure here answers the same question - *does this result depend on
+how you draw the window?* - so each one puts the four blocks on a shared axis
+rather than giving each its own chart.
+
+Figures (into outputs/figures/windows/):
+
+  fig_w1_blocks_across_game.png   what conversation content adds, by block and by
+                                  position in the game, with the marginal fits and
+                                  the common-subsample fits stacked so the two
+                                  operationalizations can be compared directly.
+  fig_w2_replicating_features.png how many features survive FDR on the learning
+                                  split *and* replicate held out, per block per
+                                  bin. This is the most robust evidence in the
+                                  study and it is a count, so it gets its own chart.
+  fig_w3_paired_contrasts.png     block-versus-block differences estimated on one
+                                  common subsample, where a difference has an
+                                  interval that means something.
+
+Run:  python scripts/13_window_figures.py
+"""
+
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+import style
+from style import pretty
+from config import BLOCK_MEANING, DATA_PROCESSED, FIGURES, TABLES_WINDOWS
+
+# Main figures carry the narrative; appendix figures are the same analyses run on
+# the two wider windows, plus the robustness work. They are kept apart so the
+# reader is never asked to work out which is which.
+# The outcome is a share of the endowment; every effect on it is reported in
+# percentage points of the endowment, so plotted coefficients are scaled by 100.
+PP = 100
+
+MAIN_DIR = FIGURES / "main"
+APPENDIX_DIR = FIGURES / "appendix"
+for _d in (MAIN_DIR, APPENDIX_DIR):
+    _d.mkdir(parents=True, exist_ok=True)
+
+# Pre and Post are the two halves of one gap and are the narrative; Window is their
+# union and Cumulative their superset, so both are supplementary.
+MAIN_BLOCKS = ("pre", "post")
+APPENDIX_BLOCKS = ("window", "cumulative")
+
+# Row set and row order for the feature figures come from one named window, so a
+# main figure and its appendix counterpart show the same features in the same
+# order and can be read side by side. Post is the window the published study uses
+# and the only one whose opening effect replicates cleanly.
+RANK_BLOCK = "post"
+
+# Which rounds a cell was fitted on; see SAMPLES in 11_window_compare.py. The
+# figures lead with `channel`, which conditions only on the randomized
+# availability of a chat channel. `talkers` conditions on whether the group chose
+# to speak, which is a post-treatment behaviour, and is reported as a robustness
+# check rather than as the headline.
+MAIN_SAMPLE = "channel"
+SAMPLE_NOTE = {
+    "channel": "all rounds with a chat channel open",
+    "talkers": "only rounds in which someone spoke",
+}
+
+# Fixed slots, so a block is the same colour in every figure of the set.
+def _semantic_groupings():
+    """Map each toolkit column to the semantic grouping the toolkit itself assigns.
+
+    The case study's own FEATURE_FAMILIES are a regex convenience invented here;
+    these are the categories the Team Communication Toolkit documents its features
+    under, so a reader can carry a grouping from the figure back to the docs. The
+    dictionary keys features by their base column, and the analysis reports
+    aggregated forms of those columns (``max_``, ``stdev_user_min_``, and so on),
+    so lookup is by longest matching suffix.
+
+    A handful of features - the LIWC lexicons - are documented under more than one
+    grouping. A mark can only take one colour, so the first listed wins, and the
+    caption says so.
+    """
+    from team_comm_tools.feature_dict import feature_dict
+    mapping = {}
+    for spec in feature_dict.values():
+        grouping = spec["semantic_grouping"]
+        if isinstance(grouping, list):
+            grouping = grouping[0]
+        if grouping in ("N/A", None):
+            continue
+        for column in spec["columns"]:
+            mapping[column] = grouping
+    return mapping
+
+
+SEMANTIC_GROUPING = _semantic_groupings()
+# Longest first, so `gini_coefficient_sum_num_messages` resolves to Equality
+# rather than to the `num_messages` it happens to end with.
+_GROUPING_KEYS = sorted(SEMANTIC_GROUPING, key=len, reverse=True)
+
+
+def semantic_grouping_of(feature):
+    for column in _GROUPING_KEYS:
+        if feature == column or feature.endswith("_" + column):
+            return SEMANTIC_GROUPING[column]
+    return "Other"
+
+
+# The toolkit's categories, in a fixed order with fixed colours.
+BETTER, WORSE = style.BLUE, "#d0342c"
+# Figure 2 encodes something different from figure 1 - the direction of a feature's
+# effect, not whether the block helped prediction - so it gets its own pair of
+# colours rather than reusing blue and red for a second meaning.
+MORE, LESS = style.GREEN, style.ORANGE
+
+GROUPING_COLORS = {
+    "Content": style.BLUE,
+    "Emotion": style.ORANGE,
+    "Engagement": style.GREEN,
+    "Equality": style.MAGENTA,
+    "Pace": style.VIOLET,
+    "Quantity": style.YELLOW,
+    "Variance": style.AQUA,
+    "Other": style.INK_MUTED,
+}
+
+# Stage names, in reading order, matching the analysis tables.
+STAGE_ORDER = ["opening", "middle", "endgame"]
+
+BLOCK_COLOR = {"pre": style.BLUE, "post": style.ORANGE,
+               "window": style.AQUA, "cumulative": style.VIOLET}
+BLOCK_ORDER = ["pre", "post", "window", "cumulative"]
+ALL_BLOCKS = tuple(BLOCK_ORDER)
+
+# The blocks are defined relative to one decision, so the legend has to say what
+# each one is or the figure is unreadable to anyone who has not read the README.
+# Short enough to sit as a panel title without colliding with its neighbour.
+BLOCK_SHORT = {
+    "pre": "this round, before the outcome",
+    "post": "last round, after the outcome",
+    "window": "post + pre together",
+    "cumulative": "everything so far this game",
+}
+
+BLOCK_LABEL = {
+    "pre": "pre - this round, before the outcome",
+    "post": "post - last round, after the outcome",
+    "window": "window - the whole gap (post + pre)",
+    "cumulative": "cumulative - everything so far",
+}
+
+
+def read(name):
+    path = TABLES_WINDOWS / f"{name}.csv"
+    if not path.exists():
+        raise SystemExit(f"{path} is missing - run scripts/11_window_compare.py")
+    return pd.read_csv(path)
+
+
+# Bin labels have to be put back in reading order explicitly. They arrive as
+# strings and the tables are written cell-by-cell, so relying on order of
+# appearance silently puts "rounds 11+" between "round 3" and "rounds 4-6".
+STAGE_SORT = {"opening": 0, "middle": 1, "endgame": 2}
+
+
+def _bin_key(label):
+    if label in STAGE_SORT:
+        return STAGE_SORT[label]
+    digits = "".join(c if c.isdigit() else " " for c in label).split()
+    return int(digits[0]) if digits else -1
+
+
+def bin_order(df, binning):
+    """Bins in reading order: by stage, or by the round the label starts at."""
+    return sorted(set(df.loc[df["binning"] == binning, "bin"]), key=_bin_key)
+
+
+def robust_limits(*arrays, pad=0.12, floor=0.05):
+    """Axis limits that the bulk of the intervals fit inside, always spanning zero.
+
+    A handful of cells - a small common subsample fitted with 151 features - return
+    intervals an order of magnitude wider than everything else. Scaling to them
+    would flatten every real effect to an invisible dot, so the axis is set from the
+    central mass and the few longer intervals run off the end.
+    """
+    values = np.concatenate([np.asarray(a, dtype=float).ravel() for a in arrays])
+    values = values[np.isfinite(values)]
+    if not len(values):
+        return -floor, floor
+    lo, hi = np.nanpercentile(values, [4, 96])
+    lo, hi = min(lo, -floor), max(hi, floor)
+    span = hi - lo
+    return lo - pad * span, hi + pad * span
+
+
+# =============================================================== core set ===
+# Three figures, mirroring the three the case study already reports, each widened
+# from two conversation windows to four:
+#
+#   c1  when in a game talk predicts contribution        (the paper's fig1)
+#   c2  which features carry it in the opening           (the paper's fig2)
+#   c3  whether those features keep predicting later     (the paper's fig3)
+#
+# All three read the *marginal* estimates - each window fitted on the rounds that
+# had that window's talk - because those have the most games behind them and they
+# reproduce the published result. The paired estimates, which fit every window on
+# one common subsample, answer a narrower question ("is one window better than
+# another on identical rounds?") at a third of the sample, and belong in the
+# appendix rather than in the figure that establishes when talk matters.
+
+
+def legend_estimate(ax):
+    """Both encodings: marker shape for the estimate, ink for what it means.
+
+    Sign carries meaning here that a reader cannot infer from the axis alone. A
+    negative value is not an effect in the other direction - it means the
+    conversation features made out-of-sample prediction *worse* than the controls
+    on their own, which is what an overfitting block looks like. Colouring the two
+    halves of the plane differently says so without a sentence.
+    """
+    ax.plot([], [], "o", color=style.INK, markerfacecolor=style.INK,
+            markersize=6, linestyle="none",
+            label="cross-validated on the learning games")
+    ax.plot([], [], "o", color=style.INK, markerfacecolor="none",
+            markersize=6, markeredgewidth=1.6, linestyle="none",
+            label="scored on held-out games")
+    ax.plot([], [], "-", color=BETTER, linewidth=3.2,
+            label="improves prediction")
+    ax.plot([], [], "-", color=WORSE, linewidth=3.2,
+            label="makes prediction worse")
+    ax.plot([], [], "-", color=style.INK_MUTED, linewidth=3.2,
+            label="interval includes zero")
+
+
+CAPTION_C1 = """Variance in a group's mean contribution explained by its \
+conversation *in addition to* what the game's parameters already explain. The \
+baseline model contains the game's randomized design parameters (group size, \
+multiplier, punishment and reward rules), the round's position in its game, and \
+whether the group had a chat channel at all; the value plotted is how much the \
+151 conversation features add on top of that. Above zero the features improve \
+prediction; below zero they make it worse than the baseline alone, which is what \
+an overfitting block of features looks like rather than an effect in the opposite \
+direction. n is the number of games behind each mark. Bars are 95% intervals from \
+resampling whole games. Opening is the first three rounds of a game, endgame the \
+last three.
+
+The two estimates are not equally strong evidence. The cross-validated interval \
+resamples games and refits the model; the held-out interval resamples held-out \
+games with the fitted model held fixed, so it carries no estimation uncertainty \
+and is correspondingly narrow. A cell is treated as evidence only where both \
+estimates clear zero in the same direction; a held-out mark that clears zero on \
+its own, as at middle/post and endgame/pre here, is not.
+"""
+
+
+def sample_line(sample):
+    return (f"Fitted on {SAMPLE_NOTE[sample]}."
+            + (" Rounds in which nobody spoke are retained, carrying a neutral "
+               "fill, and indicators for whether anyone spoke are in both the "
+               "baseline and the full model, so the quantity plotted is content "
+               "net of speech." if sample == "channel" else
+               " This conditions on a post-treatment behaviour and is reported as "
+               "a robustness check."))
+
+
+def fig_c1_when(kind="elastic net", controls="rules+timing",
+                blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE, out_dir=None, stem=None):
+    """When in a game does conversation predict contribution, for each window."""
+    table = read("block_delta_r2")
+    sub = table[(table["binning"] == "stage") & (table["model_family"] == kind)
+                & (table["controls"] == controls) & (table["sample"] == sample)]
+    if sub.empty:
+        print("no marginal rows for this slice; skipping c1")
+        return
+    stages = [st for st in STAGE_ORDER if st in set(sub["bin"])]
+    ylim = robust_limits(sub["ci_low"], sub["ci_high"], sub["delta_cv_r2"],
+                         sub["ci_low_heldout"], sub["ci_high_heldout"])
+
+    out_dir = out_dir or MAIN_DIR
+    stem = stem or f"fig1_when_talk_matters_{kind.replace(' ', '_')}"
+    fig, axes = plt.subplots(1, len(blocks), sharey=True,
+                             figsize=(3.6 * len(blocks) + 0.6, 5.2))
+    axes = np.atleast_1d(axes)
+    DODGE = 0.17
+
+    for ax, block in zip(axes, blocks):
+        b = sub[sub["block"] == block].set_index("bin")
+        for i, stage in enumerate(stages):
+            if stage not in b.index:
+                continue
+            r = b.loc[stage]
+            for dx, lo_c, hi_c, mid_c, filled in (
+                    (-DODGE, "ci_low", "ci_high", "delta_cv_r2", True),
+                    (+DODGE, "ci_low_heldout", "ci_high_heldout",
+                     "delta_heldout_r2", False)):
+                if r[lo_c] > 0:
+                    colour = BETTER
+                elif r[hi_c] < 0:
+                    colour = WORSE
+                else:
+                    colour = style.INK_MUTED
+                ax.plot([i + dx, i + dx], [r[lo_c], r[hi_c]], color=colour,
+                        linewidth=1.8, solid_capstyle="butt", zorder=3)
+                ax.plot([i + dx], [r[mid_c]], "o", markersize=6, color=colour,
+                        markerfacecolor=colour if filled else "none",
+                        markeredgewidth=1.6, zorder=4)
+        ax.axhline(0, color=style.INK_MUTED, linewidth=1, zorder=2)
+        # Above the line the features are earning their place; below it they are
+        # costing accuracy. Tinting the halves makes that readable at a glance.
+        ax.axhspan(0, ylim[1], color=BETTER, alpha=0.05, zorder=0, linewidth=0)
+        ax.axhspan(ylim[0], 0, color=WORSE, alpha=0.05, zorder=0, linewidth=0)
+        ax.set_xticks(range(len(stages)))
+        ax.set_xticklabels(
+            [f"{st}\nn={int(b.loc[st, 'n_games'])}" if st in b.index else st
+             for st in stages], fontsize=8.5)
+        ax.set_xlim(-0.5, len(stages) - 0.5)
+        ax.set_ylim(*ylim)
+        ax.set_xlabel("position of the round in its game")
+        ax.set_title(f"$\\bf{{{block.capitalize()}}}$\n{BLOCK_SHORT[block]}",
+                     fontsize=11.5, color=style.INK, fontweight="normal",
+                     loc="left", pad=12)
+    axes[0].set_ylabel("additional variance explained (R²)")
+
+    legend_estimate(axes[0])
+    style.header(
+        fig, axes,
+        # Two lines. header() draws the headline with its bottom on the reserved
+        # band, so extra lines grow upward into the margin rather than down onto
+        # the legend, and the tight bounding box takes them in.
+        "Conversation predicts contribution only in the opening rounds,\n"
+        "after revealing contribution outcomes",
+        legend_from=axes[0], ncol=3, panel_titles=True, extra_top=0.10,
+        headline_weight="bold", headline_size=14, legend_gap=0.18,
+        legend_borderpad=0.0)
+    (out_dir / f"{stem}_caption.txt").write_text(
+        CAPTION_C1 + "\n" + sample_line(sample) + "\n")
+    out = out_dir / f"{stem}.png"
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"wrote {out}")
+
+
+CAPTION_C2 = """Conversation features that predict a group's mean contribution in \
+the opening three rounds of a game, over the game's rules and the round's position. \
+Rows are the features that replicate in at least one window - significant after \
+false-discovery correction on the learning games, and significant with the same \
+sign on held-out games - and every window is shown for every row. Marks are the \
+change in contribution rate per standard deviation of the feature, on the learning \
+games, with 95% intervals clustered by game. Colour is the semantic grouping the \
+Team Communication Toolkit documents the feature under; the LIWC lexicons are \
+documented under three groupings at once and are shown under the first. A filled \
+mark replicates in validation, an open one does not.
+"""
+
+N_FEATURES_SHOWN = 18
+
+
+def ranked_features(cell, n):
+    """The rows for figures 2 and 3: chosen and ordered once, from RANK_BLOCK.
+
+    Both figures use this so they are a matched pair - figure 2 shows these
+    features in the opening, figure 3 follows the same features across the game.
+    Ranking from one named window rather than from whichever window flatters each
+    feature keeps a single meaning on the axis, and keeps the main and appendix
+    versions on identical rows so they can be read side by side.
+    """
+    ranker = cell[(cell["block"] == RANK_BLOCK) & cell["replicates"]]
+    if ranker.empty:
+        return [], {}
+    best = ranker[["feature", "coef_learn"]].copy()
+    best["grouping"] = best["feature"].map(semantic_grouping_of)
+    best = best.nlargest(n, "coef_learn")
+    rank = {g: i for i, g in enumerate(GROUPING_COLORS)}
+    best = best.assign(_f=best["grouping"].map(rank)).sort_values(
+        ["_f", "coef_learn"], ascending=[False, True])
+    return best["feature"].tolist(), dict(zip(best["feature"], best["grouping"]))
+
+
+def fig_c2_opening_features(bin_label="opening", blocks=MAIN_BLOCKS,
+                            sample=MAIN_SAMPLE, out_dir=None, stem=None):
+    """Which features carry the opening effect, and whether the window changes them.
+
+    Coloured by family rather than by significance, matching the published fig2:
+    the families are the substantive grouping, and a reader who wants to know what
+    kind of talk this is needs to see them grouped. Replication is carried by the
+    fill instead.
+    """
+    e = read("block_feature_effects")
+    cell = e[(e["binning"] == "stage") & (e["bin"] == bin_label)
+             & (e["sample"] == sample)]
+
+    order, family_of = ranked_features(cell, N_FEATURES_SHOWN)
+    if not order:
+        print(f"nothing replicates in {RANK_BLOCK}; skipping c2")
+        return
+
+    out_dir = out_dir or MAIN_DIR
+    stem = stem or "fig2_opening_features"
+    fig, axes = plt.subplots(1, len(blocks), sharey=True, sharex=True,
+                             figsize=(3.5 * len(blocks) + 2.2,
+                                      0.36 * len(order) + 3.6))
+    axes = np.atleast_1d(axes)
+    ys = np.arange(len(order))
+    seen = set()
+
+    for ax, block in zip(axes, blocks):
+        b = cell[cell["block"] == block].set_index("feature")
+        for y, feature in zip(ys, order):
+            if feature not in b.index:
+                continue
+            r = b.loc[feature]
+            colour = GROUPING_COLORS.get(family_of[feature], style.INK_MUTED)
+            label = None
+            if ax is axes[0] and family_of[feature] not in seen:
+                label = family_of[feature]
+                seen.add(family_of[feature])
+            ax.hlines(y, PP * r["ci_low_learn"], PP * r["ci_high_learn"],
+                      color=colour, alpha=0.4, linewidth=2.5, zorder=3)
+            ax.scatter(PP * r["coef_learn"], y, s=52, zorder=4, label=label,
+                       color=colour if r["replicates"] else style.SURFACE,
+                       edgecolor=colour, linewidth=1.6)
+        ax.axvline(0, color=style.INK_MUTED, linewidth=1, zorder=2)
+        ax.set_yticks(ys)
+        ax.set_yticklabels([style.bold_label(pretty(f)) for f in order], fontsize=8.5)
+        ax.grid(axis="y", visible=False)
+        ax.set_xlabel("change in contribution (percentage points\nof endowment) per SD of the feature")
+        ax.set_title(f"$\\bf{{{block.capitalize()}}}$\n{BLOCK_SHORT[block]}",
+                     fontsize=11.5, color=style.INK, fontweight="normal",
+                     loc="left", pad=12)
+    axes[0].margins(y=0.03)
+    # The legend fills column by column over two rows, so an odd number of entries
+    # splits the replicates/does-not pair across two columns and they land on the
+    # diagonal. One blank entry, when needed, keeps them stacked in one column.
+    if (len(seen) + 2) % 2:
+        axes[0].scatter([], [], s=0, color="none", edgecolor="none", label=" ")
+    axes[0].scatter([], [], s=52, color=style.INK_MUTED, edgecolor=style.INK_MUTED,
+                    linewidth=1.6, label="replicates in validation")
+    axes[0].scatter([], [], s=52, color=style.SURFACE, edgecolor=style.INK_MUTED,
+                    linewidth=1.6, label="does not replicate in validation")
+    legend_cols = (len(seen) + 2 + ((len(seen) + 2) % 2)) // 2
+
+    style.header(
+        fig, axes,
+        "Top predictive features in the opening rounds, by conversation window",
+        legend_from=axes[0], ncol=legend_cols, panel_titles=True, extra_top=0.34,
+        headline_weight="bold", headline_size=14)
+    (out_dir / f"{stem}_caption.txt").write_text(
+        CAPTION_C2 + "\n" + sample_line(sample) + "\n")
+    out = out_dir / f"{stem}.png"
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"wrote {out}")
+
+
+CAPTION_C3 = """Each line is one of the strongest opening-round features for that \
+window, re-estimated separately within each stage of the game. A feature is \
+eligible if it survives false-discovery correction on the learning games in the \
+opening; the panels therefore carry different features, and different numbers of \
+them, because the windows found different things. Filled marks replicate in \
+validation: significant after correction on the learning games and significant \
+with the same sign on held-out games. Opening is the first three rounds of a game, \
+endgame the last three. Green marks a feature that predicts more contribution in \
+the opening, orange one that predicts less. Vertical bars are 95% intervals from a regression of the \
+outcome on that feature alone plus the game's rules and the round's position, with \
+standard errors clustered by game; features are spread slightly around each stage \
+so their intervals stay legible.
+"""
+
+N_TRACKS = 8
+
+
+def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
+                         out_dir=None, stem=None,
+                         headline="Opening-round features are no longer "
+                                  "predictive in later rounds"):
+    """Do the opening features keep predicting once the game is underway?
+
+    A slopegraph per window, in the form the published fig3 uses: one line per
+    feature, named at the right-hand end so a reader can see *which* effect
+    collapses rather than only that something does.
+    """
+    e = read("block_feature_effects")
+    e = e[(e["binning"] == "stage") & (e["sample"] == sample)]
+    stages = [st for st in STAGE_ORDER if st in set(e["stage"] if "stage" in e
+                                                    else e["bin"])]
+    col = "stage" if "stage" in e.columns else "bin"
+    stages = [st for st in STAGE_ORDER if st in set(e[col])]
+    x = np.arange(len(stages))
+
+    # The feature names hang off the right of each panel, so the gap between
+    # columns has to be wide enough to hold them; at the default they land on the
+    # next panel's y axis.
+    out_dir = out_dir or MAIN_DIR
+    stem = stem or "fig3_effects_across_stages"
+
+    # Each window is ranked by its own strongest opening features, so a panel shows
+    # what that window actually found rather than what another window found.
+    #
+    # Selection is screened by false-discovery correction on the learning games,
+    # and the fill still means replication on held-out games. Both matter: an
+    # earlier version selected on an uncorrected p<0.05 and filled on the same
+    # rule, which drew Pre's chance hits - 17 of 151, about what 151 tests return
+    # by luck - as solid marks. Under FDR, Pre has 2 candidates and neither
+    # replicates, and the panel says so at a glance.
+    # Tracks first, layout second: a window with nothing to show is dropped from
+    # the figure rather than drawn as an empty pair of axes, and the caption says
+    # which windows were dropped and why.
+    by_block = {}
+    for block in blocks:
+        sub = e[e["block"] == block]
+        opening = sub[(sub[col] == "opening") & (sub["q_learn"] < 0.05)]
+        order = opening.nlargest(top_n, "coef_learn")["feature"].tolist()
+        tracks = []
+        for feature in order:
+            by_stage = sub[sub["feature"] == feature].set_index(col)
+            if not all(st in by_stage.index for st in stages):
+                continue
+            # Coefficients are on the 0-1 contribution rate; they are plotted in
+            # percentage points of the endowment, which is how the case study
+            # reports every effect on contribution.
+            tracks.append((feature,
+                           [PP * by_stage.loc[st, "coef_learn"] for st in stages],
+                           [bool(by_stage.loc[st, "replicates"]) for st in stages],
+                           [PP * by_stage.loc[st, "ci_low_learn"] for st in stages],
+                           [PP * by_stage.loc[st, "ci_high_learn"] for st in stages]))
+        if tracks:
+            by_block[block] = tracks
+
+    drawn = [b for b in blocks if b in by_block]
+    omitted = [b for b in blocks if b not in by_block]
+    if not drawn:
+        print(f"nothing survives correction in any window; skipping {stem}")
+        return
+    fig, axes = plt.subplots(1, len(drawn), figsize=(9.6 * len(drawn), 5.8))
+    axes = np.atleast_1d(axes).ravel()
+
+    for ax, block in zip(axes, drawn):
+        tracks = by_block[block]
+
+        # The panel is scaled to hold the intervals, not just the point estimates.
+        y_lo = min(min(l) for _, _, _, l, _ in tracks)
+        y_hi = max(max(h) for _, _, _, _, h in tracks)
+        y_pad = (y_hi - y_lo) * 0.06
+        y_lo, y_hi = y_lo - y_pad, y_hi + y_pad
+
+        # Label slots are spread over the panel's whole height rather than over the
+        # narrow range the final values happen to occupy. Eight features whose
+        # endgame estimates all sit within 0.03 of each other would otherwise stack
+        # their labels on top of one another; the leader lines carry the mapping.
+        finals = [v[-1] for _, v, _, _, _ in tracks]
+        ranked = sorted(range(len(tracks)), key=lambda i: finals[i])
+        slots = np.linspace(y_lo + (y_hi - y_lo) * 0.06,
+                            y_hi - (y_hi - y_lo) * 0.06, len(tracks))
+        label_y = {i: slots[r] for r, i in enumerate(ranked)}
+
+        # Features are spread a little around each stage so their intervals do not
+        # stack into one opaque bar. The spread is small enough that the lines stay
+        # near-vertical and the slope is still what the eye reads.
+        spread = 0.34
+        offsets = (np.linspace(-spread / 2, spread / 2, len(tracks))
+                   if len(tracks) > 1 else np.zeros(1))
+        for i, (feature, values, sig, lows, highs) in enumerate(tracks):
+            colour = MORE if values[0] > 0 else LESS
+            xs = x + offsets[i]
+            ax.plot(xs, values, color=colour, alpha=0.45, linewidth=1.5, zorder=3)
+            for xi, value, is_sig, lo, hi in zip(xs, values, sig, lows, highs):
+                ax.plot([xi, xi], [lo, hi], color=colour, alpha=0.3,
+                        linewidth=1.2, zorder=2, solid_capstyle="butt")
+                ax.scatter(xi, value, s=46 if is_sig else 34, zorder=4,
+                           color=colour if is_sig else style.SURFACE,
+                           edgecolor=colour if not is_sig else "white",
+                           linewidth=1.2)
+            ax.plot([xs[-1], x[-1] + 0.22], [values[-1], label_y[i]],
+                    color=style.INK_MUTED, alpha=0.45, linewidth=0.8, zorder=2,
+                    clip_on=False)
+            # Names are not truncated: the construct is the point of the label, and
+            # the aggregation in brackets is what disambiguates two rows that would
+            # otherwise read identically. The construct is set bold so the eye finds
+            # it without reading the qualifier first.
+            ax.annotate(style.bold_label(pretty(feature)), xy=(1.02, label_y[i]),
+                        xycoords=("axes fraction", "data"), ha="left",
+                        va="center", fontsize=8, color=style.INK_2,
+                        annotation_clip=False)
+
+        ax.axhline(0, color=style.INK, linewidth=1.2, zorder=2)
+        ax.set_ylim(y_lo, y_hi)
+        ax.set_xticks(x)
+        ax.set_xticklabels(stages, fontsize=10)
+        ax.set_xlim(-0.32, x[-1] + 0.32)
+        # Only the left column carries the axis label; on the right column it would
+        # sit underneath the labels hanging off the panel beside it.
+        if ax is axes[0]:
+            ax.set_ylabel("change in contribution\n(percentage points of endowment) per SD")
+        ax.set_title(f"$\\bf{{{block.capitalize()}}}$\n{BLOCK_SHORT[block]}",
+                     fontsize=11.5, color=style.INK, fontweight="normal",
+                     loc="left", pad=12)
+
+    axes[0].scatter([], [], s=46, color=style.INK_MUTED, edgecolor="white",
+                    linewidth=1.2, label="replicates in validation")
+    axes[0].scatter([], [], s=34, color=style.SURFACE, edgecolor=style.INK_MUTED,
+                    linewidth=1.2, label="does not replicate in validation")
+    axes[0].plot([], [], "-", color=MORE, linewidth=3.2,
+                 label="predicts more contribution")
+    axes[0].plot([], [], "-", color=LESS, linewidth=3.2,
+                 label="predicts less contribution")
+
+    fig.subplots_adjust(wspace=0.72, right=0.86)
+    style.header(
+        fig, axes, headline,
+        legend_from=axes[0], ncol=2, panel_titles=True, extra_top=0.34,
+        headline_weight="bold", headline_size=14, legend_borderpad=0.0)
+    note = ""
+    if omitted:
+        names = " and ".join(b.capitalize() for b in omitted)
+        note = (f" {names} {'is' if len(omitted) == 1 else 'are'} not shown: not "
+                f"one of its features survives false-discovery correction in the "
+                f"opening rounds, so there is nothing to follow across the game.")
+    (out_dir / f"{stem}_caption.txt").write_text(
+        CAPTION_C3.rstrip() + note + "\n" + sample_line(sample) + "\n")
+    out = out_dir / f"{stem}.png"
+    fig.savefig(out)
+    plt.close(fig)
+    print(f"wrote {out}")
+
+
+if __name__ == "__main__":
+    style.use_style()
+
+    # Main: the penalized linear model, on the two halves of the gap, fitted on
+    # every round where a channel was open. The elastic net is canonical because it
+    # is the more conservative of the two families; the `channel` sample is
+    # canonical because it conditions only on the randomized treatment.
+    #
+    # Figure 2 has no model family to choose: it is one OLS per feature, clustered
+    # by game, not a fit of the whole feature block.
+    fig_c1_when(stem="fig1_when_talk_matters")
+    fig_c3_across_stages(stem="fig2_effects_across_stages", headline=None)
+
+    # Appendix, in the order the supplement reports them: the other sample, the
+    # other model family, then the two wider windows.
+    fig_c1_when(sample="talkers", out_dir=APPENDIX_DIR,
+                stem="figS1_when_talk_matters_talkers_only")
+    fig_c3_across_stages(sample="talkers", out_dir=APPENDIX_DIR,
+                         stem="figS2_effects_across_stages_talkers_only")
+    fig_c1_when(kind="random forest", out_dir=APPENDIX_DIR,
+                stem="figS3_when_talk_matters_random_forest")
+    fig_c1_when(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR,
+                stem="figS4_when_talk_matters_wide_windows")
+    fig_c3_across_stages(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR,
+                         stem="figS5_effects_across_stages_wide_windows")
+
+    # fig_c2_opening_features() is deliberately not part of the figure set: it is a
+    # single time slice, and the across-stages figure carries the same coefficients
+    # with the time axis attached. It remains callable for the per-feature
+    # intervals on their own.
+    print(f"main figures -> {MAIN_DIR}\nappendix figures -> {APPENDIX_DIR}")

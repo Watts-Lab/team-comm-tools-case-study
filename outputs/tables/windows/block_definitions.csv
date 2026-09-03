@@ -1,0 +1,5 @@
+block,short,definition,contains
+pre,"this round, before the outcome","Messages in round k's own contribution phase: spoken while the group is deciding, but before round k's result exists. Contemporaneous with the decision rather than strictly prior to it, though it cannot contain any information about the outcome it predicts.",-
+post,"last round, after the outcome",Messages in round k-1's outcome and summary phases: the group reacting to how the previous round went. Strictly earlier than the decision it predicts.,-
+window,the whole gap between the two: post + pre,post + pre for the same decision - the entire contiguous stretch of talk between the reveal of round k-1's result and the round k decision. Not a separate kind of talk: the union of the other two halves of the same gap.,"pre, post"
+cumulative,every message so far this game,"Every message the group has spoken from the start of the game up to and including that gap, i.e. all pre/post messages belonging to rounds 1..k. A strict superset of the other three.","pre, post, window"

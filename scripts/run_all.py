@@ -12,7 +12,11 @@ import sys
 from pathlib import Path
 
 STEPS = ["01_prepare_data.py", "02_extract_features.py",
-         "03_build_analysis_table.py", "04_analysis.py", "05_figures.py"]
+         "03_build_analysis_table.py", "04_analysis.py",
+         "08_cumulative_chat.py", "09_extract_cumulative_features.py",
+         "10_build_windows_table.py", "11_window_compare.py",
+         "12_first_n.py", "13_window_figures.py",
+         "15_short_game_scope.py"]
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()

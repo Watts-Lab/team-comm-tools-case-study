@@ -1,0 +1,113 @@
+windows,split,level,step,seconds
+"Pre, Post and Window",learn,Chat,concat_bert_features,0.0
+"Pre, Post and Window",learn,Chat,text_based_features,0.01
+"Pre, Post and Window",learn,Chat,info_exchange,0.58
+"Pre, Post and Window",learn,Chat,lexical_features,14.19
+"Pre, Post and Window",learn,Chat,other_lexical_features,0.35
+"Pre, Post and Window",learn,Chat,calculate_word_mimicry,5.78
+"Pre, Post and Window",learn,Chat,calculate_hedge_features,0.0
+"Pre, Post and Window",learn,Chat,calculate_textblob_sentiment,1.45
+"Pre, Post and Window",learn,Chat,positivity_zscore,0.61
+"Pre, Post and Window",learn,Chat,get_dale_chall_score_and_classfication,0.77
+"Pre, Post and Window",learn,Chat,get_temporal_features,1.32
+"Pre, Post and Window",learn,Chat,calculate_politeness_sentiment,25.88
+"Pre, Post and Window",learn,Chat,calculate_politeness_v2,144.63
+"Pre, Post and Window",learn,Chat,get_certainty_score,28.97
+"Pre, Post and Window",learn,Chat,get_reddit_features,0.26
+"Pre, Post and Window",learn,Chat,calculate_vector_word_mimicry,6.93
+"Pre, Post and Window",learn,Chat,get_forward_flow,3.48
+"Pre, Post and Window",learn,User,user_level_summed_features,0.02
+"Pre, Post and Window",learn,User,user_level_summary_statistics_features,6.34
+"Pre, Post and Window",learn,User,user_centroids,1.79
+"Pre, Post and Window",learn,User,user_network,10.09
+"Pre, Post and Window",learn,Conversation,get_turn_taking_features,0.65
+"Pre, Post and Window",learn,Conversation,get_gini_features,0.29
+"Pre, Post and Window",learn,Conversation,calculate_team_burstiness,0.26
+"Pre, Post and Window",learn,Conversation,get_conversation_level_aggregates,39.1
+"Pre, Post and Window",learn,Conversation,get_user_level_aggregates,182.1
+"Pre, Post and Window",learn,Conversation,calculate_info_diversity,5.66
+"Pre, Post and Window",learn,Conversation,get_discursive_diversity_features,15.73
+"Pre, Post and Window",val,Chat,concat_bert_features,0.0
+"Pre, Post and Window",val,Chat,text_based_features,0.01
+"Pre, Post and Window",val,Chat,info_exchange,0.79
+"Pre, Post and Window",val,Chat,lexical_features,14.36
+"Pre, Post and Window",val,Chat,other_lexical_features,0.33
+"Pre, Post and Window",val,Chat,calculate_word_mimicry,6.7
+"Pre, Post and Window",val,Chat,calculate_hedge_features,0.0
+"Pre, Post and Window",val,Chat,calculate_textblob_sentiment,1.35
+"Pre, Post and Window",val,Chat,positivity_zscore,0.77
+"Pre, Post and Window",val,Chat,get_dale_chall_score_and_classfication,0.74
+"Pre, Post and Window",val,Chat,get_temporal_features,1.18
+"Pre, Post and Window",val,Chat,calculate_politeness_sentiment,25.22
+"Pre, Post and Window",val,Chat,calculate_politeness_v2,139.44
+"Pre, Post and Window",val,Chat,get_certainty_score,27.1
+"Pre, Post and Window",val,Chat,get_reddit_features,0.24
+"Pre, Post and Window",val,Chat,calculate_vector_word_mimicry,6.38
+"Pre, Post and Window",val,Chat,get_forward_flow,3.21
+"Pre, Post and Window",val,User,user_level_summed_features,0.02
+"Pre, Post and Window",val,User,user_level_summary_statistics_features,5.5
+"Pre, Post and Window",val,User,user_centroids,1.67
+"Pre, Post and Window",val,User,user_network,12.6
+"Pre, Post and Window",val,Conversation,get_turn_taking_features,0.69
+"Pre, Post and Window",val,Conversation,get_gini_features,0.34
+"Pre, Post and Window",val,Conversation,calculate_team_burstiness,0.32
+"Pre, Post and Window",val,Conversation,get_conversation_level_aggregates,49.18
+"Pre, Post and Window",val,Conversation,get_user_level_aggregates,225.42
+"Pre, Post and Window",val,Conversation,calculate_info_diversity,4.41
+"Pre, Post and Window",val,Conversation,get_discursive_diversity_features,15.24
+Cumulative,learn,Chat,concat_bert_features,0.02
+Cumulative,learn,Chat,text_based_features,0.05
+Cumulative,learn,Chat,info_exchange,0.45
+Cumulative,learn,Chat,lexical_features,96.38
+Cumulative,learn,Chat,other_lexical_features,2.72
+Cumulative,learn,Chat,calculate_word_mimicry,41.66
+Cumulative,learn,Chat,calculate_hedge_features,0.02
+Cumulative,learn,Chat,calculate_textblob_sentiment,11.94
+Cumulative,learn,Chat,positivity_zscore,0.72
+Cumulative,learn,Chat,get_dale_chall_score_and_classfication,6.07
+Cumulative,learn,Chat,get_temporal_features,18.73
+Cumulative,learn,Chat,calculate_politeness_sentiment,182.79
+Cumulative,learn,Chat,calculate_politeness_v2,864.07
+Cumulative,learn,Chat,get_certainty_score,176.53
+Cumulative,learn,Chat,get_reddit_features,1.52
+Cumulative,learn,Chat,calculate_vector_word_mimicry,41.15
+Cumulative,learn,Chat,get_forward_flow,20.14
+Cumulative,learn,User,user_level_summed_features,0.04
+Cumulative,learn,User,user_level_summary_statistics_features,11.57
+Cumulative,learn,User,user_centroids,10.51
+Cumulative,learn,User,user_network,4.84
+Cumulative,learn,Conversation,get_turn_taking_features,1.78
+Cumulative,learn,Conversation,get_gini_features,0.24
+Cumulative,learn,Conversation,calculate_team_burstiness,0.19
+Cumulative,learn,Conversation,get_conversation_level_aggregates,35.58
+Cumulative,learn,Conversation,get_user_level_aggregates,102.64
+Cumulative,learn,Conversation,calculate_info_diversity,19.56
+Cumulative,learn,Conversation,get_discursive_diversity_features,40.0
+Cumulative,val,Chat,concat_bert_features,0.02
+Cumulative,val,Chat,text_based_features,0.05
+Cumulative,val,Chat,info_exchange,0.59
+Cumulative,val,Chat,lexical_features,73.2
+Cumulative,val,Chat,other_lexical_features,1.7
+Cumulative,val,Chat,calculate_word_mimicry,23.12
+Cumulative,val,Chat,calculate_hedge_features,0.01
+Cumulative,val,Chat,calculate_textblob_sentiment,7.21
+Cumulative,val,Chat,positivity_zscore,0.51
+Cumulative,val,Chat,get_dale_chall_score_and_classfication,3.76
+Cumulative,val,Chat,get_temporal_features,8.07
+Cumulative,val,Chat,calculate_politeness_sentiment,127.69
+Cumulative,val,Chat,calculate_politeness_v2,695.66
+Cumulative,val,Chat,get_certainty_score,139.33
+Cumulative,val,Chat,get_reddit_features,1.29
+Cumulative,val,Chat,calculate_vector_word_mimicry,33.87
+Cumulative,val,Chat,get_forward_flow,16.49
+Cumulative,val,User,user_level_summed_features,0.04
+Cumulative,val,User,user_level_summary_statistics_features,10.42
+Cumulative,val,User,user_centroids,8.58
+Cumulative,val,User,user_network,6.59
+Cumulative,val,Conversation,get_turn_taking_features,1.61
+Cumulative,val,Conversation,get_gini_features,0.28
+Cumulative,val,Conversation,calculate_team_burstiness,0.25
+Cumulative,val,Conversation,get_conversation_level_aggregates,42.33
+Cumulative,val,Conversation,get_user_level_aggregates,144.01
+Cumulative,val,Conversation,calculate_info_diversity,16.0
+Cumulative,val,Conversation,get_discursive_diversity_features,33.32

@@ -37,8 +37,8 @@ UP3="$UP2 outputs/features/output/conv/learn_conv_level.csv \
      outputs/features/output/conv/val_conv_level.csv scripts/03_build_analysis_table.py"
 UP4="$UP3 data/processed/analysis_learn.csv data/processed/analysis_val.csv \
      scripts/04_analysis.py"
-UP5="$UP4 outputs/tables/round_stage.csv outputs/tables/feature_effects.csv \
-     outputs/tables/variance_decomposition.csv scripts/05_figures.py"
+UP5="$UP4 outputs/tables/windows/block_delta_r2.csv \
+     outputs/tables/windows/block_feature_effects.csv scripts/13_window_figures.py"
 
 fresh() {
   local out=$1; shift
@@ -138,7 +138,7 @@ snapshot() {
   [ "$st" = stale ] && printf "  ${DIM}stale: older than the data or the script${OFF}"
   printf "\n"
   # Reported in the order the analysis writes them, so a run reads top to bottom.
-  # The first four are archived analyses; the rest carry the case study's story.
+  # The first four bound how the rest should be read; the rest carry the story.
   for t in channel_effect model_comparison variance_decomposition speech_vs_content \
            family_importance family_importance_opening \
            round_stage stage_profile stage_examples stage_feature_effects \
@@ -159,19 +159,19 @@ snapshot() {
   # ---- 5. figures -------------------------------------------------------
   st=todo
   local n fresh_n=0 f newest_table
-  n=$(ls outputs/figures/fig[1-3]_*.png 2>/dev/null | wc -l | tr -d ' ')
+  n=$(ls outputs/figures/main/*.png outputs/figures/appendix/*.png 2>/dev/null | wc -l | tr -d ' ')
   # Compare against the NEWEST table, not one chosen table. A figure can easily
   # postdate the single table it was checked against while being drawn from six
   # others that have since been rewritten - which is exactly how this line came
   # to report seven stale figures as current.
   newest_table=$(ls -t outputs/tables/*.csv 2>/dev/null | head -1)
-  for f in outputs/figures/fig[1-3]_*.png; do
+  for f in outputs/figures/main/*.png outputs/figures/appendix/*.png; do
     fresh "$f" "$newest_table" $UP5 && fresh_n=$((fresh_n + 1))
   done
   [ "$n" -gt 0 ] && st=stale
-  [ "$fresh_n" -ge 3 ] && st=done
-  running 05_figures && st=run
-  printf " %b 5  figures  ${DIM}%s of 3 drawn, %s current${OFF}\n" "$(mark $st)" "$n" "$fresh_n"
+  [ "$fresh_n" -ge 6 ] && st=done
+  running 13_window_figures && st=run
+  printf " %b 5  figures  ${DIM}%s of 6 drawn, %s current${OFF}\n" "$(mark $st)" "$n" "$fresh_n"
 }
 
 if [ "$1" = "-w" ] || [ "$1" = "--watch" ]; then
