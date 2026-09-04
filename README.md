@@ -1,10 +1,17 @@
 # Case study replication package
 
+<https://github.com/Watts-Lab/team-comm-tools-case-study>
+
 Code and outputs for the case study in *`team_comm_tools`: A Python Toolkit for
 Exploring Text Conversations in Groups*. The pipeline turns two experiment
 pickles from Alsobay et al. (2026) into the figures, tables and numbers the paper
 reports, using [`team_comm_tools`](https://github.com/Watts-Lab/team_comm_tools)
 v0.1.8 for feature extraction.
+
+The corpus is the public goods game data collected by Alsobay, M., Watts, D. J.,
+& Almaatouq, A. (2026). Integrative experiments identify how punishment affects
+welfare in public goods games. *Science*, 392(6794).
+<https://doi.org/10.1126/science.aeb5280>
 
 This file explains how to run the pipeline and where each output goes. The paper
 itself covers what the results mean.
