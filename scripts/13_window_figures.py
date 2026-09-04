@@ -236,20 +236,20 @@ CAPTION_C1 = """Variance in a group's mean contribution explained by its \
 conversation *in addition to* what the game's parameters already explain. The \
 baseline model contains the game's randomized design parameters (group size, \
 multiplier, punishment and reward rules), the round's position in its game, and \
-whether the group had a chat channel at all; the value plotted is how much the \
+indicators for whether the group spoke at all; the value plotted is how much the \
 151 conversation features add on top of that. Above zero the features improve \
 prediction; below zero they make it worse than the baseline alone, which is what \
 an overfitting block of features looks like rather than an effect in the opposite \
-direction. n is the number of games behind each mark. Bars are 95% intervals from \
-resampling whole games. Opening is the first three rounds of a game, endgame the \
-last three.
+direction. The counts under each label are the learning-split game-rounds and \
+games behind the cross-validated mark; the held-out mark beside it is scored on \
+the corresponding validation games. Opening is the first three rounds of a game, \
+Endgame the last three.
 
-The two estimates are not equally strong evidence. The cross-validated interval \
-resamples games and refits the model; the held-out interval resamples held-out \
-games with the fitted model held fixed, so it carries no estimation uncertainty \
-and is correspondingly narrow. A cell is treated as evidence only where both \
+Each mark carries a 95% percentile interval from 2,000 bootstrap resamples of \
+whole games: the learning games for the cross-validated mark, the validation \
+games for the held-out one. A cell is treated as evidence only where both \
 estimates clear zero in the same direction; a held-out mark that clears zero on \
-its own, as at middle/post and endgame/pre here, is not.
+its own, as at Middle/Post and Endgame/Pre here, is not.
 """
 
 
@@ -281,7 +281,7 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
     fig, axes = plt.subplots(1, len(blocks), sharey=True,
                              figsize=(3.6 * len(blocks) + 0.6, 5.2))
     axes = np.atleast_1d(axes)
-    DODGE = 0.17
+    DODGE = 0.10
 
     for ax, block in zip(axes, blocks):
         b = sub[sub["block"] == block].set_index("bin")
@@ -311,7 +311,9 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
         ax.axhspan(ylim[0], 0, color=WORSE, alpha=0.05, zorder=0, linewidth=0)
         ax.set_xticks(range(len(stages)))
         ax.set_xticklabels(
-            [f"{st}\nn={int(b.loc[st, 'n_games'])}" if st in b.index else st
+            [f"{st.capitalize()}\n{int(b.loc[st, 'n_rounds']):,} rounds"
+             f"\n{int(b.loc[st, 'n_games'])} games" if st in b.index else
+             st.capitalize()
              for st in stages], fontsize=8.5)
         ax.set_xlim(-0.5, len(stages) - 0.5)
         ax.set_ylim(*ylim)
@@ -327,7 +329,7 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
         # Two lines. header() draws the headline with its bottom on the reserved
         # band, so extra lines grow upward into the margin rather than down onto
         # the legend, and the tight bounding box takes them in.
-        "Conversation predicts contribution only in the opening rounds,\n"
+        "Conversation predicts contribution only in the Opening rounds,\n"
         "after revealing contribution outcomes",
         legend_from=axes[0], ncol=3, panel_titles=True, extra_top=0.10,
         headline_weight="bold", headline_size=14, legend_gap=0.18,
