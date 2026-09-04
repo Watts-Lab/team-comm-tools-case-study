@@ -42,7 +42,8 @@ than block B", and no such test is computed. The honest use of the comparison is
 descriptive: four descriptions of one sample, each carrying the number of games
 behind it so the reader can see how thin any given cell is.
 
-Four tables, all under ``outputs/tables/windows/``:
+Three tables under ``outputs/tables/windows/``, and one under
+``outputs/tables/diagnostics/``:
 
   block_delta_r2.csv        what conversation *content* adds over rules, timing and
                             the channel indicator, cross-validated on the learning
@@ -59,7 +60,7 @@ Four tables, all under ``outputs/tables/windows/``:
   block_agreement.csv       do the blocks agree about which features matter, and do
                             the bins? Correlations between coefficient vectors, plus
                             counts of features significant in both with the same sign.
-  block_clustering.csv      the power inventory: every cell that could have been
+  block_clustering.csv      (diagnostics/) the power inventory: every cell that could have been
                             fitted, whether it was, and why not. Skipped cells are
                             in this table by design - a cell dropped for having 14
                             games is a finding about the design, and silently
@@ -94,7 +95,7 @@ from statsmodels.stats.multitest import multipletests
 
 import modeling
 from config import (BLOCK_CONTAINS, BLOCK_DEFINITION, BLOCK_MEANING,
-                    DATA_PROCESSED, TABLES, TABLES_WINDOWS)
+                    DATA_PROCESSED, TABLES, TABLES_DIAGNOSTICS, TABLES_WINDOWS)
 from modeling import CHANNEL, GROUP, MOMENTUM, OUTCOME
 
 # Two ways of saying where a round sits in its game, both carried in a ``binning``
@@ -306,7 +307,7 @@ def clustering(learn, val, blocks, learn_bins, val_bins):
                      "analysed": reason is None,
                      "skip_reason": reason or ""})
     out = pd.DataFrame(rows)
-    out.to_csv(TABLES_WINDOWS / "block_clustering.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "block_clustering.csv", index=False)
     kept = int(out["analysed"].sum())
     print(f"[clustering] {kept} of {len(out)} cells clear "
           f"{modeling.MIN_ROWS} rounds and {modeling.MIN_GAMES} games", flush=True)

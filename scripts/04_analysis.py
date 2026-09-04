@@ -45,7 +45,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from statsmodels.stats.multitest import multipletests
 
-from config import CONFIG_COLS, DATA_PROCESSED, SEED, TABLES, TIMING_COLS
+from config import (CONFIG_COLS, DATA_PROCESSED, SEED, TABLES,
+                    TABLES_DIAGNOSTICS, TIMING_COLS)
 
 OUTCOME = "contribution_rate"
 GROUP = "gameId"          # rounds within a game are not independent observations
@@ -318,7 +319,7 @@ def decomposition(learn, val):
                          "cv_r2_ci_low": lo, "cv_r2_ci_high": hi,
                          "r2_heldout_val": r2(val[OUTCOME], val_pred)})
     comparison = pd.DataFrame(rows)
-    comparison.to_csv(TABLES / "model_comparison.csv", index=False)
+    comparison.to_csv(TABLES_DIAGNOSTICS / "model_comparison.csv", index=False)
 
     # Each step measured against the model it should be judged against.
     steps = [("channel", "M0 rules + timing", "M1 + chat channel"),
@@ -342,7 +343,7 @@ def decomposition(learn, val):
                 "ci_low": lo, "ci_high": hi,
                 "delta_r2_heldout": r2(y_val, p_val) - r2(y_val, b_val)})
     decomp = pd.DataFrame(deltas)
-    decomp.to_csv(TABLES / "variance_decomposition.csv", index=False)
+    decomp.to_csv(TABLES_DIAGNOSTICS / "variance_decomposition.csv", index=False)
     return comparison, decomp
 
 
@@ -393,7 +394,7 @@ def speech_vs_content(learn, val):
                              "delta_r2_heldout": hi_val - lo_val})
 
     out = pd.DataFrame(rows)
-    out.to_csv(TABLES / "speech_vs_content.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "speech_vs_content.csv", index=False)
     return out
 
 
@@ -423,7 +424,7 @@ def family_importance(learn, val):
                          "drop_in_heldout_r2": full_val_r2 - r2(val[OUTCOME], val_pred)})
     out = pd.DataFrame(rows).sort_values(["model_family", "drop_in_cv_r2"],
                                          ascending=[True, False])
-    out.to_csv(TABLES / "family_importance.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "family_importance.csv", index=False)
     return out
 
 
@@ -469,7 +470,7 @@ def family_importance_opening(learn, val, block="post"):
 
     out = pd.DataFrame(rows).sort_values(["model_family", "drop_in_cv_r2"],
                                          ascending=[True, False])
-    out.to_csv(TABLES / "family_importance_opening.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "family_importance_opening.csv", index=False)
     return out
 
 
@@ -565,7 +566,7 @@ def stage_profile(learn):
                                columns="stage", values="mean_z")
     wide["swing"] = wide[order[-1]] - wide[order[0]]
     wide = wide.reset_index().sort_values("swing", key=abs, ascending=False)
-    wide.to_csv(TABLES / "stage_profile.csv", index=False)
+    wide.to_csv(TABLES_DIAGNOSTICS / "stage_profile.csv", index=False)
     return wide
 
 
@@ -600,7 +601,7 @@ def stage_examples(split="learn", per_stage=8, seed=SEED):
             picks.append(take.assign(block=block, stage=stage)
                          [["block", "stage", "round_index", "text"]])
     out = pd.concat(picks).reset_index(drop=True)
-    out.to_csv(TABLES / "stage_examples.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "stage_examples.csv", index=False)
     return out
 
 
@@ -727,7 +728,7 @@ def stage_agreement(stage_effects):
                              "n_sig_both": len(both),
                              "n_sig_both_same_sign": agree})
     out = pd.DataFrame(rows)
-    out.to_csv(TABLES / "stage_agreement.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "stage_agreement.csv", index=False)
     return out
 
 
@@ -770,7 +771,7 @@ def feature_effects(learn, val):
     out["replicates"] = ((out["q_learn"] < 0.05) & (out["p_val"] < 0.05)
                          & (np.sign(out["coef_learn"]) == np.sign(out["coef_val"])))
     out = out.sort_values("p_learn").reset_index(drop=True)
-    out.to_csv(TABLES / "feature_effects.csv", index=False)
+    out.to_csv(TABLES_DIAGNOSTICS / "feature_effects.csv", index=False)
     return out
 
 
@@ -860,7 +861,7 @@ def main(only=None):
               f"{(effects.q_learn < 0.05).sum()}; also holding up on held-out data: "
               f"{effects.replicates.sum()}")
 
-    print("\ntables written to outputs/tables/")
+    print("\ntables written to outputs/tables/ and outputs/tables/diagnostics/")
 
 
 if __name__ == "__main__":

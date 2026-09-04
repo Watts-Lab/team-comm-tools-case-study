@@ -7,6 +7,10 @@ venv/
 # Embedding cache produced by team_comm_tools (large, fully regenerable)
 outputs/vector_cache/
 
+# Step 17 moves the cache aside before timing a cold initialization. The copy it
+# leaves behind is the same 2.2 GB of vectors, so it is not tracked either.
+outputs/vector_cache_backup/
+
 # Logs
 *.log
 

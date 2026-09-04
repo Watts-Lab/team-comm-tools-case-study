@@ -1,335 +1,186 @@
-# What do groups say that makes them cooperate?
+# Case study replication package
 
-### A case study for the [Team Communication Toolkit](https://github.com/Watts-Lab/team_comm_tools)
+Code and outputs for the case study in *`team_comm_tools`: A Python Toolkit for
+Exploring Text Conversations in Groups*. The pipeline turns two experiment
+pickles from Alsobay et al. (2026) into the figures, tables and numbers the paper
+reports, using [`team_comm_tools`](https://github.com/Watts-Lab/team_comm_tools)
+v0.1.8 for feature extraction.
 
-A worked example of using `team_comm_tools` (v0.1.8) end to end: from raw chat
-logs, through feature extraction, to a substantive answer about when conversation
-predicts behaviour and what kind of conversation does it.
+This file explains how to run the pipeline and where each output goes. The paper
+itself covers what the results mean.
 
----
+## Requirements
 
-## The question
-
-Groups of people play an online **public goods game**. Each round, every player
-chooses how much of a private endowment to put into a shared pot; the pot is
-multiplied and split evenly regardless of who paid in. Contributing is good for the
-group and costly for the individual, so how much a group contributes is a clean
-behavioural measure of cooperation. Some groups can chat with each other while they
-play.
-
-> **Among rounds where a group talked, what about the conversation predicts how
-> much they contribute next?**
-
-The answer, in three parts:
-
-1. Conversation predicts contribution **only in the first three rounds of a game**,
-   and only the talk that happens **after a round's outcome is revealed**.
-2. In those rounds, a third of the toolkit's features predict contribution, and
-   they describe conversations that **cover more ground and carry more opinion**.
-3. Those same features **stop predicting** once a game is underway.
-
----
-
-## Design
-
-**Unit of analysis.** One game-round: a single group, a single round of play. There
-are only a few hundred games, but 5,765 game-rounds in the learning split and 6,692
-held out, which is what makes the question answerable.
-
-**Outcome.** The group's mean contribution in a round, as a share of the endowment.
-
-**What counts as a conversation.** A round runs in three phases: players choose
-during the *contribution* phase, then the result appears in the *outcome* and
-*summary* phases. Talk is therefore split by where it sits relative to that reveal,
-and both blocks predict the same round's contribution:
-
-| Block | Messages | Learning-split conversations |
-|---|---|---|
-| **Before the reveal** | that round's contribution phase | 1,162 |
-| **After the reveal** | the *previous* round's outcome and summary phases | 1,487 |
-
-Every message is spoken before the decision it is used to predict. The
-before-the-reveal block is contemporaneous with that decision rather than strictly
-prior to it, but it cannot contain any information about the outcome, which does
-not exist yet. The after-the-reveal block carries no such caveat.
-
-Conversations are short: a median of 4 messages for the after-the-reveal block.
-A 30-round game contributes close to sixty conversations, not one.
-
-**Where a round sits in its game.** Games run from 3 to 30 rounds, so "early" needs
-defining. The main analysis uses round number — beginning is the first three
-rounds, end is the last three — and `outputs/tables/round_stage.csv` repeats
-everything using thirds of the game instead.
-
-**Controls.** The game's randomized design parameters (group size, multiplier,
-punishment and reward rules) and the round's position in its game.
-
-**Validation.** Feature selection, scaling, model form and hyperparameters are all
-decided on the learning split. Held-out games are scored once. Cross-validation
-folds hold out whole games, since rounds within a game share a group, a treatment
-and often a conversation. Confidence intervals are bootstraps over games.
-
-**Models.** A penalized linear model (`ElasticNetCV`) and a `RandomForestRegressor`,
-both with hyperparameters tuned inside each training fold.
-
----
-
-## Extracting the features
-
-The whole extraction is one call:
-
-```python
-from team_comm_tools import FeatureBuilder
-
-FeatureBuilder(
-    input_df=chat,                   # one row per message
-    conversation_id_col="conv_id",   # one conversation = one game-round-and-block
-    speaker_id_col="playerId",
-    message_col="text",
-    timestamp_col="timestamp",
-    custom_features=["(BERT) Mimicry", "Moving Mimicry",
-                     "Forward Flow", "Discursive Diversity"],
-    drop_redundant_columns=True,     # new in v0.1.8
-    corr_thresh=0.9,
-    treat_zero_as_na=False,
-).featurize()
-```
-
-**Redundancy reduction did the feature selection.** The toolkit found 188 groups of
-features correlated above 0.9 and kept one representative each, taking **3,083
-columns to 252**. The groups are informative in themselves: ConvoKit politeness and
-Yeomans receptiveness turn out to measure much the same thing in this data, and
-after reduction **not one politeness column survives** — every one was absorbed into
-a group represented by a receptiveness or LIWC feature.
-
-A further 17 features were dropped because the held-out split returns no values for
-them at all, leaving **151** to analyse. A feature that cannot be estimated out of
-sample cannot support a claim that rests on out-of-sample replication.
-
-One setting is deliberately not the default. `treat_zero_as_na=True` is the better
-choice for *estimating* correlations between sparse features, but the frame it
-modifies is the one written to disk, so it also rewrites every zero in the output as
-NA. Here zero is meaningful — a conversation with no greetings really did contain
-none — so it is set to `False`.
-
-Features arrive at the conversation level three ways, and the figures name the route
-in brackets after each feature:
-
-| Route | Columns | Example |
-|---|---|---|
-| Native conversation-level | 16 | `discursive_diversity` — computed from the whole conversation |
-| Utterance → conversation | 101 | `max_forward_flow` — the largest value across its messages |
-| Utterance → speaker → conversation | 135 | `mean_user_min_forward_flow` — each speaker's minimum, then averaged |
-
----
-
-## 1. Conversation predicts contribution only at the start, and only after the reveal
-
-Conversation features added to a model of the game's rules, fitted separately within
-each stage, trained on the learning split and scored on held-out games:
-
-| Stage | Elastic net | Random forest |
-|---|---|---|
-| **Beginning** (first three rounds) | **+0.091** [0.051, 0.129] | **+0.083** [0.023, 0.142] |
-| Middle | +0.001 [−0.021, 0.021] | +0.005 [0.000, 0.008] |
-| End (last three rounds) | +0.005 [−0.070, 0.092] | −0.016 [−0.053, 0.028] |
-
-Both model families agree, and both intervals exclude zero at the beginning only.
-
-Talk *before* the reveal predicts nothing at any stage — the left panel of the
-figure sits on zero throughout. What matters is what a group says once it has seen
-how the round went.
-
-![When talk matters](outputs/figures/main/fig1_when_talk_matters.png)
-
-The effect is specific to the literal opening rounds. Grouped into thirds of the
-game instead, it disappears: in a 30-round game the first third runs to round 9, and
-by then there is nothing to find.
-
----
-
-## 2. What predicts it
-
-Inside those 204 conversations, **54 of 151 features reach p<0.05** — against about
-8 expected by chance — **26 survive a false-discovery-rate correction**, and **23 of
-those also hold on held-out data**.
-
-![Opening features across stages](outputs/figures/main/fig2_effects_across_stages.png)
-
-Every surviving effect is positive, and they fall into two ideas:
-
-- **Conversations that cover more ground.** Forward flow, discursive diversity, and
-  information diversity all measure how far a conversation travels between messages.
-- **Conversations carrying more opinion.** TextBlob subjectivity and the spread of
-  BERT sentiment measure how far messages are from flat, neutral statements.
-
-The effects are near-identical in size (0.035 to 0.041 per SD), which is a hint that
-they are variations on one underlying signal rather than eight separate findings.
-Reading the conversations bears that out.
-
----
-
-## 3. And they stop predicting once the game is underway
-
-Taking the ten strongest opening-round features and re-estimating each one
-separately in the middle and end of a game:
-
-| Stage | Mean coefficient | Significant at p<0.05 |
-|---|---|---|
-| Beginning | +0.038 | **10 of 10** |
-| Middle | −0.006 | 1 of 10 |
-| End | −0.009 | **0 of 10** |
-
-![Wider windows](outputs/figures/appendix/figS2_when_talk_matters_wide_windows.png)
-
-They do not reverse — the later coefficients are not distinguishable from zero — they
-simply stop carrying information. Across the full set of 151 features, the
-correlation between the beginning and the middle of a game is **−0.18**, and between
-the beginning and the end **−0.29**. The middle and end resemble each other (+0.48);
-neither resembles the beginning.
-
----
-
-## Reading the conversations behind the features
-
-A feature name describes a construct; it does not tell you what that construct
-looked like in the data. `outputs/examples/` holds one plain-text file per reported
-feature, with the highest- and lowest-scoring conversations:
-
-```
-  round 1 | 3 messages | 2 speakers | feature z = +1.20 | next-round contribution 0.86
-      sloth: deducting removes value so we don't wanna do taht either
-    gorilla: I came in knowing what I was going to do throughout.
-      sloth: Yea, just wanna make sure we are all on same page :) ty gorilla <3
-```
+Python 3.12 and the packages in `requirements.txt`:
 
 ```bash
-python scripts/06_feature_examples.py --n 15
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-Doing this changes how the result should be read. Across `discursive_diversity`,
-`max_forward_flow` and `stdev_user_min_neutral_bert`, the *lowest*-scoring
-conversations are the same ones: "Hi / hi", "Yeah! / Yeah!", "ok / ok / Ok". The
-highest-scoring are groups doing several things at once — proposing an amount and
-committing to it, pressing the members who withheld, setting a norm for the rounds
-ahead, celebrating a round that went well. What these features share is that
-**the group was actively using the channel, and used it for a variety of ends**.
-No single one of those activities accounts for the effect.
+If spaCy or NLTK resources are missing, run `download_resources` once; the
+toolkit installs that command.
 
-The same tool exists for the lexicon features, which need it most:
+Run every script from the repository root. Python then puts `scripts/` on the
+path, which is how each step imports `config`:
 
 ```bash
-python scripts/07_lexicon_words.py relative
+python scripts/01_prepare_data.py
 ```
 
-`max_relative_lexical_wordcount` is the second strongest predictor, and the LIWC
-"relativity" category sounds specific. In this data it matches *in* (101 times),
-*time* (34), *put* (30), *on* (28), *go* (23), *next* (19). Those words turn up
-when a group urges one another to contribute — "next round everyone put 20 in!"
-scores three — so the column is picking up an activity, not the construct its name
-suggests. Read the words a lexicon actually matched before believing its label.
+## Running the pipeline
 
----
+```bash
+python scripts/run_all.py            # steps 1 to 16, in order
+bash scripts/status.sh -w            # progress, in a second terminal
+```
 
-## What this shows about the toolkit
+Two steps dominate the wall clock. Step 2 runs the toolkit over about 25,000
+messages and takes roughly an hour on a laptop CPU, and step 11 refits every
+model in every cell and takes several hours. Step 4 takes about 40 minutes and
+accepts `--only` to re-run one section:
 
-The extraction is cheap and the grain is a parameter: one `FeatureBuilder` call
-turned ~25,000 messages into 151 non-redundant features at a unit — game-round by
-position-relative-to-the-reveal — chosen by editing a single argument. The toolkit's
-own redundancy reduction then selected features better than a hand-written screen
-would, and reported a substantive fact on the way: politeness and receptiveness are
-not separate measurements here.
+```bash
+python scripts/04_analysis.py --only stages
+python scripts/04_analysis.py --help     # every section, with its cost
+```
 
-A broad screen over 151 features found nothing in the Middle or Endgame of a game,
-nothing in pre-outcome conversation, and one narrow, replicated finding in the
-Opening rounds. That ratio is normal for an honest exploratory pass, and it is the
-argument for a tool that makes such passes cheap.
+Steps 8 to 11 can also run unattended through `bash scripts/run_windows_chain.sh`,
+tracked by `bash scripts/windows_status.sh -w`.
 
-It is also an argument for reading the text. The strongest features have distinct
-names — semantic diversity, subjectivity, relativity — and reading the
-conversations shows what they have in common: early on, groups that used the
-channel actively, to coordinate, to censure, to set a norm, went on to contribute
-more than groups that said little. The variety is the point. Restricting
-communication to one speech act does not reproduce the benefit of free-form talk
-(Bochet et al., 2006; Palfrey et al., 2017), and no single feature here accounts
-for the effect either. That is a hypothesis worth designing a study around, not a
-finding to report as settled.
+Step 17 stands outside `run_all.py` because it clears the embedding cache to time
+a cold start. It moves the cached vectors to `outputs/vector_cache_backup/`, so a
+run can be undone by moving them back.
 
----
+```bash
+python scripts/17_cold_init.py --split learn
+```
 
-## Repository layout
+## The steps
+
+| Step | Script | Reads | Writes |
+|---|---|---|---|
+| 1 | `01_prepare_data.py` | `data/raw/*.pkl` | `data/processed/{chat,rounds}_{learn,val}.csv` |
+| 2 | `02_extract_features.py` | `chat_{split}.csv` | `outputs/features/output/{chat,user,conv}/` |
+| 3 | `03_build_analysis_table.py` | step 2 output | `data/processed/analysis_{split}.csv`, `outputs/tables/feature_manifest.csv` |
+| 4 | `04_analysis.py` | `analysis_{split}.csv` | `outputs/tables/*.csv` and `outputs/tables/diagnostics/*.csv` (nine sections) |
+| 6 | `06_feature_examples.py` | step 2 output | `outputs/examples/*.txt` |
+| 7 | `07_lexicon_words.py relative` | `chat_{split}.csv` | `outputs/tables/lexicon_matches_relative.csv` |
+| 8 | `08_cumulative_chat.py` | `chat_{split}.csv` | `data/processed/chat_cumulative_{split}.csv` |
+| 9 | `09_extract_cumulative_features.py` | step 8 output | `outputs/features_cumulative/` |
+| 10 | `10_build_windows_table.py` | steps 3 and 9 | `data/processed/analysis_windows_{split}.csv` |
+| 11 | `11_window_compare.py` | step 10 output | `outputs/tables/windows/*.csv`, `diagnostics/block_clustering.csv` (five sections) |
+| 13 | `13_window_figures.py` | `windows/block_delta_r2.csv`, `windows/block_feature_effects.csv` | `outputs/figures/{main,appendix}/*.png` |
+| 14 | `14_descriptive_figures.py` | step 1 output | `outputs/figures/main/fig0_*.png`, `outputs/tables/channel_effect_tests.csv` |
+| 15 | `15_short_game_scope.py` | `analysis_{split}.csv` | `outputs/tables/short_game_{scope,composition}.csv` |
+| 16 | `16_runtime_table.py` | `outputs/logs/feature_builder.log` | `outputs/tables/runtime*.csv`, `runtime_table.tex` |
+| 17 | `17_cold_init.py` | `chat_{split}.csv` | `outputs/tables/runtime_cold_init.csv` |
+
+There is no step 5, and step 12 was removed along with the first-N analysis it
+computed. The numbering is left as it is so that the remaining steps keep the
+names they have in the logs.
+
+## Where each result in the paper comes from
+
+Figures, by the number each one has in the paper:
+
+| Paper | File |
+|---|---|
+| Figure 3 | `outputs/figures/main/fig0_communication_effect.png` |
+| Figure 4 | `outputs/figures/main/fig0_corpus.png` |
+| Figure 5 | `outputs/figures/main/fig1_when_talk_matters.png` |
+| Figure 6 | `outputs/figures/main/fig2_effects_across_stages.png` |
+| Figure E1 | `outputs/figures/appendix/figS1_when_talk_matters_talkers_only.png` |
+| Figure E2 | `outputs/figures/appendix/figS2_effects_across_stages_talkers_only.png` |
+| Figure E3 | `outputs/figures/appendix/figS3_when_talk_matters_random_forest.png` |
+| Figure E4 | `outputs/figures/appendix/figS4_when_talk_matters_wide_windows.png` |
+| Figure E5 | `outputs/figures/appendix/figS5_effects_across_stages_wide_windows.png` |
+
+The step 13 figures each have a `_caption.txt` beside them, written by the same script.
+
+Tables and reported numbers:
+
+| Paper | File |
+|---|---|
+| Section 4.1.2, the communication effect | `outputs/tables/channel_effect_tests.csv` (step 14), `channel_effect.csv` (step 4) |
+| Section 4.3, the feature counts | `outputs/tables/feature_manifest.csv`, `outputs/logs/feature_builder.log` |
+| Table 3, the runtime | `outputs/tables/runtime_table.tex`, from `runtime.csv`, `runtime_steps.csv` and `runtime_cold_init.csv` |
+| Section 4.5, additional variance explained | `outputs/tables/windows/block_delta_r2.csv` |
+| Section 4.6, per-feature effects | `outputs/tables/windows/block_feature_effects.csv` |
+| Section 4.6, the `relative` lexicon | `outputs/tables/lexicon_matches_relative.csv` |
+| Section 4.6, the conversations quoted | `outputs/examples/*.txt` |
+| Appendix E.1 to E.4 and E.6 | `outputs/tables/windows/block_delta_r2.csv` (columns `controls`, `sample`, `model_family`, `binning`) |
+| Appendix E.4, screen agreement | `outputs/tables/windows/block_agreement.csv` |
+| Appendix E.5, proportional thirds | `outputs/tables/round_stage.csv` |
+| Appendix E.7, short games | `outputs/tables/short_game_scope.csv`, `short_game_composition.csv` |
+| Appendix E.8, the paired comparison | `outputs/tables/windows/block_paired_contrasts.csv`, `block_paired.csv` |
+
+`block_delta_r2.csv` holds every cell of the design in one file. A row is one
+combination of `binning` (stage, round_bin, all), `bin`, `block` (pre, post,
+window, cumulative), `sample` (channel, talkers), `model_family` and `controls`
+(rules+timing, rules+timing+momentum). The main text reports the ElasticNet on
+the channel sample with `rules+timing` controls; each appendix test varies one of
+those columns.
+
+`outputs/tables/diagnostics/` holds the tables behind decisions the paper states
+in prose:
+
+| File | What it holds |
+|---|---|
+| `model_comparison.csv`, `variance_decomposition.csv` | each block of predictors added to the model in turn, with the R² it buys |
+| `speech_vs_content.csv` | what speaking at all adds, and what the content adds on top of it, per boundary |
+| `family_importance.csv`, `family_importance_opening.csv` | how much prediction is lost when one feature family is dropped, pooled and in the Opening |
+| `stage_profile.csv`, `stage_agreement.csv`, `stage_examples.csv` | how each feature behaves across the three time periods, and sample messages from each |
+| `feature_effects.csv` | the per-feature screen pooled over all rounds, which the by-period screens refine |
+| `block_clustering.csv` | every cell of the design, whether it was fitted, and the rounds and games behind it |
+
+## Layout
 
 ```
 .
 ├── data/
-│   ├── raw/           # the two experiment pickles, as collected
-│   └── processed/     # tidy CSVs written by steps 1 and 3
+│   ├── raw/           two experiment pickles, as collected
+│   └── processed/     tidy CSVs from steps 1, 3, 8 and 10
 ├── scripts/
-│   ├── config.py                  # paths, controls, feature families
-│   ├── style.py                   # figure conventions and shared styling
-│   ├── status.sh                  # pipeline tracker; -w to watch
-│   ├── compat/pgg_helper/         # stub module so the raw pickles unpickle
-│   ├── 01_prepare_data.py         # pickles      -> chat + game-round tables
-│   ├── 02_extract_features.py     # chat table   -> toolkit features
-│   ├── 03_build_analysis_table.py # features     -> one row per game-round
-│   ├── 04_analysis.py             # every number reported above
-│   ├── 13_window_figures.py       # the main and appendix figures
-│   ├── 06_feature_examples.py     # conversations behind each feature
-│   ├── 07_lexicon_words.py        # which words a lexicon feature counted
-│   └── run_all.py                 # steps 1-5, in order
+│   ├── config.py      paths, controls, feature families, the seed
+│   ├── modeling.py    cross-validation, bootstrap and regression helpers
+│   ├── style.py       figure conventions
+│   ├── compat/        stub module so the raw pickles unpickle
+│   ├── run_all.py     steps 1 to 16
+│   ├── status.sh      pipeline tracker; -w to watch
+│   └── 01..17         the steps in the table above
 └── outputs/
-    ├── features/         # toolkit output at chat, speaker, conversation level
-    ├── features_cumulative/  # the same, for the cumulative window (step 9)
-    ├── tables/           # every result as CSV
-    │   └── windows/      # the four-window comparison and the first-N analysis
-    ├── examples/         # conversations behind each reported feature
-    ├── logs/             # the toolkit's own run logs from step 2
-    └── figures/
-        ├── main/         # the two figures the paper reports
-        └── appendix/     # the same analyses on the wider windows
+    ├── features/      toolkit output for the per-round conversations
+    ├── features_cumulative/   toolkit output for the cumulative conversations
+    ├── tables/        every result as CSV
+    │   ├── windows/      the four-boundary comparison
+    │   └── diagnostics/  supporting tables the paper does not print
+    ├── examples/      conversations behind each reported feature
+    ├── figures/       main/ and appendix/
+    └── logs/          the toolkit's run logs, read by step 16
 ```
 
-## Running it
+Five paths are regenerable and not tracked: `outputs/features/`,
+`outputs/features_cumulative/`, `outputs/vector_cache/`,
+`outputs/vector_cache_backup/` and `outputs/logs/`. The
+two analysis tables the window chain expands, `chat_cumulative_*.csv` and
+`analysis_windows_*.csv`, are not tracked either. Everything the paper cites is
+tracked, so the tables and figures can be checked without re-running anything.
 
-```bash
-pip install -r requirements.txt
-python scripts/run_all.py            # end to end
-bash scripts/status.sh -w            # watch progress in another terminal
-```
+Re-running step 2 or step 9 rewrites `outputs/logs/feature_builder.log`, which
+step 16 parses for the runtime table.
 
-Step 2 is the slow one: sentence embeddings and several classifiers over ~25,000
-messages, roughly an hour on a laptop CPU, cached afterwards. Step 4 takes about 40
-minutes because both model families are retuned inside every cross-validation fold;
-`--only` re-runs a single section:
+## Reproducibility notes
 
-```bash
-python scripts/04_analysis.py --only stages     # ~15 min
-python scripts/04_analysis.py --only profile    # seconds
-python scripts/04_analysis.py --help            # all sections, with costs
-```
+`config.py` sets one seed (2139) for every model, split and bootstrap. Model
+selection, scaling and hyperparameter tuning happen inside the learning split;
+the validation games are scored once. Cross-validation folds hold out whole
+games, and bootstrap intervals resample games.
 
-`scripts/status.sh` reports a stage as current only when its outputs postdate both
-the data they were computed from and the script that computed them.
+The toolkit call in step 2 fixes three settings that the paper reports:
+`drop_redundant_columns=True` with `corr_thresh=0.9`, and `treat_zero_as_na=False`
+so that a zero count stays a zero.
 
-## Also in the repository
-
-Three analyses sit outside the story above. They are computed by `04_analysis.py`
-and their tables are in `outputs/tables/`; they are reported as numbers rather than
-figures:
-
-- **The channel effect.** Whether a group had a chat channel at all was randomized.
-  Having one raises contribution by 0.143 [0.102, 0.184] — far more than anything
-  said in it. That is a fact about the treatment rather than about conversation.
-- **Speaking versus saying.** Pooled across all rounds, the apparent effect of talk
-  is mostly *whether* a group spoke rather than what it said. The opening-round
-  effect above is content: it survives with speech indicators already in the model.
-- **Both staging definitions.** The stage analysis repeated using thirds of the game
-  rather than round number.
-
-## A note on interpretation
-
-These features are **exploratory signals, not validated constructs**. The toolkit
-guarantees that each column computes what its documentation says; it cannot
-guarantee that a column measures the construct a reader has in mind — as the
-`relative` example above shows. Screen broadly, control for what you know, check
-against held-out data, and read the text before believing a feature name.
+Runtimes in Table 3 come from one machine, a 2024 MacBook Pro (M4 Pro, macOS
+26.5.2). Step 16 reports whatever the log holds, so re-running the pipeline on
+other hardware changes the table.

@@ -58,10 +58,4 @@ echo "PID $!" > "$LOGS/11.pid"
 wait $!
 say "window comparison finished"
 
-# ---- 4. the cumulative half of the first-N analysis -------------------------
-if [ -f scripts/12_first_n.py ]; then
-  say "running the cumulative half of the first-N analysis"
-  $PY -u scripts/12_first_n.py --summary both \
-      >> "$LOGS/12_first_n.log" 2>&1
-fi
 say "chain complete"

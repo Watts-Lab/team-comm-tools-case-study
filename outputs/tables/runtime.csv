@@ -1,5 +1,5 @@
-windows,split,input_file,started,message_rows,distinct_messages,conversations,speakers,init_seconds,vector_regen_seconds,featurize_seconds,total_seconds
-"Pre, Post and Window",learn,learn.csv,2026-08-26 15:54:28,25192,12601,4341,1337,1.38,0.0,497.44,498.82
-"Pre, Post and Window",val,val.csv,2026-08-26 16:03:22,23252,11635,5522,1448,1.3,0.0,543.42,544.72
-Cumulative,learn,learn.csv,2026-09-02 00:00:02,143737,12601,2359,1337,393.1,388.46,1692.07,2085.17
-Cumulative,val,val.csv,2026-09-02 00:38:33,121339,11635,3410,1448,525.33,521.19,1396.15,1921.48
+windows,split,input_file,started,message_rows,distinct_messages,conversations,speakers,logged_init_seconds,vector_regen_seconds,featurize_seconds,cached_init_seconds,init_seconds,total_seconds
+"Pre, Post and Window",learn,learn.csv,2026-08-26 15:54:28,25192,12601,4341,1337,1.38,0.0,497.44,1.38,179.83,677.27
+"Pre, Post and Window",val,val.csv,2026-08-26 16:03:22,23252,11635,5522,1448,1.3,0.0,543.42,1.3,109.92,653.34
+Cumulative,learn,learn.csv,2026-09-02 00:00:02,143737,12601,2359,1337,393.1,388.46,1692.07,,393.1,2085.17
+Cumulative,val,val.csv,2026-09-02 00:38:33,121339,11635,3410,1448,525.33,521.19,1396.15,,525.33,1921.48

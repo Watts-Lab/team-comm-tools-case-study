@@ -17,7 +17,7 @@ snapshot () {
 
   printf '\n\033[1mrunning jobs\033[0m\n'
   local any=0
-  for job in 09_cumulative_features 11_samples 11_paired 12_first_n chain; do
+  for job in 09_cumulative_features 11_samples 11_paired chain; do
     pidf="$LOGS/${job%%_*}.pid"
     [ "$job" = chain ] && pidf="$LOGS/chain.pid"
     [ "$job" = 11_paired ] && pidf="$LOGS/11.pid"
@@ -34,7 +34,7 @@ snapshot () {
   [ "$any" = 0 ] && printf '  (nothing running)\n'
 
   printf '\n\033[1mlatest output per job\033[0m\n'
-  for job in 09_cumulative_features 11_samples 11_paired 12_first_n chain; do
+  for job in 09_cumulative_features 11_samples 11_paired chain; do
     [ -f "$LOGS/$job.log" ] || continue
     printf '  \033[36m%s\033[0m\n' "$job"
     clean "$LOGS/$job.log" 3 | sed 's/^/    /' | cut -c1-160

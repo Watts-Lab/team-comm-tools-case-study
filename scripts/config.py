@@ -21,11 +21,15 @@ VECTOR_CACHE = ROOT / "outputs" / "vector_cache"
 # overwrite or contaminate the per-round feature files the published analysis reads.
 FEATURES_CUMULATIVE = OUTPUTS / "features_cumulative"
 CONV_FEATURES_CUMULATIVE = FEATURES_CUMULATIVE / "output" / "conv"
-# Results for the window-comparison and first-N analyses (steps 11 and 12).
+# Results for the window comparison (step 11).
 TABLES_WINDOWS = TABLES / "windows"
+# Tables that support a decision the paper states without being reported in it:
+# the nested model comparison, speaking versus content, the feature families, the
+# stage profile and the pooled per-feature effects.
+TABLES_DIAGNOSTICS = TABLES / "diagnostics"
 
 for _d in (DATA_PROCESSED, FEATURES, FEATURES_CUMULATIVE, TABLES,
-           TABLES_WINDOWS, FIGURES):
+           TABLES_WINDOWS, TABLES_DIAGNOSTICS, FIGURES):
     _d.mkdir(parents=True, exist_ok=True)
 
 # The pickles were written from a `pgg_helper.preprocess.master_data` instance;
