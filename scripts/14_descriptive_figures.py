@@ -31,8 +31,8 @@ FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 SPLIT_LABEL = {"learn": "Learning games", "val": "Validation games"}
 STAGE_ORDER = ["opening", "middle", "endgame"]
-STAGE_LABEL = {"opening": "opening\n(first 3 rounds)", "middle": "middle",
-               "endgame": "endgame\n(last 3 rounds)"}
+STAGE_LABEL = {"opening": "Opening\n(first 3 rounds)", "middle": "Middle",
+               "endgame": "Endgame\n(last 3 rounds)"}
 
 # The four marks in the first figure. The first is the control; the second pools
 # every group that was given a channel, whether or not it used one, which is the
