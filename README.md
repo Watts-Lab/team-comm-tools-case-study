@@ -210,10 +210,11 @@ python scripts/06_feature_examples.py --n 15
 Doing this changes how the result should be read. Across `discursive_diversity`,
 `max_forward_flow` and `stdev_user_min_neutral_bert`, the *lowest*-scoring
 conversations are the same ones: "Hi / hi", "Yeah! / Yeah!", "ok / ok / Ok". The
-highest-scoring are groups coordinating explicitly — proposing an amount, agreeing
-to it, naming who did not contribute. These features are substantially detecting
-**whether the exchange went beyond pleasantries**, rather than measuring three
-distinct constructs.
+highest-scoring are groups doing several things at once — proposing an amount and
+committing to it, pressing the members who withheld, setting a norm for the rounds
+ahead, celebrating a round that went well. What these features share is that
+**the group was actively using the channel, and used it for a variety of ends**.
+No single one of those activities accounts for the effect.
 
 The same tool exists for the lexicon features, which need it most:
 
@@ -223,9 +224,10 @@ python scripts/07_lexicon_words.py relative
 
 `max_relative_lexical_wordcount` is the second strongest predictor, and the LIWC
 "relativity" category sounds specific. In this data it matches *in* (101 times),
-*time* (34), *put* (30), *on* (28), *go* (23), *next* (19). A message like "next
-round all put 20" scores two; "hi" scores zero. It is another proxy for whether the
-message said anything, not a measure of relativity.
+*time* (34), *put* (30), *on* (28), *go* (23), *next* (19). Those words turn up
+when a group urges one another to contribute — "next round everyone put 20 in!"
+scores three — so the column is picking up an activity, not the construct its name
+suggests. Read the words a lexicon actually matched before believing its label.
 
 ---
 
@@ -238,18 +240,20 @@ own redundancy reduction then selected features better than a hand-written scree
 would, and reported a substantive fact on the way: politeness and receptiveness are
 not separate measurements here.
 
-The results are mostly null, and the nulls are informative. A broad screen over 151
-features found nothing in the middle or end of a game, nothing in talk before an
-outcome is revealed, and one narrow, replicated finding in the opening rounds. That
-ratio is normal for an honest exploratory pass, and it is the argument for a tool
-that makes such passes cheap.
+A broad screen over 151 features found nothing in the Middle or Endgame of a game,
+nothing in pre-outcome conversation, and one narrow, replicated finding in the
+Opening rounds. That ratio is normal for an honest exploratory pass, and it is the
+argument for a tool that makes such passes cheap.
 
-It is also an argument for reading the text. The strongest features look like
-distinct constructs — semantic movement, subjectivity, relativity — and the
-conversations show them converging on something simpler: early on, groups that
-actually talk to each other go on to contribute more than groups that exchange
-greetings. That is a hypothesis worth designing a study around, not a finding to
-report as settled.
+It is also an argument for reading the text. The strongest features have distinct
+names — semantic diversity, subjectivity, relativity — and reading the
+conversations shows what they have in common: early on, groups that used the
+channel actively, to coordinate, to censure, to set a norm, went on to contribute
+more than groups that said little. The variety is the point. Restricting
+communication to one speech act does not reproduce the benefit of free-form talk
+(Bochet et al., 2006; Palfrey et al., 2017), and no single feature here accounts
+for the effect either. That is a hypothesis worth designing a study around, not a
+finding to report as settled.
 
 ---
 

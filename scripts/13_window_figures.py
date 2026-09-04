@@ -343,7 +343,7 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
 
 
 CAPTION_C2 = """Conversation features that predict a group's mean contribution in \
-the opening three rounds of a game, over the game's rules and the round's position. \
+the Opening three rounds of a game, over the game's rules and the round's position. \
 Rows are the features that replicate in at least one window - significant after \
 false-discovery correction on the learning games, and significant with the same \
 sign on held-out games - and every window is shown for every row. Marks are the \
@@ -454,18 +454,18 @@ def fig_c2_opening_features(bin_label="opening", blocks=MAIN_BLOCKS,
     print(f"wrote {out}")
 
 
-CAPTION_C3 = """Each line is one of the strongest opening-round features for that \
-window, re-estimated separately within each stage of the game. A feature is \
+CAPTION_C3 = """Each line is one of the strongest Opening-round features for that \
+window, re-estimated separately within each time period of the game. A feature is \
 eligible if it survives false-discovery correction on the learning games in the \
-opening; the panels therefore carry different features, and different numbers of \
+Opening; the panels therefore carry different features, and different numbers of \
 them, because the windows found different things. Filled marks replicate in \
 validation: significant after correction on the learning games and significant \
 with the same sign on held-out games. Opening is the first three rounds of a game, \
-endgame the last three. Green marks a feature that predicts more contribution in \
-the opening, orange one that predicts less. Vertical bars are 95% intervals from a regression of the \
+Endgame the last three. Green marks a feature that predicts more contribution in \
+the Opening, orange one that predicts less. Vertical bars are 95% intervals from a regression of the \
 outcome on that feature alone plus the game's rules and the round's position, with \
-standard errors clustered by game; features are spread slightly around each stage \
-so their intervals stay legible.
+standard errors clustered by game; features are spread slightly around each time \
+period so their intervals stay legible.
 """
 
 N_TRACKS = 8
@@ -587,7 +587,7 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
         ax.axhline(0, color=style.INK, linewidth=1.2, zorder=2)
         ax.set_ylim(y_lo, y_hi)
         ax.set_xticks(x)
-        ax.set_xticklabels(stages, fontsize=10)
+        ax.set_xticklabels([st.capitalize() for st in stages], fontsize=10)
         ax.set_xlim(-0.32, x[-1] + 0.32)
         # Only the left column carries the axis label; on the right column it would
         # sit underneath the labels hanging off the panel beside it.
