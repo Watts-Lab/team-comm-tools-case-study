@@ -58,14 +58,6 @@ def counts():
     }
 
 
-def bold(text):
-    """Bold title text. fontweight="bold" is ignored when the resolved font has no
-    bold face, so titles go through mathtext, as they do in the other figures."""
-    # Mathtext reads ":" as a relation and pads it on both sides; the negative
-    # thin spaces cancel that padding so the colon sits against the word.
-    return r"$\bf{" + text.replace(" ", r"\ ").replace(":", r"\!\!:\!") + "}$"
-
-
 def box(ax, x, top, w, title, body, tone=style.BLUE, title_size=10.5):
     """Draw a box whose height is set by how many lines of text it holds.
 
@@ -77,8 +69,8 @@ def box(ax, x, top, w, title, body, tone=style.BLUE, title_size=10.5):
     ax.add_patch(FancyBboxPatch(
         (x, top - h), w, h, boxstyle="round,pad=0,rounding_size=0.012",
         linewidth=1.4, edgecolor=tone, facecolor=style.SURFACE, zorder=3))
-    ax.text(x + w / 2, top - PAD, bold(title), ha="center", va="top",
-            fontsize=title_size, color=style.INK, zorder=4)
+    ax.text(x + w / 2, top - PAD, title, ha="center", va="top",
+            fontsize=title_size, color=style.INK, fontweight="bold", zorder=4)
     ax.text(x + w / 2, top - PAD - TITLE_H - 0.4 * BODY_H, body, ha="center",
             va="top", fontsize=9, color=style.INK_2, linespacing=1.45, zorder=4)
     return top - h

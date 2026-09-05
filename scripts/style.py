@@ -32,10 +32,31 @@ titles, subtitles, or legends.
 """
 
 import textwrap
+from pathlib import Path
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import font_manager
+
+# The paper is set in Latin Modern, so the figures are too: a figure in Helvetica
+# dropped into a Latin Modern document reads as a foreign object on the page. The
+# four faces are bundled in scripts/fonts/ so a figure regenerates identically on
+# a machine with no TeX installation; a TeX Live copy is the fallback.
+FONT_NAME = "Latin Modern Roman"
+FONT_DIR = Path(__file__).resolve().parent / "fonts"
+TEXLIVE_GLOB = "/usr/local/texlive/*/texmf-dist/fonts/opentype/public/lm/lmroman10-*.otf"
+
+
+def _register_font():
+    """Make Latin Modern available to matplotlib, and report whether it worked."""
+    faces = sorted(FONT_DIR.glob("lmroman10-*.otf"))
+    if not faces:
+        from glob import glob
+        faces = [Path(f) for f in sorted(glob(TEXLIVE_GLOB))]
+    for face in faces:
+        font_manager.fontManager.addfont(str(face))
+    return any(f.name == FONT_NAME for f in font_manager.fontManager.ttflist)
 
 # Categorical slots, assigned in fixed order and never cycled.
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
@@ -65,7 +86,17 @@ def use_style():
         "savefig.dpi": 200,
         "savefig.bbox": "tight",
         "font.size": 10,
-        "font.family": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
+        "font.family": ([FONT_NAME] if _register_font() else [])
+                       + ["DejaVu Serif", "Times New Roman", "serif"],
+        # Mathtext has its own font stack and ignores font.family, so $R^2$ and
+        # the bold labels would otherwise come out in a different typeface from
+        # the text beside them.
+        "mathtext.fontset": "custom",
+        "mathtext.rm": FONT_NAME,
+        "mathtext.it": f"{FONT_NAME}:italic",
+        "mathtext.bf": f"{FONT_NAME}:bold",
+        "mathtext.bfit": f"{FONT_NAME}:italic:bold",
+        "mathtext.sf": FONT_NAME,
         "axes.titlesize": 11,
         "axes.titleweight": "normal",
         "axes.titlelocation": "left",

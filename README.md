@@ -28,6 +28,11 @@ pip install -r requirements.txt
 If spaCy or NLTK resources are missing, run `download_resources` once; the
 toolkit installs that command.
 
+Figures are set in Latin Modern, the typeface the paper itself uses. The four
+faces are bundled in `scripts/fonts/` under the GUST Font License, so no TeX
+installation is needed; `scripts/style.py` falls back to a TeX Live copy, and
+then to a serif default, if they are missing.
+
 Run every script from the repository root. Python then puts `scripts/` on the
 path, which is how each step imports `config`:
 
