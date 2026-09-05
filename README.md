@@ -38,7 +38,7 @@ python scripts/01_prepare_data.py
 ## Running the pipeline
 
 ```bash
-python scripts/run_all.py            # steps 1 to 16, in order
+python scripts/run_all.py            # steps 1 to 19, in order
 bash scripts/status.sh -w            # progress, in a second terminal
 ```
 
@@ -82,6 +82,8 @@ python scripts/17_cold_init.py --split learn
 | 15 | `15_short_game_scope.py` | `analysis_{split}.csv` | `outputs/tables/short_game_{scope,composition}.csv` |
 | 16 | `16_runtime_table.py` | `outputs/logs/feature_builder.log` | `outputs/tables/runtime*.csv`, `runtime_table.tex` |
 | 17 | `17_cold_init.py` | `chat_{split}.csv` | `outputs/tables/runtime_cold_init.csv` |
+| 18 | `18_pre_post_power.py` | `chat_{split}.csv`, `analysis_{split}.csv` | `outputs/tables/pre_post_power.csv` |
+| 19 | `19_pipeline_figure.py` | steps 3, 11 | `outputs/figures/main/fig3_analysis_pipeline.png` |
 
 There is no step 5, and step 12 was removed along with the first-N analysis it
 computed. The numbering is left as it is so that the remaining steps keep the
@@ -95,8 +97,9 @@ Figures, by the number each one has in the paper:
 |---|---|
 | Figure 3 | `outputs/figures/main/fig0_communication_effect.png` |
 | Figure 4 | `outputs/figures/main/fig0_corpus.png` |
-| Figure 5 | `outputs/figures/main/fig1_when_talk_matters.png` |
-| Figure 6 | `outputs/figures/main/fig2_effects_across_stages.png` |
+| Figure 5 | `outputs/figures/main/fig3_analysis_pipeline.png` |
+| Figure 6 | `outputs/figures/main/fig1_when_talk_matters.png` |
+| Figure 7 | `outputs/figures/main/fig2_effects_across_stages.png` |
 | Figure E1 | `outputs/figures/appendix/figS1_when_talk_matters_talkers_only.png` |
 | Figure E2 | `outputs/figures/appendix/figS2_effects_across_stages_talkers_only.png` |
 | Figure E3 | `outputs/figures/appendix/figS3_when_talk_matters_random_forest.png` |
@@ -115,6 +118,7 @@ Tables and reported numbers:
 | Section 4.5, additional variance explained | `outputs/tables/windows/block_delta_r2.csv` |
 | Section 4.6, per-feature effects | `outputs/tables/windows/block_feature_effects.csv` |
 | Section 4.6, the `relative` lexicon | `outputs/tables/lexicon_matches_relative.csv` |
+| Section 4.5, how much talk each boundary holds | `outputs/tables/pre_post_power.csv` |
 | Section 4.6, the conversations quoted | `outputs/examples/*.txt` |
 | Appendix E.1 to E.4 and E.6 | `outputs/tables/windows/block_delta_r2.csv` (columns `controls`, `sample`, `model_family`, `binning`) |
 | Appendix E.4, screen agreement | `outputs/tables/windows/block_agreement.csv` |

@@ -456,17 +456,17 @@ def fig_c2_opening_features(bin_label="opening", blocks=MAIN_BLOCKS,
     print(f"wrote {out}")
 
 
-CAPTION_C3 = """Each line is one of the strongest Opening-round features for that \
+CAPTION_C3 = """Each row is one of the strongest Opening-round features for that \
 window, re-estimated separately within each time period of the game. A feature is \
 eligible if it survives false-discovery correction on the learning games in the \
-Opening; the panels therefore carry different features, and different numbers of \
-them, because the windows found different things. Filled marks replicate in \
-validation: significant after correction on the learning games and significant \
-with the same sign on held-out games. Opening is the first three rounds of a game, \
-Endgame the last three. {colour_key} Vertical bars are 95% intervals from a regression of the \
-outcome on that feature alone plus the game's rules and the round's position, with \
-standard errors clustered by game; features are spread slightly around each time \
-period so their intervals stay legible.
+Opening, and the {n_shown} eligible features with the largest Opening coefficients are \
+shown, ordered by that coefficient; the panels therefore carry different features, \
+and different numbers of them, because the windows found different things. Filled \
+marks replicate in validation: significant after correction on the learning games \
+and significant with the same sign on held-out games. Opening is the first three \
+rounds of a game, Endgame the last three. Horizontal bars are 95% \
+intervals from a regression of the outcome on that feature alone plus the game's \
+rules and the round's position, with standard errors clustered by game.
 """
 
 N_TRACKS = 8
@@ -529,95 +529,75 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
         if tracks:
             by_block[block] = tracks
 
-    # Where every surviving feature predicts more contribution, the colour that
-    # would mark the opposite direction is left out of the legend and the caption
-    # rather than named for marks the figure does not contain.
-    any_less = any(values[0] <= 0 for tracks in by_block.values()
-                   for _, values, _, _, _ in tracks)
-
     drawn = [b for b in blocks if b in by_block]
     omitted = [b for b in blocks if b not in by_block]
     if not drawn:
         print(f"nothing survives correction in any window; skipping {stem}")
         return
-    fig, axes = plt.subplots(1, len(drawn), figsize=(9.6 * len(drawn), 5.8))
-    axes = np.atleast_1d(axes).ravel()
 
-    for ax, block in zip(axes, drawn):
+    # One row per window, one column per time period, and one row of the y axis per
+    # feature. An earlier version drew each feature as a line across the three time
+    # periods, which put eight lines of one colour through one another and left the
+    # reader to follow a grey leader line to the name. Giving each feature its own
+    # y position separates them by position instead of by hue, so the figure holds
+    # up in greyscale and for a reader who cannot distinguish the colours.
+    n_rows = max(len(by_block[b]) for b in drawn)
+    fig, axes = plt.subplots(
+        len(drawn), len(stages), sharey="row", squeeze=False,
+        figsize=(11.5, 1.9 + 0.42 * n_rows * len(drawn)),
+        gridspec_kw={"wspace": 0.12, "hspace": 0.42})
+
+    for row, block in enumerate(drawn):
         tracks = by_block[block]
+        # Strongest at the top, which is the order the Opening column establishes
+        # and the other two columns inherit.
+        tracks = sorted(tracks, key=lambda t: t[1][0])
+        ys = np.arange(len(tracks))
+        x_lo = min(min(l) for _, _, _, l, _ in tracks)
+        x_hi = max(max(h) for _, _, _, _, h in tracks)
+        x_pad = (x_hi - x_lo) * 0.06
+        for cell, stage in enumerate(stages):
+            ax = axes[row][cell]
+            for y, (feature, values, sig, lows, highs) in zip(ys, tracks):
+                # One colour for every feature: the sign of the estimate is
+                # already on the x axis, so colour would only repeat it.
+                colour = MORE
+                ax.plot([lows[cell], highs[cell]], [y, y], color=colour,
+                        alpha=0.55, linewidth=1.8, solid_capstyle="butt", zorder=3)
+                ax.scatter(values[cell], y, s=48, zorder=4,
+                           color=colour if sig[cell] else style.SURFACE,
+                           edgecolor=colour, linewidth=1.4)
+            ax.axvline(0, color=style.INK, linewidth=1.1, zorder=2)
+            ax.set_ylim(-0.7, len(tracks) - 0.3)
+            ax.set_xlim(x_lo - x_pad, x_hi + x_pad)
+            ax.grid(axis="y", visible=False)
+            ax.tick_params(axis="y", length=0)
+            ax.set_yticks(ys)
+            if cell == 0:
+                ax.set_yticklabels(
+                    [style.bold_label(pretty(f)) for f, _, _, _, _ in tracks],
+                    fontsize=8)
+            ax.set_title(stage.capitalize(), fontsize=10.5, color=style.INK_2,
+                         loc="left", pad=6)
+            if row == len(drawn) - 1:
+                ax.set_xlabel("change in contribution\n(percentage points) per SD"
+                              if cell == 1 else "")
+        axes[row][0].annotate(
+            f"$\\bf{{{block.capitalize()}}}$: {BLOCK_SHORT[block]}",
+            xy=(0, 1.0), xytext=(0, 26), xycoords="axes fraction",
+            textcoords="offset points", ha="left", va="bottom",
+            fontsize=11.5, color=style.INK, annotation_clip=False)
 
-        # The panel is scaled to hold the intervals, not just the point estimates.
-        y_lo = min(min(l) for _, _, _, l, _ in tracks)
-        y_hi = max(max(h) for _, _, _, _, h in tracks)
-        y_pad = (y_hi - y_lo) * 0.06
-        y_lo, y_hi = y_lo - y_pad, y_hi + y_pad
+    axes[0][0].scatter([], [], s=48, color=style.INK_MUTED,
+                       edgecolor=style.INK_MUTED, linewidth=1.4,
+                       label="replicates in validation")
+    axes[0][0].scatter([], [], s=48, color=style.SURFACE,
+                       edgecolor=style.INK_MUTED, linewidth=1.4,
+                       label="does not replicate in validation")
 
-        # Label slots are spread over the panel's whole height rather than over the
-        # narrow range the final values happen to occupy. Eight features whose
-        # endgame estimates all sit within 0.03 of each other would otherwise stack
-        # their labels on top of one another; the leader lines carry the mapping.
-        finals = [v[-1] for _, v, _, _, _ in tracks]
-        ranked = sorted(range(len(tracks)), key=lambda i: finals[i])
-        slots = np.linspace(y_lo + (y_hi - y_lo) * 0.06,
-                            y_hi - (y_hi - y_lo) * 0.06, len(tracks))
-        label_y = {i: slots[r] for r, i in enumerate(ranked)}
-
-        # Features are spread a little around each stage so their intervals do not
-        # stack into one opaque bar. The spread is small enough that the lines stay
-        # near-vertical and the slope is still what the eye reads.
-        spread = 0.34
-        offsets = (np.linspace(-spread / 2, spread / 2, len(tracks))
-                   if len(tracks) > 1 else np.zeros(1))
-        for i, (feature, values, sig, lows, highs) in enumerate(tracks):
-            colour = MORE if values[0] > 0 else LESS
-            xs = x + offsets[i]
-            ax.plot(xs, values, color=colour, alpha=0.45, linewidth=1.5, zorder=3)
-            for xi, value, is_sig, lo, hi in zip(xs, values, sig, lows, highs):
-                ax.plot([xi, xi], [lo, hi], color=colour, alpha=0.3,
-                        linewidth=1.2, zorder=2, solid_capstyle="butt")
-                ax.scatter(xi, value, s=46 if is_sig else 34, zorder=4,
-                           color=colour if is_sig else style.SURFACE,
-                           edgecolor=colour if not is_sig else "white",
-                           linewidth=1.2)
-            ax.plot([xs[-1], x[-1] + 0.22], [values[-1], label_y[i]],
-                    color=style.INK_MUTED, alpha=0.45, linewidth=0.8, zorder=2,
-                    clip_on=False)
-            # Names are not truncated: the construct is the point of the label, and
-            # the aggregation in brackets is what disambiguates two rows that would
-            # otherwise read identically. The construct is set bold so the eye finds
-            # it without reading the qualifier first.
-            ax.annotate(style.bold_label(pretty(feature)), xy=(1.02, label_y[i]),
-                        xycoords=("axes fraction", "data"), ha="left",
-                        va="center", fontsize=8, color=style.INK_2,
-                        annotation_clip=False)
-
-        ax.axhline(0, color=style.INK, linewidth=1.2, zorder=2)
-        ax.set_ylim(y_lo, y_hi)
-        ax.set_xticks(x)
-        ax.set_xticklabels([st.capitalize() for st in stages], fontsize=10)
-        ax.set_xlim(-0.32, x[-1] + 0.32)
-        # Only the left column carries the axis label; on the right column it would
-        # sit underneath the labels hanging off the panel beside it.
-        if ax is axes[0]:
-            ax.set_ylabel("change in contribution\n(percentage points of endowment) per SD")
-        ax.set_title(f"$\\bf{{{block.capitalize()}}}$\n{BLOCK_SHORT[block]}",
-                     fontsize=11.5, color=style.INK, fontweight="normal",
-                     loc="left", pad=12)
-
-    axes[0].scatter([], [], s=46, color=style.INK_MUTED, edgecolor="white",
-                    linewidth=1.2, label="replicates in validation")
-    axes[0].scatter([], [], s=34, color=style.SURFACE, edgecolor=style.INK_MUTED,
-                    linewidth=1.2, label="does not replicate in validation")
-    axes[0].plot([], [], "-", color=MORE, linewidth=3.2,
-                 label="predicts more contribution")
-    if any_less:
-        axes[0].plot([], [], "-", color=LESS, linewidth=3.2,
-                     label="predicts less contribution")
-
-    fig.subplots_adjust(wspace=0.72, right=0.86)
     style.header(
         fig, axes, headline,
-        legend_from=axes[0], ncol=2, panel_titles=True, extra_top=0.34,
+        legend_from=axes[0][0], ncol=2, panel_titles=True, extra_top=0.34,
         headline_weight="bold", headline_size=14, legend_borderpad=0.0)
     note = ""
     if omitted:
@@ -625,12 +605,8 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
         note = (f" {names} {'is' if len(omitted) == 1 else 'are'} not shown: not "
                 f"one of its features survives false-discovery correction in the "
                 f"opening rounds, so there is nothing to follow across the game.")
-    colour_key = ("Green marks a feature that predicts more contribution in the "
-                  "Opening, orange one that predicts less."
-                  if any_less else
-                  "Green marks a feature that predicts more contribution.")
     (out_dir / f"{stem}_caption.txt").write_text(
-        CAPTION_C3.format(colour_key=colour_key).rstrip() + note + "\n"
+        CAPTION_C3.format(n_shown=top_n).rstrip() + note + "\n"
         + sample_line(sample) + "\n")
     out = out_dir / f"{stem}.png"
     fig.savefig(out)

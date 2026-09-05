@@ -17,7 +17,8 @@ STEPS = ["01_prepare_data.py", "02_extract_features.py",
          "08_cumulative_chat.py", "09_extract_cumulative_features.py",
          "10_build_windows_table.py", "11_window_compare.py",
          "13_window_figures.py", "14_descriptive_figures.py",
-         "15_short_game_scope.py", "16_runtime_table.py"]
+         "15_short_game_scope.py", "16_runtime_table.py",
+         "18_pre_post_power.py", "19_pipeline_figure.py"]
 
 # Steps that need an argument to write the output the paper uses. Without a
 # category, step 7 lists the lexicons and exits.
