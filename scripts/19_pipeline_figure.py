@@ -68,7 +68,8 @@ def box(ax, x, top, w, title, body, tone=style.BLUE, title_size=10.5):
     h = 2 * PAD + TITLE_H + 0.4 * BODY_H + lines * BODY_H
     ax.add_patch(FancyBboxPatch(
         (x, top - h), w, h, boxstyle="round,pad=0,rounding_size=0.012",
-        linewidth=1.4, edgecolor=tone, facecolor=style.SURFACE, zorder=3))
+        linewidth=1.4, edgecolor=tone, facecolor=style.SURFACE, zorder=3,
+        clip_on=False))
     ax.text(x + w / 2, top - PAD, title, ha="center", va="top",
             fontsize=title_size, color=style.INK, fontweight="bold", zorder=4)
     ax.text(x + w / 2, top - PAD - TITLE_H - 0.4 * BODY_H, body, ha="center",
@@ -91,7 +92,7 @@ def main():
     n = counts()
 
     fig, ax = plt.subplots(figsize=(FIG_W, FIG_H))
-    ax.set_xlim(0, 1)
+    ax.set_xlim(-0.015, 1.015)
     ax.set_ylim(Y_MIN, 1)
     ax.axis("off")
 
