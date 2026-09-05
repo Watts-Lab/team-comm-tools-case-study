@@ -155,8 +155,8 @@ def main():
         tone=style.GREEN)
     box(ax, q_right_x, e_top, q_w, "Evidence standard",
         "False-discovery-rate correction on the\n"
-        "learning games, then replication held out\n"
-        "with the same sign.",
+        "learning games, and must replicate on\n"
+        "the validation set.",
         tone=style.GREEN)
 
     MAIN_DIR.mkdir(parents=True, exist_ok=True)
