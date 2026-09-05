@@ -40,6 +40,10 @@ import numpy as np
 # Categorical slots, assigned in fixed order and never cycled.
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
 MAGENTA, GREEN, VIOLET = "#e87ba4", "#008300", "#4a3aa7"
+# Print-legibility variants. A figure that separates two or three series only by
+# hue is unreadable on a black-and-white printer, so the series that need to
+# survive that pass are drawn in tones of clearly different lightness.
+BLUE_DARK, GREEN_LIGHT, GRAY_LIGHT = "#123a63", "#86d9b0", "#a8a69d"
 SURFACE = "#fcfcfb"
 INK, INK_2, INK_MUTED = "#0b0b0b", "#52514e", "#8a8880"
 GRID = "#e5e4df"

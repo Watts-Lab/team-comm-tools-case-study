@@ -54,6 +54,10 @@ EXTRA_CONTRASTS = [("silent", "spoke")]
 # panel would read as a different colour from the same bar in another.
 BAR_ALPHA = 0.62
 
+# The two splits are told apart by lightness as well as by hue, so the panels stay
+# readable printed in black and white: the learning games are the darker series.
+SPLIT_COLOR = {"learn": style.BLUE_DARK, "val": style.GREEN_LIGHT}
+
 # Contribution is a share of the endowment; it is reported throughout the case
 # study in percent of the endowment, and differences between groups in percentage
 # points, so the game means are scaled by 100 as soon as they are read.
@@ -210,7 +214,7 @@ def fig_corpus():
     fig, axes = plt.subplots(1, 3, figsize=(14.4, 4.6))
 
     medians = {}
-    for split, colour in zip(SPLITS, (style.BLUE, style.AQUA)):
+    for split, colour in zip(SPLITS, (SPLIT_COLOR["learn"], SPLIT_COLOR["val"])):
         rounds, chat = load(split)
         g = game_table(rounds, chat)
 
@@ -241,8 +245,8 @@ def fig_corpus():
 
     # The two medians are a round apart, so their labels are pushed to opposite
     # sides of their own line rather than centred, where they would overlap.
-    for split, colour, ha, dx in (("learn", style.BLUE, "left", 4),
-                                  ("val", style.AQUA, "right", -4)):
+    for split, colour, ha, dx in (("learn", SPLIT_COLOR["learn"], "left", 4),
+                                  ("val", SPLIT_COLOR["val"], "right", -4)):
         m = medians[split]
         axes[0].axvline(m, color=colour, linestyle=(0, (4, 2)), linewidth=1.6,
                         zorder=4)

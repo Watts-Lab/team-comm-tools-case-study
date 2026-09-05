@@ -107,7 +107,9 @@ def semantic_grouping_of(feature):
 
 
 # The toolkit's categories, in a fixed order with fixed colours.
-BETTER, WORSE = style.BLUE, "#d0342c"
+# Three tones of clearly different lightness, so the three states are still
+# distinguishable printed in black and white: dark blue, mid red, light grey.
+BETTER, WORSE, NEUTRAL = style.BLUE_DARK, "#d0342c", style.GRAY_LIGHT
 # Figure 2 encodes something different from figure 1 - the direction of a feature's
 # effect, not whether the block helped prediction - so it gets its own pair of
 # colours rather than reusing blue and red for a second meaning.
@@ -228,7 +230,7 @@ def legend_estimate(ax):
             label="improves prediction")
     ax.plot([], [], "-", color=WORSE, linewidth=3.2,
             label="makes prediction worse")
-    ax.plot([], [], "-", color=style.INK_MUTED, linewidth=3.2,
+    ax.plot([], [], "-", color=NEUTRAL, linewidth=3.2,
             label="interval includes zero")
 
 
@@ -298,7 +300,7 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
                 elif r[hi_c] < 0:
                     colour = WORSE
                 else:
-                    colour = style.INK_MUTED
+                    colour = NEUTRAL
                 ax.plot([i + dx, i + dx], [r[lo_c], r[hi_c]], color=colour,
                         linewidth=1.8, solid_capstyle="butt", zorder=3)
                 ax.plot([i + dx], [r[mid_c]], "o", markersize=6, color=colour,
@@ -461,8 +463,7 @@ Opening; the panels therefore carry different features, and different numbers of
 them, because the windows found different things. Filled marks replicate in \
 validation: significant after correction on the learning games and significant \
 with the same sign on held-out games. Opening is the first three rounds of a game, \
-Endgame the last three. Green marks a feature that predicts more contribution in \
-the Opening, orange one that predicts less. Vertical bars are 95% intervals from a regression of the \
+Endgame the last three. {colour_key} Vertical bars are 95% intervals from a regression of the \
 outcome on that feature alone plus the game's rules and the round's position, with \
 standard errors clustered by game; features are spread slightly around each time \
 period so their intervals stay legible.
@@ -527,6 +528,12 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
                            [PP * by_stage.loc[st, "ci_high_learn"] for st in stages]))
         if tracks:
             by_block[block] = tracks
+
+    # Where every surviving feature predicts more contribution, the colour that
+    # would mark the opposite direction is left out of the legend and the caption
+    # rather than named for marks the figure does not contain.
+    any_less = any(values[0] <= 0 for tracks in by_block.values()
+                   for _, values, _, _, _ in tracks)
 
     drawn = [b for b in blocks if b in by_block]
     omitted = [b for b in blocks if b not in by_block]
@@ -603,8 +610,9 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
                     linewidth=1.2, label="does not replicate in validation")
     axes[0].plot([], [], "-", color=MORE, linewidth=3.2,
                  label="predicts more contribution")
-    axes[0].plot([], [], "-", color=LESS, linewidth=3.2,
-                 label="predicts less contribution")
+    if any_less:
+        axes[0].plot([], [], "-", color=LESS, linewidth=3.2,
+                     label="predicts less contribution")
 
     fig.subplots_adjust(wspace=0.72, right=0.86)
     style.header(
@@ -617,8 +625,13 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
         note = (f" {names} {'is' if len(omitted) == 1 else 'are'} not shown: not "
                 f"one of its features survives false-discovery correction in the "
                 f"opening rounds, so there is nothing to follow across the game.")
+    colour_key = ("Green marks a feature that predicts more contribution in the "
+                  "Opening, orange one that predicts less."
+                  if any_less else
+                  "Green marks a feature that predicts more contribution.")
     (out_dir / f"{stem}_caption.txt").write_text(
-        CAPTION_C3.rstrip() + note + "\n" + sample_line(sample) + "\n")
+        CAPTION_C3.format(colour_key=colour_key).rstrip() + note + "\n"
+        + sample_line(sample) + "\n")
     out = out_dir / f"{stem}.png"
     fig.savefig(out)
     plt.close(fig)
