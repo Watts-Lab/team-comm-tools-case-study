@@ -267,7 +267,9 @@ def sample_line(sample):
 
 def fig_c1_when(kind="elastic net", controls="rules+timing",
                 blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE, out_dir=None, stem=None,
-                variation=None):
+                variation=None,
+                headline="Conversation predicts contribution only in the Opening "
+                         "rounds,\nafter revealing contribution outcomes"):
     """When in a game does conversation predict contribution, for each window."""
     table = read("block_delta_r2")
     sub = table[(table["binning"] == "stage") & (table["model_family"] == kind)
@@ -332,8 +334,7 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
         # Two lines. header() draws the headline with its bottom on the reserved
         # band, so extra lines grow upward into the margin rather than down onto
         # the legend, and the tight bounding box takes them in.
-        "Conversation predicts contribution only in the Opening rounds,\n"
-        "after revealing contribution outcomes",
+        headline,
         subtitle=variation,
         legend_from=axes[0], ncol=3, panel_titles=True, extra_top=0.10,
         headline_weight="bold", headline_size=14, legend_gap=0.18,
@@ -631,21 +632,35 @@ if __name__ == "__main__":
 
     # Appendix, in the order the supplement reports them: the other sample, the
     # other model family, then the two wider windows.
-    TALKERS = ("Robustness check: silent game-rounds dropped, "
-               "rather than retained through the neutral fill")
-    FOREST = "Robustness check: the random forest in place of the ElasticNet"
-    WIDE = ("Robustness check: the Window and Cumulative conversation "
-            "boundaries in place of Pre and Post")
-    fig_c1_when(sample="talkers", out_dir=APPENDIX_DIR, variation=TALKERS,
+    # The headline of an appendix figure says what this run changed; the panels
+    # are the same panels as the main-text figure, so repeating its headline
+    # would leave five figures that look and read alike.
+    TALKERS = ("Robustness check: silent game-rounds dropped,\n"
+               "rather than retained with a neutral fill")
+    TALKERS_SUB = ("Otherwise as in the main text, where every round with an open "
+                   "channel is fitted.")
+    FOREST = ("Robustness check: the random forest\n"
+              "in place of the ElasticNet")
+    FOREST_SUB = ("Otherwise as in the main text, where the penalized linear model "
+                  "is the primary family.")
+    WIDE = ("Robustness check: the wider conversation boundaries,\n"
+            "Window and Cumulative")
+    WIDE_SUB = ("Otherwise as in the main text, which bounds a conversation as Pre "
+                "or Post.")
+    fig_c1_when(sample="talkers", out_dir=APPENDIX_DIR, headline=TALKERS,
+                variation=TALKERS_SUB,
                 stem="figS1_when_talk_matters_talkers_only")
-    fig_c3_across_stages(sample="talkers", out_dir=APPENDIX_DIR, variation=TALKERS,
+    fig_c3_across_stages(sample="talkers", out_dir=APPENDIX_DIR, headline=TALKERS,
+                         variation=TALKERS_SUB,
                          stem="figS2_effects_across_stages_talkers_only")
-    fig_c1_when(kind="random forest", out_dir=APPENDIX_DIR, variation=FOREST,
+    fig_c1_when(kind="random forest", out_dir=APPENDIX_DIR, headline=FOREST,
+                variation=FOREST_SUB,
                 stem="figS3_when_talk_matters_random_forest")
-    fig_c1_when(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR, variation=WIDE,
+    fig_c1_when(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR, headline=WIDE,
+                variation=WIDE_SUB,
                 stem="figS4_when_talk_matters_wide_windows")
     fig_c3_across_stages(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR,
-                         variation=WIDE,
+                         headline=WIDE, variation=WIDE_SUB,
                          stem="figS5_effects_across_stages_wide_windows")
 
     # fig_c2_opening_features() is deliberately not part of the figure set: it is a
