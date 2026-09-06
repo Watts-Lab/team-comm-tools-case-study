@@ -266,7 +266,8 @@ def sample_line(sample):
 
 
 def fig_c1_when(kind="elastic net", controls="rules+timing",
-                blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE, out_dir=None, stem=None):
+                blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE, out_dir=None, stem=None,
+                variation=None):
     """When in a game does conversation predict contribution, for each window."""
     table = read("block_delta_r2")
     sub = table[(table["binning"] == "stage") & (table["model_family"] == kind)
@@ -333,6 +334,7 @@ def fig_c1_when(kind="elastic net", controls="rules+timing",
         # the legend, and the tight bounding box takes them in.
         "Conversation predicts contribution only in the Opening rounds,\n"
         "after revealing contribution outcomes",
+        subtitle=variation,
         legend_from=axes[0], ncol=3, panel_titles=True, extra_top=0.10,
         headline_weight="bold", headline_size=14, legend_gap=0.18,
         legend_borderpad=0.0)
@@ -473,7 +475,7 @@ N_TRACKS = 8
 
 
 def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
-                         out_dir=None, stem=None,
+                         out_dir=None, stem=None, variation=None,
                          headline="Opening-round features are no longer "
                                   "predictive in later rounds"):
     """Do the opening features keep predicting once the game is underway?
@@ -596,7 +598,7 @@ def fig_c3_across_stages(top_n=N_TRACKS, blocks=MAIN_BLOCKS, sample=MAIN_SAMPLE,
                        label="does not replicate in validation")
 
     style.header(
-        fig, axes, headline,
+        fig, axes, headline, subtitle=variation,
         legend_from=axes[0][0], ncol=2, panel_titles=True, extra_top=0.34,
         headline_weight="bold", headline_size=14, legend_borderpad=0.0)
     note = ""
@@ -629,15 +631,21 @@ if __name__ == "__main__":
 
     # Appendix, in the order the supplement reports them: the other sample, the
     # other model family, then the two wider windows.
-    fig_c1_when(sample="talkers", out_dir=APPENDIX_DIR,
+    TALKERS = ("Robustness check: silent game-rounds dropped, "
+               "rather than retained through the neutral fill")
+    FOREST = "Robustness check: the random forest in place of the ElasticNet"
+    WIDE = ("Robustness check: the Window and Cumulative conversation "
+            "boundaries in place of Pre and Post")
+    fig_c1_when(sample="talkers", out_dir=APPENDIX_DIR, variation=TALKERS,
                 stem="figS1_when_talk_matters_talkers_only")
-    fig_c3_across_stages(sample="talkers", out_dir=APPENDIX_DIR,
+    fig_c3_across_stages(sample="talkers", out_dir=APPENDIX_DIR, variation=TALKERS,
                          stem="figS2_effects_across_stages_talkers_only")
-    fig_c1_when(kind="random forest", out_dir=APPENDIX_DIR,
+    fig_c1_when(kind="random forest", out_dir=APPENDIX_DIR, variation=FOREST,
                 stem="figS3_when_talk_matters_random_forest")
-    fig_c1_when(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR,
+    fig_c1_when(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR, variation=WIDE,
                 stem="figS4_when_talk_matters_wide_windows")
     fig_c3_across_stages(blocks=APPENDIX_BLOCKS, out_dir=APPENDIX_DIR,
+                         variation=WIDE,
                          stem="figS5_effects_across_stages_wide_windows")
 
     # fig_c2_opening_features() is deliberately not part of the figure set: it is a
