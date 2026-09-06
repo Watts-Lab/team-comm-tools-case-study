@@ -231,11 +231,25 @@ def cell_frames(learn, val, block, binning, bin_label, learn_bins, val_bins,
 
 
 def indicators_for(df, block, sample):
-    """Silence indicators, which vary only when silent rounds are in the sample."""
+    """The silence indicator, which varies only when silent rounds are in the sample.
+
+    Two flags are carried in the table. ``chose_silence_{block}`` marks a group that
+    had a channel and said nothing; ``has_features_{block}`` marks one that spoke.
+    They are distinct only where the rows include games with no channel at all,
+    which are false on both. Every cell here is restricted to rounds with an open
+    channel, so the two are exact complements and the pair states one fact twice;
+    the behaviour is the informative half, so that is the one kept.
+    """
     if sample != "channel":
         return []
-    return [c for c in (f"has_features_{block}", f"chose_silence_{block}")
+    cols = [c for c in (f"chose_silence_{block}", f"has_features_{block}")
             if c in df.columns and df[c].nunique() > 1]
+    if len(cols) == 2:
+        spoke = df[f"has_features_{block}"].astype(bool)
+        silent = df[f"chose_silence_{block}"].astype(bool)
+        if (silent == ~spoke).all():
+            return [f"chose_silence_{block}"]
+    return cols
 
 
 def skip_reason(l_sub, v_sub):

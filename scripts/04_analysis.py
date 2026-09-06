@@ -109,15 +109,22 @@ def block_features(df, block, with_indicator=True):
     that *had* a channel and said nothing, which is a behaviour rather than a
     missing value, and which describes more game-rounds than actual talk does. A
     linear model cannot construct it from the channel and talk indicators on its
-    own, since it is their interaction.
+    own, since it is their interaction - but only while the rows include games
+    with no channel, which are false on both flags. Where they do not, the two are
+    exact complements and state one fact twice, so the behaviour is kept alone.
     """
     m = manifest()
     cols = [f"{f}__{block}" for f in m.loc[m["kept"], "feature"]]
     cols = [c for c in cols if c in df.columns]
     if with_indicator:
-        for flag in (f"has_features_{block}", f"chose_silence_{block}"):
-            if flag in df.columns and df[flag].nunique() > 1:
-                cols.append(flag)
+        flags = [f for f in (f"chose_silence_{block}", f"has_features_{block}")
+                 if f in df.columns and df[f].nunique() > 1]
+        if len(flags) == 2:
+            spoke = df[f"has_features_{block}"].astype(bool)
+            silent = df[f"chose_silence_{block}"].astype(bool)
+            if (silent == ~spoke).all():
+                flags = [f"chose_silence_{block}"]
+        cols.extend(flags)
     return cols
 
 
@@ -363,8 +370,13 @@ def speech_vs_content(learn, val):
     rows = []
 
     for block in BLOCKS:
-        indicators = [c for c in (f"has_features_{block}", f"chose_silence_{block}")
+        indicators = [c for c in (f"chose_silence_{block}", f"has_features_{block}")
                       if c in learn.columns and learn[c].nunique() > 1]
+        if len(indicators) == 2:
+            spoke = learn[f"has_features_{block}"].astype(bool)
+            silent = learn[f"chose_silence_{block}"].astype(bool)
+            if (silent == ~spoke).all():      # no rows without a channel
+                indicators = [f"chose_silence_{block}"]
         content = block_features(learn, block, with_indicator=False)
         specs = {"base": base,
                  "indicators": base + indicators,
