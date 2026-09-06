@@ -81,8 +81,9 @@ def main():
         "\\centering",
         "\\caption{\\textbf{Additional $R^2$ from Conversation, for Every Cell of the Design.}"
         " Each entry is the variance in a group's mean contribution explained by its conversation"
-        " beyond the base model, under the ElasticNet. CV is cross-validated within the learning"
-        " split; HO is scored on the held-out validation games. Bold marks the cells where both"
+        " beyond the base model, under the ElasticNet. Learn is the cross-validated estimate within"
+        " the learning split; Val is the estimate scored on the held-out validation games. Bold"
+        " marks the cells where both"
         " estimates clear zero in the same direction, the standard this appendix applies"
         " throughout; intervals are given in the section that discusses each test. Post in round 1"
         " on the conversing sample has no rows."
@@ -94,7 +95,7 @@ def main():
         " & & " + " & ".join(header_cols.split(" ")) + " \\\\",
         cmid,
         "\\textbf{Time period} & \\textbf{Sample} & "
-        + " & ".join(["\\textbf{CV} & \\textbf{HO}"] * len(BLOCKS)) + " \\\\",
+        + " & ".join(["\\textbf{Learn} & \\textbf{Val}"] * len(BLOCKS)) + " \\\\",
         "\\midrule",
     ]
     for i, b in enumerate(BINS):
