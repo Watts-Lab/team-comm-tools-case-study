@@ -636,7 +636,7 @@ if __name__ == "__main__":
     # are the same panels as the main-text figure, so repeating its headline
     # would leave five figures that look and read alike.
     TALKERS = ("Robustness check: silent game-rounds dropped,\n"
-               "rather than retained with a neutral fill")
+               "instead of retained with a neutral fill")
     TALKERS_SUB = ("Otherwise as in the main text, where every round with an open "
                    "channel is fitted.")
     FOREST = ("Robustness check: using Random Forest\n"
