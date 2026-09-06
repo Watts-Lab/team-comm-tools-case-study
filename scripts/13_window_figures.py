@@ -639,8 +639,8 @@ if __name__ == "__main__":
                "rather than retained with a neutral fill")
     TALKERS_SUB = ("Otherwise as in the main text, where every round with an open "
                    "channel is fitted.")
-    FOREST = ("Robustness check: the random forest\n"
-              "in place of the ElasticNet")
+    FOREST = ("Robustness check: using Random Forest\n"
+              "instead of ElasticNet")
     FOREST_SUB = ("Otherwise as in the main text, where the penalized linear model "
                   "is the primary family.")
     WIDE = ("Robustness check: the wider conversation boundaries,\n"
